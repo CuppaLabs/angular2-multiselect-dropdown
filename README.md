@@ -2,8 +2,6 @@
 
 Angular 2 multiselect dropdown component for web applications. Easy to integrate and use.
 
-# [Documentation](https://cuppalabs.github.io/angular2-social-login/documentation.html) | [Demo](https://cuppa-angular2-oauth.herokuapp.com/login)
-
 ## Getting Started
 ### Installation
 - The Mutiselect Dropdown package is published on the [npm](https://www.npmjs.com/package/angular2-multiselect-dropdown) Registry. 
