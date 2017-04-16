@@ -1,0 +1,42 @@
+<div class="cuppa-dropdown" (clickOutside)="closeDropdown()">
+    <div class="selected-list">
+        <button class="c-btn" (click)="toggleDropdown()">
+            <span *ngIf="selectedItems.length == 0">{{settings.text}}</span>
+            <span *ngIf="settings.singleSelection">
+                <span *ngFor="let item of selectedItems;trackBy: trackByFn;">
+                    {{item.itemName}}
+                </span>
+            </span>
+            <div class="c-list" *ngIf="selectedItems.length > 0 && !settings.singleSelection">
+                <div class="c-token" *ngFor="let item of selectedItems;trackBy: trackByFn;let k = index" [hidden]="k > 2">
+                    <span class="c-label">{{item.itemName}}</span>
+                    <span class="fa fa-remove" (click)="removeSelected(item)"></span>
+                </div>
+            </div> 
+            <span *ngIf="selectedItems.length > 3">+{{selectedItems.length - 3}}</span>
+            <span class="fa" [ngClass]="{'fa-angle-down': !isActive,'fa-angle-up':isActive}"></span>
+        </button>      
+    </div>
+    <div class="dropdown-list" [hidden]="!isActive">
+    <div class="arrow-up"></div>
+    <div class="list-area">
+        <div class="pure-checkbox select-all" *ngIf="settings.enableCheckAll && !settings.singleSelection" (click)="toggleSelectAll()">
+            <input type="checkbox" [checked]="isSelectAll"/>
+            <label>
+                <span [hidden]="isSelectAll">{{settings.selectAllText}}</span>
+                <span [hidden]="!isSelectAll">{{settings.unSelectAllText}}</span>
+            </label>
+        </div>   
+        <div class="list-filter" *ngIf="settings.enableSearchFilter">
+            <span class="fa fa-search"></span>
+            <input type="text" placeholder="Search" [(ngModel)]="filter.itemName">
+        </div> 
+    <ul [style.maxHeight] = "settings.maxHeight+'px'">
+        <li *ngFor="let item of data | listFilter:filter; let i = index;" (click)="onItemClick(item,i)" class="pure-checkbox">
+            <input type="checkbox" [checked]="isSelected(item)"/>
+            <label>{{item.itemName}}</label>
+        </li>
+    </ul>
+    </div>
+    </div>
+</div>

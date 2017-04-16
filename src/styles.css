@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background: url('assets/img/sand-background.jpg');
+}
+.navbar-default{
+    border-radius: 0px !important;
+    background-color: #fff !important;
+    margin: 0px !important;
+}
+.navbar-brand>img {
+    height: 32px;
+    margin-top: -6px;
+}
+.component-title{
+    font-size: 18px;
+    color: #333 !important;
+}
+.jumbotron{
+    text-align: center;
+    color: #fff !important;
+}
+.jumbotron h1{
+    text-shadow: 1px 1px 0px #7d7d7d;
+}
+h4{
+    color: #686868;
+}
+@media screen and (min-width: 768px){
+    .jumbotron{
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
+        margin: 0px;
+        background: none !important;
+    }
+    .jumbotron .h1, .jumbotron h1{
+        font-size: 42px !important;
+        color: #fff !important;
+    }
+}

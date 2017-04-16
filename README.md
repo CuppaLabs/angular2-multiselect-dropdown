@@ -1,27 +1,112 @@
-# Angular2MultiselectDropdown
+# Angular2 Multiselect Dropdown
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.32.3.
+Angular 2 multiselect dropdown component for web applications. Easy to integrate and use.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# [Documentation](https://cuppalabs.github.io/angular2-social-login/documentation.html) | [Demo](https://cuppa-angular2-oauth.herokuapp.com/login)
 
-## Code scaffolding
+## Getting Started
+### Installation
+- The Mutiselect Dropdown package is published on the [npm](https://www.npmjs.com/package/angular2-multiselect-dropdown) Registry. 
+- Install the package :
+    `npm install angular2-multiselect-dropdown`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+- Once installed import `AngularMultiSelectModule` from the installed package into your module as follows:
 
-## Build
+### Usage
+Import `AngularMultiSelectModule` into `NgModule` in `app.module.ts`
+```js
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+@NgModule({
+  // ...
+  imports: [
+    AngularMultiSelectModule,
+  ]
+  // ...
+})
 
-## Running unit tests
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Declare the component data variables and options in your component where you want to consume the dropdown component.
 
-## Running end-to-end tests
+```js
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+import { Component, OnInit } from '@angular/core';
 
-## Further help
+export class AppComponent implements OnInit {
+    dropdownList = [];
+    selectedItems = [];
+    dropdownSettings = {};
+    ngOnInit(){
+        this.dropdownList = [
+                              {"id":1,"itemName":"India"},
+                              {"id":2,"itemName":"Singapore"},
+                              {"id":3,"itemName":"Australia"},
+                              {"id":4,"itemName":"Canada"},
+                              {"id":5,"itemName":"South Korea"},
+                              {"id":6,"itemName":"Germany"},
+                              {"id":7,"itemName":"France"},
+                              {"id":8,"itemName":"Russia"},
+                              {"id":9,"itemName":"Italy"},
+                              {"id":10,"itemName":"Sweden"}
+                            ];
+        this.selectedItems = [
+                                {"id":2,"itemName":"Singapore"},
+                                {"id":3,"itemName":"Australia"},
+                                {"id":4,"itemName":"Canada"},
+                                {"id":5,"itemName":"South Korea"}
+                            ];
+        this.dropdownSettings = { 
+                                  singleSelection: false, 
+                                  text:"Select Countries",
+                                  selectAllText:'Select All',
+                                  unSelectAllText:'UnSelect All',
+                                  enableSearchFilter: true
+                                };            
+    }
+    onItemSelect(item){
+        console.log('Selected Item:');
+        console.log(item);
+    }
+    OnItemDeSelect(item){
+        console.log('De-Selected Item:');
+        console.log(item);
+    }
+}
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Add the following component tag in you template 
+```html
+<angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"></angular2-multiselect>
+
+```
+
+### Settings
+The following list of settings are supported by the component. Configure the settings to meet your requirement.
+
+| Setting         |Type    | Description            | Default Value |
+|:--- |:--- |:--- |:--- |
+| singleSelection | Boolean | To set the dropdown for single item selection only. | false |
+| text | String | Text to be show in the dropdown, when no items are selected. | 'Select' |
+| enableCheckAll | Boolean | Enable the option to select all items in list | false |
+| selectAllText | String | Text to display as the label of select all option | Select All |
+| unSelectAllText | String | Text to display as the label of unSelect option | UnSelect All |
+| enableSearchFilter | Boolean | Enable filter option for the list. | false |
+| maxHeight | Number | Set maximum height of the dropdown list in px. | 300 |
+
+### Callback Methods
+- `onSelect` - Return the selected item on selection.
+    Example : (onSelect)="onItemSelect($event)"
+- `onDeSelect` - Return the un-selected item on un-selecting.
+    Example : (onDeSelect)="OnItemDeSelect($event)"
+    
+
+## Run locally
+- Clone the repository or downlod the .zip,.tar files.
+- Run `npm install`
+- Run `ng serve` for a dev server
+- Navigate to `http://localhost:4200/`
+ The app will automatically reload if you change any of the source files.
+
+## License
+MIT License.
