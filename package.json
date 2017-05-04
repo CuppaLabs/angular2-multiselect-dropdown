@@ -1,6 +1,6 @@
 {
   "name": "angular2-multiselect-dropdown",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -11,7 +11,7 @@
     "e2e": "ng e2e"
   },
   "private": false,
-    "dependencies": {
+  "dependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",
@@ -20,14 +20,14 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
-    "bootstrap":"*",
-    "font-awesome":"*",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    "bootstrap":"*",
+    "font-awesome":"*"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0",
+    "@angular/cli": "1.0.1",
     "@angular/compiler-cli": "^4.0.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",

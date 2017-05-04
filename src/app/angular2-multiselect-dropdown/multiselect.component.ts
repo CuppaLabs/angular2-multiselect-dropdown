@@ -1,7 +1,8 @@
 import { Component, OnInit, NgModule, OnChanges, ViewEncapsulation,forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { CommonModule }       from '@angular/common';
-import { ListItem , DropdownSettings, MyException} from './multiselect.model';
+import { ListItem , MyException} from './multiselect.model';
+import { DropdownSettings } from './multiselect.interface';
 import { ClickOutsideDirective } from './clickOutside';
 import { ListFilterPipe } from './list-filter';
 
