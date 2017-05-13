@@ -36,11 +36,14 @@ export class AppComponent implements OnInit {
     this.selectedItems = [
                           {"id":2,"itemName":"Singapore"}];
     this.selectedItems2 = [
+                          {"id":1,"itemName":"India"},
                           {"id":2,"itemName":"Singapore"},
                           {"id":3,"itemName":"Australia"},
                            {"id":4,"itemName":"Canada"},
                           {"id":5,"itemName":"South Korea"}];
     this.selectedItems3 = [
+                          {"id":1,"itemName":"India"},
+                          {"id":2,"itemName":"Singapore"},
                           {"id":4,"itemName":"Canada"},
                           {"id":5,"itemName":"South Korea"}];
 
@@ -55,7 +58,8 @@ export class AppComponent implements OnInit {
                               text:"Select Countries",
                               selectAllText:'Select All',
                               unSelectAllText:'UnSelect All',
-                              enableSearchFilter: true
+                              enableSearchFilter: true,
+                              badgeShowLimit: 3
                             };   
   }
   onItemSelect(item:any){

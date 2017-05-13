@@ -95,6 +95,7 @@ The following list of settings are supported by the component. Configure the set
 | unSelectAllText | String | Text to display as the label of unSelect option | UnSelect All |
 | enableSearchFilter | Boolean | Enable filter option for the list. | false |
 | maxHeight | Number | Set maximum height of the dropdown list in px. | 300 |
+| badgeShowLimit | Number | Limit the number of badges/items to show in the input field. If not set will show all selected. | All |
 
 ### Callback Methods
 - `onSelect` - Return the selected item on selection.

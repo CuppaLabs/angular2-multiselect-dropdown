@@ -27,6 +27,7 @@ $base-color: #0079FE;
             color: #fff;
             border-radius: 2px;
             margin-right: 4px;
+            margin-bottom: 2px;
             float: left;
             .c-label{
                 display: block;
@@ -43,8 +44,10 @@ $base-color: #0079FE;
         }
     }
     .fa-angle-down, .fa-angle-up{
-        float: right;
         font-size: 15pt;
+        position: absolute;
+        right: 10px;
+        top: 25%;
     }
     button{
         width: 100%;

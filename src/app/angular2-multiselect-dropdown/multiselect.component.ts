@@ -46,7 +46,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         selectAllText: 'Select All',
         unSelectAllText: 'UnSelect All',
         enableSearchFilter: false,
-        maxHeight: 300
+        maxHeight: 300,
+        badgeShowLimit: 999999999999
     }
     constructor(){
 

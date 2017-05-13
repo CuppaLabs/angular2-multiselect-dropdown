@@ -5,5 +5,6 @@ export interface DropdownSettings{
     selectAllText: String;
     unSelectAllText: String;
     enableSearchFilter: Boolean;
-    maxHeight: Number
+    maxHeight: Number;
+    badgeShowLimit: Number
 } 
