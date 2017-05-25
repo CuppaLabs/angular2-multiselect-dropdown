@@ -75,7 +75,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         if(this.isSelectAll){
             this.isSelectAll = false;
         }
-        this.onChangeCallback(this.selectedItems);
     }
     private onTouchedCallback: () => void = noop;
     private onChangeCallback: (_: any) => void = noop;
@@ -132,6 +131,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         }
         else
             this.selectedItems.push(item);
+        this.onChangeCallback(this.selectedItems);
     }
     removeSelected(clickedItem: ListItem){
         this.selectedItems.forEach(item => {
@@ -139,6 +139,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
                this.selectedItems.splice(this.selectedItems.indexOf(item),1);
            }
         });    
+        this.onChangeCallback(this.selectedItems);
     }
     toggleDropdown(){
         this.isActive = !this.isActive;
