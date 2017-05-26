@@ -85,7 +85,12 @@ export class AppComponent implements OnInit {
 
 Add the following component tag in you template 
 ```html
-<angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"></angular2-multiselect>
+<angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" 
+    [settings]="dropdownSettings" 
+    (onSelect)="onItemSelect($event)" 
+    (onDeSelect)="OnItemDeSelect($event)"
+    (onSelectAll)="onSelectAll($event)"
+    (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
 
 ```
 
