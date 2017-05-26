@@ -39,14 +39,14 @@ module.exports = module.exports.toString();
 /***/ 155:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"cuppa-dropdown\" (clickOutside)=\"closeDropdown()\">\r\n    <div class=\"selected-list\">\r\n        <button class=\"c-btn\" (click)=\"toggleDropdown()\">\r\n            <span *ngIf=\"selectedItems.length == 0\">{{settings.text}}</span>\r\n            <span *ngIf=\"settings.singleSelection\">\r\n                <span *ngFor=\"let item of selectedItems;trackBy: trackByFn;\">\r\n                    {{item.itemName}}\r\n                </span>\r\n            </span>\r\n            <div class=\"c-list\" *ngIf=\"selectedItems.length > 0 && !settings.singleSelection\">\r\n                <div class=\"c-token\" *ngFor=\"let item of selectedItems;trackBy: trackByFn;let k = index\" [hidden]=\"k > settings.badgeShowLimit-1\">\r\n                    <span class=\"c-label\">{{item.itemName}}</span>\r\n                    <span class=\"fa fa-remove\" (click)=\"removeSelected(item)\"></span>\r\n                </div>\r\n            </div> \r\n            <span *ngIf=\"selectedItems.length > settings.badgeShowLimit\">+{{selectedItems.length - settings.badgeShowLimit }}</span>\r\n            <span class=\"fa\" [ngClass]=\"{'fa-angle-down': !isActive,'fa-angle-up':isActive}\"></span>\r\n        </button>      \r\n    </div>\r\n    <div class=\"dropdown-list\" [hidden]=\"!isActive\">\r\n    <div class=\"arrow-up\"></div>\r\n    <div class=\"list-area\">\r\n        <div class=\"pure-checkbox select-all\" *ngIf=\"settings.enableCheckAll && !settings.singleSelection\" (click)=\"toggleSelectAll()\">\r\n            <input type=\"checkbox\" [checked]=\"isSelectAll\"/>\r\n            <label>\r\n                <span [hidden]=\"isSelectAll\">{{settings.selectAllText}}</span>\r\n                <span [hidden]=\"!isSelectAll\">{{settings.unSelectAllText}}</span>\r\n            </label>\r\n        </div>   \r\n        <div class=\"list-filter\" *ngIf=\"settings.enableSearchFilter\">\r\n            <span class=\"fa fa-search\"></span>\r\n            <input type=\"text\" placeholder=\"Search\" [(ngModel)]=\"filter.itemName\">\r\n        </div> \r\n    <ul [style.maxHeight] = \"settings.maxHeight+'px'\">\r\n        <li *ngFor=\"let item of data | listFilter:filter; let i = index;\" (click)=\"onItemClick(item,i)\" class=\"pure-checkbox\">\r\n            <input type=\"checkbox\" [checked]=\"isSelected(item)\"/>\r\n            <label>{{item.itemName}}</label>\r\n        </li>\r\n    </ul>\r\n    </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"cuppa-dropdown\" (clickOutside)=\"closeDropdown()\">\r\n    <div class=\"selected-list\">\r\n        <button class=\"c-btn\" (click)=\"toggleDropdown()\">\r\n            <span *ngIf=\"selectedItems.length == 0\">{{settings.text}}</span>\r\n            <span *ngIf=\"settings.singleSelection\">\r\n                <span *ngFor=\"let item of selectedItems;trackBy: trackByFn;\">\r\n                    {{item.itemName}}\r\n                </span>\r\n            </span>\r\n            <div class=\"c-list\" *ngIf=\"selectedItems.length > 0 && !settings.singleSelection\">\r\n                <div class=\"c-token\" *ngFor=\"let item of selectedItems;trackBy: trackByFn;let k = index\" [hidden]=\"k > settings.badgeShowLimit-1\">\r\n                    <span class=\"c-label\">{{item.itemName}}</span>\r\n                    <span class=\"fa fa-remove\" (click)=\"onItemClick(item)\"></span>\r\n                </div>\r\n            </div> \r\n            <span *ngIf=\"selectedItems.length > settings.badgeShowLimit\">+{{selectedItems.length - settings.badgeShowLimit }}</span>\r\n            <span class=\"fa\" [ngClass]=\"{'fa-angle-down': !isActive,'fa-angle-up':isActive}\"></span>\r\n        </button>      \r\n    </div>\r\n    <div class=\"dropdown-list\" [hidden]=\"!isActive\">\r\n    <div class=\"arrow-up\"></div>\r\n    <div class=\"list-area\">\r\n        <div class=\"pure-checkbox select-all\" *ngIf=\"settings.enableCheckAll && !settings.singleSelection\" (click)=\"toggleSelectAll()\">\r\n            <input type=\"checkbox\" [checked]=\"isSelectAll\"/>\r\n            <label>\r\n                <span [hidden]=\"isSelectAll\">{{settings.selectAllText}}</span>\r\n                <span [hidden]=\"!isSelectAll\">{{settings.unSelectAllText}}</span>\r\n            </label>\r\n        </div>   \r\n        <div class=\"list-filter\" *ngIf=\"settings.enableSearchFilter\">\r\n            <span class=\"fa fa-search\"></span>\r\n            <input type=\"text\" placeholder=\"Search\" [(ngModel)]=\"filter.itemName\">\r\n        </div> \r\n    <ul [style.maxHeight] = \"settings.maxHeight+'px'\">\r\n        <li *ngFor=\"let item of data | listFilter:filter; let i = index;\" (click)=\"onItemClick(item,i)\" class=\"pure-checkbox\">\r\n            <input type=\"checkbox\" [checked]=\"isSelected(item)\"/>\r\n            <label>{{item.itemName}}</label>\r\n        </li>\r\n    </ul>\r\n    </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 156:
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\r\n        <div class=\"container-fluid\">\r\n          <div class=\"navbar-header\">\r\n            <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\r\n              <span class=\"sr-only\">Toggle navigation</span>\r\n              <span class=\"icon-bar\"></span>\r\n              <span class=\"icon-bar\"></span>\r\n              <span class=\"icon-bar\"></span>\r\n            </button>\r\n            <a class=\"navbar-brand\" href=\"https://cuppalabs.github.io\">\r\n                <img src=\"assets/img/cuppa-logo-coffee11.png\" alt=\"\">\r\n            </a>\r\n          </div>\r\n          <div id=\"navbar\" class=\"navbar-collapse collapse\">\r\n           <!-- <ul class=\"nav navbar-nav\">\r\n              <li><a href=\"#\" class=\"component-title\">Angular 2 MultiSelect Dropdown</a></li>\r\n            </ul> -->\r\n            <ul class=\"nav navbar-nav navbar-right\">\r\n              <li><a href=\"https://cuppalabs.github.io/components/multiselectDropdown\">Documentation <span class=\"sr-only\">(current)</span></a></li>\r\n              <li><a href=\"https://github.com/CuppaLabs/angular2-multiselect-dropdown\">Github</a></li>\r\n              <li><a href=\"https://cuppalabs.github.io/components/multiselectDropdown\">Back to Article</a></li>\r\n            </ul>\r\n          </div><!--/.nav-collapse -->\r\n        </div><!--/.container-fluid -->\r\n      </nav>\r\n<div class=\"containner\">\r\n    <div class=\"jumbotron\">\r\n      <div class=\"container\">\r\n        <h1>Angular 2 MultiSelect Dropdown</h1>\r\n        <p>Advanced component for angular web applications.</p>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-1\"></div>\r\n    <div class=\"col-md-3\">\r\n        <h4>Single Selection</h4>\r\n        <angular2-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\"></angular2-multiselect>\r\n    </div>\r\n    <div class=\"col-md-4\">\r\n        <h4>MultiSelect, Show all Selected</h4>\r\n        <angular2-multiselect [data]=\"dropdownList2\" [(ngModel)]=\"selectedItems2\" [settings]=\"dropdownSettings2\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\"></angular2-multiselect>\r\n    </div>\r\n    <div class=\"col-md-3\">\r\n        <h4>Search Filter & Limit Show Selected</h4>\r\n        <angular2-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems3\" [settings]=\"dropdownSettings3\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\"></angular2-multiselect>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<nav class=\"navbar navbar-default\">\r\n        <div class=\"container-fluid\">\r\n          <div class=\"navbar-header\">\r\n            <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\r\n              <span class=\"sr-only\">Toggle navigation</span>\r\n              <span class=\"icon-bar\"></span>\r\n              <span class=\"icon-bar\"></span>\r\n              <span class=\"icon-bar\"></span>\r\n            </button>\r\n            <a class=\"navbar-brand\" href=\"https://cuppalabs.github.io\">\r\n                <img src=\"assets/img/cuppa-logo-coffee11.png\" alt=\"\">\r\n            </a>\r\n          </div>\r\n          <div id=\"navbar\" class=\"navbar-collapse collapse\">\r\n           <!-- <ul class=\"nav navbar-nav\">\r\n              <li><a href=\"#\" class=\"component-title\">Angular 2 MultiSelect Dropdown</a></li>\r\n            </ul> -->\r\n            <ul class=\"nav navbar-nav navbar-right\">\r\n              <li><a href=\"https://cuppalabs.github.io/components/multiselectDropdown\">Documentation <span class=\"sr-only\">(current)</span></a></li>\r\n              <li><a href=\"https://github.com/CuppaLabs/angular2-multiselect-dropdown\">Github</a></li>\r\n              <li><a href=\"https://cuppalabs.github.io/components/multiselectDropdown\">Back to Article</a></li>\r\n            </ul>\r\n          </div><!--/.nav-collapse -->\r\n        </div><!--/.container-fluid -->\r\n      </nav>\r\n<div class=\"containner\">\r\n    <div class=\"jumbotron\">\r\n      <div class=\"container\">\r\n        <h1>Angular 2 MultiSelect Dropdown</h1>\r\n        <p>Advanced component for angular web applications.</p>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-1\"></div>\r\n    <div class=\"col-md-3\">\r\n        <h4>Single Selection</h4>\r\n        <angular2-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\"></angular2-multiselect>\r\n    </div>\r\n    <div class=\"col-md-4\">\r\n        <h4>MultiSelect, Show all Selected</h4>\r\n        <angular2-multiselect [data]=\"dropdownList2\" [(ngModel)]=\"selectedItems2\" [settings]=\"dropdownSettings2\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\"  (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\"></angular2-multiselect>\r\n    </div>\r\n    <div class=\"col-md-3\">\r\n        <h4>Search Filter & Limit Show Selected</h4>\r\n        <angular2-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems3\" [settings]=\"dropdownSettings3\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\"></angular2-multiselect>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -239,6 +239,8 @@ var AngularMultiSelect = (function () {
     function AngularMultiSelect() {
         this.onSelect = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]();
         this.onDeSelect = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]();
+        this.onSelectAll = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]();
+        this.onDeSelectAll = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]();
         this.isActive = false;
         this.isSelectAll = false;
         this.filter = new __WEBPACK_IMPORTED_MODULE_3__multiselect_model__["a" /* ListItem */]();
@@ -274,10 +276,12 @@ var AngularMultiSelect = (function () {
             this.removeSelected(item);
             this.onDeSelect.emit(item);
         }
-        if (this.isSelectAll) {
+        if (this.isSelectAll || this.data.length > this.selectedItems.length) {
             this.isSelectAll = false;
         }
-        this.onChangeCallback(this.selectedItems);
+        if (this.data.length == this.selectedItems.length) {
+            this.isSelectAll = true;
+        }
     };
     AngularMultiSelect.prototype.writeValue = function (value) {
         if (value !== undefined && value !== null) {
@@ -328,6 +332,7 @@ var AngularMultiSelect = (function () {
         }
         else
             this.selectedItems.push(item);
+        this.onChangeCallback(this.selectedItems);
     };
     AngularMultiSelect.prototype.removeSelected = function (clickedItem) {
         var _this = this;
@@ -336,6 +341,7 @@ var AngularMultiSelect = (function () {
                 _this.selectedItems.splice(_this.selectedItems.indexOf(item), 1);
             }
         });
+        this.onChangeCallback(this.selectedItems);
     };
     AngularMultiSelect.prototype.toggleDropdown = function () {
         this.isActive = !this.isActive;
@@ -349,11 +355,13 @@ var AngularMultiSelect = (function () {
             this.selectedItems = this.data.slice();
             this.isSelectAll = true;
             this.onChangeCallback(this.selectedItems);
+            this.onSelectAll.emit(this.selectedItems);
         }
         else {
             this.selectedItems = [];
             this.isSelectAll = false;
             this.onChangeCallback(this.selectedItems);
+            this.onDeSelectAll.emit(this.selectedItems);
         }
     };
     return AngularMultiSelect;
@@ -374,6 +382,14 @@ __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Output */])('onDeSelect'),
     __metadata("design:type", typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]) === "function" && _c || Object)
 ], AngularMultiSelect.prototype, "onDeSelect", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Output */])('onSelectAll'),
+    __metadata("design:type", typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]) === "function" && _d || Object)
+], AngularMultiSelect.prototype, "onSelectAll", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Output */])('onDeSelectAll'),
+    __metadata("design:type", typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]) === "function" && _e || Object)
+], AngularMultiSelect.prototype, "onDeSelectAll", void 0);
 AngularMultiSelect = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["g" /* Component */])({
         selector: 'angular2-multiselect',
@@ -397,7 +413,7 @@ AngularMultiSelectModule = __decorate([
     })
 ], AngularMultiSelectModule);
 
-var _a, _b, _c;
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=C:/Users/Lenovo/Documents/Projects/angular2-multiselect-dropdown/src/multiselect.component.js.map
 
 /***/ }),
@@ -483,8 +499,7 @@ var AppComponent = (function () {
             { "id": 1, "itemName": "India" },
             { "id": 2, "itemName": "Singapore" },
             { "id": 3, "itemName": "Australia" },
-            { "id": 4, "itemName": "Canada" },
-            { "id": 5, "itemName": "South Korea" }
+            { "id": 4, "itemName": "Canada" }
         ];
         this.selectedItems3 = [
             { "id": 1, "itemName": "India" },
@@ -509,9 +524,17 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.onItemSelect = function (item) {
         console.log(item);
+        console.log(this.selectedItems2);
     };
     AppComponent.prototype.OnItemDeSelect = function (item) {
         console.log(item);
+        console.log(this.selectedItems2);
+    };
+    AppComponent.prototype.onSelectAll = function (items) {
+        console.log(items);
+    };
+    AppComponent.prototype.onDeSelectAll = function (items) {
+        console.log(items);
     };
     AppComponent.prototype.showModel = function () {
         console.log(this.selectedItems);

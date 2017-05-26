@@ -37,10 +37,10 @@
     </div>
     <div class="col-md-4">
         <h4>MultiSelect, Show all Selected</h4>
-        <angular2-multiselect [data]="dropdownList2" [(ngModel)]="selectedItems2" [settings]="dropdownSettings2" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"></angular2-multiselect>
+        <angular2-multiselect [data]="dropdownList2" [(ngModel)]="selectedItems2" [settings]="dropdownSettings2" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"  (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
     </div>
     <div class="col-md-3">
         <h4>Search Filter & Limit Show Selected</h4>
-        <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems3" [settings]="dropdownSettings3" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"></angular2-multiselect>
+        <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems3" [settings]="dropdownSettings3" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
     </div>
 </div>

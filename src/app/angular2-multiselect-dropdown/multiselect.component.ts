@@ -35,6 +35,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
     @Output('onDeSelect')
     onDeSelect: EventEmitter<ListItem> = new EventEmitter<ListItem>();
 
+    @Output('onSelectAll')
+    onSelectAll: EventEmitter<Array<ListItem>> = new EventEmitter<Array<ListItem>>();
+
+    @Output('onDeSelectAll')
+    onDeSelectAll: EventEmitter<Array<ListItem>> = new EventEmitter<Array<ListItem>>();
+
     private selectedItems: Array<ListItem>;
     private isActive: boolean = false;
     private isSelectAll: boolean = false;
@@ -72,10 +78,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
            this.removeSelected(item);
             this.onDeSelect.emit(item);
         }
-        if(this.isSelectAll){
+        if(this.isSelectAll || this.data.length > this.selectedItems.length){
             this.isSelectAll = false;
         }
-        this.onChangeCallback(this.selectedItems);
+        if(this.data.length == this.selectedItems.length){
+            this.isSelectAll = true;
+        }
     }
     private onTouchedCallback: () => void = noop;
     private onChangeCallback: (_: any) => void = noop;
@@ -132,13 +140,15 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         }
         else
             this.selectedItems.push(item);
+            this.onChangeCallback(this.selectedItems);
     }
     removeSelected(clickedItem: ListItem){
         this.selectedItems.forEach(item => {
            if(clickedItem.id === item.id){
                this.selectedItems.splice(this.selectedItems.indexOf(item),1);
            }
-        });    
+        }); 
+        this.onChangeCallback(this.selectedItems);   
     }
     toggleDropdown(){
         this.isActive = !this.isActive;
@@ -152,11 +162,13 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
             this.selectedItems = this.data.slice();
             this.isSelectAll = true;
             this.onChangeCallback(this.selectedItems);
+            this.onSelectAll.emit(this.selectedItems);
         }
         else{
             this.selectedItems = [];
             this.isSelectAll = false;
             this.onChangeCallback(this.selectedItems);
+            this.onDeSelectAll.emit(this.selectedItems);
         }     
     }
 }

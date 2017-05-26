@@ -66,13 +66,19 @@ export class AppComponent implements OnInit {
                                   enableSearchFilter: true
                                 };            
     }
-    onItemSelect(item){
-        console.log('Selected Item:');
+    onItemSelect(item:any){
         console.log(item);
+        console.log(this.selectedItems2);
     }
-    OnItemDeSelect(item){
-        console.log('De-Selected Item:');
+    OnItemDeSelect(item:any){
         console.log(item);
+        console.log(this.selectedItems2);
+    }
+    onSelectAll(items: any){
+        console.log(items);
+    }
+    onDeSelectAll(items: any){
+        console.log(items);
     }
 }
 ```
@@ -102,6 +108,10 @@ The following list of settings are supported by the component. Configure the set
     Example : (onSelect)="onItemSelect($event)"
 - `onDeSelect` - Return the un-selected item on un-selecting.
     Example : (onDeSelect)="OnItemDeSelect($event)"
+- `onSelectAll` - Return the list of all selected items.
+    Example : (onSelectAll)="onSelectAll($event)"
+- `onDeSelectAll` - Returns an empty array.
+    Example : (onDeSelectAll)="onDeSelectAll($event)"
     
 
 ## Run locally
