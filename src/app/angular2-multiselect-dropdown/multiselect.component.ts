@@ -147,8 +147,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
            if(clickedItem.id === item.id){
                this.selectedItems.splice(this.selectedItems.indexOf(item),1);
            }
-        }); 
-        this.onChangeCallback(this.selectedItems);   
+        });    
+        this.onChangeCallback(this.selectedItems);
     }
     toggleDropdown(){
         this.isActive = !this.isActive;
