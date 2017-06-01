@@ -63,7 +63,8 @@ export class AppComponent implements OnInit {
                                   text:"Select Countries",
                                   selectAllText:'Select All',
                                   unSelectAllText:'UnSelect All',
-                                  enableSearchFilter: true
+                                  enableSearchFilter: true,
+                                  classes:"myclass custom-class"
                                 };            
     }
     onItemSelect(item:any){
