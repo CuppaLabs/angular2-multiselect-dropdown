@@ -107,6 +107,7 @@ The following list of settings are supported by the component. Configure the set
 | enableSearchFilter | Boolean | Enable filter option for the list. | false |
 | maxHeight | Number | Set maximum height of the dropdown list in px. | 300 |
 | badgeShowLimit | Number | Limit the number of badges/items to show in the input field. If not set will show all selected. | All |
+| classes | String | Custom classes to the dropdown component. Classes are added to the dropdown selector tag. To add multiple classes, the value should be space separated class names.| '' |
 
 ### Callback Methods
 - `onSelect` - Return the selected item on selection.

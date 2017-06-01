@@ -27,15 +27,14 @@ $base-color: #0079FE;
             color: #fff;
             border-radius: 2px;
             margin-right: 4px;
-            margin-bottom: 2px;
             float: left;
             .c-label{
                 display: block;
                 float: left;
-                width: 50px;
+                /*width: 50px;
                 white-space: nowrap;
                 text-overflow: ellipsis;
-                overflow: hidden;
+                overflow: hidden;*/
             }
             .fa-remove{
                 margin-left: 1px;
@@ -59,6 +58,7 @@ $base-color: #0079FE;
     position: absolute;
     padding-top: 14px;
     width: 100%;
+    z-index: 9999;
     ul{
         padding: 0px;
         list-style: none;

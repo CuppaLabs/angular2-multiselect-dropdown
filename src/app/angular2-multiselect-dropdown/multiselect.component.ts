@@ -17,6 +17,7 @@ const noop = () => {
 @Component({
     selector:'angular2-multiselect',
     templateUrl: './multiselect.component.html',
+    host: { '[class]' : 'defaultSettings.classes'  },
     styleUrls:['./multiselect.component.scss'],
     providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR]
 })
@@ -53,7 +54,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         unSelectAllText: 'UnSelect All',
         enableSearchFilter: false,
         maxHeight: 300,
-        badgeShowLimit: 999999999999
+        badgeShowLimit: 999999999999,
+        classes:''
     }
     constructor(){
 

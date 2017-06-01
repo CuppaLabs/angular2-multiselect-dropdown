@@ -51,7 +51,8 @@ export class AppComponent implements OnInit {
                               text:"Select Countries",
                               selectAllText:'Select All',
                               unSelectAllText:'UnSelect All',
-                              enableSearchFilter: false
+                              enableSearchFilter: false,
+                              classes:"myclass custom-class"
                             };
     this.dropdownSettings3 = { singleSelection: false, 
                               text:"Select Countries",
