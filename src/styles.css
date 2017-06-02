@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 body{
-    background: url('assets/img/sand-background.jpg');
+   background: url('assets/img/sand-background.jpg');
 }
 .navbar-default{
     border-radius: 0px !important;
     background-color: #fff !important;
     margin: 0px !important;
+}
+.row{
+    margin: 0px !important;
+    margin-bottom: 20px !important;
 }
 .navbar-brand>img {
     height: 32px;

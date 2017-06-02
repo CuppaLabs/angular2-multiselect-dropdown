@@ -109,6 +109,7 @@ The following list of settings are supported by the component. Configure the set
 | maxHeight | Number | Set maximum height of the dropdown list in px. | 300 |
 | badgeShowLimit | Number | Limit the number of badges/items to show in the input field. If not set will show all selected. | All |
 | classes | String | Custom classes to the dropdown component. Classes are added to the dropdown selector tag. To add multiple classes, the value should be space separated class names.| '' |
+| limitSelection | Number | Limit the selection of number of items from the dropdown list. Once the limit is reached, all unselected items gets disabled. | none |
 
 ### Callback Methods
 - `onSelect` - Return the selected item on selection.

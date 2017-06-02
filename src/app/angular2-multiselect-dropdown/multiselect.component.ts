@@ -55,8 +55,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         enableSearchFilter: false,
         maxHeight: 300,
         badgeShowLimit: 999999999999,
-        classes:'',
-        selectionLimit: 999999999999
+        classes:''
     }
     constructor(){
 
@@ -71,22 +70,33 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         }*/
     }
     onItemClick(item: ListItem,index){
-        let found = this.isSelected(item);
+        
+                let found = this.isSelected(item);
+                let limit = this.selectedItems.length < this.settings.limitSelection ? true : false;
 
-        if(!found){
-            this.addSelected(item);
-            this.onSelect.emit(item);
-        }
-        else{
-           this.removeSelected(item);
-            this.onDeSelect.emit(item);
-        }
-        if(this.isSelectAll || this.data.length > this.selectedItems.length){
-            this.isSelectAll = false;
-        }
-        if(this.data.length == this.selectedItems.length){
-            this.isSelectAll = true;
-        }
+                if(!found){
+                    if(this.settings.limitSelection){
+                        if(limit){
+                            this.addSelected(item);
+                            this.onSelect.emit(item);
+                        } 
+                    }
+                    else{
+                        this.addSelected(item);
+                        this.onSelect.emit(item);
+                    }
+                    
+                }
+                else{
+                this.removeSelected(item);
+                    this.onDeSelect.emit(item);
+                }
+                if(this.isSelectAll || this.data.length > this.selectedItems.length){
+                    this.isSelectAll = false;
+                }
+                if(this.data.length == this.selectedItems.length){
+                    this.isSelectAll = true;
+                }    
     }
     private onTouchedCallback: () => void = noop;
     private onChangeCallback: (_: any) => void = noop;
@@ -108,8 +118,14 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
                 }
                 
             }
-            else
-            this.selectedItems = value;
+            else{
+                if(this.settings.limitSelection){
+                            this.selectedItems = value.splice(0,this.settings.limitSelection);
+                        }
+                        else{
+                            this.selectedItems = value;
+                        }
+            }
         } else {
             this.selectedItems = [];
         }
