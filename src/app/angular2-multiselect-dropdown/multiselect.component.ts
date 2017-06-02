@@ -55,7 +55,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         enableSearchFilter: false,
         maxHeight: 300,
         badgeShowLimit: 999999999999,
-        classes:''
+        classes:'',
+        selectionLimit: 999999999999
     }
     constructor(){
 
