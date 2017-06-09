@@ -39,14 +39,14 @@ module.exports = module.exports.toString();
 /***/ 151:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"cuppa-dropdown\" (clickOutside)=\"closeDropdown()\">\r\n    <div class=\"selected-list\">\r\n        <button class=\"c-btn\" (click)=\"toggleDropdown()\">\r\n            <span *ngIf=\"selectedItems.length == 0\">{{settings.text}}</span>\r\n            <span *ngIf=\"settings.singleSelection\">\r\n                <span *ngFor=\"let item of selectedItems;trackBy: trackByFn;\">\r\n                    {{item.itemName}}\r\n                </span>\r\n            </span>\r\n            <div class=\"c-list\" *ngIf=\"selectedItems.length > 0 && !settings.singleSelection\">\r\n                <div class=\"c-token\" *ngFor=\"let item of selectedItems;trackBy: trackByFn;let k = index\" [hidden]=\"k > settings.badgeShowLimit-1\">\r\n                    <span class=\"c-label\">{{item.itemName}}</span>\r\n                    <span class=\"fa fa-remove\" (click)=\"onItemClick(item)\"></span>\r\n                </div>\r\n            </div> \r\n            <span *ngIf=\"selectedItems.length > settings.badgeShowLimit\">+{{selectedItems.length - settings.badgeShowLimit }}</span>\r\n            <span class=\"fa\" [ngClass]=\"{'fa-angle-down': !isActive,'fa-angle-up':isActive}\"></span>\r\n        </button>      \r\n    </div>\r\n    <div class=\"dropdown-list\" [hidden]=\"!isActive\">\r\n    <div class=\"arrow-up\"></div>\r\n    <div class=\"list-area\">\r\n        <div class=\"pure-checkbox select-all\" *ngIf=\"settings.enableCheckAll && !settings.singleSelection\" (click)=\"toggleSelectAll()\">\r\n            <input type=\"checkbox\" [checked]=\"isSelectAll\"/>\r\n            <label>\r\n                <span [hidden]=\"isSelectAll\">{{settings.selectAllText}}</span>\r\n                <span [hidden]=\"!isSelectAll\">{{settings.unSelectAllText}}</span>\r\n            </label>\r\n        </div>   \r\n        <div class=\"list-filter\" *ngIf=\"settings.enableSearchFilter\">\r\n            <span class=\"fa fa-search\"></span>\r\n            <input type=\"text\" placeholder=\"Search\" [(ngModel)]=\"filter.itemName\">\r\n        </div> \r\n    <ul [style.maxHeight] = \"settings.maxHeight+'px'\">\r\n        <li *ngFor=\"let item of data | listFilter:filter; let i = index;\" (click)=\"onItemClick(item,i)\" class=\"pure-checkbox\">\r\n            <input type=\"checkbox\" [checked]=\"isSelected(item)\"/>\r\n            <label>{{item.itemName}}</label>\r\n        </li>\r\n    </ul>\r\n    </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"cuppa-dropdown\" (clickOutside)=\"closeDropdown()\">\r\n    <div class=\"selected-list\">\r\n        <button class=\"c-btn\" (click)=\"toggleDropdown($event)\">\r\n            <span *ngIf=\"selectedItems.length == 0\">{{settings.text}}</span>\r\n            <span *ngIf=\"settings.singleSelection\">\r\n                <span *ngFor=\"let item of selectedItems;trackBy: trackByFn;\">\r\n                    {{item.itemName}}\r\n                </span>\r\n            </span>\r\n            <div class=\"c-list\" *ngIf=\"selectedItems.length > 0 && !settings.singleSelection\">\r\n                <div class=\"c-token\" *ngFor=\"let item of selectedItems;trackBy: trackByFn;let k = index\" [hidden]=\"k > settings.badgeShowLimit-1\">\r\n                    <span class=\"c-label\">{{item.itemName}}</span>\r\n                    <span class=\"fa fa-remove\" (click)=\"onItemClick(item)\"></span>\r\n                </div>\r\n            </div> \r\n            <span *ngIf=\"selectedItems.length > settings.badgeShowLimit\">+{{selectedItems.length - settings.badgeShowLimit }}</span>\r\n            <span class=\"fa\" [ngClass]=\"{'fa-angle-down': !isActive,'fa-angle-up':isActive}\"></span>\r\n        </button>      \r\n    </div>\r\n    <div class=\"dropdown-list\" [hidden]=\"!isActive\">\r\n    <div class=\"arrow-up\"></div>\r\n    <div class=\"list-area\">\r\n        <div class=\"pure-checkbox select-all\" *ngIf=\"settings.enableCheckAll && !settings.singleSelection && !settings.limitSelection\" (click)=\"toggleSelectAll()\">\r\n            <input type=\"checkbox\" [checked]=\"isSelectAll\" [disabled]=\"settings.limitSelection == selectedItems.length\"/>\r\n            <label>\r\n                <span [hidden]=\"isSelectAll\">{{settings.selectAllText}}</span>\r\n                <span [hidden]=\"!isSelectAll\">{{settings.unSelectAllText}}</span>\r\n            </label>\r\n        </div>   \r\n        <div class=\"list-filter\" *ngIf=\"settings.enableSearchFilter\">\r\n            <span class=\"fa fa-search\"></span>\r\n            <input type=\"text\" placeholder=\"Search\" [(ngModel)]=\"filter.itemName\">\r\n        </div> \r\n    <ul [style.maxHeight] = \"settings.maxHeight+'px'\">\r\n        <li *ngFor=\"let item of data | listFilter:filter; let i = index;\" (click)=\"onItemClick(item,i)\" class=\"pure-checkbox\">\r\n            <input type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"settings.limitSelection == selectedItems.length && !isSelected(item)\"/>\r\n            <label>{{item.itemName}}</label>\r\n        </li>\r\n    </ul>\r\n    </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 152:
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\r\n        <div class=\"container-fluid\">\r\n          <div class=\"navbar-header\">\r\n            <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\r\n              <span class=\"sr-only\">Toggle navigation</span>\r\n              <span class=\"icon-bar\"></span>\r\n              <span class=\"icon-bar\"></span>\r\n              <span class=\"icon-bar\"></span>\r\n            </button>\r\n            <a class=\"navbar-brand\" href=\"https://cuppalabs.github.io\">\r\n                <img src=\"assets/img/cuppa-logo-coffee11.png\" alt=\"\">\r\n            </a>\r\n          </div>\r\n          <div id=\"navbar\" class=\"navbar-collapse collapse\">\r\n           <!-- <ul class=\"nav navbar-nav\">\r\n              <li><a href=\"#\" class=\"component-title\">Angular 2 MultiSelect Dropdown</a></li>\r\n            </ul> -->\r\n            <ul class=\"nav navbar-nav navbar-right\">\r\n              <li><a href=\"https://cuppalabs.github.io/components/multiselectDropdown\">Documentation <span class=\"sr-only\">(current)</span></a></li>\r\n              <li><a href=\"https://github.com/CuppaLabs/angular2-multiselect-dropdown\">Github</a></li>\r\n              <li><a href=\"https://cuppalabs.github.io/components/multiselectDropdown\">Back to Article</a></li>\r\n            </ul>\r\n          </div><!--/.nav-collapse -->\r\n        </div><!--/.container-fluid -->\r\n      </nav>\r\n<div class=\"containner\">\r\n    <div class=\"jumbotron\">\r\n      <div class=\"container\">\r\n        <h1>Angular 2 MultiSelect Dropdown</h1>\r\n        <p>Advanced component for angular web applications.</p>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-1\"></div>\r\n    <div class=\"col-md-3\">\r\n        <h4>Single Selection</h4>\r\n        <angular2-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\"></angular2-multiselect>\r\n    </div>\r\n    <div class=\"col-md-4\">\r\n        <h4>MultiSelect, Show all Selected</h4>\r\n        <angular2-multiselect [data]=\"dropdownList2\" [(ngModel)]=\"selectedItems2\" [settings]=\"dropdownSettings2\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\"  (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\"></angular2-multiselect>\r\n    </div>\r\n    <div class=\"col-md-3\">\r\n        <h4>Search Filter & Limit Show Selected</h4>\r\n        <angular2-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems3\" [settings]=\"dropdownSettings3\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\" (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\"></angular2-multiselect>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<nav class=\"navbar navbar-default\">\r\n        <div class=\"container-fluid\">\r\n          <div class=\"navbar-header\">\r\n            <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\r\n              <span class=\"sr-only\">Toggle navigation</span>\r\n              <span class=\"icon-bar\"></span>\r\n              <span class=\"icon-bar\"></span>\r\n              <span class=\"icon-bar\"></span>\r\n            </button>\r\n            <a class=\"navbar-brand\" href=\"https://cuppalabs.github.io\">\r\n                <img src=\"assets/img/cuppa-logo-coffee11.png\" alt=\"\">\r\n            </a>\r\n          </div>\r\n          <div id=\"navbar\" class=\"navbar-collapse collapse\">\r\n           <!-- <ul class=\"nav navbar-nav\">\r\n              <li><a href=\"#\" class=\"component-title\">Angular 2 MultiSelect Dropdown</a></li>\r\n            </ul> -->\r\n            <ul class=\"nav navbar-nav navbar-right\">\r\n              <li><a href=\"https://cuppalabs.github.io/components/multiselectDropdown\">Documentation <span class=\"sr-only\">(current)</span></a></li>\r\n              <li><a href=\"https://github.com/CuppaLabs/angular2-multiselect-dropdown\">Github</a></li>\r\n              <li><a href=\"https://cuppalabs.github.io/components/multiselectDropdown\">Back to Article</a></li>\r\n            </ul>\r\n          </div><!--/.nav-collapse -->\r\n        </div><!--/.container-fluid -->\r\n      </nav>\r\n<div class=\"containner\">\r\n    <div class=\"jumbotron\">\r\n      <div class=\"container\">\r\n        <h1>Angular 2 MultiSelect Dropdown</h1>\r\n        <p>Advanced component for angular web applications.</p>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n    <div class=\"col-md-1\"></div>\r\n    <div class=\"col-md-3\">\r\n        <h4>Single Selection</h4>\r\n        <angular2-multiselect [data]=\"singleSelectionList\" [(ngModel)]=\"singleSelectionselectedItems\" [settings]=\"singleSelectionSettings\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\"></angular2-multiselect>\r\n    </div>\r\n    <div class=\"col-md-4\">\r\n        <h4>MultiSelect, Show all Selected, Select All</h4>\r\n        <angular2-multiselect [data]=\"basicExampleList\" [(ngModel)]=\"basicExampleSelectedItems\" [settings]=\"basicExampleSettings\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\"  (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\"></angular2-multiselect>\r\n    </div>\r\n    <div class=\"col-md-3\">\r\n        <h4>Search Filter & Limit Show Selected</h4>\r\n        <angular2-multiselect [data]=\"basicExampleList\" [(ngModel)]=\"selectedItems3\" [settings]=\"dropdownSettings3\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\" (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\"></angular2-multiselect>\r\n    </div>     \r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-md-1\"></div>\r\n      <div class=\"col-md-3\">\r\n        <h4>Limit Selection</h4>\r\n        <angular2-multiselect [data]=\"basicExampleList\" [(ngModel)]=\"limitSelectionSelectedItems\" [settings]=\"limitSelectionSettings\" (onSelect)=\"onItemSelect($event)\" (onDeSelect)=\"OnItemDeSelect($event)\" (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\"></angular2-multiselect>\r\n      </div> \r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -269,9 +269,18 @@ var AngularMultiSelect = (function () {
     };
     AngularMultiSelect.prototype.onItemClick = function (item, index) {
         var found = this.isSelected(item);
+        var limit = this.selectedItems.length < this.settings.limitSelection ? true : false;
         if (!found) {
-            this.addSelected(item);
-            this.onSelect.emit(item);
+            if (this.settings.limitSelection) {
+                if (limit) {
+                    this.addSelected(item);
+                    this.onSelect.emit(item);
+                }
+            }
+            else {
+                this.addSelected(item);
+                this.onSelect.emit(item);
+            }
         }
         else {
             this.removeSelected(item);
@@ -299,8 +308,14 @@ var AngularMultiSelect = (function () {
                     console.error(e.body.msg);
                 }
             }
-            else
-                this.selectedItems = value;
+            else {
+                if (this.settings.limitSelection) {
+                    this.selectedItems = value.splice(0, this.settings.limitSelection);
+                }
+                else {
+                    this.selectedItems = value;
+                }
+            }
         }
         else {
             this.selectedItems = [];
@@ -344,8 +359,9 @@ var AngularMultiSelect = (function () {
         });
         this.onChangeCallback(this.selectedItems);
     };
-    AngularMultiSelect.prototype.toggleDropdown = function () {
+    AngularMultiSelect.prototype.toggleDropdown = function (evt) {
         this.isActive = !this.isActive;
+        evt.preventDefault();
     };
     AngularMultiSelect.prototype.closeDropdown = function () {
         this.isActive = false;
@@ -470,53 +486,55 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'app works!';
-        this.dropdownList = [];
-        this.dropdownList2 = [];
-        this.selectedItems = [];
-        this.selectedItems2 = [];
+        this.singleSelectionList = [];
+        this.singleSelectionselectedItems = [];
+        this.singleSelectionSettings = {};
+        this.basicExampleList = [];
+        this.basicExampleSelectedItems = [];
+        this.basicExampleSettings = {};
         this.selectedItems3 = [];
-        this.dropdownSettings = {};
-        this.dropdownSettings2 = {};
         this.dropdownSettings3 = {};
+        this.limitSelectionSelectedItems = [];
+        this.limitSelectionSettings = {};
     }
     AppComponent.prototype.ngOnInit = function () {
-        this.dropdownList = [
+        this.singleSelectionList = [
             { "id": 1, "itemName": "India" },
             { "id": 2, "itemName": "Singapore" },
             { "id": 3, "itemName": "Australia" },
             { "id": 4, "itemName": "Canada" },
             { "id": 5, "itemName": "South Korea" }
         ];
-        this.dropdownList2 = [
-            { "id": 1, "itemName": "India" },
-            { "id": 2, "itemName": "Singapore" },
-            { "id": 3, "itemName": "Australia" },
-            { "id": 4, "itemName": "Canada" },
-            { "id": 5, "itemName": "South Korea" }
-        ];
-        this.selectedItems = [
+        this.singleSelectionselectedItems = [
             { "id": 2, "itemName": "Singapore" }
         ];
-        this.selectedItems2 = [
+        this.singleSelectionSettings = { singleSelection: true, text: "Select Country" };
+        this.basicExampleList = [
+            { "id": 1, "itemName": "India" },
+            { "id": 2, "itemName": "Singapore" },
+            { "id": 3, "itemName": "Australia" },
+            { "id": 4, "itemName": "Canada" },
+            { "id": 5, "itemName": "South Korea" }
+        ];
+        this.basicExampleSelectedItems = [
             { "id": 1, "itemName": "India" },
             { "id": 2, "itemName": "Singapore" },
             { "id": 3, "itemName": "Australia" },
             { "id": 4, "itemName": "Canada" }
         ];
-        this.selectedItems3 = [
-            { "id": 1, "itemName": "India" },
-            { "id": 2, "itemName": "Singapore" },
-            { "id": 4, "itemName": "Canada" },
-            { "id": 5, "itemName": "South Korea" }
-        ];
-        this.dropdownSettings = { singleSelection: true, text: "Select Country" };
-        this.dropdownSettings2 = { singleSelection: false,
+        this.basicExampleSettings = {
             text: "Select Countries",
             selectAllText: 'Select All',
             unSelectAllText: 'UnSelect All',
             enableSearchFilter: false,
             classes: "myclass custom-class"
         };
+        this.selectedItems3 = [
+            { "id": 1, "itemName": "India" },
+            { "id": 2, "itemName": "Singapore" },
+            { "id": 4, "itemName": "Canada" },
+            { "id": 5, "itemName": "South Korea" }
+        ];
         this.dropdownSettings3 = { singleSelection: false,
             text: "Select Countries",
             selectAllText: 'Select All',
@@ -524,14 +542,28 @@ var AppComponent = (function () {
             enableSearchFilter: true,
             badgeShowLimit: 3
         };
+        this.limitSelectionSelectedItems = [
+            { "id": 1, "itemName": "India" },
+            { "id": 2, "itemName": "Singapore" },
+            { "id": 3, "itemName": "Australia" },
+            { "id": 4, "itemName": "Canada" }
+        ];
+        this.limitSelectionSettings = {
+            text: "Select Countries",
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            enableSearchFilter: false,
+            classes: "myclass custom-class",
+            limitSelection: 2
+        };
     };
     AppComponent.prototype.onItemSelect = function (item) {
         console.log(item);
-        console.log(this.selectedItems2);
+        console.log(this.basicExampleSelectedItems);
     };
     AppComponent.prototype.OnItemDeSelect = function (item) {
         console.log(item);
-        console.log(this.selectedItems2);
+        console.log(this.basicExampleSelectedItems);
     };
     AppComponent.prototype.onSelectAll = function (items) {
         console.log(items);
@@ -540,7 +572,7 @@ var AppComponent = (function () {
         console.log(items);
     };
     AppComponent.prototype.showModel = function () {
-        console.log(this.selectedItems);
+        console.log(this.singleSelectionselectedItems);
     };
     return AppComponent;
 }());

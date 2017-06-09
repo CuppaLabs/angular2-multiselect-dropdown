@@ -7,53 +7,63 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'app works!';
-  dropdownList = [];
-  dropdownList2 = [];
-  selectedItems = [];
-  selectedItems2 = [];
+  singleSelectionList = [];
+  singleSelectionselectedItems = [];
+  singleSelectionSettings = {};
+
+  basicExampleList = [];
+  basicExampleSelectedItems = [];
+  basicExampleSettings = {};
+
   selectedItems3 = [];
-  dropdownSettings = {};
-  dropdownSettings2 = {};
   dropdownSettings3 = {};
+
+  limitSelectionSelectedItems = [];
+  limitSelectionSettings = {};
   constructor(){
     
   }
   ngOnInit(){
-    this.dropdownList = [
+    this.singleSelectionList = [
                           {"id":1,"itemName":"India"},
                           {"id":2,"itemName":"Singapore"},
                           {"id":3,"itemName":"Australia"},
                           {"id":4,"itemName":"Canada"},
                           {"id":5,"itemName":"South Korea"}
                         ];
-    this.dropdownList2 = [
-                          {"id":1,"itemName":"India"},
-                          {"id":2,"itemName":"Singapore"},
-                          {"id":3,"itemName":"Australia"},
-                          {"id":4,"itemName":"Canada"},
-                          {"id":5,"itemName":"South Korea"}
-                        ];
-    this.selectedItems = [
-                          {"id":2,"itemName":"Singapore"}];
-    this.selectedItems2 = [
-                          {"id":1,"itemName":"India"},
-                          {"id":2,"itemName":"Singapore"},
-                          {"id":3,"itemName":"Australia"},
-                           {"id":4,"itemName":"Canada"}];
-    this.selectedItems3 = [
-                          {"id":1,"itemName":"India"},
-                          {"id":2,"itemName":"Singapore"},
-                          {"id":4,"itemName":"Canada"},
-                          {"id":5,"itemName":"South Korea"}];
 
-    this.dropdownSettings = {singleSelection: true, text:"Select Country"};
-    this.dropdownSettings2 = { singleSelection: false, 
+    this.singleSelectionselectedItems = [
+                          {"id":2,"itemName":"Singapore"}];
+    this.singleSelectionSettings = {singleSelection: true, text:"Select Country"};
+
+    this.basicExampleList = [
+                          {"id":1,"itemName":"India"},
+                          {"id":2,"itemName":"Singapore"},
+                          {"id":3,"itemName":"Australia"},
+                          {"id":4,"itemName":"Canada"},
+                          {"id":5,"itemName":"South Korea"}
+                        ];
+    
+    this.basicExampleSelectedItems = [
+                          {"id":1,"itemName":"India"},
+                          {"id":2,"itemName":"Singapore"},
+                          {"id":3,"itemName":"Australia"},
+                          {"id":4,"itemName":"Canada"}];
+    this.basicExampleSettings = { 
                               text:"Select Countries",
                               selectAllText:'Select All',
                               unSelectAllText:'UnSelect All',
                               enableSearchFilter: false,
                               classes:"myclass custom-class"
                             };
+
+    this.selectedItems3 = [
+                          {"id":1,"itemName":"India"},
+                          {"id":2,"itemName":"Singapore"},
+                          {"id":4,"itemName":"Canada"},
+                          {"id":5,"itemName":"South Korea"}];
+
+    
     this.dropdownSettings3 = { singleSelection: false, 
                               text:"Select Countries",
                               selectAllText:'Select All',
@@ -61,14 +71,27 @@ export class AppComponent implements OnInit {
                               enableSearchFilter: true,
                               badgeShowLimit: 3
                             };   
+    this.limitSelectionSelectedItems = [
+                          {"id":1,"itemName":"India"},
+                          {"id":2,"itemName":"Singapore"},
+                          {"id":3,"itemName":"Australia"},
+                          {"id":4,"itemName":"Canada"}];
+    this.limitSelectionSettings = { 
+                              text:"Select Countries",
+                              selectAllText:'Select All',
+                              unSelectAllText:'UnSelect All',
+                              enableSearchFilter: false,
+                              classes:"myclass custom-class",
+                              limitSelection: 2
+                            };
   }
   onItemSelect(item:any){
     console.log(item);
-    console.log(this.selectedItems2);
+    console.log(this.basicExampleSelectedItems);
   }
   OnItemDeSelect(item:any){
     console.log(item);
-    console.log(this.selectedItems2);
+    console.log(this.basicExampleSelectedItems);
   }
   onSelectAll(items: any){
     console.log(items);
@@ -77,6 +100,6 @@ export class AppComponent implements OnInit {
     console.log(items);
   }
   showModel(){
-    console.log(this.selectedItems);
+    console.log(this.singleSelectionselectedItems);
   }
 }
