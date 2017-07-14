@@ -9,4 +9,5 @@ export interface DropdownSettings{
     badgeShowLimit: Number;
     classes: String;
     limitSelection?: Number;
+    disabled?: Boolean;
 } 

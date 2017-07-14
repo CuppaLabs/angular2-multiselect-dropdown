@@ -54,7 +54,8 @@ export class AppComponent implements OnInit {
                               selectAllText:'Select All',
                               unSelectAllText:'UnSelect All',
                               enableSearchFilter: false,
-                              classes:"myclass custom-class"
+                              classes:"myclass custom-class",
+                              disabled: true
                             };
 
     this.selectedItems3 = [

@@ -12,6 +12,9 @@ $base-color: #0079FE;
     font-size: 14px;
     color: #333;
 }
+.c-btn.disabled{
+    background: #ccc;
+}
 .c-btn:focus{
         outline: none;
     }

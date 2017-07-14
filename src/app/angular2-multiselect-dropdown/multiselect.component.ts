@@ -55,7 +55,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         enableSearchFilter: false,
         maxHeight: 300,
         badgeShowLimit: 999999999999,
-        classes:''
+        classes:'',
+        disabled: false
     }
     constructor(){
 
@@ -70,6 +71,10 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         }*/
     }
     onItemClick(item: ListItem,index){
+
+                if(this.settings.disabled){
+                    return false;
+                }
         
                 let found = this.isSelected(item);
                 let limit = this.selectedItems.length < this.settings.limitSelection ? true : false;
