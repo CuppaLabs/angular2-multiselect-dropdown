@@ -20,6 +20,9 @@ export class AppComponent implements OnInit {
 
   limitSelectionSelectedItems = [];
   limitSelectionSettings = {};
+
+  disableModeSelectedItems = [];
+  disableModeSettings = {};
   constructor(){
     
   }
@@ -54,8 +57,7 @@ export class AppComponent implements OnInit {
                               selectAllText:'Select All',
                               unSelectAllText:'UnSelect All',
                               enableSearchFilter: false,
-                              classes:"myclass custom-class",
-                              disabled: true
+                              classes:"myclass custom-class"
                             };
 
     this.selectedItems3 = [
@@ -84,6 +86,20 @@ export class AppComponent implements OnInit {
                               enableSearchFilter: false,
                               classes:"myclass custom-class",
                               limitSelection: 2
+                            };
+    this.disableModeSelectedItems = [
+                          {"id":1,"itemName":"India"},
+                          {"id":2,"itemName":"Singapore"},
+                          {"id":3,"itemName":"Australia"},
+                          {"id":4,"itemName":"Canada"}];
+    this.disableModeSettings = { 
+                              text:"Select Countries",
+                              selectAllText:'Select All',
+                              unSelectAllText:'UnSelect All',
+                              enableSearchFilter: false,
+                              classes:"myclass custom-class",
+                              limitSelection: 2,
+                              disabled: true
                             };
   }
   onItemSelect(item:any){
