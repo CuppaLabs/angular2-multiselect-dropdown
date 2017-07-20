@@ -42,7 +42,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
     @Output('onDeSelectAll')
     onDeSelectAll: EventEmitter<Array<ListItem>> = new EventEmitter<Array<ListItem>>();
 
-    public selectedItems: Array<ListItem>;
+    public selectedItems: Array<ListItem>=[];
     public isActive: boolean = false;
     public isSelectAll: boolean = false;
     filter: ListItem = new ListItem();
