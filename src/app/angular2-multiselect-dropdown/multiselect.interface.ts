@@ -10,4 +10,5 @@ export interface DropdownSettings{
     classes: String;
     limitSelection?: Number;
     disabled?: Boolean;
+    searchPlaceholderText: String;
 } 

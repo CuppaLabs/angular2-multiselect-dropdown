@@ -55,5 +55,9 @@
         <h4>Disable Mode</h4>
         <angular2-multiselect [data]="basicExampleList" [(ngModel)]="disableModeSelectedItems" [settings]="disableModeSettings"></angular2-multiselect>
       </div> 
+      <div class="col-md-3">
+        <h4>Custom Search Placeholder Text</h4>
+        <angular2-multiselect [data]="placeholderExampleList" [(ngModel)]="placeholderExampleSelectedItems" [settings]="placeholderExampleSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+    </div>  
     </div>
 </div>

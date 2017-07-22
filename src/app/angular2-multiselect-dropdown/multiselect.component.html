@@ -29,7 +29,7 @@
         </div>   
         <div class="list-filter" *ngIf="settings.enableSearchFilter">
             <span class="fa fa-search"></span>
-            <input type="text" placeholder="Search" [(ngModel)]="filter.itemName">
+            <input type="text" [placeholder]="settings.searchPlaceholderText" [(ngModel)]="filter.itemName">
         </div> 
     <ul [style.maxHeight] = "settings.maxHeight+'px'">
         <li *ngFor="let item of data | listFilter:filter; let i = index;" (click)="onItemClick(item,i)" class="pure-checkbox">

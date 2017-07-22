@@ -111,6 +111,7 @@ The following list of settings are supported by the component. Configure the set
 | classes | String | Custom classes to the dropdown component. Classes are added to the dropdown selector tag. To add multiple classes, the value should be space separated class names.| '' |
 | limitSelection | Number | Limit the selection of number of items from the dropdown list. Once the limit is reached, all unselected items gets disabled. | none |
 | disabled | Boolean | Disable the dropdown | false |
+| searchPlaceholderText | String | Custom text for the search placeholder text. Default value would be 'Search' | 'Search' |
 
 ### Callback Methods
 - `onSelect` - Return the selected item on selection.

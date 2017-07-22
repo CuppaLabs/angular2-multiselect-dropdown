@@ -23,6 +23,11 @@ export class AppComponent implements OnInit {
 
   disableModeSelectedItems = [];
   disableModeSettings = {};
+
+  placeholderExampleList = [];
+  placeholderExampleSelectedItems = [];
+  placeholderExampleSettings = {};
+
   constructor(){
     
   }
@@ -101,6 +106,30 @@ export class AppComponent implements OnInit {
                               limitSelection: 2,
                               disabled: true
                             };
+
+    this.placeholderExampleList = [
+                          {"id":1,"itemName":"India"},
+                          {"id":2,"itemName":"Singapore"},
+                          {"id":3,"itemName":"Australia"},
+                          {"id":4,"itemName":"Canada"},
+                          {"id":5,"itemName":"South Korea"}
+                        ];
+    
+    this.placeholderExampleSelectedItems = [
+                          {"id":1,"itemName":"India"},
+                          {"id":2,"itemName":"Singapore"},
+                          {"id":3,"itemName":"Australia"},
+                          {"id":4,"itemName":"Canada"}];
+    this.placeholderExampleSettings = { 
+                              text:"Select Countries",
+                              selectAllText:'Select All',
+                              unSelectAllText:'UnSelect All',
+                              enableSearchFilter: true,
+                              classes:"myclass custom-class",
+                              searchPlaceholderText: "Custom Placeholder text"
+                            };
+
+
   }
   onItemSelect(item:any){
     console.log(item);
