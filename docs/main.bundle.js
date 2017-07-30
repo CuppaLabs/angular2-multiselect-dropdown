@@ -340,7 +340,7 @@ var AngularMultiSelect = (function () {
     };
     AngularMultiSelect.prototype.isSelected = function (clickedItem) {
         var found = false;
-        this.selectedItems.forEach(function (item) {
+        this.selectedItems && this.selectedItems.forEach(function (item) {
             if (clickedItem.id === item.id) {
                 found = true;
             }
