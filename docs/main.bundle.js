@@ -303,8 +303,9 @@ var AngularMultiSelect = (function () {
                         this.selectedItems = [value[0]];
                         throw new __WEBPACK_IMPORTED_MODULE_3__multiselect_model__["b" /* MyException */](404, { "msg": "Single Selection Mode, Selected Items cannot have more than one item." });
                     }
-                    else
+                    else {
                         this.selectedItems = value;
+                    }
                 }
                 catch (e) {
                     console.error(e.body.msg);
@@ -316,6 +317,9 @@ var AngularMultiSelect = (function () {
                 }
                 else {
                     this.selectedItems = value;
+                }
+                if (this.selectedItems.length === this.data.length) {
+                    this.isSelectAll = true;
                 }
             }
         }

@@ -116,8 +116,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
                         this.selectedItems = [value[0]];
                         throw new MyException(404, { "msg": "Single Selection Mode, Selected Items cannot have more than one item." });
                     }
-                    else
+                    else{
                         this.selectedItems = value;
+                    }
                 }
                 catch(e){
                     console.error(e.body.msg);
@@ -128,8 +129,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
                 if(this.settings.limitSelection){
                             this.selectedItems = value.splice(0,this.settings.limitSelection);
                         }
-                        else{
-                            this.selectedItems = value;
+                 else{
+                        this.selectedItems = value;
+                    }
+                if(this.selectedItems.length === this.data.length){
+                            this.isSelectAll = true;
                         }
             }
         } else {
