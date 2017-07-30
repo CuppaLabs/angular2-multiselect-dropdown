@@ -28,6 +28,10 @@ export class AppComponent implements OnInit {
   placeholderExampleSelectedItems = [];
   placeholderExampleSettings = {};
 
+  resetExampleList = [];
+  resetExampleSelectedItems = [];
+  resetExampleSettings = {};
+
   constructor(){
     
   }
@@ -128,7 +132,26 @@ export class AppComponent implements OnInit {
                               classes:"myclass custom-class",
                               searchPlaceholderText: "Custom Placeholder text"
                             };
-
+    this.resetExampleList = [
+                          {"id":1,"itemName":"India"},
+                          {"id":2,"itemName":"Singapore"},
+                          {"id":3,"itemName":"Australia"},
+                          {"id":4,"itemName":"Canada"},
+                          {"id":5,"itemName":"South Korea"}
+                        ];
+    
+    this.resetExampleSelectedItems = [
+                          {"id":1,"itemName":"India"},
+                          {"id":2,"itemName":"Singapore"},
+                          {"id":3,"itemName":"Australia"},
+                          {"id":4,"itemName":"Canada"}];
+    this.resetExampleSettings = { 
+                              text:"Select Countries",
+                              selectAllText:'Select All',
+                              unSelectAllText:'UnSelect All',
+                              enableSearchFilter: false,
+                              classes:"myclass custom-class"
+                            };                
 
   }
   onItemSelect(item:any){
@@ -147,5 +170,8 @@ export class AppComponent implements OnInit {
   }
   showModel(){
     console.log(this.singleSelectionselectedItems);
+  }
+  changeData(){
+    this.resetExampleSelectedItems = [];
   }
 }

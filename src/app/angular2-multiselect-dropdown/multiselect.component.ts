@@ -64,12 +64,14 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
     }
     ngOnInit(){
          this.settings = Object.assign(this.defaultSettings, this.settings);
-       /* this.selectedItems = [];
-        for(var t=0;t<this.data.length;t++){
-            if(this.data[t]){
-                this.selectedItems.push(this.data[t]);
+    }
+    ngDoCheck(){
+        if(this.selectedItems){
+            console.log(this.selectedItems.length);
+            if(this.selectedItems.length == 0 || this.data.length == 0 || this.selectedItems.length < this.data.length){
+                this.isSelectAll = false;
             }
-        }*/
+        }
     }
     onItemClick(item: ListItem, index: number){
 
@@ -132,7 +134,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
                  else{
                         this.selectedItems = value;
                     }
-                if(this.selectedItems.length === this.data.length){
+                if(this.selectedItems.length === this.data.length && this.data.length > 0){
                             this.isSelectAll = true;
                         }
             }
@@ -172,7 +174,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
             this.onChangeCallback(this.selectedItems);
     }
     removeSelected(clickedItem: ListItem){
-        this.selectedItems.forEach(item => {
+        this.selectedItems && this.selectedItems.forEach(item => {
            if(clickedItem.id === item.id){
                this.selectedItems.splice(this.selectedItems.indexOf(item),1);
            }
