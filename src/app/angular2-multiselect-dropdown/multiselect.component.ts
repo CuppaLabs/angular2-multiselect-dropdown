@@ -71,7 +71,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
             }
         }*/
     }
-    onItemClick(item: ListItem,index){
+    onItemClick(item: ListItem, index: number){
 
                 if(this.settings.disabled){
                     return false;
@@ -150,7 +150,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
     registerOnTouched(fn: any) {
         this.onTouchedCallback = fn;
     }
-    trackByFn(index,item){
+    trackByFn(index: number, item: ListItem){
         return item.id;
     }
     isSelected(clickedItem:ListItem){
@@ -179,7 +179,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         });    
         this.onChangeCallback(this.selectedItems);
     }
-    toggleDropdown(evt){
+    toggleDropdown(evt: any){
         this.isActive = !this.isActive;
         evt.preventDefault();
     }
