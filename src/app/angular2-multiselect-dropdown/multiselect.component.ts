@@ -67,7 +67,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
     }
     ngDoCheck(){
         if(this.selectedItems){
-            console.log(this.selectedItems.length);
             if(this.selectedItems.length == 0 || this.data.length == 0 || this.selectedItems.length < this.data.length){
                 this.isSelectAll = false;
             }
