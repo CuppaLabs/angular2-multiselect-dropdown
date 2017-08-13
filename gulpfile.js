@@ -50,7 +50,7 @@ gulp.task('build:esm:watch', ['build:esm'], () => {
 });
 
 gulp.task('copy', () => {
-  return gulp.src(['package.json','LICENSE'])
+  return gulp.src(['package.json','LICENSE','README.md'])
   .pipe(gulp.dest('dist/'));
 });
 

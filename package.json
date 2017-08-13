@@ -8,7 +8,7 @@
     "ng": "ng",
     "start": "ng serve",
     "e2e": "ng e2e",
-    "build": "npm run build:esm && npm run build:umd && gulp copy && ng build --base-href /angular2-multiselect-dropdown/",
+    "build": "npm run build:esm && npm run build:umd && gulp copy",
     "build:esm": "gulp inline-templates && npm run ngcompile",
     "build:esm:watch": "gulp build:esm:watch",
     "build:umd": "webpack --config webpack-umd.config.ts",
@@ -30,7 +30,8 @@
     "preversion": "npm run ci",
     "test": "karma start",
     "test:watch": "karma start --auto-watch --no-single-run",
-    "tslint": "tslint"
+    "tslint": "tslint",
+    "github-pages":"ng build --base-href /angular2-multiselect-dropdown/"
   },
   "private": false,
   "dependencies": {
