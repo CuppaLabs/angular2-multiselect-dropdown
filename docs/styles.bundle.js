@@ -1,4 +1,4 @@
-webpackJsonp([1],{
+webpackJsonp(["styles"],{
 
 /***/ "../../../../../src/assets/img/sand-background.jpg":
 /***/ (function(module, exports, __webpack_require__) {

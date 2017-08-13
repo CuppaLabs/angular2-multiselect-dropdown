@@ -1,1 +1,245 @@
-.cuppa-dropdown { position: relative; } .c-btn { display: inline-block; background: #fff; border: 1px solid #ccc; border-radius: 3px; font-size: 14px; color: #333; } .c-btn.disabled { background: #ccc; } .c-btn:focus { outline: none; } .selected-list .c-list { float: left; padding: 0px; margin: 0px; } .selected-list .c-list .c-token { list-style: none; padding: 0px 5px; background: #0079FE; color: #fff; border-radius: 2px; margin-right: 4px; float: left; } .selected-list .c-list .c-token .c-label { display: block; float: left; /*width: 50px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;*/ } .selected-list .c-list .c-token .fa-remove { margin-left: 1px; font-size: 12px; } .selected-list .fa-angle-down, .selected-list .fa-angle-up { font-size: 15pt; position: absolute; right: 10px; top: 25%; } .selected-list button { width: 100%; box-shadow: 0px 1px 5px #959595; padding: 10px; } .dropdown-list { position: absolute; padding-top: 14px; width: 100%; z-index: 9999; } .dropdown-list ul { padding: 0px; list-style: none; overflow: auto; margin: 0px; } .dropdown-list ul li { padding: 10px 10px; cursor: pointer; text-align: left; } .dropdown-list ul li:first-child { padding-top: 10px; } .dropdown-list ul li:last-child { padding-bottom: 10px; } .dropdown-list ul li:hover { background: #f5f5f5; } .dropdown-list ul::-webkit-scrollbar { width: 8px; } .dropdown-list ul::-webkit-scrollbar-thumb { background: #cccccc; border-radius: 5px; } .dropdown-list ul::-webkit-scrollbar-track { background: #f2f2f2; } .arrow-up { width: 0; height: 0; border-left: 13px solid transparent; border-right: 13px solid transparent; border-bottom: 15px solid #fff; margin-left: 15px; position: absolute; top: 0; } .list-area { border: 1px solid #ccc; border-radius: 3px; background: #fff; margin: 0px; box-shadow: 0px 1px 5px #959595; } .select-all { padding: 10px; border-bottom: 1px solid #ccc; text-align: left; } .list-filter { border-bottom: 1px solid #ccc; position: relative; } .list-filter input { border: 0px; width: 100%; height: 35px; padding: 0px 0px 0px 35px; } .list-filter input:focus { outline: none; } .list-filter .fa { position: absolute; top: 10px; left: 13px; color: #888; } .pure-checkbox input[type="checkbox"] { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; } .pure-checkbox input[type="checkbox"]:focus + label:before, .pure-checkbox input[type="checkbox"]:hover + label:before { border-color: #0079FE; background-color: #f2f2f2; } .pure-checkbox input[type="checkbox"]:active + label:before { transition-duration: 0s; } .pure-checkbox input[type="checkbox"] + label { position: relative; padding-left: 2em; vertical-align: middle; user-select: none; cursor: pointer; margin: 0px; color: #000; } .pure-checkbox input[type="checkbox"] + label:before { box-sizing: content-box; content: ''; color: #0079FE; position: absolute; top: 50%; left: 0; width: 14px; height: 14px; margin-top: -9px; border: 2px solid #0079FE; text-align: center; transition: all 0.4s ease; } .pure-checkbox input[type="checkbox"] + label:after { box-sizing: content-box; content: ''; background-color: #0079FE; position: absolute; top: 50%; left: 4px; width: 10px; height: 10px; margin-top: -5px; transform: scale(0); transform-origin: 50%; transition: transform 200ms ease-out; } .pure-checkbox input[type="checkbox"]:disabled + label:before { border-color: #cccccc; } .pure-checkbox input[type="checkbox"]:disabled:focus + label:before .pure-checkbox input[type="checkbox"]:disabled:hover + label:before { background-color: inherit; } .pure-checkbox input[type="checkbox"]:disabled:checked + label:before { background-color: #cccccc; } .pure-checkbox input[type="checkbox"] + label:after { background-color: transparent; top: 50%; left: 4px; width: 8px; height: 3px; margin-top: -4px; border-style: solid; border-color: #ffffff; border-width: 0 0 3px 3px; border-image: none; transform: rotate(-45deg) scale(0); } .pure-checkbox input[type="checkbox"]:checked + label:after { content: ''; transform: rotate(-45deg) scale(1); transition: transform 200ms ease-out; } .pure-checkbox input[type="radio"]:checked + label:before { animation: borderscale 300ms ease-in; background-color: white; } .pure-checkbox input[type="radio"]:checked + label:after { transform: scale(1); } .pure-checkbox input[type="radio"] + label:before { border-radius: 50%; } .pure-checkbox input[type="checkbox"]:checked + label:before { animation: borderscale 200ms ease-in; background: #0079FE; } .pure-checkbox input[type="checkbox"]:checked + label:after { transform: rotate(-45deg) scale(1); } @keyframes borderscale { 50% { box-shadow: 0 0 0 2px #0079FE; } } .list-message { text-align: center; } 
+
+$base-color: #0079FE;
+
+.cuppa-dropdown{
+    position: relative;
+}
+.c-btn{
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #333;
+}
+.c-btn.disabled{
+    background: #ccc;
+}
+.c-btn:focus{
+        outline: none;
+    }
+.selected-list{
+    .c-list{
+        float: left;
+        padding: 0px;
+        margin: 0px;
+        .c-token{
+            list-style: none;  
+            padding: 0px 5px;
+            background: $base-color; 
+            color: #fff;
+            border-radius: 2px;
+            margin-right: 4px;
+            float: left;
+            .c-label{
+                display: block;
+                float: left;
+                /*width: 50px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;*/
+            }
+            .fa-remove{
+                margin-left: 1px;
+                font-size: 12px;
+            }
+        }
+    }
+    .fa-angle-down, .fa-angle-up{
+        font-size: 15pt;
+        position: absolute;
+        right: 10px;
+        top: 25%;
+    }
+    button{
+        width: 100%;
+        box-shadow: 0px 1px 5px #959595;
+        padding: 10px;
+    }
+}
+.dropdown-list{
+    position: absolute;
+    padding-top: 14px;
+    width: 100%;
+    z-index: 9999;
+    ul{
+        padding: 0px;
+        list-style: none;
+        overflow: auto;
+        margin: 0px;
+        li{
+            padding: 10px 10px;
+            cursor: pointer;
+            text-align: left;
+        }
+        li:first-child{
+            padding-top: 10px;
+        }
+        li:last-child{
+            padding-bottom: 10px;
+        }
+        li:hover{
+            background: #f5f5f5;
+        }
+    }
+    ul::-webkit-scrollbar{
+        width: 8px;
+    }
+    ul::-webkit-scrollbar-thumb{
+        background: #cccccc;
+        border-radius: 5px;
+    }
+    ul::-webkit-scrollbar-track{
+        background: #f2f2f2;
+    }
+}
+.arrow-up {
+  width: 0; 
+  height: 0; 
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 15px solid #fff;
+  margin-left: 15px;
+  position: absolute;
+  top: 0;
+}
+.list-area{
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #fff;
+    margin: 0px;
+    box-shadow: 0px 1px 5px #959595;
+}
+.select-all{
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+.list-filter{
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    input{
+        border: 0px;
+        width: 100%;
+        height: 35px;
+        padding: 0px 0px 0px 35px;
+    }
+    input:focus{
+        outline: none;
+    }
+    .fa{
+        position: absolute;
+        top: 10px;
+        left: 13px;
+        color: #888;
+    }
+}
+.pure-checkbox input[type="checkbox"] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.pure-checkbox input[type="checkbox"]:focus + label:before,
+.pure-checkbox input[type="checkbox"]:hover + label:before
+ {
+  border-color: $base-color;
+  background-color: #f2f2f2;
+}
+.pure-checkbox input[type="checkbox"]:active + label:before {
+  transition-duration: 0s;
+}
+.pure-checkbox input[type="checkbox"] + label{
+  position: relative;
+  padding-left: 2em;
+  vertical-align: middle;
+  user-select: none;
+  cursor: pointer;
+  margin: 0px;
+  color: #000;
+}
+.pure-checkbox input[type="checkbox"] + label:before{
+  box-sizing: content-box;
+  content: '';
+  color: $base-color;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  margin-top: -9px;
+  border: 2px solid $base-color;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+.pure-checkbox input[type="checkbox"] + label:after{
+  box-sizing: content-box;
+  content: '';
+  background-color: $base-color;
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  transform: scale(0);
+  transform-origin: 50%;
+  transition: transform 200ms ease-out;
+}
+.pure-checkbox input[type="checkbox"]:disabled + label:before{
+  border-color: #cccccc;
+}
+.pure-checkbox input[type="checkbox"]:disabled:focus + label:before
+.pure-checkbox input[type="checkbox"]:disabled:hover + label:before{
+  background-color: inherit;
+}
+.pure-checkbox input[type="checkbox"]:disabled:checked + label:before{
+  background-color: #cccccc;
+}
+.pure-checkbox input[type="checkbox"] + label:after{
+  background-color: transparent;
+  top: 50%;
+  left: 4px;
+  width: 8px;
+  height: 3px;
+  margin-top: -4px;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 0 0 3px 3px;
+  border-image: none;
+  transform: rotate(-45deg) scale(0);
+}
+.pure-checkbox input[type="checkbox"]:checked + label:after{
+  content: '';
+  transform: rotate(-45deg) scale(1);
+  transition: transform 200ms ease-out;
+}
+.pure-checkbox input[type="radio"]:checked + label:before{
+  animation: borderscale 300ms ease-in;
+  background-color: white;
+}
+.pure-checkbox input[type="radio"]:checked + label:after{
+  transform: scale(1);
+}
+.pure-checkbox input[type="radio"] + label:before{
+  border-radius: 50%;
+}
+.pure-checkbox input[type="checkbox"]:checked + label:before{
+  animation: borderscale 200ms ease-in;
+  background: $base-color;
+}
+.pure-checkbox input[type="checkbox"]:checked + label:after{
+  transform: rotate(-45deg) scale(1);
+}
+@keyframes borderscale {
+  50% {
+    box-shadow: 0 0 0 2px $base-color;
+  }
+}
+.list-message{
+    text-align: center;
+}
