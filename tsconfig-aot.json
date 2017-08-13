@@ -19,7 +19,8 @@
     "rootDir": "./tmp/src-inlined"
   },
   "files": [
-    "./tmp/src-inlined/index.ts"
+    "./tmp/src-inlined/index.ts",
+    "./tmp/src-inlined/angular2-multiselect-dropdown.ts"
   ],
   "angularCompilerOptions": {
     "genDir": "dist",

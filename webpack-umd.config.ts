@@ -10,6 +10,8 @@ export default {
   entry: {
     'index.umd': './src/lib/src/index.ts',
     'index.umd.min': './src/lib/src/index.ts',
+     'angular2-multiselect-dropdown.umd': './src/lib/src/angular2-multiselect-dropdown.ts',
+    'angular2-multiselect-dropdown.umd.min': './src/lib/src/angular2-multiselect-dropdown.ts'
   },
   output: {
     path: path.join(__dirname, 'dist'),
