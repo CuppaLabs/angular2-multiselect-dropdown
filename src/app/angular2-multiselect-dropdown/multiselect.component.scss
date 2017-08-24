@@ -42,6 +42,7 @@ $base-color: #0079FE;
             .fa-remove{
                 margin-left: 1px;
                 font-size: 12px;
+                z-index: 100000000;
             }
         }
     }
@@ -51,10 +52,11 @@ $base-color: #0079FE;
         right: 10px;
         top: 25%;
     }
-    button{
+    .c-btn{
         width: 100%;
         box-shadow: 0px 1px 5px #959595;
         padding: 10px;
+        cursor: pointer;
     }
 }
 .dropdown-list{

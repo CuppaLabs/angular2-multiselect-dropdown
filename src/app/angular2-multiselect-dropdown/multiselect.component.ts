@@ -72,8 +72,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
             }
         }
     }
-    onItemClick(item: ListItem, index: number){
-
+    onItemClick(item: ListItem, index: number, evt: Event){
                 if(this.settings.disabled){
                     return false;
                 }
@@ -181,6 +180,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         this.onChangeCallback(this.selectedItems);
     }
     toggleDropdown(evt: any){
+        if(this.settings.disabled){
+            return false;
+        }
         this.isActive = !this.isActive;
         evt.preventDefault();
     }
