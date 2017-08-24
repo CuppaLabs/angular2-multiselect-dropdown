@@ -1,6 +1,6 @@
 {
   "name": "angular2-multiselect-dropdown",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "license": "MIT",
   "angular-cli": {},
   "author":"Pradeep Terli",
@@ -42,7 +42,7 @@
 "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/compiler-cli": "^4.0.0",
-    "@angular/cli": "^1.2.0",
+    "@angular/cli": "^1.3.2",
     "@angular/core": "^4.0.0",
      "@angular/forms": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
