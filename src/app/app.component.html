@@ -1,71 +1,95 @@
 <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="https://cuppalabs.github.io">
-                <img src="assets/img/cuppa-logo-coffee11.png" alt="">
-            </a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-           <!-- <ul class="nav navbar-nav">
-              <li><a href="#" class="component-title">Angular 2 MultiSelect Dropdown</a></li>
-            </ul> -->
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="https://cuppalabs.github.io/components/multiselectDropdown">Documentation <span class="sr-only">(current)</span></a></li>
-              <li><a href="https://github.com/CuppaLabs/angular2-multiselect-dropdown">Github</a></li>
-              <li><a href="https://cuppalabs.github.io/components/multiselectDropdown">Back to Article</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
-<div class="containner">
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Angular 2 MultiSelect Dropdown</h1>
-        <p>Advanced component for angular web applications.</p>
-      </div>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+              aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://cuppalabs.github.io">
+        <img src="assets/img/cuppa-logo-coffee11.png" alt="">
+      </a>
     </div>
-    <div class="row">
+    <div id="navbar" class="navbar-collapse collapse">
+      <!-- <ul class="nav navbar-nav">
+         <li><a href="#" class="component-title">Angular 2 MultiSelect Dropdown</a></li>
+       </ul> -->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://cuppalabs.github.io/components/multiselectDropdown">Documentation <span class="sr-only">(current)</span></a>
+        </li>
+        <li><a href="https://github.com/CuppaLabs/angular2-multiselect-dropdown">Github</a></li>
+        <li><a href="https://cuppalabs.github.io/components/multiselectDropdown">Back to Article</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container-fluid -->
+</nav>
+<div class="containner">
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Angular 2 MultiSelect Dropdown</h1>
+      <p>Advanced component for angular web applications.</p>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-3">
-        <h4>Single Selection</h4>
-        <angular2-multiselect [data]="singleSelectionList" [(ngModel)]="singleSelectionselectedItems" [settings]="singleSelectionSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"></angular2-multiselect>
+      <h4>Single Selection</h4>
+      <angular2-multiselect [data]="singleSelectionList" [(ngModel)]="singleSelectionselectedItems"
+                            [settings]="singleSelectionSettings" (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"></angular2-multiselect>
     </div>
     <div class="col-md-4">
-        <h4>MultiSelect, Show all Selected, Select All</h4>
-        <angular2-multiselect [data]="basicExampleList" [(ngModel)]="basicExampleSelectedItems" [settings]="basicExampleSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"  (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+      <h4>MultiSelect, Show all Selected, Select All</h4>
+      <angular2-multiselect [data]="basicExampleList" [(ngModel)]="basicExampleSelectedItems"
+                            [settings]="basicExampleSettings" (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
     </div>
     <div class="col-md-3">
-        <h4>Search Filter & Limit Show Selected</h4>
-        <angular2-multiselect [data]="basicExampleList" [(ngModel)]="selectedItems3" [settings]="dropdownSettings3" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
-    </div>     
+      <h4>Search Filter & Limit Show Selected</h4>
+      <angular2-multiselect [data]="basicExampleList" [(ngModel)]="selectedItems3" [settings]="dropdownSettings3"
+                            (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
     </div>
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-3">
-        <h4>Limit Selection</h4>
-        <angular2-multiselect [data]="basicExampleList" [(ngModel)]="limitSelectionSelectedItems" [settings]="limitSelectionSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
-      </div> 
-      <div class="col-md-3">
-        <h4>Disable Mode</h4>
-        <angular2-multiselect [data]="basicExampleList" [(ngModel)]="disableModeSelectedItems" [settings]="disableModeSettings"></angular2-multiselect>
-      </div> 
-      <div class="col-md-3">
-        <h4>Custom Search Placeholder Text</h4>
-        <angular2-multiselect [data]="placeholderExampleList" [(ngModel)]="placeholderExampleSelectedItems" [settings]="placeholderExampleSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
-    </div>  
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <h4>Limit Selection</h4>
+      <angular2-multiselect [data]="basicExampleList" [(ngModel)]="limitSelectionSelectedItems"
+                            [settings]="limitSelectionSettings" (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
     </div>
-    <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <h4>Reset Dropdown</h4>
-        <div class="col-md-2"><button (click)="changeData()" class="btn btn-danger">Reset</button></div>
-        <div class="col-md-10"><angular2-multiselect [data]="resetExampleList" [(ngModel)]="resetExampleSelectedItems" [settings]="resetExampleSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"  (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect></div>
-        </div>
+    <div class="col-md-3">
+      <h4>Disable Mode</h4>
+      <angular2-multiselect [data]="basicExampleList" [(ngModel)]="disableModeSelectedItems"
+                            [settings]="disableModeSettings"></angular2-multiselect>
     </div>
+    <div class="col-md-3">
+      <h4>Custom Search Placeholder Text</h4>
+      <angular2-multiselect [data]="placeholderExampleList" [(ngModel)]="placeholderExampleSelectedItems"
+                            [settings]="placeholderExampleSettings" (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h4>Reset Dropdown</h4>
+      <div class="col-md-2">
+        <button (click)="changeData()" class="btn btn-danger">Reset</button>
+      </div>
+      <div class="col-md-10">
+        <angular2-multiselect [data]="resetExampleList" [(ngModel)]="resetExampleSelectedItems"
+                              [settings]="resetExampleSettings" (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+      </div>
+    </div>
+  </div>
 </div>
