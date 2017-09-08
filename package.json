@@ -3,7 +3,7 @@
   "version": "1.2.6",
   "license": "MIT",
   "angular-cli": {},
-  "author":"Pradeep Terli",
+  "author": "Pradeep Terli",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -31,20 +31,21 @@
     "test": "karma start",
     "test:watch": "karma start --auto-watch --no-single-run",
     "tslint": "tslint",
-    "github-pages":"ng build --base-href /angular2-multiselect-dropdown/"
+    "github-pages": "ng build --base-href /angular2-multiselect-dropdown/"
   },
   "private": false,
   "dependencies": {
-    "bootstrap":"*",
-    "font-awesome":"*"
+    "@angular/http": "^4.4.0-RC.0",
+    "bootstrap": "*",
+    "font-awesome": "*"
   },
   "devDependencies": {
-"@angular/common": "^4.0.0",
+    "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/compiler-cli": "^4.0.0",
     "@angular/cli": "^1.3.2",
     "@angular/core": "^4.0.0",
-     "@angular/forms": "^4.0.0",
+    "@angular/forms": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@compodoc/compodoc": "^1.0.0-beta.9",
@@ -61,7 +62,7 @@
     "css-loader": "^0.28.1",
     "gh-pages": "^1.0.0",
     "gulp": "^3.9.1",
-    "gulp-copy":"^1.0.1",
+    "gulp-copy": "^1.0.1",
     "gulp-inline-ng2-template": "^4.0.0",
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine-core": "^2.6.1",
