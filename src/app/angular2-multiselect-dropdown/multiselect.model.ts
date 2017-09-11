@@ -1,6 +1,7 @@
 export class ListItem{
     id: Number;
-    itemName: String
+    itemName: String;
+    itemClass?: string;
 }
 export class MyException {
 	status : number;
@@ -9,5 +10,5 @@ export class MyException {
 		this.status = status;
 		this.body = body;
 	}
-	
+
 }
