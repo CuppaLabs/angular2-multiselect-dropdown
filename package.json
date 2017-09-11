@@ -35,7 +35,6 @@
   },
   "private": false,
   "dependencies": {
-    "@angular/http": "^4.4.0-RC.0",
     "bootstrap":"*",
     "font-awesome":"*"
   },
