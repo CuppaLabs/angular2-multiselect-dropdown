@@ -12,10 +12,10 @@
                     <span class="c-label">{{item.itemName}}</span>
                     <span class="fa fa-remove" (click)="onItemClick(item,k,$event)" disabled="true"></span>
                 </div>
-            </div> 
+            </div>
             <span *ngIf="selectedItems?.length > settings.badgeShowLimit">+{{selectedItems?.length - settings.badgeShowLimit }}</span>
             <span class="fa" [ngClass]="{'fa-angle-down': !isActive,'fa-angle-up':isActive}"></span>
-        </div>      
+        </div>
     </div>
     <div class="dropdown-list" [hidden]="!isActive">
     <div class="arrow-up"></div>
@@ -26,15 +26,15 @@
                 <span [hidden]="isSelectAll">{{settings.selectAllText}}</span>
                 <span [hidden]="!isSelectAll">{{settings.unSelectAllText}}</span>
             </label>
-        </div>   
+        </div>
         <div class="list-filter" *ngIf="settings.enableSearchFilter">
             <span class="fa fa-search"></span>
             <input type="text" [placeholder]="settings.searchPlaceholderText" [(ngModel)]="filter.itemName">
-        </div> 
+        </div>
     <ul [style.maxHeight] = "settings.maxHeight+'px'">
         <li *ngFor="let item of data | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
             <input type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
-            <label>{{item.itemName}}</label>
+            <label [ngClass]="item.itemClass">{{item.itemName}}</label>
         </li>
     </ul>
     <h5 class="list-message" *ngIf="data?.length == 0">No Data Available</h5>
