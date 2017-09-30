@@ -7,8 +7,9 @@ export interface DropdownSettings{
     enableSearchFilter: Boolean;
     maxHeight: Number;
     badgeShowLimit: Number;
+    hideBadges: Boolean;
     classes: String;
     limitSelection?: Number;
     disabled?: Boolean;
     searchPlaceholderText: String;
-} 
+}
