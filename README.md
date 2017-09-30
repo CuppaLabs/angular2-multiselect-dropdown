@@ -8,7 +8,7 @@ Angular 2 multiselect dropdown component for web applications. Easy to integrate
 
 ## Getting Started
 ### Installation
-- The Mutiselect Dropdown package is published on the [npm](https://www.npmjs.com/package/angular2-multiselect-dropdown) Registry. 
+- The Mutiselect Dropdown package is published on the [npm](https://www.npmjs.com/package/angular2-multiselect-dropdown) Registry.
 - Install the package :
     `npm install angular2-multiselect-dropdown`
 
@@ -58,8 +58,8 @@ export class AppComponent implements OnInit {
                                 {"id":4,"itemName":"Canada"},
                                 {"id":5,"itemName":"South Korea"}
                             ];
-        this.dropdownSettings = { 
-                                  singleSelection: false, 
+        this.dropdownSettings = {
+                                  singleSelection: false,
                                   text:"Select Countries",
                                   selectAllText:'Select All',
                                   unSelectAllText:'UnSelect All',
@@ -84,11 +84,11 @@ export class AppComponent implements OnInit {
 }
 ```
 
-Add the following component tag in you template 
+Add the following component tag in you template
 ```html
-<angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" 
-    [settings]="dropdownSettings" 
-    (onSelect)="onItemSelect($event)" 
+<angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems"
+    [settings]="dropdownSettings"
+    (onSelect)="onItemSelect($event)"
     (onDeSelect)="OnItemDeSelect($event)"
     (onSelectAll)="onSelectAll($event)"
     (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
@@ -108,6 +108,7 @@ The following list of settings are supported by the component. Configure the set
 | enableSearchFilter | Boolean | Enable filter option for the list. | false |
 | maxHeight | Number | Set maximum height of the dropdown list in px. | 300 |
 | badgeShowLimit | Number | Limit the number of badges/items to show in the input field. If not set will show all selected. | All |
+| hideBadges | Boolean | Hide the badges and always show the text | false |
 | classes | String | Custom classes to the dropdown component. Classes are added to the dropdown selector tag. To add multiple classes, the value should be space separated class names.| '' |
 | limitSelection | Number | Limit the selection of number of items from the dropdown list. Once the limit is reached, all unselected items gets disabled. | none |
 | disabled | Boolean | Disable the dropdown | false |
@@ -122,7 +123,7 @@ The following list of settings are supported by the component. Configure the set
     Example : (onSelectAll)="onSelectAll($event)"
 - `onDeSelectAll` - Returns an empty array.
     Example : (onDeSelectAll)="onDeSelectAll($event)"
-    
+
 
 ## Run locally
 - Clone the repository or downlod the .zip,.tar files.
