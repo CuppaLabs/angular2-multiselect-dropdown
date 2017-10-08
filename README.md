@@ -112,6 +112,8 @@ The following list of settings are supported by the component. Configure the set
 | limitSelection | Number | Limit the selection of number of items from the dropdown list. Once the limit is reached, all unselected items gets disabled. | none |
 | disabled | Boolean | Disable the dropdown | false |
 | searchPlaceholderText | String | Custom text for the search placeholder text. Default value would be 'Search' | 'Search' |
+| groupBy | String | Name of the field by which the list should be grouped. | none |
+
 
 ### Callback Methods
 - `onSelect` - Return the selected item on selection.

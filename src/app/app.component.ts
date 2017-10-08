@@ -32,6 +32,10 @@ export class AppComponent implements OnInit {
   resetExampleSelectedItems = [];
   resetExampleSettings = {};
 
+  groupByExampleList = [];
+  groupByExampleSelectedItems = [];
+  groupByExampleSettings = {};
+
   constructor(){
     
   }
@@ -53,7 +57,8 @@ export class AppComponent implements OnInit {
                           {"id":2,"itemName":"Singapore"},
                           {"id":3,"itemName":"Australia"},
                           {"id":4,"itemName":"Canada"},
-                          {"id":5,"itemName":"South Korea"}
+                          {"id":5,"itemName":"South Korea"},    
+                          {"id":6,"itemName":"Brazil"}                      
                         ];
     
     this.basicExampleSelectedItems = [
@@ -65,7 +70,7 @@ export class AppComponent implements OnInit {
                               text:"Select Countries",
                               selectAllText:'Select All',
                               unSelectAllText:'UnSelect All',
-                              enableSearchFilter: false,
+                              enableSearchFilter: true,
                               classes:"myclass custom-class"
                             };
 
@@ -151,7 +156,29 @@ export class AppComponent implements OnInit {
                               unSelectAllText:'UnSelect All',
                               enableSearchFilter: false,
                               classes:"myclass custom-class"
-                            };                
+                            };      
+    this.groupByExampleList = [
+                          {"id":1,"itemName":"India","category":"asia"},
+                          {"id":2,"itemName":"Singapore","category":"asia"},
+                          {"id":3,"itemName":"Germany","category":"Europe"},
+                          {"id":4,"itemName":"France","category":"Europe"},
+                          {"id":5,"itemName":"South Korea","category":"asia"},    
+                          {"id":6,"itemName":"Sweden","category":"Europe"}                      
+                        ];
+    
+    this.groupByExampleSelectedItems = [
+                          {"id":1,"itemName":"India"},
+                          {"id":2,"itemName":"Singapore"},
+                          {"id":3,"itemName":"Germany"},
+                          {"id":4,"itemName":"France"}];
+    this.groupByExampleSettings = { 
+                              text:"Select Countries",
+                              selectAllText:'Select All',
+                              unSelectAllText:'UnSelect All',
+                              enableSearchFilter: true,
+                              classes:"myclass custom-class",
+                              groupBy: "category"
+                            };          
 
   }
   onItemSelect(item:any){

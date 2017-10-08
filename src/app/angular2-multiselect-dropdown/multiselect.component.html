@@ -31,12 +31,21 @@
             <span class="fa fa-search"></span>
             <input type="text" [placeholder]="settings.searchPlaceholderText" [(ngModel)]="filter.itemName">
         </div> 
-    <ul [style.maxHeight] = "settings.maxHeight+'px'">
+    <ul *ngIf="!settings.groupBy" [style.maxHeight] = "settings.maxHeight+'px'">
         <li *ngFor="let item of data | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
             <input type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
             <label>{{item.itemName}}</label>
         </li>
     </ul>
+    <div *ngIf="settings.groupBy">
+    <ul *ngFor="let obj of data | groupBy:'category'; let i = index;" [style.maxHeight] = "settings.maxHeight+'px'" class="list-grp">
+        <h4>{{obj.key}}</h4>
+        <li *ngFor="let item of obj.value | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
+            <input type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
+            <label>{{item.itemName}}</label>
+        </li>
+    </ul>
+    </div>
     <h5 class="list-message" *ngIf="data?.length == 0">No Data Available</h5>
     </div>
     </div>

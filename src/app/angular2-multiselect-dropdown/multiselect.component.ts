@@ -5,6 +5,8 @@ import { ListItem , MyException} from './multiselect.model';
 import { DropdownSettings } from './multiselect.interface';
 import { ClickOutsideDirective } from './clickOutside';
 import { ListFilterPipe } from './list-filter';
+import { groupByPipe } from './group-by';
+
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -208,7 +210,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
 
 @NgModule({
   imports:      [ CommonModule,FormsModule ],
-  declarations: [AngularMultiSelect, ClickOutsideDirective, ListFilterPipe],
-  exports:      [AngularMultiSelect, ClickOutsideDirective, ListFilterPipe]
+  declarations: [AngularMultiSelect, ClickOutsideDirective, ListFilterPipe, groupByPipe],
+  exports:      [AngularMultiSelect, ClickOutsideDirective, ListFilterPipe, groupByPipe]
 })
 export class AngularMultiSelectModule { }
