@@ -84,14 +84,14 @@ $base-color: #0079FE;
             background: #f5f5f5;
         }
     }
-    ul::-webkit-scrollbar{
+    ::-webkit-scrollbar{
         width: 8px;
     }
-    ul::-webkit-scrollbar-thumb{
+    ::-webkit-scrollbar-thumb{
         background: #cccccc;
         border-radius: 5px;
     }
-    ul::-webkit-scrollbar-track{
+    ::-webkit-scrollbar-track{
         background: #f2f2f2;
     }
 }
@@ -163,6 +163,7 @@ $base-color: #0079FE;
   cursor: pointer;
   margin: 0px;
   color: #000;
+  font-weight: 300;
 }
 .pure-checkbox input[type="checkbox"] + label:before{
   box-sizing: content-box;
@@ -244,4 +245,16 @@ $base-color: #0079FE;
 }
 .list-message{
     text-align: center;
+}
+.list-grp{
+    padding: 0 15px !important;
+}
+.list-grp h4 {
+    text-transform: capitalize;
+    margin: 15px 0px 0px 0px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.list-grp > li {
+    padding-left: 15px !important;
 }

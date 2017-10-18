@@ -37,8 +37,8 @@
             <label>{{item.itemName}}</label>
         </li>
     </ul>
-    <div *ngIf="settings.groupBy">
-    <ul *ngFor="let obj of data | groupBy:'category'; let i = index;" [style.maxHeight] = "settings.maxHeight+'px'" class="list-grp">
+    <div *ngIf="settings.groupBy" [style.maxHeight] = "settings.maxHeight+'px'" style="overflow: auto;">
+    <ul *ngFor="let obj of data | groupBy:'category'; let i = index;" class="list-grp">
         <h4>{{obj.key}}</h4>
         <li *ngFor="let item of obj.value | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
             <input type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>

@@ -84,14 +84,14 @@ $base-color: #0079FE;
             background: #f5f5f5;
         }
     }
-    ul::-webkit-scrollbar{
+    ::-webkit-scrollbar{
         width: 8px;
     }
-    ul::-webkit-scrollbar-thumb{
+    ::-webkit-scrollbar-thumb{
         background: #cccccc;
         border-radius: 5px;
     }
-    ul::-webkit-scrollbar-track{
+    ::-webkit-scrollbar-track{
         background: #f2f2f2;
     }
 }

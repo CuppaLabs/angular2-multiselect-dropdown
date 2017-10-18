@@ -159,7 +159,7 @@ export class AppComponent implements OnInit {
                             };      
     this.groupByExampleList = [
                           {"id":1,"itemName":"India","category":"asia"},
-                          {"id":2,"itemName":"Singapore","category":"asia"},
+                          {"id":2,"itemName":"Singapore","category":"asia pacific"},
                           {"id":3,"itemName":"Germany","category":"Europe"},
                           {"id":4,"itemName":"France","category":"Europe"},
                           {"id":5,"itemName":"South Korea","category":"asia"},    
@@ -178,7 +178,18 @@ export class AppComponent implements OnInit {
                               enableSearchFilter: true,
                               classes:"myclass custom-class",
                               groupBy: "category"
-                            };          
+                            }; 
+
+  this.groupByExampleSettings = {
+singleSelection: false,
+text:"Select Fields",
+selectAllText:'Select All',
+unSelectAllText:'UnSelect All',
+searchPlaceholderText: 'Search Fields',
+enableSearchFilter: true,
+badgeShowLimit: 5,
+groupBy:"category"
+};         
 
   }
   onItemSelect(item:any){
