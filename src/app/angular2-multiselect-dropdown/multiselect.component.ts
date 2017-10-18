@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, OnChanges, ViewEncapsulation,forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, NgModule, OnChanges, ViewEncapsulation,forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform, ChangeDetectorRef } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { CommonModule }       from '@angular/common';
 import { ListItem , MyException} from './multiselect.model';
@@ -61,7 +61,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         disabled: false,
         searchPlaceholderText: 'Search'
     }
-    constructor(){
+    constructor(private changeDetectionRef: ChangeDetectorRef){
 
     }
     ngOnInit(){
@@ -141,6 +141,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         } else {
             this.selectedItems = [];
         }
+        this.changeDetectionRef.markForCheck();
     }
 
     //From ControlValueAccessor interface
@@ -169,9 +170,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
             this.selectedItems = [];
             this.selectedItems.push(item);
         }
-        else
+        else {
             this.selectedItems.push(item);
-            this.onChangeCallback(this.selectedItems);
+        }
+        this.changeDetectionRef.markForCheck();
+        this.onChangeCallback(this.selectedItems);
     }
     removeSelected(clickedItem: ListItem){
         this.selectedItems && this.selectedItems.forEach(item => {
@@ -179,6 +182,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
                this.selectedItems.splice(this.selectedItems.indexOf(item),1);
            }
         });    
+        this.changeDetectionRef.markForCheck();
         this.onChangeCallback(this.selectedItems);
     }
     toggleDropdown(evt: any){
@@ -196,12 +200,14 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
             this.selectedItems = [];
             this.selectedItems = this.data.slice();
             this.isSelectAll = true;
+            this.changeDetectionRef.markForCheck();
             this.onChangeCallback(this.selectedItems);
             this.onSelectAll.emit(this.selectedItems);
         }
         else{
             this.selectedItems = [];
             this.isSelectAll = false;
+            this.changeDetectionRef.markForCheck();
             this.onChangeCallback(this.selectedItems);
             this.onDeSelectAll.emit(this.selectedItems);
         }     
