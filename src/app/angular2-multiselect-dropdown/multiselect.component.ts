@@ -193,6 +193,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         evt.preventDefault();
     }
     closeDropdown() {
+        this.filter = new ListItem();
         this.isActive = false;
     }
     toggleSelectAll() {

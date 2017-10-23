@@ -129,16 +129,8 @@ var ListFilterPipe = (function () {
         if (!items || !filter) {
             return items;
         }
-        // filter items array, items which match and return true will be kept, false will be filtered out
         return items.filter(function (item) { return _this.applyFilter(item, filter); });
     };
-    /**
-     * Perform the filtering.
-     *
-     * @param {Book} book The book to compare to the filter.
-     * @param {Book} filter The filter to apply.
-     * @return {boolean} True if book satisfies filters, false if not.
-     */
     ListFilterPipe.prototype.applyFilter = function (item, filter) {
         return !(filter.itemName && item.itemName && item.itemName.toLowerCase().indexOf(filter.itemName.toLowerCase()) === -1);
     };
@@ -365,6 +357,7 @@ var AngularMultiSelect = (function () {
         evt.preventDefault();
     };
     AngularMultiSelect.prototype.closeDropdown = function () {
+        this.filter = new __WEBPACK_IMPORTED_MODULE_3__multiselect_model__["a" /* ListItem */]();
         this.isActive = false;
     };
     AngularMultiSelect.prototype.toggleSelectAll = function () {
