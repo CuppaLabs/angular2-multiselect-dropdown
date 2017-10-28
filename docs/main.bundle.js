@@ -601,7 +601,7 @@ var AppComponent = (function () {
             unSelectAllText: 'UnSelect All',
             enableSearchFilter: false,
             classes: "myclass custom-class",
-            limitSelection: 2
+            limitSelection: 4
         };
         this.disableModeSelectedItems = [
             { "id": 1, "itemName": "India" },
