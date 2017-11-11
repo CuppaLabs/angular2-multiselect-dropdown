@@ -94,6 +94,20 @@ Add the following component tag in you template
     (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
 
 ```
+### Template - For custom html of menu item
+
+```html
+<angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings">
+  <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.itemName}}</label>
+            <img [src]="item.image" style="width: 30px; border: 1px solid #efefef;margin-right: 20px;" />
+            <label>Capital - {{item.capital}}</label>
+          </ng-template>
+  </c-item>    
+</angular2-multiselect>
+
+```
 
 ### Settings
 The following list of settings are supported by the component. Configure the settings to meet your requirement.

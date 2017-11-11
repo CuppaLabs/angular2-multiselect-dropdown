@@ -1,0 +1,24 @@
+<h2 class="example-title">{{title}}</h2>
+<div class="col-md-10 mr-auto ml-auto dropdown-container">
+    <div class="row">
+        <div class="col">
+            <button (click)="changeData()" class="btn btn-danger">Reset</button>
+        </div>
+        <div class="col-md-10">
+    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
+        (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+
+        </div>
+    </div>
+</div>
+
+<h4 class="example-title code-section">Code</h4>
+
+<p-tabView>
+    <p-tabPanel header="{{tstitle}}">
+        <ng2-gist [gistId]="tsgist"></ng2-gist>
+    </p-tabPanel>
+    <p-tabPanel header="{{htmltitle}}">
+        <ng2-gist [gistId]="htmlgist"></ng2-gist>
+    </p-tabPanel>
+</p-tabView>

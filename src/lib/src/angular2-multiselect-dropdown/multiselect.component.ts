@@ -1,12 +1,11 @@
-import { Component, OnInit, NgModule, OnChanges, ViewEncapsulation, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, NgModule, SimpleChanges, OnChanges, ViewEncapsulation, ContentChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ListItem, MyException } from './multiselect.model';
 import { DropdownSettings } from './multiselect.interface';
 import { ClickOutsideDirective } from './clickOutside';
 import { ListFilterPipe } from './list-filter';
-import { groupByPipe } from './group-by';
-
+import { Item, TemplateRenderer } from './menu-item';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -24,7 +23,7 @@ const noop = () => {
     providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR]
 })
 
-export class AngularMultiSelect implements OnInit, ControlValueAccessor {
+export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChanges {
 
     @Input()
     data: Array<ListItem>;
@@ -44,6 +43,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
     @Output('onDeSelectAll')
     onDeSelectAll: EventEmitter<Array<ListItem>> = new EventEmitter<Array<ListItem>>();
 
+    @ContentChild(Item) itemTempl: Item;
+
+
     public selectedItems: Array<ListItem>;
     public isActive: boolean = false;
     public isSelectAll: boolean = false;
@@ -60,7 +62,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         badgeShowLimit: 999999999999,
         classes: '',
         disabled: false,
-        searchPlaceholderText: 'Search'
+        searchPlaceholderText: 'Search',
+        showCheckbox: true
     }
     constructor() {
 
@@ -69,6 +72,16 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
         this.settings = Object.assign(this.defaultSettings, this.settings);
         if (this.settings.groupBy) {
             this.groupedData = this.transformData(this.data, this.settings.groupBy);
+        }
+    }
+    ngOnChanges(changes: SimpleChanges){
+        if(!changes.data.firstChange){
+            if (this.settings.groupBy) {
+            this.groupedData = this.transformData(this.data, this.settings.groupBy);
+            if(this.data.length == 0){
+                this.selectedItems = [];
+            }
+        }
         }
     }
     ngDoCheck() {
@@ -230,7 +243,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor {
 
 @NgModule({
     imports: [CommonModule, FormsModule],
-    declarations: [AngularMultiSelect, ClickOutsideDirective, ListFilterPipe, groupByPipe],
-    exports: [AngularMultiSelect, ClickOutsideDirective, ListFilterPipe, groupByPipe]
+    declarations: [AngularMultiSelect, ClickOutsideDirective, ListFilterPipe, Item, TemplateRenderer],
+    exports: [AngularMultiSelect, ClickOutsideDirective, ListFilterPipe, Item, TemplateRenderer]
 })
 export class AngularMultiSelectModule { }
