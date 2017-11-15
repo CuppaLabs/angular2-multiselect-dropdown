@@ -19,6 +19,7 @@ import { CustomPlaceholderExample } from './examples/customplaceholder';
 import { StylingExample } from './examples/styling';
 import { ng2Gist } from './examples/gist';
 import { TabViewModule } from 'primeng/primeng';
+import { UsingWithFormExample } from './examples/usingWithForms';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TabViewModule } from 'primeng/primeng';
     LimitSelectionExample,
     LimitBadgesExample,
     CustomPlaceholderExample,
-    StylingExample
+    StylingExample,
+    UsingWithFormExample
     ],
   imports: [
     BrowserModule,

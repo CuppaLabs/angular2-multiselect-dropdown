@@ -53,7 +53,7 @@
         <span *ngIf="itemTempl" >
         <li *ngFor="let item of obj.value | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
             <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
-            <label>{{item.itemName}}</label>
+            <label></label>
             <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
         </li>
         </span>

@@ -1,6 +1,6 @@
 {
   "name": "angular2-multiselect-dropdown",
-  "version": "2.0.0",
+  "version": "2.0.1",
     "description": "Angular 2 and angular 4 multiselect dropdown component.",
       "keywords": [
     "angular 2 multiselect dropdown",
@@ -42,7 +42,6 @@
   },
   "private": false,
   "dependencies": {
-    "bootstrap":"^4.0.0-beta.2",
     "font-awesome":"*"
   },
   "devDependencies": {
@@ -96,7 +95,9 @@
     "webpack-rxjs-externals": "^1.0.0",
     "zone.js": "^0.8.10",
     "ng2-gist":"*",
-    "primeng":"*"
+    "primeng":"*",
+     "bootstrap":"^4.0.0-beta.2"
+
   },
   "repository": {
     "type": "git",

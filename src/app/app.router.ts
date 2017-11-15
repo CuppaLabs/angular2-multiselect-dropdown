@@ -13,6 +13,7 @@ import { LimitSelectionExample } from './examples/limitselection';
 import { LimitBadgesExample } from './examples/limitbadges';
 import { CustomPlaceholderExample } from './examples/customplaceholder';
 import { StylingExample } from './examples/styling';
+import { UsingWithFormExample } from './examples/usingWithForms';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/basic',pathMatch: 'full'},
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
     { path: 'limitselection', component: LimitSelectionExample},
     { path: 'limitbadges', component: LimitBadgesExample},
     { path: 'customplaceholder', component: CustomPlaceholderExample},
-    { path: 'styling', component: StylingExample}
+    { path: 'styling', component: StylingExample},
+    { path: 'usinginform', component: UsingWithFormExample}
 ];
 
 
