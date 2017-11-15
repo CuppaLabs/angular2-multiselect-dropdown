@@ -6,6 +6,16 @@ Angular 2 multiselect dropdown component for web applications. Easy to integrate
 
 # [Documentation](http://cuppalabs.github.io/components/multiselectDropdown) | [Demos / Examples](https://cuppalabs.github.io/angular2-multiselect-dropdown).
 
+## Table of Contents
+##### 1. Getting Started
+##### 2. Installation
+##### 3. Usage
+##### 4. Templates
+##### 5. Using with Angular Forms
+##### 6. Settings configuration
+##### 7. Callbacks and events
+
+
 ## Getting Started
 ### Installation
 - The Mutiselect Dropdown package is published on the [npm](https://www.npmjs.com/package/angular2-multiselect-dropdown) Registry. 
@@ -108,6 +118,26 @@ Add the following component tag in you template
 </angular2-multiselect>
 
 ```
+
+### Using with Angular Forms
+
+```html
+
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm" style="border: 1px solid #ccc; padding: 10px;">
+        <div class="form-group">
+            <label for="name">Skills</label>
+            <angular2-multiselect [data]="itemList" [(ngModel)]="formModel.skills" 
+                                  [settings]="settings" 
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)" 
+                                  (onSelectAll)="onSelectAll($event)" 
+                                  (onDeSelectAll)="onDeSelectAll($event)" name="skills">
+            </angular2-multiselect>
+        </div>
+</form>
+
+```
+
 
 ### Settings
 The following list of settings are supported by the component. Configure the settings to meet your requirement.
