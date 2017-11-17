@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { StylingExample } from './examples/styling';
 import { ng2Gist } from './examples/gist';
 import { TabViewModule } from 'primeng/primeng';
 import { UsingWithFormExample } from './examples/usingWithForms';
+import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
 
 @NgModule({
   declarations: [
@@ -36,10 +37,12 @@ import { UsingWithFormExample } from './examples/usingWithForms';
     LimitBadgesExample,
     CustomPlaceholderExample,
     StylingExample,
-    UsingWithFormExample
+    UsingWithFormExample,
+    UsingWithReactiveFormExample
     ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpModule,
     AppRouterModule,

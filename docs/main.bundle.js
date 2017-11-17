@@ -207,6 +207,7 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* unused harmony export DROPDOWN_CONTROL_VALUE_ACCESSOR */
+/* unused harmony export DROPDOWN_CONTROL_VALIDATION */
 /* unused harmony export AngularMultiSelect */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AngularMultiSelectModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
@@ -239,6 +240,11 @@ var DROPDOWN_CONTROL_VALUE_ACCESSOR = {
     provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["NG_VALUE_ACCESSOR"],
     useExisting: Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return AngularMultiSelect; }),
     multi: true
+};
+var DROPDOWN_CONTROL_VALIDATION = {
+    provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["NG_VALIDATORS"],
+    useExisting: Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return AngularMultiSelect; }),
+    multi: true,
 };
 var noop = function () {
 };
@@ -320,6 +326,13 @@ var AngularMultiSelect = (function () {
             this.isSelectAll = true;
         }
     };
+    AngularMultiSelect.prototype.validate = function (c) {
+        return (!this.parseError) ? null : {
+            jsonParseError: {
+                valid: false,
+            },
+        };
+    };
     AngularMultiSelect.prototype.writeValue = function (value) {
         if (value !== undefined && value !== null) {
             if (this.settings.singleSelection) {
@@ -379,6 +392,9 @@ var AngularMultiSelect = (function () {
         }
         else
             this.selectedItems.push(item);
+        if (this.selectedItems.length > 0) {
+            this.parseError = false;
+        }
         this.onChangeCallback(this.selectedItems);
     };
     AngularMultiSelect.prototype.removeSelected = function (clickedItem) {
@@ -388,6 +404,9 @@ var AngularMultiSelect = (function () {
                 _this.selectedItems.splice(_this.selectedItems.indexOf(item), 1);
             }
         });
+        if (this.selectedItems.length == 0) {
+            this.parseError = true;
+        }
         this.onChangeCallback(this.selectedItems);
     };
     AngularMultiSelect.prototype.toggleDropdown = function (evt) {
@@ -466,7 +485,7 @@ var AngularMultiSelect = (function () {
             template: __webpack_require__("../../../../../src/app/angular2-multiselect-dropdown/multiselect.component.html"),
             host: { '[class]': 'defaultSettings.classes' },
             styles: [__webpack_require__("../../../../../src/app/angular2-multiselect-dropdown/multiselect.component.scss")],
-            providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR]
+            providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR, DROPDOWN_CONTROL_VALIDATION]
         }),
         __metadata("design:paramtypes", [])
     ], AngularMultiSelect);
@@ -543,7 +562,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"row\">\r\n    <div class=\"col-md-3 left-sidebar\">\r\n      <div class=\"list-group\">\r\n        <a href=\"#\" class=\"list-group-item list-group-item-action disabled\">\r\n    Examples\r\n  </a>\r\n        <a [routerLink]=\"['basic']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiselect basic example</a>\r\n        <a [routerLink]=\"['singleselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Single selection</a>\r\n        <a [routerLink]=\"['searchfilter']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Search filter</a>\r\n        <a [routerLink]=\"['groupby']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Group By</a>\r\n        <a [routerLink]=\"['templating']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Templating</a>\r\n        <a [routerLink]=\"['usinginform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Forms</a>\r\n        <a [routerLink]=\"['resetdropdown']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Reset dropdown</a>\r\n        <a [routerLink]=\"['disablemode']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Disable dropdown</a>\r\n        <a [routerLink]=\"['limitselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit selection</a>\r\n        <a [routerLink]=\"['limitbadges']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit Badges</a>\r\n        <a [routerLink]=\"['customplaceholder']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Custom placeholder</a>\r\n        <a [routerLink]=\"['styling']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">CSS Styling</a>\r\n\r\n      </div>\r\n    </div>\r\n    <div class=\"col center-content\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n</div>"
+module.exports = "\r\n<div class=\"row\">\r\n    <div class=\"col-md-3 left-sidebar\">\r\n      <div class=\"list-group\">\r\n        <a href=\"#\" class=\"list-group-item list-group-item-action disabled\">\r\n    Examples\r\n  </a>\r\n        <a [routerLink]=\"['basic']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiselect basic example</a>\r\n        <a [routerLink]=\"['singleselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Single selection</a>\r\n        <a [routerLink]=\"['searchfilter']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Search filter</a>\r\n        <a [routerLink]=\"['groupby']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Group By</a>\r\n        <a [routerLink]=\"['templating']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Templating</a>\r\n        <a [routerLink]=\"['usinginform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Template Driven Forms</a>\r\n        <a [routerLink]=\"['usinginreactiveform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Reactive Forms</a>\r\n        <a [routerLink]=\"['resetdropdown']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Reset dropdown</a>\r\n        <a [routerLink]=\"['disablemode']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Disable dropdown</a>\r\n        <a [routerLink]=\"['limitselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit selection</a>\r\n        <a [routerLink]=\"['limitbadges']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit Badges</a>\r\n        <a [routerLink]=\"['customplaceholder']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Custom placeholder</a>\r\n        <a [routerLink]=\"['styling']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">CSS Styling</a>\r\n\r\n      </div>\r\n    </div>\r\n    <div class=\"col center-content\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -824,12 +843,14 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19_primeng_primeng__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__examples_usingWithForms__ = __webpack_require__("../../../../../src/app/examples/usingWithForms.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__examples_usingInReactForms__ = __webpack_require__("../../../../../src/app/examples/usingInReactForms.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -870,10 +891,12 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_15__examples_limitbadges__["a" /* LimitBadgesExample */],
                 __WEBPACK_IMPORTED_MODULE_16__examples_customplaceholder__["a" /* CustomPlaceholderExample */],
                 __WEBPACK_IMPORTED_MODULE_17__examples_styling__["a" /* StylingExample */],
-                __WEBPACK_IMPORTED_MODULE_20__examples_usingWithForms__["a" /* UsingWithFormExample */]
+                __WEBPACK_IMPORTED_MODULE_20__examples_usingWithForms__["a" /* UsingWithFormExample */],
+                __WEBPACK_IMPORTED_MODULE_21__examples_usingInReactForms__["a" /* UsingWithReactiveFormExample */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["ReactiveFormsModule"],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_6__app_router__["a" /* AppRouterModule */],
@@ -910,12 +933,14 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__examples_customplaceholder__ = __webpack_require__("../../../../../src/app/examples/customplaceholder.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__examples_styling__ = __webpack_require__("../../../../../src/app/examples/styling.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__examples_usingWithForms__ = __webpack_require__("../../../../../src/app/examples/usingWithForms.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__examples_usingInReactForms__ = __webpack_require__("../../../../../src/app/examples/usingInReactForms.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -943,7 +968,8 @@ var appRoutes = [
     { path: 'limitbadges', component: __WEBPACK_IMPORTED_MODULE_10__examples_limitbadges__["a" /* LimitBadgesExample */] },
     { path: 'customplaceholder', component: __WEBPACK_IMPORTED_MODULE_11__examples_customplaceholder__["a" /* CustomPlaceholderExample */] },
     { path: 'styling', component: __WEBPACK_IMPORTED_MODULE_12__examples_styling__["a" /* StylingExample */] },
-    { path: 'usinginform', component: __WEBPACK_IMPORTED_MODULE_13__examples_usingWithForms__["a" /* UsingWithFormExample */] }
+    { path: 'usinginform', component: __WEBPACK_IMPORTED_MODULE_13__examples_usingWithForms__["a" /* UsingWithFormExample */] },
+    { path: 'usinginreactiveform', component: __WEBPACK_IMPORTED_MODULE_14__examples_usingInReactForms__["a" /* UsingWithReactiveFormExample */] }
 ];
 var AppRouterModule = (function () {
     function AppRouterModule() {
@@ -1881,6 +1907,92 @@ var TemplatingExample = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/examples/usingInReactForms.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UsingWithReactiveFormExample; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var UsingWithReactiveFormExample = (function () {
+    function UsingWithReactiveFormExample(fb) {
+        this.fb = fb;
+        this.itemList = [];
+        this.selectedItems = [];
+        this.settings = {};
+        this.title = "Using with Reactive Forms";
+        this.tsgist = "CuppaLabs/f0dfe353c6378cee7f55547395a80fc4";
+        this.htmlgist = "CuppaLabs/0a32c3d76110468b84bac01fd64488bc";
+        this.tstitle = "using-in-reactive-forms.ts";
+        this.htmltitle = "using-with-reactive-forms.html";
+        this.createForm();
+    }
+    UsingWithReactiveFormExample.prototype.createForm = function () {
+        this.userForm = this.fb.group({
+            name: '',
+            email: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required],
+            skills: [[], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]
+        });
+    };
+    UsingWithReactiveFormExample.prototype.submitForm = function () {
+        console.log(this.userForm);
+    };
+    UsingWithReactiveFormExample.prototype.ngOnInit = function () {
+        this.itemList = [
+            { "id": 1, "itemName": "Angular" },
+            { "id": 2, "itemName": "JavaScript" },
+            { "id": 3, "itemName": "HTML" },
+            { "id": 4, "itemName": "CSS" },
+            { "id": 5, "itemName": "ReactJS" },
+            { "id": 6, "itemName": "HTML5" }
+        ];
+        this.selectedItems = [];
+        this.settings = {
+            text: "Select Skills",
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            classes: "myclass custom-class"
+        };
+    };
+    UsingWithReactiveFormExample.prototype.onItemSelect = function (item) {
+        console.log(item);
+        console.log(this.selectedItems);
+    };
+    UsingWithReactiveFormExample.prototype.OnItemDeSelect = function (item) {
+        console.log(item);
+        console.log(this.selectedItems);
+    };
+    UsingWithReactiveFormExample.prototype.onSelectAll = function (items) {
+        console.log(items);
+    };
+    UsingWithReactiveFormExample.prototype.onDeSelectAll = function (items) {
+        console.log(items);
+    };
+    UsingWithReactiveFormExample = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: __webpack_require__("../../../../../src/app/examples/views/using-in-react-form.html")
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"]) === "function" && _a || Object])
+    ], UsingWithReactiveFormExample);
+    return UsingWithReactiveFormExample;
+    var _a;
+}());
+
+//# sourceMappingURL=C:/Users/Lenovo/Documents/Projects/angular2-multiselect-dropdown/src/usingInReactForms.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/examples/usingWithForms.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1904,11 +2016,11 @@ var UsingWithFormExample = (function () {
         this.settings = {};
         this.formModel = {
             name: '',
-            email: '',
-            skills: []
+            email: 'ascasc@aa.com',
+            skills: [{ "id": 1, "itemName": "Angular" }]
         };
         this.submitted = false;
-        this.title = "Using with Angular Forms";
+        this.title = "Using with Template driven Forms";
         this.tsgist = "CuppaLabs/6cd9396b8f5589b792b27dd10efe9140";
         this.htmlgist = "CuppaLabs/8148509a46a59e3aba513808daa40ca1";
         this.tstitle = "using-in-forms.ts";
@@ -1975,7 +2087,14 @@ module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"col
 /***/ "../../../../../src/app/examples/views/using-in-form.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"row\">\r\n<div class=\"col-md-6 ml-auto mr-auto\">\r\n    <form (ngSubmit)=\"onSubmit()\" #loginForm=\"ngForm\" style=\"border: 1px solid #ccc; padding: 10px;\">\r\n        <div class=\"form-group\">\r\n            <label for=\"name\">Skills</label>\r\n            <angular2-multiselect [data]=\"itemList\" [(ngModel)]=\"formModel.skills\" \r\n                                  [settings]=\"settings\" \r\n                                  (onSelect)=\"onItemSelect($event)\"\r\n                                  (onDeSelect)=\"OnItemDeSelect($event)\" \r\n                                  (onSelectAll)=\"onSelectAll($event)\" \r\n                                  (onDeSelectAll)=\"onDeSelectAll($event)\" name=\"skills\">\r\n            </angular2-multiselect>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"name\">Name</label>\r\n            <input type=\"text\" class=\"form-control\" id=\"name\" required pattern=\"[a-zA-Z][a-zA-Z ]+\" [(ngModel)]=\"formModel.name\" name=\"name\"\r\n                #name=\"ngModel\">\r\n            <div [hidden]=\"name.valid || name.pristine\" class=\"alert alert-danger\">\r\n                <div [hidden]=\"!name.hasError('required')\">Name is required</div>\r\n                <div [hidden]=\"!name.hasError('pattern')\">Only alphabetsallowed</div>\r\n\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"name\">Email Address</label>\r\n            <input type=\"text\" class=\"form-control\" id=\"emailaddress\" required [(ngModel)]=\"formModel.email\" name=\"email\" pattern=\"^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$\"\r\n                #email=\"ngModel\">\r\n            <div [hidden]=\"email.valid || email.pristine\" class=\"alert alert-danger\">\r\n                <div [hidden]=\"!email.hasError('required')\">Email is required</div>\r\n                <div [hidden]=\"!email.hasError('pattern')\">Email format should be <small><b>joe@abc.com</b></small></div>\r\n            </div>\r\n        </div>\r\n        <button type=\"submit\" class=\"btn btn-success btn-block\" [disabled]=\"!loginForm.form.valid\">Submit</button>\r\n    </form>\r\n</div>\r\n<div class=\"col-md-6\">\r\n    <table class=\"table\">\r\n        <tr>\r\n            <td><label>Name</label></td>\r\n            <td>{{formModel.name}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td><label>Email</label></td>\r\n            <td>{{formModel.email}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td><label>Skills</label></td>\r\n            <td>\r\n                <h6 *ngFor=\"let obj of formModel.skills\">{{obj.itemName}}</h6>\r\n            </td>\r\n        </tr>\r\n    </table>\r\n    <span>{{formModel | json}}</span>\r\n</div>\r\n</div>\r\n<h4 class=\"example-title code-section\">Code</h4>\r\n\r\n<p-tabView>\r\n    <p-tabPanel header=\"{{tstitle}}\">\r\n       <ng2-gist [gistId]=\"tsgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <p-tabPanel header=\"{{htmltitle}}\">\r\n        <ng2-gist [gistId]=\"htmlgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <span *ngIf=\"cssgist\">\r\n        <p-tabPanel header=\"{{csstitle}}\">\r\n        <ng2-gist [gistId]=\"cssgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n</p-tabView>"
+module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"row\">\r\n<div class=\"col-md-6 ml-auto mr-auto\">\r\n    <form (ngSubmit)=\"onSubmit()\" #loginForm=\"ngForm\" style=\"border: 1px solid #ccc; padding: 10px;\">\r\n        <div class=\"form-group\">\r\n            <label for=\"name\">Skills</label>\r\n            <angular2-multiselect [data]=\"itemList\" [(ngModel)]=\"formModel.skills\" \r\n                                  [settings]=\"settings\" \r\n                                  (onSelect)=\"onItemSelect($event)\"\r\n                                  (onDeSelect)=\"OnItemDeSelect($event)\" \r\n                                  (onSelectAll)=\"onSelectAll($event)\" \r\n                                  (onDeSelectAll)=\"onDeSelectAll($event)\" name=\"skills\" #skills=\"ngModel\" required>\r\n            </angular2-multiselect>\r\n            <div [hidden]=\"skills.valid\" class=\"alert alert-danger\">\r\n                <div [hidden]=\"!skills.hasError('required')\">Atleast one Skill is required</div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"name\">Name</label>\r\n            <input type=\"text\" class=\"form-control\" id=\"name\" required pattern=\"[a-zA-Z][a-zA-Z ]+\" [(ngModel)]=\"formModel.name\" name=\"name\"\r\n                #name=\"ngModel\">\r\n            <div [hidden]=\"name.valid || name.pristine\" class=\"alert alert-danger\">\r\n                <div [hidden]=\"!name.hasError('required')\">Name is required</div>\r\n                <div [hidden]=\"!name.hasError('pattern')\">Only alphabetsallowed</div>\r\n\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"name\">Email Address</label>\r\n            <input type=\"text\" class=\"form-control\" id=\"emailaddress\" required [(ngModel)]=\"formModel.email\" name=\"email\" pattern=\"^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$\"\r\n                #email=\"ngModel\">\r\n            <div [hidden]=\"email.valid || email.pristine\" class=\"alert alert-danger\">\r\n                <div [hidden]=\"!email.hasError('required')\">Email is required</div>\r\n                <div [hidden]=\"!email.hasError('pattern')\">Email format should be <small><b>joe@abc.com</b></small></div>\r\n            </div>\r\n        </div>\r\n        <button type=\"submit\" class=\"btn btn-success btn-block\" [disabled]=\"!loginForm.form.valid\">Submit</button>\r\n    </form>\r\n</div>\r\n<div class=\"col-md-6\">\r\n    <table class=\"table\">\r\n        <tr>\r\n            <td><label>Name</label></td>\r\n            <td>{{formModel.name}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td><label>Email</label></td>\r\n            <td>{{formModel.email}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td><label>Skills</label></td>\r\n            <td>\r\n                <h6 *ngFor=\"let obj of formModel.skills\">{{obj.itemName}}</h6>\r\n            </td>\r\n        </tr>\r\n    </table>\r\n    <span>{{formModel | json}}</span>\r\n</div>\r\n</div>\r\n<h4 class=\"example-title code-section\">Code</h4>\r\n\r\n<p-tabView>\r\n    <p-tabPanel header=\"{{tstitle}}\">\r\n       <ng2-gist [gistId]=\"tsgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <p-tabPanel header=\"{{htmltitle}}\">\r\n        <ng2-gist [gistId]=\"htmlgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <span *ngIf=\"cssgist\">\r\n        <p-tabPanel header=\"{{csstitle}}\">\r\n        <ng2-gist [gistId]=\"cssgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n</p-tabView>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/examples/views/using-in-react-form.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"row\">\r\n<div class=\"col-md-6 ml-auto mr-auto\">\r\n    <form [formGroup]=\"userForm\" novalidate style=\"border: 1px solid #ccc; padding: 10px;\">\r\n        <div class=\"form-group\">\r\n            <label for=\"name\">Skills</label>\r\n           <angular2-multiselect [data]=\"itemList\" [(ngModel)]=\"selectedItems\" \r\n                                  [settings]=\"settings\" \r\n                                  (onSelect)=\"onItemSelect($event)\"\r\n                                  (onDeSelect)=\"OnItemDeSelect($event)\" \r\n                                  (onSelectAll)=\"onSelectAll($event)\" \r\n                                  (onDeSelectAll)=\"onDeSelectAll($event)\" formControlName=\"skills\">\r\n            </angular2-multiselect>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"name\">Name</label>\r\n            <input class=\"form-control\" formControlName=\"name\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"name\">Email Address</label>\r\n            <input class=\"form-control\" formControlName=\"email\">\r\n        </div>\r\n        <button (click)=\"submitForm()\" [disabled]=\"!userForm.valid\" class=\"btn btn-success btn-block\">Submit</button>\r\n    </form>\r\n\r\n</div>\r\n<div class=\"col-md-6\">\r\n    <table class=\"table\">\r\n        <tr>\r\n            <td><label>Name</label></td>\r\n            <td>{{userForm.value.name}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td><label>Email</label></td>\r\n            <td>{{userForm.value.email}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td><label>Skills</label></td>\r\n            <td>\r\n                <h6 *ngFor=\"let obj of userForm.value.skills\">{{obj.itemName}}</h6>\r\n            </td>\r\n        </tr>\r\n    </table>\r\n    <span>{{userForm.value | json}}</span>\r\n    <p>Form status: {{ userForm.status | json }}</p>\r\n</div>\r\n</div>\r\n<h4 class=\"example-title code-section\">Code</h4>\r\n\r\n<p-tabView>\r\n    <p-tabPanel header=\"{{tstitle}}\">\r\n       <ng2-gist [gistId]=\"tsgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <p-tabPanel header=\"{{htmltitle}}\">\r\n        <ng2-gist [gistId]=\"htmlgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <span *ngIf=\"cssgist\">\r\n        <p-tabPanel header=\"{{csstitle}}\">\r\n        <ng2-gist [gistId]=\"cssgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n</p-tabView>"
 
 /***/ }),
 

@@ -1,20 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-    templateUrl: './views/using-in-form.html'
+    templateUrl: './views/using-in-react-form.html'
 })
-export class UsingWithFormExample implements OnInit {
+export class UsingWithReactiveFormExample implements OnInit {
     itemList = [];
     selectedItems = [];
     settings = {};
-    formModel = {
-        name: '',
-        email: 'ascasc@aa.com',
-        skills: [{ "id": 1, "itemName": "Angular" }]
-    };
-    submitted = false;
-    onSubmit() { this.submitted = true; }
-    constructor() { }
+
+    userForm: FormGroup;
+
+    constructor(private fb: FormBuilder) {
+        this.createForm();
+    }
+    createForm() {
+        this.userForm = this.fb.group({
+            name: '',
+            email: ['', Validators.required],
+            skills: [[], Validators.required]
+        });
+    }
+    submitForm() {
+        console.log(this.userForm);
+    }
     ngOnInit() {
 
         this.itemList = [
@@ -25,7 +34,7 @@ export class UsingWithFormExample implements OnInit {
             { "id": 5, "itemName": "ReactJS" },
             { "id": 6, "itemName": "HTML5" }
         ];
-
+        this.selectedItems = [];
         this.settings = {
             text: "Select Skills",
             selectAllText: 'Select All',
@@ -48,9 +57,9 @@ export class UsingWithFormExample implements OnInit {
         console.log(items);
     }
 
-    title: string = "Using with Template driven Forms";
-    tsgist: string = "CuppaLabs/6cd9396b8f5589b792b27dd10efe9140";
-    htmlgist: string = "CuppaLabs/8148509a46a59e3aba513808daa40ca1";
-    tstitle: string = "using-in-forms.ts"
-    htmltitle: string = "using-with-forms.html";
+    title: string = "Using with Reactive Forms";
+    tsgist: string = "CuppaLabs/f0dfe353c6378cee7f55547395a80fc4";
+    htmlgist: string = "CuppaLabs/0a32c3d76110468b84bac01fd64488bc";
+    tstitle: string = "using-in-reactive-forms.ts"
+    htmltitle: string = "using-with-reactive-forms.html";
 }

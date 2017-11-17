@@ -11,7 +11,8 @@ Angular 2 multiselect dropdown component for web applications. Easy to integrate
 ##### 2. Installation
 ##### 3. Usage
 ##### 4. Templates
-##### 5. Using with Angular Forms
+##### 5. Template Driven Forms support
+##### 5. Reactive Forms support
 ##### 6. Settings configuration
 ##### 7. Callbacks and events
 
@@ -119,7 +120,7 @@ Add the following component tag in you template
 
 ```
 
-### Using with Angular Forms
+### Template Driven Forms support
 
 ```html
 
@@ -138,6 +139,44 @@ Add the following component tag in you template
 
 ```
 
+```js
+
+formModel = {
+        name: '',
+        email: 'ascasc@aa.com',
+        skills: [{ "id": 1, "itemName": "Angular" }]
+    };
+
+```
+
+### Reactive Forms support
+
+```html
+
+<form [formGroup]="userForm" novalidate style="border: 1px solid #ccc; padding: 10px;">
+        <div class="form-group">
+            <label for="name">Skills</label>
+           <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" 
+                                  [settings]="settings" 
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)" 
+                                  (onSelectAll)="onSelectAll($event)" 
+                                  (onDeSelectAll)="onDeSelectAll($event)" formControlName="skills">
+            </angular2-multiselect>
+        </div>
+</form>
+
+```
+
+```js
+userForm: FormGroup;
+this.userForm = this.fb.group({
+            name: '',
+            email: ['', Validators.required],
+            skills: [[], Validators.required]
+        });
+
+```
 
 ### Settings
 The following list of settings are supported by the component. Configure the settings to meet your requirement.

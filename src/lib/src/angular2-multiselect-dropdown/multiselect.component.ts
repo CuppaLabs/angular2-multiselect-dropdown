@@ -1,5 +1,5 @@
 import { Component, OnInit, NgModule, SimpleChanges, OnChanges, ViewEncapsulation, ContentChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ListItem, MyException } from './multiselect.model';
 import { DropdownSettings } from './multiselect.interface';
@@ -12,6 +12,11 @@ export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     useExisting: forwardRef(() => AngularMultiSelect),
     multi: true
 };
+export const DROPDOWN_CONTROL_VALIDATION: any = {
+    provide: NG_VALIDATORS,
+    useExisting: forwardRef(() => AngularMultiSelect),
+    multi: true,
+}
 const noop = () => {
 };
 
@@ -20,10 +25,10 @@ const noop = () => {
     templateUrl: './multiselect.component.html',
     host: { '[class]': 'defaultSettings.classes' },
     styleUrls: ['./multiselect.component.scss'],
-    providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR]
+    providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR, DROPDOWN_CONTROL_VALIDATION]
 })
 
-export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChanges {
+export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChanges, Validator {
 
     @Input()
     data: Array<ListItem>;
@@ -45,7 +50,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
     @ContentChild(Item) itemTempl: Item;
 
-
     public selectedItems: Array<ListItem>;
     public isActive: boolean = false;
     public isSelectAll: boolean = false;
@@ -65,6 +69,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         searchPlaceholderText: 'Search',
         showCheckbox: true
     }
+    public parseError: boolean;
     constructor() {
 
     }
@@ -74,14 +79,14 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.groupedData = this.transformData(this.data, this.settings.groupBy);
         }
     }
-    ngOnChanges(changes: SimpleChanges){
-        if(!changes.data.firstChange){
+    ngOnChanges(changes: SimpleChanges) {
+        if (!changes.data.firstChange) {
             if (this.settings.groupBy) {
-            this.groupedData = this.transformData(this.data, this.settings.groupBy);
-            if(this.data.length == 0){
-                this.selectedItems = [];
+                this.groupedData = this.transformData(this.data, this.settings.groupBy);
+                if (this.data.length == 0) {
+                    this.selectedItems = [];
+                }
             }
-        }
         }
     }
     ngDoCheck() {
@@ -123,7 +128,15 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.isSelectAll = true;
         }
     }
-    private onTouchedCallback: () => void = noop;
+    public validate(c: FormControl) {
+
+        return (!this.parseError) ? null : {
+            jsonParseError: {
+                valid: false,
+            },
+        };
+    }
+    private onTouchedCallback: (_: any) => void = noop;
     private onChangeCallback: (_: any) => void = noop;
 
     writeValue(value: any) {
@@ -188,7 +201,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         else
             this.selectedItems.push(item);
+        if (this.selectedItems.length > 0) {
+            this.parseError = false;
+        }
         this.onChangeCallback(this.selectedItems);
+
     }
     removeSelected(clickedItem: ListItem) {
         this.selectedItems && this.selectedItems.forEach(item => {
@@ -196,6 +213,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 this.selectedItems.splice(this.selectedItems.indexOf(item), 1);
             }
         });
+        if (this.selectedItems.length == 0) {
+            this.parseError = true;
+        }
         this.onChangeCallback(this.selectedItems);
     }
     toggleDropdown(evt: any) {
@@ -224,8 +244,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.onDeSelectAll.emit(this.selectedItems);
         }
     }
-    transformData(arr: Array<ListItem>, field: any):Array<ListItem> {
-        const groupedObj:any = arr.reduce((prev:any, cur:any) => {
+    transformData(arr: Array<ListItem>, field: any): Array<ListItem> {
+        const groupedObj: any = arr.reduce((prev: any, cur: any) => {
             if (!prev[cur[field]]) {
                 prev[cur[field]] = [cur];
             } else {
@@ -233,7 +253,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             }
             return prev;
         }, {});
-        const tempArr:any = [];
+        const tempArr: any = [];
         Object.keys(groupedObj).map(function (x) {
             tempArr.push({ key: x, value: groupedObj[x] });
         });

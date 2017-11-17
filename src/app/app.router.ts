@@ -14,6 +14,7 @@ import { LimitBadgesExample } from './examples/limitbadges';
 import { CustomPlaceholderExample } from './examples/customplaceholder';
 import { StylingExample } from './examples/styling';
 import { UsingWithFormExample } from './examples/usingWithForms';
+import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/basic',pathMatch: 'full'},
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     { path: 'limitbadges', component: LimitBadgesExample},
     { path: 'customplaceholder', component: CustomPlaceholderExample},
     { path: 'styling', component: StylingExample},
-    { path: 'usinginform', component: UsingWithFormExample}
+    { path: 'usinginform', component: UsingWithFormExample},
+    { path: 'usinginreactiveform', component: UsingWithReactiveFormExample}
 ];
 
 
