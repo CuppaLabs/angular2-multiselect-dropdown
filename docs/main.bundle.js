@@ -4,7 +4,11 @@ webpackJsonp(["main"],{
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
-	return new Promise(function(resolve, reject) { reject(new Error("Cannot find module '" + req + "'.")); });
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
+	});
 }
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
@@ -29,7 +33,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var ClickOutsideDirective = (function () {
+var ClickOutsideDirective = /** @class */ (function () {
     function ClickOutsideDirective(_elementRef) {
         this._elementRef = _elementRef;
         this.clickOutside = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
@@ -80,7 +84,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var ListFilterPipe = (function () {
+var ListFilterPipe = /** @class */ (function () {
     function ListFilterPipe() {
     }
     ListFilterPipe.prototype.transform = function (items, filter) {
@@ -123,7 +127,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var Item = (function () {
+var Item = /** @class */ (function () {
     function Item() {
     }
     __decorate([
@@ -141,7 +145,7 @@ var Item = (function () {
     var _a;
 }());
 
-var TemplateRenderer = (function () {
+var TemplateRenderer = /** @class */ (function () {
     function TemplateRenderer(viewContainer) {
         this.viewContainer = viewContainer;
     }
@@ -248,7 +252,7 @@ var DROPDOWN_CONTROL_VALIDATION = {
 };
 var noop = function () {
 };
-var AngularMultiSelect = (function () {
+var AngularMultiSelect = /** @class */ (function () {
     function AngularMultiSelect() {
         this.onSelect = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.onDeSelect = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
@@ -493,7 +497,7 @@ var AngularMultiSelect = (function () {
     var _a, _b, _c, _d, _e, _f;
 }());
 
-var AngularMultiSelectModule = (function () {
+var AngularMultiSelectModule = /** @class */ (function () {
     function AngularMultiSelectModule() {
     }
     AngularMultiSelectModule = __decorate([
@@ -523,13 +527,13 @@ var AngularMultiSelectModule = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return MyException; });
-var ListItem = (function () {
+var ListItem = /** @class */ (function () {
     function ListItem() {
     }
     return ListItem;
 }());
 
-var MyException = (function () {
+var MyException = /** @class */ (function () {
     function MyException(status, body) {
         this.status = status;
         this.body = body;
@@ -582,7 +586,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var AppComponent = (function () {
+var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.title = 'app works!';
         this.singleSelectionList = [];
@@ -872,7 +876,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AppModule = (function () {
+var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
@@ -971,7 +975,7 @@ var appRoutes = [
     { path: 'usinginform', component: __WEBPACK_IMPORTED_MODULE_13__examples_usingWithForms__["a" /* UsingWithFormExample */] },
     { path: 'usinginreactiveform', component: __WEBPACK_IMPORTED_MODULE_14__examples_usingInReactForms__["a" /* UsingWithReactiveFormExample */] }
 ];
-var AppRouterModule = (function () {
+var AppRouterModule = /** @class */ (function () {
     function AppRouterModule() {
     }
     AppRouterModule = __decorate([
@@ -1007,7 +1011,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var BasicExample = (function () {
+var BasicExample = /** @class */ (function () {
     function BasicExample() {
         this.itemList = [];
         this.selectedItems = [];
@@ -1083,7 +1087,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var CustomPlaceholderExample = (function () {
+var CustomPlaceholderExample = /** @class */ (function () {
     function CustomPlaceholderExample() {
         this.itemList = [];
         this.selectedItems = [];
@@ -1161,7 +1165,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var DisableModeExample = (function () {
+var DisableModeExample = /** @class */ (function () {
     function DisableModeExample() {
         this.itemList = [];
         this.selectedItems = [];
@@ -1246,7 +1250,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var ng2Gist = (function () {
+var ng2Gist = /** @class */ (function () {
     function ng2Gist() {
     }
     ng2Gist.prototype.ngAfterViewInit = function () {
@@ -1297,7 +1301,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var GroupByExample = (function () {
+var GroupByExample = /** @class */ (function () {
     function GroupByExample() {
         this.itemList = [];
         this.selectedItems = [];
@@ -1383,7 +1387,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var LimitBadgesExample = (function () {
+var LimitBadgesExample = /** @class */ (function () {
     function LimitBadgesExample() {
         this.itemList = [];
         this.selectedItems = [];
@@ -1461,7 +1465,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var LimitSelectionExample = (function () {
+var LimitSelectionExample = /** @class */ (function () {
     function LimitSelectionExample() {
         this.itemList = [];
         this.selectedItems = [];
@@ -1539,7 +1543,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var ResetDropdownExample = (function () {
+var ResetDropdownExample = /** @class */ (function () {
     function ResetDropdownExample() {
         this.itemList = [];
         this.selectedItems = [];
@@ -1621,7 +1625,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var SearchFilterExample = (function () {
+var SearchFilterExample = /** @class */ (function () {
     function SearchFilterExample() {
         this.itemList = [];
         this.selectedItems = [];
@@ -1699,7 +1703,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var SingleSelectionExample = (function () {
+var SingleSelectionExample = /** @class */ (function () {
     function SingleSelectionExample() {
         this.itemList = [];
         this.selectedItems = [];
@@ -1767,7 +1771,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var StylingExample = (function () {
+var StylingExample = /** @class */ (function () {
     function StylingExample() {
         this.itemList = [];
         this.selectedItems = [];
@@ -1845,7 +1849,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var TemplatingExample = (function () {
+var TemplatingExample = /** @class */ (function () {
     function TemplatingExample() {
         this.itemList = [];
         this.selectedItems = [];
@@ -1925,7 +1929,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var UsingWithReactiveFormExample = (function () {
+var UsingWithReactiveFormExample = /** @class */ (function () {
     function UsingWithReactiveFormExample(fb) {
         this.fb = fb;
         this.itemList = [];
@@ -2009,7 +2013,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var UsingWithFormExample = (function () {
+var UsingWithFormExample = /** @class */ (function () {
     function UsingWithFormExample() {
         this.itemList = [];
         this.selectedItems = [];

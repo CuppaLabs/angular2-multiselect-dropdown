@@ -8,10 +8,10 @@ const exec = require('child_process').exec;
  * @see  https://github.com/ludohenin/gulp-inline-ng2-template
  */
 const INLINE_TEMPLATES = {
-  SRC: './src/lib/src/**/*.ts',
+  SRC: './src/app/angular2-multiselect-dropdown/**/*.ts',
   DIST: './tmp/src-inlined',
   CONFIG: {
-    base: '/src/lib/src',
+    base: '/src/app/angular2-multiselect-dropdown',
     target: 'es6',
     useRelativePaths: true,
     styleProcessor: compileSass

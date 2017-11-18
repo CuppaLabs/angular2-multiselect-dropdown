@@ -8,10 +8,10 @@ const pkg = JSON.parse(fs.readFileSync('./package.json').toString());
 
 export default {
   entry: {
-    'index.umd': './src/lib/src/index.ts',
-    'index.umd.min': './src/lib/src/index.ts',
-     'angular2-multiselect-dropdown.umd': './src/lib/src/angular2-multiselect-dropdown.ts',
-    'angular2-multiselect-dropdown.umd.min': './src/lib/src/angular2-multiselect-dropdown.ts'
+    'index.umd': './src/app/angular2-multiselect-dropdown/index.ts',
+    'index.umd.min': './src/app/angular2-multiselect-dropdown/index.ts',
+     'angular2-multiselect-dropdown.umd': './src/app/angular2-multiselect-dropdown/angular2-multiselect-dropdown.ts',
+    'angular2-multiselect-dropdown.umd.min': './src/app/angular2-multiselect-dropdown/angular2-multiselect-dropdown.ts'
   },
   output: {
     path: path.join(__dirname, 'dist'),

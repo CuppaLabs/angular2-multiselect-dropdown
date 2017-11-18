@@ -1,6 +1,6 @@
 {
   "name": "angular2-multiselect-dropdown",
-  "version": "2.1.0",
+  "version": "2.1.1",
     "description": "Angular 2 and angular 4 multiselect dropdown component.",
       "keywords": [
     "angular 2 multiselect dropdown",
@@ -52,8 +52,10 @@
     "@angular/cli": "^1.3.2",
     "@angular/core": "^4.0.0",
      "@angular/forms": "^4.0.0",
+     "@angular/http": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/router": "^4.0.0",
     "@compodoc/compodoc": "^1.0.0-beta.9",
     "@types/jasmine": "^2.5.47",
     "@types/karma": "^0.13.35",
@@ -73,6 +75,7 @@
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine-core": "^2.6.1",
     "json-loader": "^0.5.4",
+    "@types/log4js": "0.0.33",
     "karma": "^1.7.0",
     "karma-chrome-launcher": "^2.1.1",
     "karma-coverage-istanbul-reporter": "^1.2.1",
