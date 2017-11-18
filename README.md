@@ -1,5 +1,7 @@
 # Angular2 Multiselect Dropdown
 [![npm version](https://img.shields.io/npm/v/angular2-multiselect-dropdown.svg)](https://www.npmjs.com/package/angular2-multiselect-dropdown)
+[![downloads](https://img.shields.io/npm/dt/angular2-multiselect-dropdown.svg)](https://www.npmjs.com/package/angular2-multiselect-dropdown)
+[![license](https://img.shields.io/github/license/cuppalabs/angular2-multiselect-dropdown.svg)](https://www.npmjs.com/package/angular2-multiselect-dropdown)
 
 Angular 2 multiselect dropdown component for web applications. Easy to integrate and use.
 
