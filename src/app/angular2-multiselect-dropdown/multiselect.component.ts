@@ -80,7 +80,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
     }
     ngOnChanges(changes: SimpleChanges) {
-        if (!changes.data.firstChange) {
+        if(changes.data && !changes.data.firstChange) {
             if (this.settings.groupBy) {
                 this.groupedData = this.transformData(this.data, this.settings.groupBy);
                 if (this.data.length == 0) {
