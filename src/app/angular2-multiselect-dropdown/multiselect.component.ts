@@ -188,9 +188,16 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     isSelected(clickedItem: ListItem) {
         let found = false;
         this.selectedItems && this.selectedItems.forEach(item => {
-            if (clickedItem.id === item.id) {
-                found = true;
+            if(this.settings.checkedByName){
+                if (clickedItem.itemName === item.itemName) {
+                    found = true;
+                }
+            }else{
+                if (clickedItem.id === item.id) {
+                    found = true;
+                }
             }
+            
         });
         return found;
     }
