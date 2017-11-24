@@ -13,4 +13,5 @@ export interface DropdownSettings{
     searchPlaceholderText: String;
     groupBy?: String;
     showCheckbox?: Boolean;
+    checkedByName?: Boolean;
 } 
