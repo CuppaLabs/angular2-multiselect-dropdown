@@ -129,7 +129,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.isSelectAll = true;
         }
     }
-    public validate(c: FormControl):any {
+    public validate(c: FormControl): any {
         return null;
     }
     private onTouchedCallback: (_: any) => void = noop;
@@ -198,7 +198,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         else
             this.selectedItems.push(item);
         this.onChangeCallback(this.selectedItems);
-
+        this.onTouchedCallback(this.selectedItems);
     }
     removeSelected(clickedItem: ListItem) {
         this.selectedItems && this.selectedItems.forEach(item => {
@@ -207,6 +207,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             }
         });
         this.onChangeCallback(this.selectedItems);
+        this.onTouchedCallback(this.selectedItems);
     }
     toggleDropdown(evt: any) {
         if (this.settings.disabled) {
@@ -225,12 +226,16 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.selectedItems = this.data.slice();
             this.isSelectAll = true;
             this.onChangeCallback(this.selectedItems);
+            this.onTouchedCallback(this.selectedItems);
+
             this.onSelectAll.emit(this.selectedItems);
         }
         else {
             this.selectedItems = [];
             this.isSelectAll = false;
             this.onChangeCallback(this.selectedItems);
+            this.onTouchedCallback(this.selectedItems);
+
             this.onDeSelectAll.emit(this.selectedItems);
         }
     }

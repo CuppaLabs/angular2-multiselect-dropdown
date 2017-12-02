@@ -394,6 +394,7 @@ var AngularMultiSelect = /** @class */ (function () {
         else
             this.selectedItems.push(item);
         this.onChangeCallback(this.selectedItems);
+        this.onTouchedCallback(this.selectedItems);
     };
     AngularMultiSelect.prototype.removeSelected = function (clickedItem) {
         var _this = this;
@@ -403,6 +404,7 @@ var AngularMultiSelect = /** @class */ (function () {
             }
         });
         this.onChangeCallback(this.selectedItems);
+        this.onTouchedCallback(this.selectedItems);
     };
     AngularMultiSelect.prototype.toggleDropdown = function (evt) {
         if (this.settings.disabled) {
@@ -421,12 +423,14 @@ var AngularMultiSelect = /** @class */ (function () {
             this.selectedItems = this.data.slice();
             this.isSelectAll = true;
             this.onChangeCallback(this.selectedItems);
+            this.onTouchedCallback(this.selectedItems);
             this.onSelectAll.emit(this.selectedItems);
         }
         else {
             this.selectedItems = [];
             this.isSelectAll = false;
             this.onChangeCallback(this.selectedItems);
+            this.onTouchedCallback(this.selectedItems);
             this.onDeSelectAll.emit(this.selectedItems);
         }
     };
