@@ -4,6 +4,7 @@
     <form [formGroup]="userForm" novalidate style="border: 1px solid #ccc; padding: 10px;">
         <div class="form-group">
             <label for="name">Skills</label>
+            <span style="color: red;float: right;">* required</span>
            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" 
                                   [settings]="settings" 
                                   (onSelect)="onItemSelect($event)"
@@ -18,6 +19,7 @@
         </div>
         <div class="form-group">
             <label for="name">Email Address</label>
+            <span style="color: red;float: right;">* required</span>
             <input class="form-control" formControlName="email">
         </div>
         <button (click)="submitForm()" [disabled]="!userForm.valid" class="btn btn-success btn-block">Submit</button>

@@ -7,7 +7,7 @@ export class DisableModeExample implements OnInit {
 
   itemList = [];
   selectedItems = [];
-  settings = {};
+  settings:any = {};
 
   constructor() {
 
@@ -58,6 +58,18 @@ export class DisableModeExample implements OnInit {
   }
   changeData() {
     this.selectedItems = [];
+  }
+  toggleDisable(){
+    console.log(this.settings);
+    this.settings = {
+      text: "Select Countries",
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      enableSearchFilter: false,
+      classes: "myclass custom-class",
+      limitSelection: 2,
+      disabled: false
+    };
   }
   title: string = "Disable mode";
   tsgist: string = "CuppaLabs/96f799302bdfa08e11b4420c86c1d720";

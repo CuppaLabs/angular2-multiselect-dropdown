@@ -67,7 +67,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         classes: '',
         disabled: false,
         searchPlaceholderText: 'Search',
-        showCheckbox: true
+        showCheckbox: true,
+        noDataLabel: 'No Data Available'
     }
     public parseError: boolean;
     constructor() {
@@ -80,7 +81,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
     }
     ngOnChanges(changes: SimpleChanges) {
-        if(changes.data && !changes.data.firstChange) {
+        if (changes.data && !changes.data.firstChange) {
             if (this.settings.groupBy) {
                 this.groupedData = this.transformData(this.data, this.settings.groupBy);
                 if (this.data.length == 0) {
@@ -128,13 +129,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.isSelectAll = true;
         }
     }
-    public validate(c: FormControl) {
-
-        return (!this.parseError) ? null : {
-            jsonParseError: {
-                valid: false,
-            },
-        };
+    public validate(c: FormControl):any {
+        return null;
     }
     private onTouchedCallback: (_: any) => void = noop;
     private onChangeCallback: (_: any) => void = noop;
@@ -201,9 +197,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         else
             this.selectedItems.push(item);
-        if (this.selectedItems.length > 0) {
-            this.parseError = false;
-        }
         this.onChangeCallback(this.selectedItems);
 
     }
@@ -213,9 +206,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 this.selectedItems.splice(this.selectedItems.indexOf(item), 1);
             }
         });
-        if (this.selectedItems.length == 0) {
-            this.parseError = true;
-        }
         this.onChangeCallback(this.selectedItems);
     }
     toggleDropdown(evt: any) {

@@ -16,8 +16,8 @@ export class UsingWithReactiveFormExample implements OnInit {
     }
     createForm() {
         this.userForm = this.fb.group({
-            name: '',
-            email: ['', Validators.required],
+            name: 'xbvxncvx',
+            email: ['absd@gmail.com', Validators.required],
             skills: [[], Validators.required]
         });
     }
