@@ -3,7 +3,7 @@
     <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"  (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
    <c-item>
           <ng-template let-item="item">
-            <label style="color: #333;min-width: 150px;">{{item.name}}</label>
+            <label style="color: #333;min-width: 150px;">{{item.itemName}}</label>
             <img [src]="item.image" style="width: 30px; border: 1px solid #efefef;margin-right: 20px;" />
             <label>Capital - {{item.capital}}</label>
           </ng-template>
