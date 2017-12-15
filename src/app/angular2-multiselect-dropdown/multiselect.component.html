@@ -30,7 +30,7 @@
         </div>   
         <div class="list-filter" *ngIf="settings.enableSearchFilter">
             <span class="fa fa-search"></span>
-            <input type="text" [placeholder]="settings.searchPlaceholderText" [(ngModel)]="filter.itemName">
+            <input #searchInput type="text" [placeholder]="settings.searchPlaceholderText" [(ngModel)]="filter.itemName">
         </div> 
     <ul *ngIf="!settings.groupBy" [style.maxHeight] = "settings.maxHeight+'px'">
         <span *ngIf="itemTempl">

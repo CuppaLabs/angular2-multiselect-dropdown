@@ -198,6 +198,7 @@ The following list of settings are supported by the component. Configure the set
 | disabled | Boolean | Disable the dropdown | false |
 | searchPlaceholderText | String | Custom text for the search placeholder text. Default value would be 'Search' | 'Search' |
 | groupBy | String | Name of the field by which the list should be grouped. | none |
+| searchAutofocus | Boolean | Autofocus search input field| true |
 
 
 ### Callback Methods
@@ -209,7 +210,10 @@ The following list of settings are supported by the component. Configure the set
     Example : (onSelectAll)="onSelectAll($event)"
 - `onDeSelectAll` - Returns an empty array.
     Example : (onDeSelectAll)="onDeSelectAll($event)"
-    
+- `onOpen` - Callback method fired after the dropdown opens
+    Example : (onOpen)="onOpen($event)"
+- `onClose` - Callback method, fired when the dropdown is closed
+    Example : (onClose)="onClose($event)"
 
 ## Run locally
 - Clone the repository or downlod the .zip,.tar files.

@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, SimpleChanges, OnChanges, ViewEncapsulation, ContentChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, NgModule, SimpleChanges, OnChanges, ViewEncapsulation, ContentChild, ViewChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ListItem, MyException } from './multiselect.model';
@@ -48,7 +48,15 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Output('onDeSelectAll')
     onDeSelectAll: EventEmitter<Array<ListItem>> = new EventEmitter<Array<ListItem>>();
 
+    @Output('onOpen')
+    onOpen: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output('onClose')
+    onClose: EventEmitter<any> = new EventEmitter<any>();
+
     @ContentChild(Item) itemTempl: Item;
+
+    @ViewChild('searchInput') searchInput: ElementRef;
 
     public selectedItems: Array<ListItem>;
     public isActive: boolean = false;
@@ -68,7 +76,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         disabled: false,
         searchPlaceholderText: 'Search',
         showCheckbox: true,
-        noDataLabel: 'No Data Available'
+        noDataLabel: 'No Data Available',
+        searchAutofocus: true
     }
     public parseError: boolean;
     constructor() {
@@ -214,11 +223,23 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             return false;
         }
         this.isActive = !this.isActive;
+        if (this.isActive) {
+            if (this.settings.searchAutofocus) {
+                setTimeout(() => {
+                    this.searchInput.nativeElement.focus();
+                }, 0);
+            }
+            this.onOpen.emit(true);
+        }
+        else {
+            this.onClose.emit(false);
+        }
         evt.preventDefault();
     }
     closeDropdown() {
         this.filter = new ListItem();
         this.isActive = false;
+        this.onClose.emit(false);
     }
     toggleSelectAll() {
         if (!this.isSelectAll) {

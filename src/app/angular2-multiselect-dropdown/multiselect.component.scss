@@ -30,6 +30,7 @@ $base-color: #0079FE;
             color: #fff;
             border-radius: 2px;
             margin-right: 4px;
+            margin-top: 2px;
             float: left;
             .c-label{
                 display: block;
@@ -227,7 +228,6 @@ $base-color: #0079FE;
   transition: transform 200ms ease-out;
 }
 .pure-checkbox input[type="radio"]:checked + label:before{
-  animation: borderscale 300ms ease-in;
   background-color: white;
 }
 .pure-checkbox input[type="radio"]:checked + label:after{
@@ -237,16 +237,10 @@ $base-color: #0079FE;
   border-radius: 50%;
 }
 .pure-checkbox input[type="checkbox"]:checked + label:before{
-  animation: borderscale 200ms ease-in;
   background: $base-color;
 }
 .pure-checkbox input[type="checkbox"]:checked + label:after{
   transform: rotate(-45deg) scale(1);
-}
-@keyframes borderscale {
-  50% {
-    box-shadow: 0 0 0 2px $base-color;
-  }
 }
 .list-message{
     text-align: center;

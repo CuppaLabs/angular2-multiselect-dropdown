@@ -14,4 +14,5 @@ export interface DropdownSettings{
     groupBy?: String;
     showCheckbox?: Boolean;
     noDataLabel: string;
+    searchAutofocus?: boolean;
 } 
