@@ -224,7 +224,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         this.isActive = !this.isActive;
         if (this.isActive) {
-            if (this.settings.searchAutofocus) {
+            if (this.settings.searchAutofocus && this.settings.enableSearchFilter) {
                 setTimeout(() => {
                     this.searchInput.nativeElement.focus();
                 }, 0);

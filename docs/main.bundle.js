@@ -427,7 +427,7 @@ var AngularMultiSelect = /** @class */ (function () {
         }
         this.isActive = !this.isActive;
         if (this.isActive) {
-            if (this.settings.searchAutofocus) {
+            if (this.settings.searchAutofocus && this.settings.enableSearchFilter) {
                 setTimeout(function () {
                     _this.searchInput.nativeElement.focus();
                 }, 0);
