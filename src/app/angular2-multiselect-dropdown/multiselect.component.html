@@ -13,7 +13,7 @@
                     <span class="fa fa-remove" (click)="onItemClick(item,k,$event)"></span>
                 </div>
             </div> 
-            <span *ngIf="selectedItems?.length > settings.badgeShowLimit">+{{selectedItems?.length - settings.badgeShowLimit }}</span>
+            <span class="countplaceholder" *ngIf="selectedItems?.length > settings.badgeShowLimit">+{{selectedItems?.length - settings.badgeShowLimit }}</span>
             <span class="fa" [ngClass]="{'fa-angle-down': !isActive,'fa-angle-up':isActive}"></span>
         </div>      
     </div>
@@ -28,11 +28,15 @@
                 <span [hidden]="!isSelectAll">{{settings.unSelectAllText}}</span>
             </label>
         </div>   
-        <div class="list-filter" *ngIf="settings.enableSearchFilter">
+        <div class="list-filter" *ngIf="settings.enableSearchFilter && !settings.lazyLoading">
             <span class="fa fa-search"></span>
             <input #searchInput type="text" [placeholder]="settings.searchPlaceholderText" [(ngModel)]="filter.itemName">
         </div> 
-    <ul *ngIf="!settings.groupBy" [style.maxHeight] = "settings.maxHeight+'px'">
+        <div class="list-filter" *ngIf="settings.enableSearchFilter && settings.lazyLoading">
+            <span class="fa fa-search"></span>
+            <input #searchInput type="text" [placeholder]="settings.searchPlaceholderText" (keyup)="filterInfiniteList($event)">
+        </div>
+    <ul *ngIf="!settings.groupBy" [style.maxHeight] = "settings.maxHeight+'px'" class="lazyContainer" >
         <span *ngIf="itemTempl">
             <li *ngFor="let item of data | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
             <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
@@ -40,16 +44,26 @@
             <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
         </li>
         </span>
-        <span *ngIf="!itemTempl" >
+        <span *ngIf="!itemTempl && !settings.lazyLoading" >
         <li *ngFor="let item of data | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
             <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
             <label>{{item.itemName}}</label>
         </li>
         </span>
+        <span *ngIf="!itemTempl && settings.lazyLoading" >
+            <div [ngStyle]="{'height':totalHeight+'px'}" style="position: relative;">
+
+            
+        <li *ngFor="let item of chunkArray | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" style="position: absolute;width: 100%;" class="pure-checkbox" [styleProp]="chunkIndex[i]">
+            <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
+            <label>{{item.itemName}}</label>
+        </li>
+        </div>
+        </span>
     </ul>
     <div *ngIf="settings.groupBy" [style.maxHeight] = "settings.maxHeight+'px'" style="overflow: auto;">
     <ul *ngFor="let obj of groupedData ; let i = index;" class="list-grp">
-        <h4>{{obj.key}}</h4>
+        <h4 *ngIf="(obj.value | listFilter:filter ).length > 0">{{obj.key}}</h4>
         <span *ngIf="itemTempl" >
         <li *ngFor="let item of obj.value | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
             <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>

@@ -21,6 +21,7 @@ import { ng2Gist } from './examples/gist';
 import { TabViewModule } from 'primeng/primeng';
 import { UsingWithFormExample } from './examples/usingWithForms';
 import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
+import { LazyLoadingExample } from './examples/lazyLoading';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
     CustomPlaceholderExample,
     StylingExample,
     UsingWithFormExample,
-    UsingWithReactiveFormExample
+    UsingWithReactiveFormExample,
+    LazyLoadingExample
     ],
   imports: [
     BrowserModule,

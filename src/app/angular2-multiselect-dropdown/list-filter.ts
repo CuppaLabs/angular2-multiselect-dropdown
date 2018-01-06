@@ -17,7 +17,6 @@ export class ListFilterPipe implements PipeTransform {
         let found = false;
         for (var prop in item) {
             if (filter.itemName) {
-                console.log(item[prop].toString().toLowerCase());
                 if (item[prop].toString().toLowerCase().indexOf(filter.itemName.toLowerCase()) >= 0) {
                     found = true;
                 }

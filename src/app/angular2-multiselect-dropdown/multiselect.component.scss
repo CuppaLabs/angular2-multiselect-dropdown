@@ -23,6 +23,7 @@ $base-color: #0079FE;
         float: left;
         padding: 0px;
         margin: 0px;
+        width: calc(100% - 20px);
         .c-token{
             list-style: none;  
             padding: 0px 5px;
@@ -51,7 +52,14 @@ $base-color: #0079FE;
         font-size: 15pt;
         position: absolute;
         right: 10px;
-        top: 25%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .countplaceholder {
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
     }
     .c-btn{
         width: 100%;
@@ -59,6 +67,7 @@ $base-color: #0079FE;
         padding: 10px;
         cursor: pointer;
         display: flex;
+        position: relative;
     }
 }
 .dropdown-list{

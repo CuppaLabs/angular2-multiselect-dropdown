@@ -15,6 +15,7 @@ import { CustomPlaceholderExample } from './examples/customplaceholder';
 import { StylingExample } from './examples/styling';
 import { UsingWithFormExample } from './examples/usingWithForms';
 import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
+import { LazyLoadingExample } from './examples/lazyLoading';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/basic',pathMatch: 'full'},
@@ -30,7 +31,9 @@ const appRoutes: Routes = [
     { path: 'customplaceholder', component: CustomPlaceholderExample},
     { path: 'styling', component: StylingExample},
     { path: 'usinginform', component: UsingWithFormExample},
-    { path: 'usinginreactiveform', component: UsingWithReactiveFormExample}
+    { path: 'usinginreactiveform', component: UsingWithReactiveFormExample},
+    { path: 'lazyloading', component: LazyLoadingExample}
+
 ];
 
 

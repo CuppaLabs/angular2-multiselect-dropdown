@@ -3,7 +3,7 @@ import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Va
 import { CommonModule } from '@angular/common';
 import { ListItem, MyException } from './multiselect.model';
 import { DropdownSettings } from './multiselect.interface';
-import { ClickOutsideDirective } from './clickOutside';
+import { ClickOutsideDirective, ScrollDirective, styleDirective } from './clickOutside';
 import { ListFilterPipe } from './list-filter';
 import { Item, TemplateRenderer } from './menu-item';
 
@@ -63,6 +63,20 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     public isSelectAll: boolean = false;
     public groupedData: Array<ListItem>;
     filter: ListItem = new ListItem();
+    public chunkArray:any[];
+    public scrollTop:any;
+    public chunkIndex:any[] = [];
+    public cachedItems:any[] = [];
+    public totalRows:any;
+    public itemHeight:any = 41.6;
+    public screenItemsLen:any;
+    public cachedItemsLen:any;
+    public totalHeight: any;
+    public scroller:any;
+    public maxBuffer:any;
+    public lastScrolled:any;
+    public lastRepaintY: any;
+
     defaultSettings: DropdownSettings = {
         singleSelection: false,
         text: 'Select',
@@ -77,10 +91,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         searchPlaceholderText: 'Search',
         showCheckbox: true,
         noDataLabel: 'No Data Available',
-        searchAutofocus: true
+        searchAutofocus: true,
+        lazyLoading: false
     }
     public parseError: boolean;
-    constructor() {
+    constructor(public _elementRef : ElementRef) {
 
     }
     ngOnInit() {
@@ -88,6 +103,14 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         if (this.settings.groupBy) {
             this.groupedData = this.transformData(this.data, this.settings.groupBy);
         }
+        this.totalRows = (this.data && this.data.length);
+        this.cachedItems = this.data;
+        this.screenItemsLen = Math.ceil(this.settings.maxHeight / this.itemHeight);
+        this.cachedItemsLen = this.screenItemsLen * 3;
+        this.totalHeight = this.itemHeight * this.totalRows;
+        this.maxBuffer = this.screenItemsLen * this.itemHeight;
+        this.lastScrolled = 0;
+        this.renderChunk(0, this.cachedItemsLen / 2);
     }
     ngOnChanges(changes: SimpleChanges) {
         if (changes.data && !changes.data.firstChange) {
@@ -98,6 +121,10 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 }
             }
         }
+        if (changes.settings && !changes.settings.firstChange) { 
+            this.settings = Object.assign(this.defaultSettings, this.settings);
+            console.log(this.settings);
+        }
     }
     ngDoCheck() {
         if (this.selectedItems) {
@@ -105,6 +132,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 this.isSelectAll = false;
             }
         }
+    }
+    ngAfterViewInit() {
+        this._elementRef.nativeElement.getElementsByClassName("lazyContainer")[0].addEventListener('scroll', this.onScroll.bind(this));
     }
     onItemClick(item: ListItem, index: number, evt: Event) {
         if (this.settings.disabled) {
@@ -275,11 +305,63 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         });
         return tempArr;
     }
+    renderChunk(fromPos:any, howMany:any) {
+        this.chunkArray = [];
+        this.chunkIndex = [];
+        var finalItem = fromPos + howMany;
+        if (finalItem > this.totalRows)
+            finalItem = this.totalRows;
+
+        for (var i = fromPos; i < finalItem; i++) {
+                this.chunkIndex.push((i * this.itemHeight) + 'px');
+                this.chunkArray.push(this.data[i]);
+        }
+        console.log(this.chunkArray);
+    }
+    public onScroll(e:any) {
+        this.scrollTop = e.target.scrollTop;
+        this.updateView(this.scrollTop);
+
+    }
+    public updateView(scrollTop:any){
+        var scrollPos = scrollTop ? scrollTop: 0;
+         var first = (scrollPos / this.itemHeight) - this.screenItemsLen;
+        var firstTemp = ""+first;
+        first = parseInt(firstTemp) < 0 ? 0 : parseInt(firstTemp);
+            this.renderChunk(first, this.cachedItemsLen);
+            this.lastRepaintY = scrollPos;      
+    }
+    public filterInfiniteList(evt: any){
+        var filteredElems:Array<any> = [];
+        this.data = this.cachedItems.slice();
+        if(evt.target.value.toString() != ''){
+          this.data.filter(function(el:any){
+              for(var prop in el){
+                  if(el[prop].toString().toLowerCase().indexOf(evt.target.value.toString().toLowerCase()) >=0 ){
+                      filteredElems.push(el);
+                  }
+              }
+          });
+            //this.cachedItems = this.data;
+            this.totalHeight = this.itemHeight * filteredElems.length;
+            this.totalRows = filteredElems.length;
+            this.data = [];
+            this.data = filteredElems;
+            this.updateView(this.scrollTop);
+        }
+        else if(evt.target.value.toString() == '' && this.cachedItems.length > 0){
+            this.data = [];
+            this.data = this.cachedItems;
+            this.totalHeight = this.itemHeight * this.data.length;
+            this.totalRows = this.data.length;
+            this.updateView(this.scrollTop);
+        } 
+    }
 }
 
 @NgModule({
     imports: [CommonModule, FormsModule],
-    declarations: [AngularMultiSelect, ClickOutsideDirective, ListFilterPipe, Item, TemplateRenderer],
-    exports: [AngularMultiSelect, ClickOutsideDirective, ListFilterPipe, Item, TemplateRenderer]
+    declarations: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer],
+    exports: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer]
 })
 export class AngularMultiSelectModule { }

@@ -5,7 +5,7 @@ export interface DropdownSettings{
     selectAllText: String;
     unSelectAllText: String;
     enableSearchFilter: Boolean;
-    maxHeight: Number;
+    maxHeight: number;
     badgeShowLimit: Number;
     classes: String;
     limitSelection?: Number;
@@ -15,4 +15,5 @@ export interface DropdownSettings{
     showCheckbox?: Boolean;
     noDataLabel: string;
     searchAutofocus?: boolean;
+    lazyLoading?: boolean;
 } 

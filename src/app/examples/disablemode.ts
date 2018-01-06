@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './views/view.html'
+  templateUrl: './views/disableMode.html'
 })
 export class DisableModeExample implements OnInit {
 
   itemList = [];
   selectedItems = [];
-  settings:any = {};
+  settings: any = {};
 
   constructor() {
 
@@ -35,7 +35,6 @@ export class DisableModeExample implements OnInit {
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: false,
       classes: "myclass custom-class",
-      limitSelection: 2,
       disabled: true
     };
   }
@@ -59,7 +58,27 @@ export class DisableModeExample implements OnInit {
   changeData() {
     this.selectedItems = [];
   }
-  toggleDisable(){
+  disable() {
+    this.settings = {
+      text: "Select Countries",
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      enableSearchFilter: false,
+      classes: "myclass custom-class",
+      disabled: true
+    };
+  }
+  enable() {
+    this.settings = {
+      text: "Select Countries",
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      enableSearchFilter: false,
+      classes: "myclass custom-class",
+      disabled: false
+    };
+  }
+  toggleDisable() {
     console.log(this.settings);
     this.settings = {
       text: "Select Countries",
