@@ -17,6 +17,12 @@ Angular 2 multiselect dropdown component for web applications. Easy to integrate
 ##### 5. Reactive Forms support
 ##### 6. Settings configuration
 ##### 7. Callbacks and events
+##### 8. Lazy lodaing - handle large data lists
+##### 9. Group By feature
+##### 10. Search filter for both plain list and grouped list
+
+
+
 
 
 ## Getting Started
