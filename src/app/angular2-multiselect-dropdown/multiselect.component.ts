@@ -123,7 +123,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         if (changes.settings && !changes.settings.firstChange) { 
             this.settings = Object.assign(this.defaultSettings, this.settings);
-            console.log(this.settings);
         }
     }
     ngDoCheck() {
@@ -316,7 +315,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 this.chunkIndex.push((i * this.itemHeight) + 'px');
                 this.chunkArray.push(this.data[i]);
         }
-        console.log(this.chunkArray);
     }
     public onScroll(e:any) {
         this.scrollTop = e.target.scrollTop;
