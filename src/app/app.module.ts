@@ -10,6 +10,7 @@ import { BasicExample } from './examples/basic';
 import { SingleSelectionExample } from './examples/singleselection';
 import { GroupByExample } from './examples/groupBy';
 import { SearchFilterExample } from './examples/searchFilter';
+import { ApiSearchFilterExample } from './examples/apiSearchFilter';
 import { TemplatingExample } from './examples/templating';
 import { ResetDropdownExample } from './examples/resetdropdown';
 import { DisableModeExample } from './examples/disablemode';
@@ -31,6 +32,7 @@ import { LazyLoadingExample } from './examples/lazyLoading';
     SingleSelectionExample,
     GroupByExample,
     SearchFilterExample,
+    ApiSearchFilterExample,
     TemplatingExample,
     ResetDropdownExample,
     DisableModeExample,

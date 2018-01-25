@@ -1,7 +1,7 @@
 <h2 class="example-title">{{title}}</h2>
 <div class="col-md-6 mr-auto ml-auto dropdown-container">
     <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
-        (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+        (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)" (onSearchInput)="onSearchInput($event)"></angular2-multiselect>
 </div>
 <h4 class="example-title code-section">Code</h4>
 
