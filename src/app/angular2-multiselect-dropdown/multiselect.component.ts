@@ -168,6 +168,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         if (this.data.length == this.selectedItems.length) {
             this.isSelectAll = true;
         }
+		if (this.settings.singleSelection) {
+            this.closeDropdown();
+        }
     }
     public validate(c: FormControl): any {
         return null;
