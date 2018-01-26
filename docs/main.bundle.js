@@ -478,6 +478,7 @@ var AngularMultiSelect = /** @class */ (function () {
         if (this.settings.singleSelection) {
             this.selectedItems = [];
             this.selectedItems.push(item);
+            this.closeDropdown();
         }
         else
             this.selectedItems.push(item);
