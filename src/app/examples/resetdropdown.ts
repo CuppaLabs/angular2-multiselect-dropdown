@@ -56,6 +56,7 @@ export class ResetDropdownExample implements OnInit {
   changeData() {
     this.selectedItems = [];
   }
+  cssgist: boolean = false;
   title: string = "Reset dropdown";
   tsgist: string = "CuppaLabs/96d3ca7681f1a7a38b8c76b2f1552458";
   htmlgist: string = "CuppaLabs/bbd73b9f9864effb69f361c9fc65a6e5";

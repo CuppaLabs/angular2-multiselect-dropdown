@@ -90,6 +90,7 @@ export class DisableModeExample implements OnInit {
       disabled: false
     };
   }
+  cssgist: boolean = false;
   title: string = "Disable mode";
   tsgist: string = "CuppaLabs/96f799302bdfa08e11b4420c86c1d720";
   htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";

@@ -52,7 +52,7 @@ export class LimitSelectionExample implements OnInit {
   onDeSelectAll(items: any) {
     console.log(items);
   }
-
+  cssgist: boolean = false;
   title: string = "Limit Selection";
   tsgist: string = "CuppaLabs/70667b7d4dd4270bb290685e036a379a";
   htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";

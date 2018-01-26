@@ -52,6 +52,7 @@ export class LimitBadgesExample implements OnInit {
   onDeSelectAll(items: any) {
     console.log(items);
   }
+  cssgist: boolean = false;
   title: string = "Limit badges length";
   tsgist: string = "CuppaLabs/00a25e7f8f70199f6571ac9fccbb94c2";
   htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";

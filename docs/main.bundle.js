@@ -376,7 +376,6 @@ var AngularMultiSelect = /** @class */ (function () {
         }
         if (changes.settings && !changes.settings.firstChange) {
             this.settings = Object.assign(this.defaultSettings, this.settings);
-            console.log(this.settings);
         }
     };
     AngularMultiSelect.prototype.ngDoCheck = function () {
@@ -387,7 +386,9 @@ var AngularMultiSelect = /** @class */ (function () {
         }
     };
     AngularMultiSelect.prototype.ngAfterViewInit = function () {
-        this._elementRef.nativeElement.getElementsByClassName("lazyContainer")[0].addEventListener('scroll', this.onScroll.bind(this));
+        if (this.settings.lazyLoading) {
+            this._elementRef.nativeElement.getElementsByClassName("lazyContainer")[0].addEventListener('scroll', this.onScroll.bind(this));
+        }
     };
     AngularMultiSelect.prototype.onItemClick = function (item, index, evt) {
         if (this.settings.disabled) {
@@ -560,7 +561,6 @@ var AngularMultiSelect = /** @class */ (function () {
             this.chunkIndex.push((i * this.itemHeight) + 'px');
             this.chunkArray.push(this.data[i]);
         }
-        console.log(this.chunkArray);
     };
     AngularMultiSelect.prototype.onScroll = function (e) {
         this.scrollTop = e.target.scrollTop;
@@ -1179,6 +1179,7 @@ var BasicExample = /** @class */ (function () {
         this.itemList = [];
         this.selectedItems = [];
         this.settings = {};
+        this.cssgist = false;
         this.title = "Basic example";
         this.tsgist = "CuppaLabs/ee72fbc7b21dad7e4e7664c5b1553235";
         this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
@@ -1255,6 +1256,7 @@ var CustomPlaceholderExample = /** @class */ (function () {
         this.itemList = [];
         this.selectedItems = [];
         this.settings = {};
+        this.cssgist = false;
         this.title = "Custom search placeholder";
         this.tsgist = "CuppaLabs/48c087b6c0b4381d5bae1c689cc0ee3e";
         this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
@@ -1333,6 +1335,7 @@ var DisableModeExample = /** @class */ (function () {
         this.itemList = [];
         this.selectedItems = [];
         this.settings = {};
+        this.cssgist = false;
         this.title = "Disable mode";
         this.tsgist = "CuppaLabs/96f799302bdfa08e11b4420c86c1d720";
         this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
@@ -1500,6 +1503,7 @@ var GroupByExample = /** @class */ (function () {
         this.itemList = [];
         this.selectedItems = [];
         this.settings = {};
+        this.cssgist = false;
         this.title = "Group By";
         this.tsgist = "CuppaLabs/f6c1328ade3201042a4b4d268a30ad8c";
         this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
@@ -1545,16 +1549,27 @@ var GroupByExample = /** @class */ (function () {
     GroupByExample.prototype.onDeSelectAll = function (items) {
         console.log(items);
     };
-    GroupByExample.prototype.change = function () {
+    GroupByExample.prototype.loadDataSet1 = function () {
         this.selectedItems = [];
-        this.itemList = [{ "id": 1, "itemName": "India", "category": "asia" },
+        this.itemList = [{ "id": 1, "itemName": "Apple", "category": "fruits" },
+            { "id": 2, "itemName": "Banana", "category": "fruits" },
+            { "id": 5, "itemName": "Tomatoe", "category": "vegetables" },
+            { "id": 6, "itemName": "Potatoe", "category": "vegetables" }];
+    };
+    GroupByExample.prototype.loadDataSet2 = function () {
+        this.selectedItems = [];
+        this.itemList = [
+            { "id": 1, "itemName": "India", "category": "asia" },
             { "id": 2, "itemName": "Singapore", "category": "asia pacific" },
+            { "id": 3, "itemName": "Germany", "category": "Europe" },
+            { "id": 4, "itemName": "France", "category": "Europe" },
             { "id": 5, "itemName": "South Korea", "category": "asia" },
-            { "id": 6, "itemName": "Sweden", "category": "Europe" }];
+            { "id": 6, "itemName": "Sweden", "category": "Europe" }
+        ];
     };
     GroupByExample = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/examples/views/view.html")
+            template: __webpack_require__("../../../../../src/app/examples/views/groupBy.html")
         }),
         __metadata("design:paramtypes", [])
     ], GroupByExample);
@@ -1587,6 +1602,7 @@ var LazyLoadingExample = /** @class */ (function () {
         this.selectedItems = [];
         this.settings = {};
         this.namesList = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez", "Wilson", "Martinez", "Anderson", "Taylor", "Thomas", "Hernandez", "Moore", "Martin", "Jackson", "Thompson", "White", "Lopez", "Lee", "Gonzalez", "Harris", "Clark", "Lewis", "Robinson", "Walker", "Perez", "Hall", "Young", "Allen", "Sanchez", "Wright", "King", "Scott", "Green", "Baker", "Adams", "Nelson", "Hill", "Ramirez", "Campbell", "Mitchell", "Roberts", "Carter", "Phillips", "Evans", "Turner", "Torres", "Parker", "Collins", "Edwards", "Stewart", "Flores", "Morris", "Nguyen", "Murphy", "Rivera", "Cook", "Rogers", "Morgan", "Peterson", "Cooper", "Reed", "Bailey", "Bell", "Gomez", "Kelly", "Howard", "Ward", "Cox", "Diaz", "Richardson", "Wood", "Watson", "Brooks", "Bennett", "Gray", "James", "Reyes", "Cruz", "Hughes", "Price", "Myers", "Long", "Foster", "Sanders", "Ross", "Morales", "Powell", "Sullivan", "Russell", "Ortiz", "Jenkins", "Gutierrez", "Perry", "Butler", "Barnes", "Fisher", "Henderson", "Coleman", "Simmons", "Patterson", "Jordan", "Reynolds", "Hamilton", "Graham", "Kim", "Gonzales", "Alexander", "Ramos", "Wallace", "Griffin", "West", "Cole", "Hayes", "Chavez", "Gibson", "Bryant", "Ellis", "Stevens", "Murray", "Ford", "Marshall", "Owens", "Mcdonald", "Harrison", "Ruiz", "Kennedy", "Wells", "Alvarez", "Woods", "Mendoza", "Castillo", "Olson", "Webb", "Washington", "Tucker", "Freeman", "Burns", "Henry", "Vasquez", "Snyder", "Simpson", "Crawford", "Jimenez", "Porter", "Mason", "Shaw", "Gordon", "Wagner", "Hunter", "Romero", "Hicks", "Dixon", "Hunt", "Palmer", "Robertson", "Black", "Holmes", "Stone", "Meyer", "Boyd", "Mills", "Warren", "Fox", "Rose", "Rice", "Moreno", "Schmidt", "Patel", "Ferguson", "Nichols", "Herrera", "Medina", "Ryan", "Fernandez", "Weaver", "Daniels", "Stephens", "Gardner", "Payne", "Kelley", "Dunn", "Pierce", "Arnold", "Tran", "Spencer", "Peters", "Hawkins", "Grant", "Hansen", "Castro", "Hoffman", "Hart", "Elliott", "Cunningham", "Knight", "Bradley", "Carroll", "Hudson", "Duncan", "Armstrong", "Berry", "Andrews", "Johnston", "Ray", "Lane", "Riley", "Carpenter", "Perkins", "Aguilar", "Silva", "Richards", "Willis", "Matthews", "Chapman", "Lawrence", "Garza", "Vargas", "Watkins", "Wheeler", "Larson", "Carlson", "Harper", "George", "Greene", "Burke", "Guzman", "Morrison", "Munoz", "Jacobs", "Obrien", "Lawson", "Franklin", "Lynch", "Bishop", "Carr", "Salazar", "Austin", "Mendez", "Gilbert", "Jensen", "Williamson", "Montgomery", "Harvey", "Oliver", "Howell", "Dean", "Hanson", "Weber", "Garrett", "Sims", "Burton", "Fuller", "Soto", "Mccoy", "Welch", "Chen", "Schultz", "Walters", "Reid", "Fields", "Walsh", "Little", "Fowler", "Bowman", "Davidson", "May", "Day", "Schneider", "Newman", "Brewer", "Lucas", "Holland", "Wong", "Banks", "Santos", "Curtis", "Pearson", "Delgado", "Valdez", "Pena", "Rios", "Douglas", "Sandoval", "Barrett", "Hopkins", "Keller", "Guerrero", "Stanley", "Bates", "Alvarado", "Beck", "Ortega", "Wade", "Estrada", "Contreras", "Barnett", "Caldwell", "Santiago", "Lambert", "Powers", "Chambers", "Nunez", "Craig", "Leonard", "Lowe", "Rhodes", "Byrd", "Gregory", "Shelton", "Frazier", "Becker", "Maldonado", "Fleming", "Vega", "Sutton", "Cohen", "Jennings", "Parks", "Mcdaniel", "Watts", "Barker", "Norris", "Vaughn", "Vazquez", "Holt", "Schwartz", "Steele", "Benson", "Neal", "Dominguez", "Horton", "Terry", "Wolfe", "Hale", "Lyons", "Graves", "Haynes", "Miles", "Park", "Warner", "Padilla", "Bush", "Thornton", "Mccarthy", "Mann", "Zimmerman", "Erickson", "Fletcher", "Mckinney", "Page", "Dawson", "Joseph", "Marquez", "Reeves", "Klein", "Espinoza", "Baldwin", "Moran", "Love", "Robbins", "Higgins", "Ball", "Cortez", "Le", "Griffith", "Bowen", "Sharp", "Cummings", "Ramsey", "Hardy", "Swanson", "Barber", "Acosta", "Luna", "Chandler", "Blair", "Daniel", "Cross", "Simon", "Dennis", "Oconnor", "Quinn", "Gross", "Navarro", "Moss", "Fitzgerald", "Doyle", "Mclaughlin", "Rojas", "Rodgers", "Stevenson", "Singh", "Yang", "Figueroa", "Harmon", "Newton", "Paul", "Manning", "Garner", "Mcgee", "Reese", "Francis", "Burgess", "Adkins", "Goodman", "Curry", "Brady", "Christensen", "Potter", "Walton", "Goodwin", "Mullins", "Molina", "Webster", "Fischer", "Campos", "Avila", "Sherman", "Todd", "Chang", "Blake", "Malone", "Wolf", "Hodges", "Juarez", "Gill", "Farmer", "Hines", "Gallagher", "Duran", "Hubbard", "Cannon", "Miranda", "Wang", "Saunders", "Tate", "Mack", "Hammond", "Carrillo", "Townsend", "Wise", "Ingram", "Barton", "Mejia", "Ayala", "Schroeder", "Hampton", "Rowe", "Parsons", "Frank", "Waters", "Strickland", "Osborne", "Maxwell", "Chan", "Deleon", "Norman", "Harrington", "Casey", "Patton", "Logan", "Bowers", "Mueller", "Glover", "Floyd", "Hartman", "Buchanan", "Cobb", "French", "Kramer", "Mccormick", "Clarke", "Tyler", "Gibbs", "Moody", "Conner", "Sparks", "Mcguire", "Leon", "Bauer", "Norton", "Pope", "Flynn", "Hogan", "Robles", "Salinas", "Yates", "Lindsey", "Lloyd", "Marsh", "Mcbride", "Owen", "Solis", "Pham", "Lang", "Pratt", "Lara", "Brock", "Ballard", "Trujillo", "Shaffer", "Drake", "Roman", "Aguirre", "Morton", "Stokes", "Lamb", "Pacheco", "Patrick", "Cochran", "Shepherd", "Cain", "Burnett", "Hess", "Li", "Cervantes", "Olsen", "Briggs", "Ochoa", "Cabrera", "Velasquez", "Montoya", "Roth", "Meyers", "Cardenas", "Fuentes", "Weiss", "Hoover", "Wilkins", "Nicholson", "Underwood", "Short", "Carson", "Morrow", "Colon", "Holloway", "Summers", "Bryan", "Petersen", "Mckenzie", "Serrano", "Wilcox", "Carey", "Clayton", "Poole", "Calderon", "Gallegos", "Greer", "Rivas", "Guerra", "Decker", "Collier", "Wall", "Whitaker", "Bass", "Flowers", "Davenport", "Conley", "Houston", "Huff", "Copeland", "Hood", "Monroe", "Massey", "Roberson", "Combs", "Franco", "Larsen", "Pittman", "Randall", "Skinner", "Wilkinson", "Kirby", "Cameron", "Bridges", "Anthony", "Richard", "Kirk", "Bruce", "Singleton", "Mathis", "Bradford", "Boone", "Abbott", "Charles", "Allison", "Sweeney", "Atkinson", "Horn", "Jefferson", "Rosales", "York", "Christian", "Phelps", "Farrell", "Castaneda", "Nash", "Dickerson", "Bond", "Wyatt", "Foley", "Chase", "Gates", "Vincent", "Mathews", "Hodge", "Garrison", "Trevino", "Villarreal", "Heath", "Dalton", "Valencia", "Callahan", "Hensley", "Atkins", "Huffman", "Roy", "Boyer", "Shields", "Lin", "Hancock", "Grimes", "Glenn", "Cline", "Delacruz", "Camacho", "Dillon", "Parrish", "Oneill", "Melton", "Booth", "Kane", "Berg", "Harrell", "Pitts", "Savage", "Wiggins", "Brennan", "Salas", "Marks", "Russo", "Sawyer", "Baxter", "Golden", "Hutchinson", "Liu", "Walter", "Mcdowell", "Wiley", "Rich", "Humphrey", "Johns", "Koch", "Suarez", "Hobbs", "Beard", "Gilmore", "Ibarra", "Keith", "Macias", "Khan", "Andrade", "Ware", "Stephenson", "Henson", "Wilkerson", "Dyer", "Mcclure", "Blackwell", "Mercado", "Tanner", "Eaton", "Clay", "Barron", "Beasley", "Oneal", "Preston", "Small", "Wu", "Zamora", "Macdonald", "Vance", "Snow", "Mcclain", "Stafford", "Orozco", "Barry", "English", "Shannon", "Kline", "Jacobson", "Woodard", "Huang", "Kemp", "Mosley", "Prince", "Merritt", "Hurst", "Villanueva", "Roach", "Nolan", "Lam", "Yoder", "Mccullough", "Lester", "Santana", "Valenzuela", "Winters", "Barrera", "Leach", "Orr", "Berger", "Mckee", "Strong", "Conway", "Stein", "Whitehead", "Bullock", "Escobar", "Knox", "Meadows", "Solomon", "Velez", "Odonnell", "Kerr", "Stout", "Blankenship", "Browning", "Kent", "Lozano", "Bartlett", "Pruitt", "Buck", "Barr", "Gaines", "Durham", "Gentry", "Mcintyre", "Sloan", "Melendez", "Rocha", "Herman", "Sexton", "Moon", "Hendricks", "Rangel", "Stark", "Lowery", "Hardin", "Hull", "Sellers", "Ellison", "Calhoun", "Gillespie", "Mora", "Knapp", "Mccall", "Morse", "Dorsey", "Weeks", "Nielsen", "Livingston", "Leblanc", "Mclean", "Bradshaw", "Glass", "Middleton", "Buckley", "Schaefer", "Frost", "Howe", "House", "Mcintosh", "Ho", "Pennington", "Reilly", "Hebert", "Mcfarland", "Hickman", "Noble", "Spears", "Conrad", "Arias", "Galvan", "Velazquez", "Huynh", "Frederick", "Randolph", "Cantu", "Fitzpatrick", "Mahoney", "Peck", "Villa", "Michael", "Donovan", "Mcconnell", "Walls", "Boyle", "Mayer", "Zuniga", "Giles", "Pineda", "Pace", "Hurley", "Mays", "Mcmillan", "Crosby", "Ayers", "Case", "Bentley", "Shepard", "Everett", "Pugh", "David", "Mcmahon", "Dunlap", "Bender", "Hahn", "Harding", "Acevedo", "Raymond", "Blackburn", "Duffy", "Landry", "Dougherty", "Bautista", "Shah", "Potts", "Arroyo", "Valentine", "Meza", "Gould", "Vaughan", "Fry", "Rush", "Avery", "Herring", "Dodson", "Clements", "Sampson", "Tapia", "Bean", "Lynn", "Crane", "Farley", "Cisneros", "Benton", "Ashley", "Mckay", "Finley", "Best", "Blevins", "Friedman", "Moses", "Sosa", "Blanchard", "Huber", "Frye", "Krueger", "Bernard", "Rosario", "Rubio", "Mullen", "Benjamin", "Haley", "Chung", "Moyer", "Choi", "Horne", "Yu", "Woodward", "Ali", "Nixon", "Hayden", "Rivers", "Estes", "Mccarty", "Richmond", "Stuart", "Maynard", "Brandt", "Oconnell", "Hanna", "Sanford", "Sheppard", "Church", "Burch", "Levy", "Rasmussen", "Coffey", "Ponce", "Faulkner", "Donaldson", "Schmitt", "Novak", "Costa", "Montes", "Booker", "Cordova", "Waller", "Arellano", "Maddox", "Mata", "Bonilla", "Stanton", "Compton", "Kaufman", "Dudley", "Mcpherson", "Beltran", "Dickson", "Mccann", "Villegas", "Proctor", "Hester", "Cantrell", "Daugherty", "Cherry", "Bray", "Davila", "Rowland", "Levine", "Madden", "Spence", "Good", "Irwin", "Werner", "Krause", "Petty", "Whitney", "Baird", "Hooper", "Pollard", "Zavala", "Jarvis", "Holden", "Haas", "Hendrix", "Mcgrath", "Bird", "Lucero", "Terrell", "Riggs", "Joyce", "Mercer", "Rollins", "Galloway", "Duke", "Odom", "Andersen", "Downs", "Hatfield", "Benitez", "Archer", "Huerta", "Travis", "Mcneil", "Hinton", "Zhang", "Hays", "Mayo", "Fritz", "Branch", "Mooney", "Ewing", "Ritter", "Esparza", "Frey", "Braun", "Gay", "Riddle", "Haney", "Kaiser", "Holder", "Chaney", "Mcknight", "Gamble", "Vang", "Cooley", "Carney", "Cowan", "Forbes", "Ferrell", "Davies", "Barajas", "Shea", "Osborn", "Bright", "Cuevas", "Bolton", "Murillo", "Lutz", "Duarte", "Kidd", "Key", "Cooke"];
+        this.cssgist = false;
         this.title = "Lazy loading - Handle large data sets";
         this.tsgist = "CuppaLabs/ee72fbc7b21dad7e4e7664c5b1553235";
         this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
@@ -1663,6 +1679,7 @@ var LimitBadgesExample = /** @class */ (function () {
         this.itemList = [];
         this.selectedItems = [];
         this.settings = {};
+        this.cssgist = false;
         this.title = "Limit badges length";
         this.tsgist = "CuppaLabs/00a25e7f8f70199f6571ac9fccbb94c2";
         this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
@@ -1741,6 +1758,7 @@ var LimitSelectionExample = /** @class */ (function () {
         this.itemList = [];
         this.selectedItems = [];
         this.settings = {};
+        this.cssgist = false;
         this.title = "Limit Selection";
         this.tsgist = "CuppaLabs/70667b7d4dd4270bb290685e036a379a";
         this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
@@ -1819,6 +1837,7 @@ var ResetDropdownExample = /** @class */ (function () {
         this.itemList = [];
         this.selectedItems = [];
         this.settings = {};
+        this.cssgist = false;
         this.title = "Reset dropdown";
         this.tsgist = "CuppaLabs/96d3ca7681f1a7a38b8c76b2f1552458";
         this.htmlgist = "CuppaLabs/bbd73b9f9864effb69f361c9fc65a6e5";
@@ -1901,6 +1920,7 @@ var SearchFilterExample = /** @class */ (function () {
         this.itemList = [];
         this.selectedItems = [];
         this.settings = {};
+        this.cssgist = false;
         this.title = "Search filter";
         this.tsgist = "CuppaLabs/447bd5fce6dfc2832f5f4a8c36726a9b";
         this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
@@ -1979,6 +1999,7 @@ var SingleSelectionExample = /** @class */ (function () {
         this.itemList = [];
         this.selectedItems = [];
         this.settings = {};
+        this.cssgist = false;
         this.title = "Single Selection";
         this.tsgist = "CuppaLabs/6ef578ce507dfd548eec39e008b4de14";
         this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
@@ -2125,6 +2146,7 @@ var TemplatingExample = /** @class */ (function () {
         this.itemList = [];
         this.selectedItems = [];
         this.settings = {};
+        this.cssgist = false;
         this.title = "Templating menu option";
         this.tsgist = "CuppaLabs/cc0ac5976bf26b89119180ff82115fe4";
         this.htmlgist = "CuppaLabs/6399258d93fd5580be1736aba2539519";
@@ -2206,6 +2228,7 @@ var UsingWithReactiveFormExample = /** @class */ (function () {
         this.itemList = [];
         this.selectedItems = [];
         this.settings = {};
+        this.cssgist = false;
         this.title = "Using with Reactive Forms";
         this.tsgist = "CuppaLabs/f0dfe353c6378cee7f55547395a80fc4";
         this.htmlgist = "CuppaLabs/0a32c3d76110468b84bac01fd64488bc";
@@ -2295,6 +2318,7 @@ var UsingWithFormExample = /** @class */ (function () {
             skills: [{ "id": 1, "itemName": "Angular" }]
         };
         this.submitted = false;
+        this.cssgist = false;
         this.title = "Using with Template driven Forms";
         this.tsgist = "CuppaLabs/6cd9396b8f5589b792b27dd10efe9140";
         this.htmlgist = "CuppaLabs/8148509a46a59e3aba513808daa40ca1";
@@ -2349,6 +2373,13 @@ var UsingWithFormExample = /** @class */ (function () {
 /***/ (function(module, exports) {
 
 module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"col-md-6 mr-auto ml-auto dropdown-container\">\r\n    <angular2-multiselect [data]=\"itemList\" [(ngModel)]=\"selectedItems\" [settings]=\"settings\" (onSelect)=\"onItemSelect($event)\"\r\n        (onDeSelect)=\"OnItemDeSelect($event)\" (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\"></angular2-multiselect>\r\n</div>\r\n<div class=\"row\">\r\n    <div>\r\n        <button (click)=\"disable()\" class=\"btn btn-danger\">Disable</button>\r\n    </div>\r\n    <div>\r\n        <button (click)=\"enable()\" class=\"btn btn-success\">Enable</button>\r\n    </div>\r\n</div>\r\n<h4 class=\"example-title code-section\">Code</h4>\r\n\r\n<p-tabView>\r\n    <p-tabPanel header=\"{{tstitle}}\">\r\n       <ng2-gist [gistId]=\"tsgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <p-tabPanel header=\"{{htmltitle}}\">\r\n        <ng2-gist [gistId]=\"htmlgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <span *ngIf=\"cssgist\">\r\n        <p-tabPanel header=\"{{csstitle}}\">\r\n        <ng2-gist [gistId]=\"cssgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n</p-tabView>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/examples/views/groupBy.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"col-md-6 mr-auto ml-auto dropdown-container\">\r\n    <angular2-multiselect [data]=\"itemList\" [(ngModel)]=\"selectedItems\" [settings]=\"settings\" (onSelect)=\"onItemSelect($event)\"\r\n        (onDeSelect)=\"OnItemDeSelect($event)\" (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\"></angular2-multiselect>\r\n</div>\r\n<button class=\"btn btn-success\" (click)=\"loadDataSet1()\">Load/change dataset 1</button>\r\n<button class=\"btn btn-success\" (click)=\"loadDataSet2()\">Load/change dataset 2</button>\r\n\r\n<h4 class=\"example-title code-section\">Code</h4>\r\n\r\n<p-tabView>\r\n    <p-tabPanel header=\"{{tstitle}}\">\r\n       <ng2-gist [gistId]=\"tsgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <p-tabPanel header=\"{{htmltitle}}\">\r\n        <ng2-gist [gistId]=\"htmlgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <span *ngIf=\"cssgist\">\r\n        <p-tabPanel header=\"{{csstitle}}\">\r\n        <ng2-gist [gistId]=\"cssgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n</p-tabView>\r\n"
 
 /***/ }),
 

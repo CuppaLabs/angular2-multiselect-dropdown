@@ -1,0 +1,23 @@
+<h2 class="example-title">{{title}}</h2>
+<div class="col-md-6 mr-auto ml-auto dropdown-container">
+    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
+        (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+</div>
+<button class="btn btn-success" (click)="loadDataSet1()">Load/change dataset 1</button>
+<button class="btn btn-success" (click)="loadDataSet2()">Load/change dataset 2</button>
+
+<h4 class="example-title code-section">Code</h4>
+
+<p-tabView>
+    <p-tabPanel header="{{tstitle}}">
+       <ng2-gist [gistId]="tsgist"></ng2-gist>
+    </p-tabPanel>
+    <p-tabPanel header="{{htmltitle}}">
+        <ng2-gist [gistId]="htmlgist"></ng2-gist>
+    </p-tabPanel>
+    <span *ngIf="cssgist">
+        <p-tabPanel header="{{csstitle}}">
+        <ng2-gist [gistId]="cssgist"></ng2-gist>
+    </p-tabPanel>
+    </span>
+</p-tabView>

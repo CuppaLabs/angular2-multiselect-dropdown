@@ -133,7 +133,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
     }
     ngAfterViewInit() {
-        this._elementRef.nativeElement.getElementsByClassName("lazyContainer")[0].addEventListener('scroll', this.onScroll.bind(this));
+        if(this.settings.lazyLoading){
+            this._elementRef.nativeElement.getElementsByClassName("lazyContainer")[0].addEventListener('scroll', this.onScroll.bind(this));
+        }
     }
     onItemClick(item: ListItem, index: number, evt: Event) {
         if (this.settings.disabled) {

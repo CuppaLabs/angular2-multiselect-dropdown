@@ -47,7 +47,7 @@ export class UsingWithFormExample implements OnInit {
     onDeSelectAll(items: any) {
         console.log(items);
     }
-
+cssgist: boolean = false;
     title: string = "Using with Template driven Forms";
     tsgist: string = "CuppaLabs/6cd9396b8f5589b792b27dd10efe9140";
     htmlgist: string = "CuppaLabs/8148509a46a59e3aba513808daa40ca1";

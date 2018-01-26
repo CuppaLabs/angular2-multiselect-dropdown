@@ -42,7 +42,7 @@ export class SingleSelectionExample implements OnInit {
    onDeSelectAll(items: any){
     console.log(items);
   }
-
+cssgist: boolean = false;
     title: string = "Single Selection";
     tsgist: string = "CuppaLabs/6ef578ce507dfd548eec39e008b4de14";
     htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";

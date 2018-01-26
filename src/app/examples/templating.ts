@@ -53,6 +53,7 @@ export class TemplatingExample implements OnInit {
    onDeSelectAll(items: any){
     console.log(items);
   }
+  cssgist: boolean = false;
     title: string = "Templating menu option";
     tsgist: string = "CuppaLabs/cc0ac5976bf26b89119180ff82115fe4";
     htmlgist: string = "CuppaLabs/6399258d93fd5580be1736aba2539519";

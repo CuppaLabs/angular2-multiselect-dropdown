@@ -50,6 +50,7 @@ export class LazyLoadingExample implements OnInit {
   changeData() {
     this.selectedItems = [];
   }
+  cssgist: boolean = false;
     title: string = "Lazy loading - Handle large data sets";
     tsgist: string = "CuppaLabs/ee72fbc7b21dad7e4e7664c5b1553235";
     htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";

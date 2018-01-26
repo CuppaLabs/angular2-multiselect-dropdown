@@ -48,7 +48,7 @@ export class BasicExample implements OnInit {
     onDeSelectAll(items: any) {
         console.log(items);
     }
-
+    cssgist: boolean = false;
     title: string = "Basic example";
     tsgist: string = "CuppaLabs/ee72fbc7b21dad7e4e7664c5b1553235";
     htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";

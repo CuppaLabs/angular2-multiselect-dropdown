@@ -52,7 +52,7 @@ export class SearchFilterExample implements OnInit {
   onDeSelectAll(items: any) {
     console.log(items);
   }
-
+  cssgist: boolean = false;
   title: string = "Search filter";
   tsgist: string = "CuppaLabs/447bd5fce6dfc2832f5f4a8c36726a9b";
   htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";

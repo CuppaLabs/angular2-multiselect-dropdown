@@ -56,7 +56,7 @@ export class UsingWithReactiveFormExample implements OnInit {
     onDeSelectAll(items: any) {
         console.log(items);
     }
-
+cssgist: boolean = false;
     title: string = "Using with Reactive Forms";
     tsgist: string = "CuppaLabs/f0dfe353c6378cee7f55547395a80fc4";
     htmlgist: string = "CuppaLabs/0a32c3d76110468b84bac01fd64488bc";
