@@ -128,6 +128,20 @@ Add the following component tag in you template
 
 ```
 
+### Template - For custom html of Selected item - badge
+
+```html
+<angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings">
+  <c-badge>
+           <ng-template let-item="item">
+            <label style="margin: 0px;">{{item.itemName}}</label>
+            <img [src]="item.image" style="width: 16px; margin-right: 5px;" />
+           </ng-template>
+  </c-badge>  
+</angular2-multiselect>
+
+```
+
 ### Template Driven Forms support
 
 ```html

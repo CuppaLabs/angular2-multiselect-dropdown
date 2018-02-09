@@ -15,6 +15,18 @@ export class Item {
 
 }
 
+@Component({
+  selector: 'c-badge',
+  template: ``
+})
+
+export class Badge { 
+
+    @ContentChild(TemplateRef) template: TemplateRef<any>
+    constructor() {   
+    }
+
+}
 
 @Component({
   selector: 'c-templateRenderer',

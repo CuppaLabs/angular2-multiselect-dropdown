@@ -9,7 +9,10 @@
             </span>
             <div class="c-list" *ngIf="selectedItems?.length > 0 && !settings.singleSelection">
                 <div class="c-token" *ngFor="let item of selectedItems;trackBy: trackByFn;let k = index" [hidden]="k > settings.badgeShowLimit-1">
-                    <span class="c-label">{{item.itemName}}</span>
+                    <span *ngIf="!badgeTempl" class="c-label">{{item.itemName}}</span>
+                    <span *ngIf="badgeTempl" class="c-label">
+                        <c-templateRenderer [data]="badgeTempl" [item]="item"></c-templateRenderer>
+                    </span>
                     <span class="fa fa-remove" (click)="onItemClick(item,k,$event)"></span>
                 </div>
             </div> 

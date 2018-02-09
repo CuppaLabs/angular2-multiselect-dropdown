@@ -5,7 +5,7 @@ import { ListItem, MyException } from './multiselect.model';
 import { DropdownSettings } from './multiselect.interface';
 import { ClickOutsideDirective, ScrollDirective, styleDirective } from './clickOutside';
 import { ListFilterPipe } from './list-filter';
-import { Item, TemplateRenderer } from './menu-item';
+import { Item, Badge, TemplateRenderer } from './menu-item';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -55,6 +55,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     onClose: EventEmitter<any> = new EventEmitter<any>();
 
     @ContentChild(Item) itemTempl: Item;
+    @ContentChild(Badge) badgeTempl: Badge;
+
 
     @ViewChild('searchInput') searchInput: ElementRef;
 
@@ -362,7 +364,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
 @NgModule({
     imports: [CommonModule, FormsModule],
-    declarations: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer],
-    exports: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer]
+    declarations: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge],
+    exports: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge]
 })
 export class AngularMultiSelectModule { }

@@ -25,10 +25,10 @@ export class TemplatingExample implements OnInit {
                         ];
     
     this.selectedItems = [
-                          {"id":1,"itemName":"India"},
-                          {"id":2,"itemName":"Singapore"},
-                          {"id":3,"itemName":"United Kingdom"},
-                          {"id":4,"itemName":"Canada"}];
+                          {"id":1,"itemName":"India","capital":"Delhi","image":"http://www.sciencekids.co.nz/images/pictures/flags96/India.jpg"},
+                          {"id":2,"itemName":"Singapore", "capital":"Singapore","image":"http://www.sciencekids.co.nz/images/pictures/flags96/Singapore.jpg"},
+                          {"id":3,"itemName":"United Kingdom", "capital":"London","image":"http://www.sciencekids.co.nz/images/pictures/flags96/United_Kingdom.jpg"},
+                          {"id":4,"itemName":"Canada","capital":"Ottawa","image":"http://www.sciencekids.co.nz/images/pictures/flags96/Canada.jpg"}]
     this.settings = { 
                               text:"Select Countries",
                               selectAllText:'Select All',
