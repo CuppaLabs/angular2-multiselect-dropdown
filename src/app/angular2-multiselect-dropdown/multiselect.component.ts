@@ -95,13 +95,13 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         noDataLabel: 'No Data Available',
         searchAutofocus: true,
         lazyLoading: false
-    }
+    };
     public parseError: boolean;
     constructor(public _elementRef : ElementRef) {
 
     }
     ngOnInit() {
-        this.settings = Object.assign(this.defaultSettings, this.settings);
+        this.settings = Object.assign({}, this.defaultSettings, this.settings);
         if (this.settings.groupBy) {
             this.groupedData = this.transformData(this.data, this.settings.groupBy);
         }
@@ -124,7 +124,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             }
         }
         if (changes.settings && !changes.settings.firstChange) { 
-            this.settings = Object.assign(this.defaultSettings, this.settings);
+            this.settings = Object.assign({}, this.defaultSettings, this.settings);
         }
     }
     ngDoCheck() {
