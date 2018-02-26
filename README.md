@@ -12,14 +12,15 @@ Angular 2 multiselect dropdown component for web applications. Easy to integrate
 ##### 1. Getting Started
 ##### 2. Installation
 ##### 3. Usage
-##### 4. Templates
-##### 5. Template Driven Forms support
-##### 5. Reactive Forms support
-##### 6. Settings configuration
-##### 7. Callbacks and events
-##### 8. Lazy lodaing - handle large data lists
-##### 9. Group By feature
-##### 10. Search filter for both plain list and grouped list
+##### 4. Custom Property Name
+##### 5. Templates
+##### 6. Template Driven Forms support
+##### 7. Reactive Forms support
+##### 8. Settings configuration
+##### 9. Callbacks and events
+##### 10. Lazy lodaing - handle large data lists
+##### 11. Group By feature
+##### 12. Search filter for both plain list and grouped list
 
 
 
@@ -113,6 +114,21 @@ Add the following component tag in you template
     (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
 
 ```
+
+### Custom Property Name
+Use `[property]` to define a custom property in the object which is used to display in the list, instead of predefined 'itemName'.
+
+```html
+<angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" 
+    [property]="'name'"
+    [settings]="dropdownSettings" 
+    (onSelect)="onItemSelect($event)" 
+    (onDeSelect)="OnItemDeSelect($event)"
+    (onSelectAll)="onSelectAll($event)"
+    (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+
+```
+
 ### Template - For custom html of menu item
 
 ```html
