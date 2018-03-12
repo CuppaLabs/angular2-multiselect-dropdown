@@ -105,17 +105,15 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         if (this.settings.groupBy) {
             this.groupedData = this.transformData(this.data, this.settings.groupBy);
         }
-        this.totalRows = (this.data && this.data.length);
-        this.cachedItems = this.data;
         this.screenItemsLen = Math.ceil(this.settings.maxHeight / this.itemHeight);
         this.cachedItemsLen = this.screenItemsLen * 3;
-        this.totalHeight = this.itemHeight * this.totalRows;
-        this.maxBuffer = this.screenItemsLen * this.itemHeight;
         this.lastScrolled = 0;
-        this.renderChunk(0, this.cachedItemsLen / 2);
+        this.renderData();
+
     }
     ngOnChanges(changes: SimpleChanges) {
         if (changes.data && !changes.data.firstChange) {
+            this.renderData();
             if (this.settings.groupBy) {
                 this.groupedData = this.transformData(this.data, this.settings.groupBy);
                 if (this.data.length == 0) {
@@ -123,7 +121,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 }
             }
         }
-        if (changes.settings && !changes.settings.firstChange) { 
+        if (changes.settings && !changes.settings.firstChange) {
             this.settings = Object.assign(this.defaultSettings, this.settings);
         }
     }
@@ -139,6 +137,15 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this._elementRef.nativeElement.getElementsByClassName("lazyContainer")[0].addEventListener('scroll', this.onScroll.bind(this));
         }
     }
+
+    renderData() {
+      this.totalRows = (this.data && this.data.length);
+      this.cachedItems = this.data;
+      this.totalHeight = this.itemHeight * this.totalRows;
+      this.maxBuffer = this.screenItemsLen * this.itemHeight;
+      this.renderChunk(0, this.cachedItemsLen / 2);
+    }
+
     onItemClick(item: ListItem, index: number, evt: Event) {
         if (this.settings.disabled) {
             return false;
@@ -332,7 +339,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         var firstTemp = ""+first;
         first = parseInt(firstTemp) < 0 ? 0 : parseInt(firstTemp);
             this.renderChunk(first, this.cachedItemsLen);
-            this.lastRepaintY = scrollPos;      
+            this.lastRepaintY = scrollPos;
     }
     public filterInfiniteList(evt: any){
         var filteredElems:Array<any> = [];
@@ -358,7 +365,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.totalHeight = this.itemHeight * this.data.length;
             this.totalRows = this.data.length;
             this.updateView(this.scrollTop);
-        } 
+        }
     }
 }
 
