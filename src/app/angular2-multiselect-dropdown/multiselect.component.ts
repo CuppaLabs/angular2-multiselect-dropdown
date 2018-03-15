@@ -123,7 +123,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 }
             }
         }
-        if (changes.settings && !changes.settings.firstChange) { 
+        if (changes.settings && !changes.settings.firstChange) {
             this.settings = Object.assign(this.defaultSettings, this.settings);
         }
     }
@@ -332,7 +332,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         var firstTemp = ""+first;
         first = parseInt(firstTemp) < 0 ? 0 : parseInt(firstTemp);
             this.renderChunk(first, this.cachedItemsLen);
-            this.lastRepaintY = scrollPos;      
+            this.lastRepaintY = scrollPos;
     }
     public filterInfiniteList(evt: any){
         var filteredElems:Array<any> = [];
@@ -342,6 +342,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
               for(var prop in el){
                   if(el[prop].toString().toLowerCase().indexOf(evt.target.value.toString().toLowerCase()) >=0 ){
                       filteredElems.push(el);
+                      break;
                   }
               }
           });
@@ -358,7 +359,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.totalHeight = this.itemHeight * this.data.length;
             this.totalRows = this.data.length;
             this.updateView(this.scrollTop);
-        } 
+        }
     }
 }
 
