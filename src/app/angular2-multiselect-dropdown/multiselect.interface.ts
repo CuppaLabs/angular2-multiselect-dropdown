@@ -16,4 +16,5 @@ export interface DropdownSettings{
     noDataLabel: string;
     searchAutofocus?: boolean;
     lazyLoading?: boolean;
+    enableApiSearch?: boolean;
 } 

@@ -6,6 +6,7 @@ import { BasicExample } from './examples/basic';
 import { SingleSelectionExample } from './examples/singleselection';
 import { GroupByExample } from './examples/groupBy';
 import { SearchFilterExample } from './examples/searchFilter';
+import { ApiSearchFilterExample } from './examples/apiSearchFilter';
 import { TemplatingExample } from './examples/templating';
 import { ResetDropdownExample } from './examples/resetdropdown';
 import { DisableModeExample } from './examples/disablemode';
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
     { path: 'basic', component: BasicExample},
     { path: 'singleselection', component: SingleSelectionExample},
     { path: 'searchfilter', component: SearchFilterExample},
+    { path: 'apiSearchfilter', component: ApiSearchFilterExample},
     { path: 'groupby', component: GroupByExample},
     { path: 'templating', component: TemplatingExample},
     { path: 'resetdropdown', component: ResetDropdownExample},

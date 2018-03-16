@@ -54,6 +54,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Output('onClose')
     onClose: EventEmitter<any> = new EventEmitter<any>();
 
+    @Output('onSearchInput')
+    onSearchInput: EventEmitter<any> = new EventEmitter<any>();
+
     @ContentChild(Item) itemTempl: Item;
     @ContentChild(Badge) badgeTempl: Badge;
 
@@ -94,7 +97,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         showCheckbox: true,
         noDataLabel: 'No Data Available',
         searchAutofocus: true,
-        lazyLoading: false
+        lazyLoading: false,
+        enableApiSearch: false
     }
     public parseError: boolean;
     constructor(public _elementRef : ElementRef) {
@@ -360,6 +364,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.totalRows = this.data.length;
             this.updateView(this.scrollTop);
         }
+    }
+    public searchText(evt:any){
+        this.onSearchInput.emit(evt.target.value);
     }
 }
 
