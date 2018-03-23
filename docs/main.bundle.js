@@ -55,6 +55,7 @@ var ClickOutsideDirective = /** @class */ (function () {
     ], ClickOutsideDirective.prototype, "clickOutside", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('document:click', ['$event', '$event.target']),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('document:touchstart', ['$event', '$event.target']),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
@@ -534,6 +535,14 @@ var AngularMultiSelect = /** @class */ (function () {
         evt.preventDefault();
     };
     AngularMultiSelect.prototype.closeDropdown = function () {
+        if (this.searchInput) {
+            this.searchInput.nativeElement.value = "";
+            this.data = [];
+            this.data = this.cachedItems;
+            this.totalHeight = this.itemHeight * this.data.length;
+            this.totalRows = this.data.length;
+            this.updateView(this.scrollTop);
+        }
         this.filter = "";
         this.isActive = false;
         this.onClose.emit(false);
