@@ -125,7 +125,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             }
         }
         if (changes.settings && !changes.settings.firstChange) {
-            this.settings = Object.assign(this.defaultSettings, this.settings);
+            this.settings = Object.assign({},this.defaultSettings, this.settings);
         }
     }
     ngDoCheck() {
