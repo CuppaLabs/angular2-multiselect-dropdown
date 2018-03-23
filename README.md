@@ -219,6 +219,7 @@ The following list of settings are supported by the component. Configure the set
 | searchPlaceholderText | String | Custom text for the search placeholder text. Default value would be 'Search' | 'Search' |
 | groupBy | String | Name of the field by which the list should be grouped. | none |
 | searchAutofocus | Boolean | Autofocus search input field| true |
+| labelKey | String | The property name which should be rendered as label in the dropdown| itemName |
 
 
 ### Callback Methods
