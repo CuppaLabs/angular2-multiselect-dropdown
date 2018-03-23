@@ -64,7 +64,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     public isActive: boolean = false;
     public isSelectAll: boolean = false;
     public groupedData: Array<ListItem>;
-    filter: ListItem = new ListItem();
+    filter: any;
     public chunkArray:any[];
     public scrollTop:any;
     public chunkIndex:any[] = [];
@@ -94,7 +94,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         showCheckbox: true,
         noDataLabel: 'No Data Available',
         searchAutofocus: true,
-        lazyLoading: false
+        lazyLoading: false,
+        labelKey: 'itemName'
     }
     public parseError: boolean;
     constructor(public _elementRef : ElementRef) {
@@ -271,7 +272,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         evt.preventDefault();
     }
     closeDropdown() {
-        this.filter = new ListItem();
+        this.filter = "";
         this.isActive = false;
         this.onClose.emit(false);
     }
