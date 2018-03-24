@@ -8691,6 +8691,7 @@ body {
 
 .top-navbar {
     padding: 0px 15px;
+    min-height: 56px;
 }
 
 .top-navbar .nav-item > .nav-link {
