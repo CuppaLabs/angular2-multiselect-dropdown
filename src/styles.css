@@ -86,3 +86,6 @@ h4{
 .dropdown-container {
     height: 170px;
 }
+iframe {
+    min-height: 300px;
+}
