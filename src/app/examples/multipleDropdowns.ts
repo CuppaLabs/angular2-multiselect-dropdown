@@ -58,9 +58,11 @@ export class MultipleDropdownsExample implements OnInit {
         console.log(items);
     }
     cssgist: boolean = false;
-    title: string = "Basic example";
-    tsgist: string = "CuppaLabs/ee72fbc7b21dad7e4e7664c5b1553235";
-    htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
-    tstitle: string = "basic.ts"
-    htmltitle: string = "basic.html";
+    title: string = "Multiple Dropdowns in a page";
+    tsgist: string = "CuppaLabs/12225540c23c8a171a81f996fc8d9ca6";
+    htmlgist: string = "CuppaLabs/3788fb5437925b9d7d8edafec567639c";
+    mockgist: string= "CuppaLabs/b3e947ec83710307a3b8680a2ff89693";
+    tstitle: string = "multiple-dropdowns.ts"
+    htmltitle: string = "multiple-dropdowns.html";
+    mocktitle: string = "mock-data.ts"
 }

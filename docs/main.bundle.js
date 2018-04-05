@@ -2082,11 +2082,13 @@ var MultipleDropdownsExample = /** @class */ (function () {
             useCases: [{ "id": "UCTest3", "name": "Use Case Test 3" }, { "id": "UCTest4", "name": "Use Case Test 4" }]
         };
         this.cssgist = false;
-        this.title = "Basic example";
-        this.tsgist = "CuppaLabs/ee72fbc7b21dad7e4e7664c5b1553235";
-        this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
-        this.tstitle = "basic.ts";
-        this.htmltitle = "basic.html";
+        this.title = "Multiple Dropdowns in a page";
+        this.tsgist = "CuppaLabs/12225540c23c8a171a81f996fc8d9ca6";
+        this.htmlgist = "CuppaLabs/3788fb5437925b9d7d8edafec567639c";
+        this.mockgist = "CuppaLabs/b3e947ec83710307a3b8680a2ff89693";
+        this.tstitle = "multiple-dropdowns.ts";
+        this.htmltitle = "multiple-dropdowns.html";
+        this.mocktitle = "mock-data.ts";
     }
     MultipleDropdownsExample.prototype.ngOnInit = function () {
         var _this = this;
@@ -2719,7 +2721,7 @@ module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"row
 /***/ "../../../../../src/app/examples/views/multipledropdowns.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group col-md-12\">\r\n                <label for=\"directorySpecialties\">Directory Specialties</label>\r\n                <angular2-multiselect id=\"directorySpecialties\" name=\"directorySpecialties\"  [(ngModel)]=\"providerLocation.directorySpecialties\"\r\n                                      [data]=\"directorySpecialties\" [settings]=\"dropdownSettings\">\r\n                </angular2-multiselect>\r\n            </div>\r\n            <div class=\"form-group col-md-12\">\r\n                <label for=\"useCases\">Use Cases</label>\r\n                <angular2-multiselect id=\"useCases\" name=\"useCases\" [(ngModel)]=\"providerLocation.useCases\"\r\n                                      [data]=\"useCases\" [settings]=\"dropdownSettings2\">\r\n                </angular2-multiselect>\r\n            </div>"
+module.exports = "<h2 class=\"example-title\"> {{title}}</h2>\r\n<div class=\"col-md-8 mr-auto ml-auto dropdown-container\">\r\n    <div class=\"form-group col-md-12\">\r\n        <label for=\"directorySpecialties\">Directory Specialties</label>\r\n        <angular2-multiselect id=\"directorySpecialties\" name=\"directorySpecialties\" [(ngModel)]=\"providerLocation.directorySpecialties\"\r\n            [data]=\"directorySpecialties\" [settings]=\"dropdownSettings\">\r\n        </angular2-multiselect>\r\n    </div>\r\n    <div class=\"form-group col-md-12\">\r\n        <label for=\"useCases\">Use Cases</label>\r\n        <angular2-multiselect id=\"useCases\" name=\"useCases\" [(ngModel)]=\"providerLocation.useCases\" [data]=\"useCases\" [settings]=\"dropdownSettings2\">\r\n        </angular2-multiselect>\r\n    </div>\r\n</div>\r\n<h4 class=\"example-title code-section\">Code</h4>\r\n\r\n<p-tabView>\r\n    <p-tabPanel header=\"{{tstitle}}\">\r\n        <ng2-gist [gistId]=\"tsgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <p-tabPanel header=\"{{htmltitle}}\">\r\n        <ng2-gist [gistId]=\"htmlgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <span *ngIf=\"cssgist\">\r\n        <p-tabPanel header=\"{{csstitle}}\">\r\n        <ng2-gist [gistId]=\"cssgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n    <span *ngIf=\"mockgist\">\r\n        <p-tabPanel header=\"{{mocktitle}}\">\r\n        <ng2-gist [gistId]=\"mockgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n</p-tabView>"
 
 /***/ }),
 
