@@ -535,13 +535,16 @@ var AngularMultiSelect = /** @class */ (function () {
         evt.preventDefault();
     };
     AngularMultiSelect.prototype.closeDropdown = function () {
-        if (this.searchInput) {
+        if (this.searchInput && this.settings.lazyLoading) {
             this.searchInput.nativeElement.value = "";
             this.data = [];
             this.data = this.cachedItems;
             this.totalHeight = this.itemHeight * this.data.length;
             this.totalRows = this.data.length;
             this.updateView(this.scrollTop);
+        }
+        if (this.searchInput) {
+            this.searchInput.nativeElement.value = "";
         }
         this.filter = "";
         this.isActive = false;
@@ -757,7 +760,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"row\">\r\n   <nav class=\"navbar navbar-expand-lg nav-sub navbar-light d-md-none d-lg-none\">\r\n     <div class=\"nav-wrapper\">\r\n  <a class=\"navbar-brand\" href=\"#\">Examples</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n     <span class=\"fa fa-angle-down\"></span>\r\n  </button>\r\n     </div>\r\n\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <div class=\"list-group\">\r\n        <a [routerLink]=\"['basic']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiselect basic example</a>\r\n        <a [routerLink]=\"['singleselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Single selection</a>\r\n        <a [routerLink]=\"['searchfilter']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Search filter</a>\r\n        <a [routerLink]=\"['groupby']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Group By</a>\r\n        <a [routerLink]=\"['templating']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Templating</a>\r\n        <a [routerLink]=\"['usinginform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Template Driven Forms</a>\r\n        <a [routerLink]=\"['usinginreactiveform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Reactive Forms</a>\r\n        <a [routerLink]=\"['lazyloading']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Lazy Loading</a>\r\n        <a [routerLink]=\"['resetdropdown']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Reset dropdown</a>\r\n        <a [routerLink]=\"['disablemode']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Disable dropdown</a>\r\n        <a [routerLink]=\"['limitselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit selection</a>\r\n        <a [routerLink]=\"['limitbadges']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit Badges</a>\r\n        <a [routerLink]=\"['customplaceholder']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Custom placeholder</a>\r\n        <a [routerLink]=\"['styling']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">CSS Styling</a>\r\n\r\n      </div>\r\n   \r\n  </div>\r\n</nav>\r\n    <div class=\"col-md-3 left-sidebar d-none d-md-block d-lg-block\">\r\n      <div class=\"list-group\">\r\n        <a href=\"#\" class=\"list-group-item list-group-item-action disabled\">\r\n    Examples\r\n  </a>\r\n        <a [routerLink]=\"['basic']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiselect basic example</a>\r\n        <a [routerLink]=\"['singleselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Single selection</a>\r\n        <a [routerLink]=\"['searchfilter']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Search filter</a>\r\n        <a [routerLink]=\"['groupby']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Group By</a>\r\n        <a [routerLink]=\"['templating']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Templating</a>\r\n        <a [routerLink]=\"['usinginform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Template Driven Forms</a>\r\n        <a [routerLink]=\"['usinginreactiveform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Reactive Forms</a>\r\n        <a [routerLink]=\"['lazyloading']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Lazy Loading</a>\r\n        <a [routerLink]=\"['resetdropdown']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Reset dropdown</a>\r\n        <a [routerLink]=\"['disablemode']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Disable dropdown</a>\r\n        <a [routerLink]=\"['limitselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit selection</a>\r\n        <a [routerLink]=\"['limitbadges']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit Badges</a>\r\n        <a [routerLink]=\"['customplaceholder']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Custom placeholder</a>\r\n        <a [routerLink]=\"['styling']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">CSS Styling</a>\r\n\r\n      </div>\r\n    </div>\r\n    <div class=\"col center-content\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n   \r\n</div>"
+module.exports = "<div class=\"row\">\r\n  <nav class=\"navbar navbar-expand-lg nav-sub navbar-light d-md-none d-lg-none\">\r\n    <div class=\"nav-wrapper\">\r\n      <a class=\"navbar-brand\" href=\"#\">Examples</a>\r\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\"\r\n        aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n     <span class=\"fa fa-angle-down\"></span>\r\n  </button>\r\n    </div>\r\n\r\n\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n      <div class=\"list-group\">\r\n        <a [routerLink]=\"['basic']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiselect basic example</a>\r\n        <a [routerLink]=\"['singleselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Single selection</a>\r\n        <a [routerLink]=\"['searchfilter']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Search filter</a>\r\n        <a [routerLink]=\"['groupby']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Group By</a>\r\n        <a [routerLink]=\"['templating']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Templating</a>\r\n        <a [routerLink]=\"['usinginform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Template Driven Forms</a>\r\n        <a [routerLink]=\"['usinginreactiveform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Reactive Forms</a>\r\n        <a [routerLink]=\"['lazyloading']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Lazy Loading</a>\r\n        <a [routerLink]=\"['resetdropdown']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Reset dropdown</a>\r\n        <a [routerLink]=\"['disablemode']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Disable dropdown</a>\r\n        <a [routerLink]=\"['limitselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit selection</a>\r\n        <a [routerLink]=\"['limitbadges']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit Badges</a>\r\n        <a [routerLink]=\"['customplaceholder']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Custom placeholder</a>\r\n        <a [routerLink]=\"['styling']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">CSS Styling</a>\r\n\r\n      </div>\r\n\r\n    </div>\r\n  </nav>\r\n  <div class=\"col-md-3 left-sidebar d-none d-md-block d-lg-block\">\r\n    <div class=\"list-group\">\r\n      <a href=\"#\" class=\"list-group-item list-group-item-action disabled\">\r\n    Examples\r\n  </a>\r\n      <a [routerLink]=\"['basic']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiselect basic example</a>\r\n      <a [routerLink]=\"['singleselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Single selection</a>\r\n      <a [routerLink]=\"['searchfilter']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Search filter</a>\r\n      <a [routerLink]=\"['groupby']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Group By</a>\r\n      <a [routerLink]=\"['templating']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Templating</a>\r\n      <a [routerLink]=\"['usinginform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Template Driven Forms</a>\r\n      <a [routerLink]=\"['usinginreactiveform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Reactive Forms</a>\r\n      <a [routerLink]=\"['lazyloading']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Lazy Loading</a>\r\n      <a [routerLink]=\"['multipledropdowns']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiple dropdowns in a page</a>\r\n      <a [routerLink]=\"['dynamicdatasets']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Dynamic Data Sets loading</a>\r\n      <a [routerLink]=\"['resetdropdown']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Reset dropdown</a>\r\n      <a [routerLink]=\"['disablemode']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Disable dropdown</a>\r\n      <a [routerLink]=\"['limitselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit selection</a>\r\n      <a [routerLink]=\"['limitbadges']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit Badges</a>\r\n      <a [routerLink]=\"['customplaceholder']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Custom placeholder</a>\r\n      <a [routerLink]=\"['styling']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">CSS Styling</a>\r\n\r\n    </div>\r\n  </div>\r\n  <div class=\"col center-content\">\r\n    <router-outlet></router-outlet>\r\n  </div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -1020,26 +1023,29 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular2_multiselect_dropdown_multiselect_component__ = __webpack_require__("../../../../../src/app/angular2-multiselect-dropdown/multiselect.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_router__ = __webpack_require__("../../../../../src/app/app.router.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__examples_basic__ = __webpack_require__("../../../../../src/app/examples/basic.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__examples_singleselection__ = __webpack_require__("../../../../../src/app/examples/singleselection.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__examples_groupBy__ = __webpack_require__("../../../../../src/app/examples/groupBy.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__examples_searchFilter__ = __webpack_require__("../../../../../src/app/examples/searchFilter.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__examples_templating__ = __webpack_require__("../../../../../src/app/examples/templating.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__examples_resetdropdown__ = __webpack_require__("../../../../../src/app/examples/resetdropdown.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__examples_disablemode__ = __webpack_require__("../../../../../src/app/examples/disablemode.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__examples_limitselection__ = __webpack_require__("../../../../../src/app/examples/limitselection.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__examples_limitbadges__ = __webpack_require__("../../../../../src/app/examples/limitbadges.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__examples_customplaceholder__ = __webpack_require__("../../../../../src/app/examples/customplaceholder.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__examples_styling__ = __webpack_require__("../../../../../src/app/examples/styling.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__examples_gist__ = __webpack_require__("../../../../../src/app/examples/gist.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19_primeng_primeng__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__examples_usingWithForms__ = __webpack_require__("../../../../../src/app/examples/usingWithForms.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__examples_usingInReactForms__ = __webpack_require__("../../../../../src/app/examples/usingInReactForms.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__examples_lazyLoading__ = __webpack_require__("../../../../../src/app/examples/lazyLoading.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__examples_mock_data__ = __webpack_require__("../../../../../src/app/examples/mock-data.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular2_multiselect_dropdown_multiselect_component__ = __webpack_require__("../../../../../src/app/angular2-multiselect-dropdown/multiselect.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_router__ = __webpack_require__("../../../../../src/app/app.router.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__examples_basic__ = __webpack_require__("../../../../../src/app/examples/basic.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__examples_singleselection__ = __webpack_require__("../../../../../src/app/examples/singleselection.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__examples_groupBy__ = __webpack_require__("../../../../../src/app/examples/groupBy.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__examples_searchFilter__ = __webpack_require__("../../../../../src/app/examples/searchFilter.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__examples_templating__ = __webpack_require__("../../../../../src/app/examples/templating.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__examples_resetdropdown__ = __webpack_require__("../../../../../src/app/examples/resetdropdown.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__examples_disablemode__ = __webpack_require__("../../../../../src/app/examples/disablemode.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__examples_limitselection__ = __webpack_require__("../../../../../src/app/examples/limitselection.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__examples_limitbadges__ = __webpack_require__("../../../../../src/app/examples/limitbadges.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__examples_customplaceholder__ = __webpack_require__("../../../../../src/app/examples/customplaceholder.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__examples_styling__ = __webpack_require__("../../../../../src/app/examples/styling.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__examples_gist__ = __webpack_require__("../../../../../src/app/examples/gist.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_primeng_primeng__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__examples_usingWithForms__ = __webpack_require__("../../../../../src/app/examples/usingWithForms.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__examples_usingInReactForms__ = __webpack_require__("../../../../../src/app/examples/usingInReactForms.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__examples_lazyLoading__ = __webpack_require__("../../../../../src/app/examples/lazyLoading.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__examples_multipleDropdowns__ = __webpack_require__("../../../../../src/app/examples/multipleDropdowns.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__examples_dynamicDataSets__ = __webpack_require__("../../../../../src/app/examples/dynamicDataSets.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1069,40 +1075,45 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__examples_gist__["a" /* ng2Gist */],
-                __WEBPACK_IMPORTED_MODULE_7__examples_basic__["a" /* BasicExample */],
-                __WEBPACK_IMPORTED_MODULE_8__examples_singleselection__["a" /* SingleSelectionExample */],
-                __WEBPACK_IMPORTED_MODULE_9__examples_groupBy__["a" /* GroupByExample */],
-                __WEBPACK_IMPORTED_MODULE_10__examples_searchFilter__["a" /* SearchFilterExample */],
-                __WEBPACK_IMPORTED_MODULE_11__examples_templating__["a" /* TemplatingExample */],
-                __WEBPACK_IMPORTED_MODULE_12__examples_resetdropdown__["a" /* ResetDropdownExample */],
-                __WEBPACK_IMPORTED_MODULE_13__examples_disablemode__["a" /* DisableModeExample */],
-                __WEBPACK_IMPORTED_MODULE_14__examples_limitselection__["a" /* LimitSelectionExample */],
-                __WEBPACK_IMPORTED_MODULE_15__examples_limitbadges__["a" /* LimitBadgesExample */],
-                __WEBPACK_IMPORTED_MODULE_16__examples_customplaceholder__["a" /* CustomPlaceholderExample */],
-                __WEBPACK_IMPORTED_MODULE_17__examples_styling__["a" /* StylingExample */],
-                __WEBPACK_IMPORTED_MODULE_20__examples_usingWithForms__["a" /* UsingWithFormExample */],
-                __WEBPACK_IMPORTED_MODULE_21__examples_usingInReactForms__["a" /* UsingWithReactiveFormExample */],
-                __WEBPACK_IMPORTED_MODULE_22__examples_lazyLoading__["a" /* LazyLoadingExample */]
+                __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__examples_gist__["a" /* ng2Gist */],
+                __WEBPACK_IMPORTED_MODULE_8__examples_basic__["a" /* BasicExample */],
+                __WEBPACK_IMPORTED_MODULE_9__examples_singleselection__["a" /* SingleSelectionExample */],
+                __WEBPACK_IMPORTED_MODULE_10__examples_groupBy__["a" /* GroupByExample */],
+                __WEBPACK_IMPORTED_MODULE_11__examples_searchFilter__["a" /* SearchFilterExample */],
+                __WEBPACK_IMPORTED_MODULE_12__examples_templating__["a" /* TemplatingExample */],
+                __WEBPACK_IMPORTED_MODULE_13__examples_resetdropdown__["a" /* ResetDropdownExample */],
+                __WEBPACK_IMPORTED_MODULE_14__examples_disablemode__["a" /* DisableModeExample */],
+                __WEBPACK_IMPORTED_MODULE_15__examples_limitselection__["a" /* LimitSelectionExample */],
+                __WEBPACK_IMPORTED_MODULE_16__examples_limitbadges__["a" /* LimitBadgesExample */],
+                __WEBPACK_IMPORTED_MODULE_17__examples_customplaceholder__["a" /* CustomPlaceholderExample */],
+                __WEBPACK_IMPORTED_MODULE_18__examples_styling__["a" /* StylingExample */],
+                __WEBPACK_IMPORTED_MODULE_21__examples_usingWithForms__["a" /* UsingWithFormExample */],
+                __WEBPACK_IMPORTED_MODULE_22__examples_usingInReactForms__["a" /* UsingWithReactiveFormExample */],
+                __WEBPACK_IMPORTED_MODULE_23__examples_lazyLoading__["a" /* LazyLoadingExample */],
+                __WEBPACK_IMPORTED_MODULE_24__examples_multipleDropdowns__["a" /* MultipleDropdownsExample */],
+                __WEBPACK_IMPORTED_MODULE_25__examples_dynamicDataSets__["a" /* DynamicDataSetsExample */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["ReactiveFormsModule"],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_6__app_router__["a" /* AppRouterModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular2_multiselect_dropdown_multiselect_component__["a" /* AngularMultiSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_19_primeng_primeng__["TabViewModule"]
+                __WEBPACK_IMPORTED_MODULE_7__app_router__["a" /* AppRouterModule */],
+                __WEBPACK_IMPORTED_MODULE_6__angular2_multiselect_dropdown_multiselect_component__["a" /* AngularMultiSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_20_primeng_primeng__["TabViewModule"]
             ],
-            providers: [],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_4__examples_mock_data__["a" /* MockService */]],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
@@ -1133,12 +1144,16 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__examples_usingWithForms__ = __webpack_require__("../../../../../src/app/examples/usingWithForms.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__examples_usingInReactForms__ = __webpack_require__("../../../../../src/app/examples/usingInReactForms.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__examples_lazyLoading__ = __webpack_require__("../../../../../src/app/examples/lazyLoading.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__examples_multipleDropdowns__ = __webpack_require__("../../../../../src/app/examples/multipleDropdowns.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__examples_dynamicDataSets__ = __webpack_require__("../../../../../src/app/examples/dynamicDataSets.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -1170,7 +1185,9 @@ var appRoutes = [
     { path: 'styling', component: __WEBPACK_IMPORTED_MODULE_12__examples_styling__["a" /* StylingExample */] },
     { path: 'usinginform', component: __WEBPACK_IMPORTED_MODULE_13__examples_usingWithForms__["a" /* UsingWithFormExample */] },
     { path: 'usinginreactiveform', component: __WEBPACK_IMPORTED_MODULE_14__examples_usingInReactForms__["a" /* UsingWithReactiveFormExample */] },
-    { path: 'lazyloading', component: __WEBPACK_IMPORTED_MODULE_15__examples_lazyLoading__["a" /* LazyLoadingExample */] }
+    { path: 'lazyloading', component: __WEBPACK_IMPORTED_MODULE_15__examples_lazyLoading__["a" /* LazyLoadingExample */] },
+    { path: 'multipledropdowns', component: __WEBPACK_IMPORTED_MODULE_16__examples_multipleDropdowns__["a" /* MultipleDropdownsExample */] },
+    { path: 'dynamicdatasets', component: __WEBPACK_IMPORTED_MODULE_17__examples_dynamicDataSets__["a" /* DynamicDataSetsExample */] }
 ];
 var AppRouterModule = /** @class */ (function () {
     function AppRouterModule() {
@@ -1462,6 +1479,104 @@ var DisableModeExample = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=C:/Users/Lenovo/Documents/Projects/angular2-multiselect-dropdown/src/disablemode.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/examples/dynamicDataSets.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DynamicDataSetsExample; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mock_data__ = __webpack_require__("../../../../../src/app/examples/mock-data.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DynamicDataSetsExample = /** @class */ (function () {
+    function DynamicDataSetsExample(mockService) {
+        this.mockService = mockService;
+        this.itemList = [];
+        this.selectedItems = [];
+        this.settings = {};
+        this.cssgist = false;
+        this.title = "Dynamic datasets loading";
+        this.tsgist = "CuppaLabs/302d580f91bc40611b2474558d98fbf2";
+        this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
+        this.mockgist = "CuppaLabs/b3e947ec83710307a3b8680a2ff89693";
+        this.tstitle = "dynamicData.ts";
+        this.htmltitle = "dynamicData.html";
+        this.mocktitle = "mock-data.ts";
+    }
+    DynamicDataSetsExample.prototype.ngOnInit = function () {
+        this.settings = {
+            text: "Select Countries",
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            classes: "myclass custom-class"
+        };
+        this.loadDataSet2();
+    };
+    DynamicDataSetsExample.prototype.onItemSelect = function (item) {
+        console.log(item);
+        console.log(this.selectedItems);
+    };
+    DynamicDataSetsExample.prototype.OnItemDeSelect = function (item) {
+        console.log(item);
+        console.log(this.selectedItems);
+    };
+    DynamicDataSetsExample.prototype.onSelectAll = function (items) {
+        console.log(items);
+    };
+    DynamicDataSetsExample.prototype.onDeSelectAll = function (items) {
+        console.log(items);
+    };
+    DynamicDataSetsExample.prototype.loadDataSet1 = function () {
+        this.settings = {
+            text: "Select Fruits",
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            classes: "myclass custom-class"
+        };
+        this.selectedItems = [];
+        this.itemList = [];
+        var tempArr = this.mockService.getFruits();
+        for (var i = 0; i < tempArr.length; ++i) {
+            this.itemList.push(tempArr[i]);
+        }
+    };
+    DynamicDataSetsExample.prototype.loadDataSet2 = function () {
+        this.settings = {
+            text: "Select Countries",
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            classes: "myclass custom-class"
+        };
+        this.selectedItems = [];
+        this.itemList = [];
+        var tempArr = this.mockService.getCountries();
+        for (var i = 0; i < tempArr.length; ++i) {
+            this.itemList.push(tempArr[i]);
+        }
+    };
+    DynamicDataSetsExample = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: __webpack_require__("../../../../../src/app/examples/views/dynamicData.html")
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__mock_data__["a" /* MockService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__mock_data__["a" /* MockService */]) === "function" && _a || Object])
+    ], DynamicDataSetsExample);
+    return DynamicDataSetsExample;
+    var _a;
+}());
+
+//# sourceMappingURL=C:/Users/Lenovo/Documents/Projects/angular2-multiselect-dropdown/src/dynamicDataSets.js.map
 
 /***/ }),
 
@@ -1847,6 +1962,176 @@ var LimitSelectionExample = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=C:/Users/Lenovo/Documents/Projects/angular2-multiselect-dropdown/src/limitselection.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/examples/mock-data.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MockService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var MockService = /** @class */ (function () {
+    function MockService() {
+        this.DATA = [{ "id": "PBMMedAdhr", "name": "PBM Medication Adherence" }, { "id": "GapsInCare", "name": "Gaps In Care" }, { "id": "UCTest1", "name": "Use Case Test1" }, { "id": "BASICSAVE", "name": "A generic alternative or 30-90 day dispense opport" }, { "id": "ADVSAVE", "name": "An advnaced generic alternative or 30-90 day dispe" }, { "id": "AttAlert", "name": "Attachment Alert" }, { "id": "PatSave", "name": "Patient savings" }, { "id": "UCTest2", "name": "Use Case Test 2" }, { "id": "UCTest3", "name": "Use Case Test 3" }, { "id": "UCTest4", "name": "Use Case Test 4" }, { "id": "UCTest5", "name": "Use Case Test 5" }, { "id": "UCTest6", "name": "Use Case Test 6" }, { "id": "UCTest7", "name": "Use Case Test 7" }, { "id": "UCTest9", "name": "Use Case Test 9" }, { "id": "UCTest#Ten", "name": "Use Case Test 10" }, { "id": "UCTest8", "name": "Use Case Test 8" }, { "id": "UCTest11", "name": "Test Use Case 11" }, { "id": "UCTest12", "name": "Test Use Case 12" }, { "id": "UCTest13", "name": "Test Use Case 13" }, { "id": "PNLIMMUN", "name": "PNL Immunization" }, { "id": "TrustBrkr", "name": "Identity Services" }, { "id": "RTBC", "name": "real time benefit check for 90 day at retail" }];
+    }
+    MockService.prototype.getDirectories = function () {
+        var _this = this;
+        return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */].create(function (observer) {
+            return new Promise(function (resolve) { return setTimeout(function () {
+                console.log("directoriesLoaded");
+                resolve(_this.DATA);
+            }, 1000); }).then(function (response) {
+                observer.next(response);
+                observer.complete();
+            });
+        });
+    };
+    MockService.prototype.getUseCases = function () {
+        var _this = this;
+        return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */].create(function (observer) {
+            return new Promise(function (resolve) { return setTimeout(function () {
+                console.log("useCasesLoaded");
+                resolve(_this.DATA);
+            }, 500); }).then(function (response) {
+                observer.next(response);
+                observer.complete();
+            });
+        });
+    };
+    MockService.prototype.getData = function (arr) {
+        if (arr.length === 0) {
+            return this.DATA;
+        }
+        // Randomly remove and add some data
+        arr.splice(Math.floor(Math.random() * arr.length), 1);
+        arr.push(this.DATA[Math.floor(Math.random() * this.DATA.length)]);
+        return arr;
+    };
+    MockService.prototype.getFruits = function () {
+        return [{ "id": 1, "itemName": "Apple", "category": "fruits" },
+            { "id": 2, "itemName": "Banana", "category": "fruits" },
+            { "id": 5, "itemName": "Tomatoe", "category": "vegetables" },
+            { "id": 6, "itemName": "Potatoe", "category": "vegetables" }];
+    };
+    MockService.prototype.getCountries = function () {
+        return [
+            { "id": 1, "itemName": "India", "category": "asia" },
+            { "id": 2, "itemName": "Singapore", "category": "asia pacific" },
+            { "id": 3, "itemName": "Germany", "category": "Europe" },
+            { "id": 4, "itemName": "France", "category": "Europe" },
+            { "id": 5, "itemName": "South Korea", "category": "asia" },
+            { "id": 6, "itemName": "Sweden", "category": "Europe" }
+        ];
+    };
+    MockService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [])
+    ], MockService);
+    return MockService;
+}());
+
+//# sourceMappingURL=C:/Users/Lenovo/Documents/Projects/angular2-multiselect-dropdown/src/mock-data.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/examples/multipleDropdowns.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MultipleDropdownsExample; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mock_data__ = __webpack_require__("../../../../../src/app/examples/mock-data.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_operators__ = __webpack_require__("../../../../rxjs/_esm5/operators/index.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MultipleDropdownsExample = /** @class */ (function () {
+    function MultipleDropdownsExample(mockService) {
+        this.mockService = mockService;
+        this.itemList = [];
+        this.selectedItems = [];
+        this.settings = {};
+        this.directorySpecialties = [];
+        this.useCases = [];
+        this.dropdownSettings = {};
+        this.dropdownSettings2 = {};
+        this.providerLocation = {
+            directorySpecialties: [{ "id": "PBMMedAdhr", "name": "PBM Medication Adherence" }, { "id": "GapsInCare", "name": "Gaps In Care" }],
+            useCases: [{ "id": "UCTest3", "name": "Use Case Test 3" }, { "id": "UCTest4", "name": "Use Case Test 4" }]
+        };
+        this.cssgist = false;
+        this.title = "Basic example";
+        this.tsgist = "CuppaLabs/ee72fbc7b21dad7e4e7664c5b1553235";
+        this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
+        this.tstitle = "basic.ts";
+        this.htmltitle = "basic.html";
+    }
+    MultipleDropdownsExample.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dropdownSettings = {
+            text: "Select",
+            enableSearchFilter: true,
+            labelKey: "name"
+        };
+        this.dropdownSettings2 = {
+            text: "Select",
+            enableSearchFilter: true,
+            labelKey: "name"
+        };
+        this.mockService.getDirectories().pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["a" /* map */])(function (resp) {
+            _this.directorySpecialties = resp;
+        })).subscribe();
+        this.mockService.getUseCases().pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["a" /* map */])(function (resp) {
+            _this.useCases = resp;
+        })).subscribe();
+    };
+    MultipleDropdownsExample.prototype.onItemSelect = function (item) {
+        console.log(item);
+        console.log(this.selectedItems);
+    };
+    MultipleDropdownsExample.prototype.OnItemDeSelect = function (item) {
+        console.log(item);
+        console.log(this.selectedItems);
+    };
+    MultipleDropdownsExample.prototype.onSelectAll = function (items) {
+        console.log(items);
+    };
+    MultipleDropdownsExample.prototype.onDeSelectAll = function (items) {
+        console.log(items);
+    };
+    MultipleDropdownsExample = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: __webpack_require__("../../../../../src/app/examples/views/multipledropdowns.html")
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__mock_data__["a" /* MockService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__mock_data__["a" /* MockService */]) === "function" && _a || Object])
+    ], MultipleDropdownsExample);
+    return MultipleDropdownsExample;
+    var _a;
+}());
+
+//# sourceMappingURL=C:/Users/Lenovo/Documents/Projects/angular2-multiselect-dropdown/src/multipleDropdowns.js.map
 
 /***/ }),
 
@@ -2410,6 +2695,13 @@ module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"col
 
 /***/ }),
 
+/***/ "../../../../../src/app/examples/views/dynamicData.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"col-md-6 mr-auto ml-auto dropdown-container\">\r\n    <angular2-multiselect [data]=\"itemList\" [(ngModel)]=\"selectedItems\" [settings]=\"settings\" (onSelect)=\"onItemSelect($event)\"\r\n        (onDeSelect)=\"OnItemDeSelect($event)\" (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\"></angular2-multiselect>\r\n</div>\r\n<button class=\"btn btn-success\" (click)=\"loadDataSet1()\">Load dataset 1</button>\r\n<button class=\"btn btn-success\" (click)=\"loadDataSet2()\">Load dataset 2</button>\r\n\r\n<h4 class=\"example-title code-section\">Code</h4>\r\n\r\n<p-tabView>\r\n    <p-tabPanel header=\"{{tstitle}}\">\r\n       <ng2-gist [gistId]=\"tsgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <p-tabPanel header=\"{{htmltitle}}\">\r\n        <ng2-gist [gistId]=\"htmlgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <span *ngIf=\"cssgist\">\r\n        <p-tabPanel header=\"{{csstitle}}\">\r\n        <ng2-gist [gistId]=\"cssgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n     <span *ngIf=\"mockgist\">\r\n        <p-tabPanel header=\"{{mocktitle}}\">\r\n        <ng2-gist [gistId]=\"mockgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n</p-tabView>\r\n"
+
+/***/ }),
+
 /***/ "../../../../../src/app/examples/views/groupBy.html":
 /***/ (function(module, exports) {
 
@@ -2421,6 +2713,13 @@ module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"col
 /***/ (function(module, exports) {
 
 module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"row\">\r\n    <div class=\"col-md-3 mr-auto ml-auto dropdown-container\">\r\n    </div>\r\n<div class=\"col-md-6 mr-auto ml-auto dropdown-container\">\r\n    <angular2-multiselect [data]=\"itemList\" [(ngModel)]=\"selectedItems\" [settings]=\"settings\" (onSelect)=\"onItemSelect($event)\"\r\n        (onDeSelect)=\"OnItemDeSelect($event)\" (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\"></angular2-multiselect>\r\n<br>\r\n<span>Total Records : {{itemList.length}}</span>\r\n</div>\r\n<div class=\"col-md-3 mr-auto ml-auto dropdown-container\">\r\n            <button (click)=\"changeData()\" class=\"btn btn-danger\">Reset</button>\r\n</div>\r\n</div>\r\n<h4 class=\"example-title code-section\">Code</h4>\r\n\r\n<p-tabView>\r\n    <p-tabPanel header=\"{{tstitle}}\">\r\n       <ng2-gist [gistId]=\"tsgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <p-tabPanel header=\"{{htmltitle}}\">\r\n        <ng2-gist [gistId]=\"htmlgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <span *ngIf=\"cssgist\">\r\n        <p-tabPanel header=\"{{csstitle}}\">\r\n        <ng2-gist [gistId]=\"cssgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n</p-tabView>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/examples/views/multipledropdowns.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"form-group col-md-12\">\r\n                <label for=\"directorySpecialties\">Directory Specialties</label>\r\n                <angular2-multiselect id=\"directorySpecialties\" name=\"directorySpecialties\"  [(ngModel)]=\"providerLocation.directorySpecialties\"\r\n                                      [data]=\"directorySpecialties\" [settings]=\"dropdownSettings\">\r\n                </angular2-multiselect>\r\n            </div>\r\n            <div class=\"form-group col-md-12\">\r\n                <label for=\"useCases\">Use Cases</label>\r\n                <angular2-multiselect id=\"useCases\" name=\"useCases\" [(ngModel)]=\"providerLocation.useCases\"\r\n                                      [data]=\"useCases\" [settings]=\"dropdownSettings2\">\r\n                </angular2-multiselect>\r\n            </div>"
 
 /***/ }),
 

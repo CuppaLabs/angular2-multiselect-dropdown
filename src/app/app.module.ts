@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MockService } from './examples/mock-data';
 
 import { AppComponent } from './app.component';
 import { AngularMultiSelectModule } from './angular2-multiselect-dropdown/multiselect.component';
@@ -22,6 +23,8 @@ import { TabViewModule } from 'primeng/primeng';
 import { UsingWithFormExample } from './examples/usingWithForms';
 import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
 import { LazyLoadingExample } from './examples/lazyLoading';
+import { MultipleDropdownsExample } from './examples/multipleDropdowns';
+import { DynamicDataSetsExample } from './examples/dynamicDataSets';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,9 @@ import { LazyLoadingExample } from './examples/lazyLoading';
     StylingExample,
     UsingWithFormExample,
     UsingWithReactiveFormExample,
-    LazyLoadingExample
+    LazyLoadingExample,
+    MultipleDropdownsExample,
+    DynamicDataSetsExample
     ],
   imports: [
     BrowserModule,
@@ -51,7 +56,7 @@ import { LazyLoadingExample } from './examples/lazyLoading';
     AngularMultiSelectModule,
     TabViewModule
   ],
-  providers: [],
+  providers: [MockService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,12 @@
+<div class="form-group col-md-12">
+                <label for="directorySpecialties">Directory Specialties</label>
+                <angular2-multiselect id="directorySpecialties" name="directorySpecialties"  [(ngModel)]="providerLocation.directorySpecialties"
+                                      [data]="directorySpecialties" [settings]="dropdownSettings">
+                </angular2-multiselect>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="useCases">Use Cases</label>
+                <angular2-multiselect id="useCases" name="useCases" [(ngModel)]="providerLocation.useCases"
+                                      [data]="useCases" [settings]="dropdownSettings2">
+                </angular2-multiselect>
+            </div>
