@@ -272,13 +272,16 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         evt.preventDefault();
     }
     closeDropdown() {
-        if(this.searchInput){
+        if(this.searchInput && this.settings.lazyLoading){
             this.searchInput.nativeElement.value = "";
             this.data = [];
             this.data = this.cachedItems;
             this.totalHeight = this.itemHeight * this.data.length;
             this.totalRows = this.data.length;
             this.updateView(this.scrollTop);
+        }
+        if(this.searchInput){
+            this.searchInput.nativeElement.value = "";
         }
         this.filter = "";
         this.isActive = false;
