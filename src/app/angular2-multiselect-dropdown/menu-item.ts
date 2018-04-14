@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgModule, TemplateRef, AfterContentInit, ContentChild, EmbeddedViewRef, OnChanges, ViewContainerRef, ViewEncapsulation, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgModule, TemplateRef, AfterContentInit, ContentChild, EmbeddedViewRef, OnChanges, ViewContainerRef, ViewEncapsulation, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform, Directive } from '@angular/core';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { CommonModule }       from '@angular/common';
 

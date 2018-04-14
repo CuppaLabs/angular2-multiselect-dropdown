@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Output, EventEmitter, HostListener, Input} from '@angular/core';
+import { Directive, ElementRef, Output, EventEmitter, HostListener, Input, OnInit, OnChanges } from '@angular/core';
 
 @Directive({
     selector: '[clickOutside]'
@@ -40,21 +40,44 @@ export class ScrollDirective {
     }
 }
 @Directive({
-  selector: '[styleProp]'
+    selector: '[styleProp]'
 })
 export class styleDirective {
 
-  constructor(private el: ElementRef) {
+    constructor(private el: ElementRef) {
 
-   }
+    }
 
-  @Input('styleProp') styleVal: number;
+    @Input('styleProp') styleVal: number;
 
-   ngOnInit() {
+    ngOnInit() {
 
-      this.el.nativeElement.style.top = this.styleVal;
-   }
+        this.el.nativeElement.style.top = this.styleVal;
+    }
     ngOnChanges(): void {
-       this.el.nativeElement.style.top = this.styleVal;
-  }
+        this.el.nativeElement.style.top = this.styleVal;
+    }
+}
+
+
+@Directive({
+    selector: '[setPosition]'
+})
+export class setPosition implements OnInit, OnChanges {
+
+    @Input('setPosition') height: number;
+
+    constructor(public el: ElementRef) {
+
+    }
+    ngOnInit() {
+        if (this.height) {
+            this.el.nativeElement.style.bottom = parseInt(this.height + 15 + "") + 'px';
+        }
+    }
+    ngOnChanges(): void {
+        if (this.height) {
+            this.el.nativeElement.style.bottom = parseInt(this.height + 15 + "") + 'px';
+        }
+    }
 }

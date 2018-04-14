@@ -17,4 +17,6 @@ export interface DropdownSettings{
     searchAutofocus?: boolean;
     lazyLoading?: boolean;
     labelKey?: String;
+    primaryKey: string;
+    position:string;
 } 
