@@ -20,6 +20,7 @@ Angular 2 multiselect dropdown component for web applications. Easy to integrate
 ##### 8. Lazy lodaing - handle large data lists
 ##### 9. Group By feature
 ##### 10. Search filter for both plain list and grouped list
+##### 11. Custom styles for default the multiselect dropdown
 
 
 
@@ -27,7 +28,7 @@ Angular 2 multiselect dropdown component for web applications. Easy to integrate
 
 ## Getting Started
 ### Installation
-- The Mutiselect Dropdown package is published on the [npm](https://www.npmjs.com/package/angular2-multiselect-dropdown) Registry. 
+- The Multiselect Dropdown package is published on the [npm](https://www.npmjs.com/package/angular2-multiselect-dropdown) Registry. 
 - Install the package :
     `npm install angular2-multiselect-dropdown`
 
@@ -199,6 +200,35 @@ this.userForm = this.fb.group({
         });
 
 ```
+
+### Custom styles for default the multiselect dropdown
+
+If you need your custom styles for the multiselect dropdown feel free to change default styles:
+
+```scss
+.your-parent-selector {
+  ::ng-deep .dropdown-list ul li.pure-checkbox{
+    padding: 10px !important;  // your custom padding
+    
+    label {
+      // hidding the left checkbox
+      padding-left: 0 !important;
+      &:before {
+        display: none;
+      }
+      &:after {
+        display: none;
+      }
+    }
+
+    &.selected {
+      background: #00AAFF;  // your custom background for selected item
+    }
+  }
+}
+```
+
+ex: ![](http://github.com/itefect/angular2-multiselect-dropdown/blob/master/src/assets/img/custom_styles_default_multiselect_dropdown.png)
 
 ### Settings
 The following list of settings are supported by the component. Configure the settings to meet your requirement.
