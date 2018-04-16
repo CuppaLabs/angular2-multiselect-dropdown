@@ -43,7 +43,7 @@
             </div>
             <ul *ngIf="!settings.groupBy" [style.maxHeight]="settings.maxHeight+'px'" class="lazyContainer">
                 <span *ngIf="itemTempl">
-            <li *ngFor="let item of data | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
+            <li *ngFor="let item of data | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox" [class.selected]="isSelected(item)">
             <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
             <label></label>
             <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
@@ -58,7 +58,7 @@
                 <span *ngIf="!itemTempl && settings.lazyLoading">
             <div [ngStyle]="{'height':totalHeight+'px'}" style="position: relative;">
 
-            
+
         <li *ngFor="let item of chunkArray | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" style="position: absolute;width: 100%;" class="pure-checkbox" [styleProp]="chunkIndex[i]">
             <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
             <label>{{item[settings.labelKey]}}</label>
@@ -77,7 +77,7 @@
         </li>
         </span>
                     <span *ngIf="!itemTempl">
-        <li *ngFor="let item of obj.value | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
+        <li *ngFor="let item of obj.value | listFilter:filter; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox" [class]="isSelected(item)">
             <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
             <label>{{item[settings.labelKey]}}</label>
         </li>
