@@ -25,6 +25,7 @@ import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
 import { LazyLoadingExample } from './examples/lazyLoading';
 import { MultipleDropdownsExample } from './examples/multipleDropdowns';
 import { DynamicDataSetsExample } from './examples/dynamicDataSets';
+import { ThemingExample } from './examples/theming';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { DynamicDataSetsExample } from './examples/dynamicDataSets';
     UsingWithReactiveFormExample,
     LazyLoadingExample,
     MultipleDropdownsExample,
-    DynamicDataSetsExample
+    DynamicDataSetsExample,
+    ThemingExample
     ],
   imports: [
     BrowserModule,

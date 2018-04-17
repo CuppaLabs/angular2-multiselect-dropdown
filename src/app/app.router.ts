@@ -18,6 +18,7 @@ import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
 import { LazyLoadingExample } from './examples/lazyLoading';
 import { MultipleDropdownsExample } from './examples/multipleDropdowns';
 import { DynamicDataSetsExample } from './examples/dynamicDataSets';
+import { ThemingExample } from './examples/theming';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/basic', pathMatch: 'full' },
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
   { path: 'usinginreactiveform', component: UsingWithReactiveFormExample },
   { path: 'lazyloading', component: LazyLoadingExample },
   { path: 'multipledropdowns', component: MultipleDropdownsExample },
-  { path: 'dynamicdatasets', component: DynamicDataSetsExample }
+  { path: 'dynamicdatasets', component: DynamicDataSetsExample },
+  { path: 'theming', component: ThemingExample }
 
 
 ];
