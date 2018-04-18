@@ -1,8 +1,8 @@
 {
   "name": "angular2-multiselect-dropdown",
   "version": "2.8.0",
-    "description": "Angular 2 and angular 4 multiselect dropdown component.",
-      "keywords": [
+  "description": "Angular 2 and angular 4 multiselect dropdown component.",
+  "keywords": [
     "angular 2 multiselect dropdown",
     "angular 4 multiselect dropdown",
     "angular multiselect",
@@ -10,7 +10,7 @@
   ],
   "license": "MIT",
   "angular-cli": {},
-  "author":"Pradeep Terli",
+  "author": "Pradeep Terli",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -38,21 +38,21 @@
     "test": "karma start",
     "test:watch": "karma start --auto-watch --no-single-run",
     "tslint": "tslint",
-    "github-pages":"ng build --base-href /angular2-multiselect-dropdown/"
+    "github-pages": "ng build --base-href /angular2-multiselect-dropdown/"
   },
   "private": false,
   "dependencies": {
-    "font-awesome":"*"
+    "font-awesome": "*"
   },
   "devDependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/compiler-cli": "^4.0.0",
-    "@angular/animations":"^4.0.0",
+    "@angular/animations": "^4.0.0",
     "@angular/cli": "^1.3.2",
     "@angular/core": "^4.0.0",
-     "@angular/forms": "^4.0.0",
-     "@angular/http": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/http": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
@@ -70,7 +70,7 @@
     "css-loader": "^0.28.1",
     "gh-pages": "^1.0.0",
     "gulp": "^3.9.1",
-    "gulp-copy":"^1.0.1",
+    "gulp-copy": "^1.0.1",
     "gulp-inline-ng2-template": "^4.0.0",
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine-core": "^2.6.1",
@@ -97,10 +97,9 @@
     "webpack-angular-externals": "^1.0.2",
     "webpack-rxjs-externals": "^1.0.0",
     "zone.js": "^0.8.10",
-    "ng2-gist":"*",
-    "primeng":"*",
-     "bootstrap":"^4.0.0-beta.2"
-
+    "ng2-gist": "*",
+    "primeng": "*",
+    "bootstrap": "^4.0.0-beta.2"
   },
   "repository": {
     "type": "git",

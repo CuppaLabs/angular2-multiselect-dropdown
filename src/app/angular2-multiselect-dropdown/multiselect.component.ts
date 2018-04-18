@@ -61,7 +61,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @ViewChild('searchInput') searchInput: ElementRef;
     @ViewChild('selectedList') selectedListElem: ElementRef;
 
-    public selectedItems: Array<any>;
+    public selectedItems: Array<any> = [];
     public isActive: boolean = false;
     public isSelectAll: boolean = false;
     public groupedData: Array<any>;
@@ -102,9 +102,10 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         position: 'bottom'
     }
     public parseError: boolean;
-    constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef) {
 
+    constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef) {
     }
+
     ngOnInit() {
         this.settings = Object.assign(this.defaultSettings, this.settings);
         if (this.settings.groupBy) {
@@ -249,6 +250,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             }
         });
         return found;
+    }
+    isDisabled(clickedItem: any) {
+      return this.settings.limitSelection === (this.selectedItems || []).length && !this.isSelected(clickedItem);
     }
     addSelected(item: any) {
         if (this.settings.singleSelection) {
