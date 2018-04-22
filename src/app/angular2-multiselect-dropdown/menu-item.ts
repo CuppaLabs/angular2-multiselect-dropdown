@@ -29,6 +29,18 @@ export class Badge {
 }
 
 @Component({
+  selector: 'c-search',
+  template: ``
+})
+
+export class Search { 
+
+    @ContentChild(TemplateRef) template: TemplateRef<any>
+    constructor() {   
+    }
+
+}
+@Component({
   selector: 'c-templateRenderer',
   template: ``
 })

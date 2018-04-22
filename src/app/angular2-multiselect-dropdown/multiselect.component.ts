@@ -5,7 +5,8 @@ import { MyException } from './multiselect.model';
 import { DropdownSettings } from './multiselect.interface';
 import { ClickOutsideDirective, ScrollDirective, styleDirective, setPosition } from './clickOutside';
 import { ListFilterPipe } from './list-filter';
-import { Item, Badge, TemplateRenderer } from './menu-item';
+import { Item, Badge, Search, TemplateRenderer } from './menu-item';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -56,6 +57,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
     @ContentChild(Item) itemTempl: Item;
     @ContentChild(Badge) badgeTempl: Badge;
+    @ContentChild(Search) searchTempl: Search;
 
 
     @ViewChild('searchInput') searchInput: ElementRef;
@@ -88,6 +90,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         selectAllText: 'Select All',
         unSelectAllText: 'UnSelect All',
         enableSearchFilter: false,
+        searchBy:[],
         maxHeight: 300,
         badgeShowLimit: 999999999999,
         classes: '',
@@ -276,7 +279,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         this.isActive = !this.isActive;
         if (this.isActive) {
-            if (this.settings.searchAutofocus && this.settings.enableSearchFilter) {
+            if (this.settings.searchAutofocus && this.settings.enableSearchFilter && !this.searchTempl) {
                 setTimeout(() => {
                     this.searchInput.nativeElement.focus();
                 }, 0);
@@ -394,7 +397,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
 @NgModule({
     imports: [CommonModule, FormsModule],
-    declarations: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, setPosition],
-    exports: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, setPosition]
+    declarations: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search, setPosition],
+    exports: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search, setPosition]
 })
 export class AngularMultiSelectModule { }
