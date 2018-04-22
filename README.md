@@ -20,6 +20,7 @@ Angular 2 multiselect dropdown component for web applications. Easy to integrate
 ##### 8. Lazy lodaing - handle large data lists
 ##### 9. Group By feature
 ##### 10. Search filter for both plain list and grouped list
+##### 11. Custom Search / Search API
 
 
 
@@ -222,7 +223,8 @@ The following list of settings are supported by the component. Configure the set
 | labelKey | String | The property name which should be rendered as label in the dropdown| itemName |
 | primaryKey | String | The property by which the object is identified. Default is 'id'.| id |
 | position | String | Set the position of the dropdown list to 'top' or 'bottom'| bottom |
-
+| noDataLabel | String | Label text when no data is available in the list| 'No Data Available' |
+| searchBy | Array | Search the list by certain properties of the list item. Ex: ["itemName, "id","name"]. Deafult is , it will search the list by all the properties of list item | [] |
 
 
 ### Callback Methods
