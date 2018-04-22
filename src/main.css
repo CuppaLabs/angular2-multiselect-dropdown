@@ -8692,8 +8692,12 @@ body {
 .top-navbar {
     padding: 0px 15px;
     min-height: 56px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 99999;
 }
-
 .top-navbar .nav-item > .nav-link {
     border-bottom: 2px solid transparent;
     padding: 15px 15px;

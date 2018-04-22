@@ -171,23 +171,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var ListFilterPipe = /** @class */ (function () {
     function ListFilterPipe() {
     }
-    ListFilterPipe.prototype.transform = function (items, filter) {
+    ListFilterPipe.prototype.transform = function (items, filter, searchBy) {
         var _this = this;
         if (!items || !filter) {
             return items;
         }
-        return items.filter(function (item) { return _this.applyFilter(item, filter); });
+        return items.filter(function (item) { return _this.applyFilter(item, filter, searchBy); });
     };
-    ListFilterPipe.prototype.applyFilter = function (item, filter) {
+    ListFilterPipe.prototype.applyFilter = function (item, filter, searchBy) {
         var found = false;
-        for (var prop in item) {
-            if (filter) {
-                if (item[prop].toString().toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
-                    found = true;
+        if (searchBy.length > 0) {
+            for (var t = 0; t < searchBy.length; t++) {
+                if (filter && item[searchBy[t]] && item[searchBy[t]] != "") {
+                    if (item[searchBy[t]].toString().toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
+                        found = true;
+                    }
                 }
             }
-            else
-                found = true;
+        }
+        else {
+            for (var prop in item) {
+                if (filter && item[prop]) {
+                    if (item[prop].toString().toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
+                        found = true;
+                    }
+                }
+            }
         }
         return found;
     };
@@ -210,7 +219,8 @@ var ListFilterPipe = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Item; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Badge; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return TemplateRenderer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return Search; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return TemplateRenderer; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -258,6 +268,24 @@ var Badge = /** @class */ (function () {
     var _a;
 }());
 
+var Search = /** @class */ (function () {
+    function Search() {
+    }
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ContentChild"])(__WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"]),
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"]) === "function" && _a || Object)
+    ], Search.prototype, "template", void 0);
+    Search = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'c-search',
+            template: ""
+        }),
+        __metadata("design:paramtypes", [])
+    ], Search);
+    return Search;
+    var _a;
+}());
+
 var TemplateRenderer = /** @class */ (function () {
     function TemplateRenderer(viewContainer) {
         this.viewContainer = viewContainer;
@@ -297,7 +325,7 @@ var TemplateRenderer = /** @class */ (function () {
 /***/ "../../../../../src/app/angular2-multiselect-dropdown/multiselect.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"cuppa-dropdown\" (clickOutside)=\"closeDropdown()\">\r\n    <div class=\"selected-list\" #selectedList>\r\n        <div class=\"c-btn\" (click)=\"toggleDropdown($event)\" [ngClass]=\"{'disabled': settings.disabled}\">\r\n            <span *ngIf=\"selectedItems?.length == 0\">{{settings.text}}</span>\r\n            <span *ngIf=\"settings.singleSelection\">\r\n                <span *ngFor=\"let item of selectedItems;trackBy: trackByFn.bind(this);\">\r\n                    {{item[settings.labelKey]}}\r\n                </span>\r\n            </span>\r\n            <div class=\"c-list\" *ngIf=\"selectedItems?.length > 0 && !settings.singleSelection\">\r\n                <div class=\"c-token\" *ngFor=\"let item of selectedItems;trackBy: trackByFn.bind(this);let k = index\" [hidden]=\"k > settings.badgeShowLimit-1\">\r\n                    <span *ngIf=\"!badgeTempl\" class=\"c-label\">{{item[settings.labelKey]}}</span>\r\n                    <span *ngIf=\"badgeTempl\" class=\"c-label\">\r\n                        <c-templateRenderer [data]=\"badgeTempl\" [item]=\"item\"></c-templateRenderer>\r\n                    </span>\r\n                    <span class=\"fa fa-remove\" (click)=\"onItemClick(item,k,$event)\"></span>\r\n                </div>\r\n            </div>\r\n            <span class=\"countplaceholder\" *ngIf=\"selectedItems?.length > settings.badgeShowLimit\">+{{selectedItems?.length - settings.badgeShowLimit }}</span>\r\n            <span class=\"fa\" [ngClass]=\"{'fa-angle-down': !isActive,'fa-angle-up':isActive}\"></span>\r\n        </div>\r\n    </div>\r\n    <div [setPosition]=\"selectedListHeight?.val\" class=\"dropdown-list\" [ngClass]= \"{'dropdown-list-top': settings.position == 'top'}\" [hidden]=\"!isActive\">\r\n        <div [ngClass]= \"{'arrow-up': settings.position == 'bottom', 'arrow-down': settings.position == 'top'}\"  class=\"arrow-2\"></div>\r\n        <div [ngClass]= \"{'arrow-up': settings.position == 'bottom', 'arrow-down': settings.position == 'top'}\"></div>\r\n        <div class=\"list-area\">\r\n            <div class=\"pure-checkbox select-all\" *ngIf=\"settings.enableCheckAll && !settings.singleSelection && !settings.limitSelection\"\r\n                (click)=\"toggleSelectAll()\">\r\n                <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelectAll\" [disabled]=\"settings.limitSelection == selectedItems?.length\"\r\n                />\r\n                <label>\r\n                <span [hidden]=\"isSelectAll\">{{settings.selectAllText}}</span>\r\n                <span [hidden]=\"!isSelectAll\">{{settings.unSelectAllText}}</span>\r\n            </label>\r\n            </div>\r\n            <div class=\"list-filter\" *ngIf=\"settings.enableSearchFilter && !settings.lazyLoading\">\r\n                <span class=\"fa fa-search\"></span>\r\n                <input #searchInput type=\"text\" [placeholder]=\"settings.searchPlaceholderText\" [(ngModel)]=\"filter\">\r\n            </div>\r\n            <div class=\"list-filter\" *ngIf=\"settings.enableSearchFilter && settings.lazyLoading\">\r\n                <span class=\"fa fa-search\"></span>\r\n                <input #searchInput type=\"text\" [placeholder]=\"settings.searchPlaceholderText\" (keyup)=\"filterInfiniteList($event)\">\r\n            </div>\r\n            <ul *ngIf=\"!settings.groupBy\" [style.maxHeight]=\"settings.maxHeight+'px'\" class=\"lazyContainer\">\r\n                <span *ngIf=\"itemTempl\">\r\n            <li *ngFor=\"let item of data | listFilter:filter; let i = index;\" (click)=\"onItemClick(item,i,$event)\" class=\"pure-checkbox\">\r\n            <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"settings.limitSelection == selectedItems?.length && !isSelected(item)\"/>\r\n            <label></label>\r\n            <c-templateRenderer [data]=\"itemTempl\" [item]=\"item\"></c-templateRenderer>\r\n        </li>\r\n        </span>\r\n                <span *ngIf=\"!itemTempl && !settings.lazyLoading\">\r\n        <li *ngFor=\"let item of data | listFilter:filter; let i = index;\" (click)=\"onItemClick(item,i,$event)\" class=\"pure-checkbox\">\r\n            <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"settings.limitSelection == selectedItems?.length && !isSelected(item)\"/>\r\n            <label>{{item[settings.labelKey]}}</label>\r\n        </li>\r\n        </span>\r\n                <span *ngIf=\"!itemTempl && settings.lazyLoading\">\r\n            <div [ngStyle]=\"{'height':totalHeight+'px'}\" style=\"position: relative;\">\r\n\r\n            \r\n        <li *ngFor=\"let item of chunkArray | listFilter:filter; let i = index;\" (click)=\"onItemClick(item,i,$event)\" style=\"position: absolute;width: 100%;\" class=\"pure-checkbox\" [styleProp]=\"chunkIndex[i]\">\r\n            <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"settings.limitSelection == selectedItems?.length && !isSelected(item)\"/>\r\n            <label>{{item[settings.labelKey]}}</label>\r\n        </li>\r\n        </div>\r\n        </span>\r\n            </ul>\r\n            <div *ngIf=\"settings.groupBy\" [style.maxHeight]=\"settings.maxHeight+'px'\" style=\"overflow: auto;\">\r\n                <ul *ngFor=\"let obj of groupedData ; let i = index;\" class=\"list-grp\">\r\n                    <h4 *ngIf=\"(obj.value | listFilter:filter ).length > 0\">{{obj.key}}</h4>\r\n                    <span *ngIf=\"itemTempl\">\r\n        <li *ngFor=\"let item of obj.value | listFilter:filter; let i = index;\" (click)=\"onItemClick(item,i,$event)\" class=\"pure-checkbox\">\r\n            <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"settings.limitSelection == selectedItems?.length && !isSelected(item)\"/>\r\n            <label></label>\r\n            <c-templateRenderer [data]=\"itemTempl\" [item]=\"item\"></c-templateRenderer>\r\n        </li>\r\n        </span>\r\n                    <span *ngIf=\"!itemTempl\">\r\n        <li *ngFor=\"let item of obj.value | listFilter:filter; let i = index;\" (click)=\"onItemClick(item,i,$event)\" class=\"pure-checkbox\">\r\n            <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"settings.limitSelection == selectedItems?.length && !isSelected(item)\"/>\r\n            <label>{{item[settings.labelKey]}}</label>\r\n        </li>\r\n        </span>\r\n                </ul>\r\n            </div>\r\n            <h5 class=\"list-message\" *ngIf=\"data?.length == 0\">{{settings.noDataLabel}}</h5>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"cuppa-dropdown\" (clickOutside)=\"closeDropdown()\">\r\n    <div class=\"selected-list\" #selectedList>\r\n        <div class=\"c-btn\" (click)=\"toggleDropdown($event)\" [ngClass]=\"{'disabled': settings.disabled}\">\r\n            <span *ngIf=\"selectedItems?.length == 0\">{{settings.text}}</span>\r\n            <span *ngIf=\"settings.singleSelection\">\r\n                <span *ngFor=\"let item of selectedItems;trackBy: trackByFn.bind(this);\">\r\n                    {{item[settings.labelKey]}}\r\n                </span>\r\n            </span>\r\n            <div class=\"c-list\" *ngIf=\"selectedItems?.length > 0 && !settings.singleSelection\">\r\n                <div class=\"c-token\" *ngFor=\"let item of selectedItems;trackBy: trackByFn.bind(this);let k = index\" [hidden]=\"k > settings.badgeShowLimit-1\">\r\n                    <span *ngIf=\"!badgeTempl\" class=\"c-label\">{{item[settings.labelKey]}}</span>\r\n                    <span *ngIf=\"badgeTempl\" class=\"c-label\">\r\n                        <c-templateRenderer [data]=\"badgeTempl\" [item]=\"item\"></c-templateRenderer>\r\n                    </span>\r\n                    <span class=\"c-remove\" (click)=\"onItemClick(item,k,$event)\">\r\n                        <svg width=\"100%\" height=\"100%\" version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 47.971 47.971\" style=\"enable-background:new 0 0 47.971 47.971;\" xml:space=\"preserve\">\r\n<g>\r\n\t<path d=\"M28.228,23.986L47.092,5.122c1.172-1.171,1.172-3.071,0-4.242c-1.172-1.172-3.07-1.172-4.242,0L23.986,19.744L5.121,0.88\r\n\t\tc-1.172-1.172-3.07-1.172-4.242,0c-1.172,1.171-1.172,3.071,0,4.242l18.865,18.864L0.879,42.85c-1.172,1.171-1.172,3.071,0,4.242\r\n\t\tC1.465,47.677,2.233,47.97,3,47.97s1.535-0.293,2.121-0.879l18.865-18.864L42.85,47.091c0.586,0.586,1.354,0.879,2.121,0.879\r\n\t\ts1.535-0.293,2.121-0.879c1.172-1.171,1.172-3.071,0-4.242L28.228,23.986z\"/>\r\n</g>\r\n</svg>\r\n\r\n                    </span>\r\n                </div>\r\n            </div>\r\n            <span class=\"countplaceholder\" *ngIf=\"selectedItems?.length > settings.badgeShowLimit\">+{{selectedItems?.length - settings.badgeShowLimit }}</span>\r\n            <!--            <span class=\"fa\" [ngClass]=\"{'c-angle-down': !isActive,'fa-angle-up':isActive}\"></span>\r\n--><span *ngIf=\"!isActive\" class=\"c-angle-down\">\r\n                <svg version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t width=\"100%\" height=\"100%\" viewBox=\"0 0 612 612\" style=\"enable-background:new 0 0 612 612;\" xml:space=\"preserve\">\r\n<g>\r\n\t<g id=\"_x31_0_34_\">\r\n\t\t<g>\r\n\t\t\t<path d=\"M604.501,134.782c-9.999-10.05-26.222-10.05-36.221,0L306.014,422.558L43.721,134.782\r\n\t\t\t\tc-9.999-10.05-26.223-10.05-36.222,0s-9.999,26.35,0,36.399l279.103,306.241c5.331,5.357,12.422,7.652,19.386,7.296\r\n\t\t\t\tc6.988,0.356,14.055-1.939,19.386-7.296l279.128-306.268C614.5,161.106,614.5,144.832,604.501,134.782z\"/>\r\n\t\t</g>\r\n\t</g>\r\n</g>\r\n</svg>\r\n\r\n            </span>\r\n            <span *ngIf=\"isActive\" class=\"c-angle-up\">\r\n                <svg version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t width=\"100%\" height=\"100%\" viewBox=\"0 0 612 612\" style=\"enable-background:new 0 0 612 612;\" xml:space=\"preserve\">\r\n<g>\r\n\t<g id=\"_x39__30_\">\r\n\t\t<g>\r\n\t\t\t<path d=\"M604.501,440.509L325.398,134.956c-5.331-5.357-12.423-7.627-19.386-7.27c-6.989-0.357-14.056,1.913-19.387,7.27\r\n\t\t\t\tL7.499,440.509c-9.999,10.024-9.999,26.298,0,36.323s26.223,10.024,36.222,0l262.293-287.164L568.28,476.832\r\n\t\t\t\tc9.999,10.024,26.222,10.024,36.221,0C614.5,466.809,614.5,450.534,604.501,440.509z\"/>\r\n\t\t</g>\r\n\t</g>\r\n</g>\r\n\r\n</svg>\r\n\r\n            </span>\r\n        </div>\r\n    </div>\r\n    <div [setPosition]=\"selectedListHeight?.val\" class=\"dropdown-list\" [ngClass]=\"{'dropdown-list-top': settings.position == 'top'}\"\r\n        [hidden]=\"!isActive\">\r\n        <div [ngClass]=\"{'arrow-up': settings.position == 'bottom', 'arrow-down': settings.position == 'top'}\" class=\"arrow-2\"></div>\r\n        <div [ngClass]=\"{'arrow-up': settings.position == 'bottom', 'arrow-down': settings.position == 'top'}\"></div>\r\n        <div class=\"list-area\">\r\n            <div class=\"pure-checkbox select-all\" *ngIf=\"settings.enableCheckAll && !settings.singleSelection && !settings.limitSelection\"\r\n                (click)=\"toggleSelectAll()\">\r\n                <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelectAll\" [disabled]=\"settings.limitSelection == selectedItems?.length\"\r\n                />\r\n                <label>\r\n                <span [hidden]=\"isSelectAll\">{{settings.selectAllText}}</span>\r\n                <span [hidden]=\"!isSelectAll\">{{settings.unSelectAllText}}</span>\r\n            </label>\r\n            </div>\r\n            <div class=\"list-filter\" *ngIf=\"settings.enableSearchFilter\">\r\n                <span class=\"c-search\">\r\n                    <svg version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t width=\"100%\" height=\"100%\" viewBox=\"0 0 615.52 615.52\" style=\"enable-background:new 0 0 615.52 615.52;\"\r\n\t xml:space=\"preserve\">\r\n<g>\r\n\t<g>\r\n\t\t<g id=\"Search__x28_and_thou_shall_find_x29_\">\r\n\t\t\t<g>\r\n\t\t\t\t<path d=\"M602.531,549.736l-184.31-185.368c26.679-37.72,42.528-83.729,42.528-133.548C460.75,103.35,357.997,0,231.258,0\r\n\t\t\t\t\tC104.518,0,1.765,103.35,1.765,230.82c0,127.47,102.753,230.82,229.493,230.82c49.53,0,95.271-15.944,132.78-42.777\r\n\t\t\t\t\tl184.31,185.366c7.482,7.521,17.292,11.291,27.102,11.291c9.812,0,19.62-3.77,27.083-11.291\r\n\t\t\t\t\tC617.496,589.188,617.496,564.777,602.531,549.736z M355.9,319.763l-15.042,21.273L319.7,356.174\r\n\t\t\t\t\tc-26.083,18.658-56.667,28.526-88.442,28.526c-84.365,0-152.995-69.035-152.995-153.88c0-84.846,68.63-153.88,152.995-153.88\r\n\t\t\t\t\ts152.996,69.034,152.996,153.88C384.271,262.769,374.462,293.526,355.9,319.763z\"/>\r\n\t\t\t</g>\r\n\t\t</g>\r\n\t</g>\r\n</g>\r\n\r\n</svg>\r\n\r\n                </span>\r\n                <input class=\"c-input\" *ngIf=\"!settings.lazyLoading && !searchTempl\" #searchInput type=\"text\" [placeholder]=\"settings.searchPlaceholderText\"\r\n                    [(ngModel)]=\"filter\">\r\n                <input class=\"c-input\" *ngIf=\"settings.lazyLoading && !searchTempl\" #searchInput type=\"text\" [placeholder]=\"settings.searchPlaceholderText\"\r\n                    (keyup)=\"filterInfiniteList($event)\">\r\n                <c-templateRenderer *ngIf=\"searchTempl\" [data]=\"searchTempl\" [item]=\"item\"></c-templateRenderer>\r\n            </div>\r\n            <ul *ngIf=\"!settings.groupBy\" [style.maxHeight]=\"settings.maxHeight+'px'\" class=\"lazyContainer\">\r\n                <span *ngIf=\"itemTempl\">\r\n            <li *ngFor=\"let item of data | listFilter: filter : settings.searchBy; let i = index;\" (click)=\"onItemClick(item,i,$event)\" class=\"pure-checkbox\">\r\n            <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"settings.limitSelection == selectedItems?.length && !isSelected(item)\"/>\r\n            <label></label>\r\n            <c-templateRenderer [data]=\"itemTempl\" [item]=\"item\"></c-templateRenderer>\r\n        </li>\r\n        </span>\r\n                <span *ngIf=\"!itemTempl && !settings.lazyLoading\">\r\n        <li *ngFor=\"let item of data | listFilter:filter : settings.searchBy; let i = index;\" (click)=\"onItemClick(item,i,$event)\" class=\"pure-checkbox\">\r\n            <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"settings.limitSelection == selectedItems?.length && !isSelected(item)\"/>\r\n            <label>{{item[settings.labelKey]}}</label>\r\n        </li>\r\n        </span>\r\n                <span *ngIf=\"!itemTempl && settings.lazyLoading\">\r\n            <div [ngStyle]=\"{'height':totalHeight+'px'}\" style=\"position: relative;\">\r\n\r\n            \r\n        <li *ngFor=\"let item of chunkArray | listFilter:filter : settings.searchBy; let i = index;\" (click)=\"onItemClick(item,i,$event)\" style=\"position: absolute;width: 100%;\" class=\"pure-checkbox\" [styleProp]=\"chunkIndex[i]\">\r\n            <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"settings.limitSelection == selectedItems?.length && !isSelected(item)\"/>\r\n            <label>{{item[settings.labelKey]}}</label>\r\n        </li>\r\n        </div>\r\n        </span>\r\n            </ul>\r\n            <div *ngIf=\"settings.groupBy\" [style.maxHeight]=\"settings.maxHeight+'px'\" style=\"overflow: auto;\">\r\n                <ul *ngFor=\"let obj of groupedData ; let i = index;\" class=\"list-grp\">\r\n                    <h4 *ngIf=\"(obj.value | listFilter:filter : settings.searchBy ).length > 0\">{{obj.key}}</h4>\r\n                    <span *ngIf=\"itemTempl\">\r\n        <li *ngFor=\"let item of obj.value | listFilter:filter : settings.searchBy; let i = index;\" (click)=\"onItemClick(item,i,$event)\" class=\"pure-checkbox\">\r\n            <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"settings.limitSelection == selectedItems?.length && !isSelected(item)\"/>\r\n            <label></label>\r\n            <c-templateRenderer [data]=\"itemTempl\" [item]=\"item\"></c-templateRenderer>\r\n        </li>\r\n        </span>\r\n                    <span *ngIf=\"!itemTempl\">\r\n        <li *ngFor=\"let item of obj.value | listFilter:filter : settings.searchBy; let i = index;\" (click)=\"onItemClick(item,i,$event)\" class=\"pure-checkbox\">\r\n            <input *ngIf=\"settings.showCheckbox\" type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"settings.limitSelection == selectedItems?.length && !isSelected(item)\"/>\r\n            <label>{{item[settings.labelKey]}}</label>\r\n        </li>\r\n        </span>\r\n                </ul>\r\n            </div>\r\n            <h5 class=\"list-message\" *ngIf=\"data?.length == 0\">{{settings.noDataLabel}}</h5>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -309,7 +337,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".cuppa-dropdown {\n  position: relative; }\n\n.c-btn {\n  display: inline-block;\n  background: #fff;\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  font-size: 14px;\n  color: #333; }\n\n.c-btn.disabled {\n  background: #ccc; }\n\n.c-btn:focus {\n  outline: none; }\n\n.selected-list .c-list {\n  float: left;\n  padding: 0px;\n  margin: 0px;\n  width: calc(100% - 20px); }\n  .selected-list .c-list .c-token {\n    list-style: none;\n    padding: 0px 5px;\n    background: #0079FE;\n    color: #fff;\n    border-radius: 2px;\n    margin-right: 4px;\n    margin-top: 2px;\n    float: left; }\n    .selected-list .c-list .c-token .c-label {\n      display: block;\n      float: left; }\n    .selected-list .c-list .c-token .fa-remove {\n      margin-left: 1px;\n      font-size: 12px;\n      z-index: 100000000; }\n\n.selected-list .fa-angle-down, .selected-list .fa-angle-up {\n  font-size: 15pt;\n  position: absolute;\n  right: 10px;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%); }\n\n.selected-list .countplaceholder {\n  position: absolute;\n  right: 30px;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%); }\n\n.selected-list .c-btn {\n  width: 100%;\n  box-shadow: 0px 1px 5px #959595;\n  padding: 10px;\n  cursor: pointer;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  position: relative; }\n\n.dropdown-list {\n  position: absolute;\n  padding-top: 14px;\n  width: 100%;\n  z-index: 9999; }\n  .dropdown-list ul {\n    padding: 0px;\n    list-style: none;\n    overflow: auto;\n    margin: 0px; }\n    .dropdown-list ul li {\n      padding: 10px 10px;\n      cursor: pointer;\n      text-align: left; }\n    .dropdown-list ul li:first-child {\n      padding-top: 10px; }\n    .dropdown-list ul li:last-child {\n      padding-bottom: 10px; }\n    .dropdown-list ul li:hover {\n      background: #f5f5f5; }\n  .dropdown-list ::-webkit-scrollbar {\n    width: 8px; }\n  .dropdown-list ::-webkit-scrollbar-thumb {\n    background: #cccccc;\n    border-radius: 5px; }\n  .dropdown-list ::-webkit-scrollbar-track {\n    background: #f2f2f2; }\n\n.arrow-up, .arrow-down {\n  width: 0;\n  height: 0;\n  border-left: 13px solid transparent;\n  border-right: 13px solid transparent;\n  border-bottom: 15px solid #fff;\n  margin-left: 15px;\n  position: absolute;\n  top: 0; }\n\n.arrow-down {\n  bottom: -14px;\n  top: unset;\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg); }\n\n.arrow-2 {\n  border-bottom: 15px solid #ccc;\n  top: -1px; }\n\n.arrow-down.arrow-2 {\n  top: unset;\n  bottom: -16px; }\n\n.list-area {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  background: #fff;\n  margin: 0px;\n  box-shadow: 0px 1px 5px #959595; }\n\n.select-all {\n  padding: 10px;\n  border-bottom: 1px solid #ccc;\n  text-align: left; }\n\n.list-filter {\n  border-bottom: 1px solid #ccc;\n  position: relative; }\n  .list-filter input {\n    border: 0px;\n    width: 100%;\n    height: 35px;\n    padding: 0px 0px 0px 35px; }\n  .list-filter input:focus {\n    outline: none; }\n  .list-filter .fa {\n    position: absolute;\n    top: 10px;\n    left: 13px;\n    color: #888; }\n\n.pure-checkbox input[type=\"checkbox\"] {\n  border: 0;\n  clip: rect(0 0 0 0);\n  height: 1px;\n  margin: -1px;\n  overflow: hidden;\n  padding: 0;\n  position: absolute;\n  width: 1px; }\n\n.pure-checkbox input[type=\"checkbox\"]:focus + label:before,\n.pure-checkbox input[type=\"checkbox\"]:hover + label:before {\n  border-color: #0079FE;\n  background-color: #f2f2f2; }\n\n.pure-checkbox input[type=\"checkbox\"]:active + label:before {\n  transition-duration: 0s; }\n\n.pure-checkbox input[type=\"checkbox\"] + label {\n  position: relative;\n  padding-left: 2em;\n  vertical-align: middle;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: pointer;\n  margin: 0px;\n  color: #000;\n  font-weight: 300; }\n\n.pure-checkbox input[type=\"checkbox\"] + label:before {\n  box-sizing: content-box;\n  content: '';\n  color: #0079FE;\n  position: absolute;\n  top: 50%;\n  left: 0;\n  width: 14px;\n  height: 14px;\n  margin-top: -9px;\n  border: 2px solid #0079FE;\n  text-align: center;\n  transition: all 0.4s ease; }\n\n.pure-checkbox input[type=\"checkbox\"] + label:after {\n  box-sizing: content-box;\n  content: '';\n  background-color: #0079FE;\n  position: absolute;\n  top: 50%;\n  left: 4px;\n  width: 10px;\n  height: 10px;\n  margin-top: -5px;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n  -webkit-transform-origin: 50%;\n          transform-origin: 50%;\n  transition: -webkit-transform 200ms ease-out;\n  transition: transform 200ms ease-out;\n  transition: transform 200ms ease-out, -webkit-transform 200ms ease-out; }\n\n.pure-checkbox input[type=\"checkbox\"]:disabled + label:before {\n  border-color: #cccccc; }\n\n.pure-checkbox input[type=\"checkbox\"]:disabled:focus + label:before\n.pure-checkbox input[type=\"checkbox\"]:disabled:hover + label:before {\n  background-color: inherit; }\n\n.pure-checkbox input[type=\"checkbox\"]:disabled:checked + label:before {\n  background-color: #cccccc; }\n\n.pure-checkbox input[type=\"checkbox\"] + label:after {\n  background-color: transparent;\n  top: 50%;\n  left: 4px;\n  width: 8px;\n  height: 3px;\n  margin-top: -4px;\n  border-style: solid;\n  border-color: #ffffff;\n  border-width: 0 0 3px 3px;\n  -o-border-image: none;\n     border-image: none;\n  -webkit-transform: rotate(-45deg) scale(0);\n          transform: rotate(-45deg) scale(0); }\n\n.pure-checkbox input[type=\"checkbox\"]:checked + label:after {\n  content: '';\n  -webkit-transform: rotate(-45deg) scale(1);\n          transform: rotate(-45deg) scale(1);\n  transition: -webkit-transform 200ms ease-out;\n  transition: transform 200ms ease-out;\n  transition: transform 200ms ease-out, -webkit-transform 200ms ease-out; }\n\n.pure-checkbox input[type=\"radio\"]:checked + label:before {\n  background-color: white; }\n\n.pure-checkbox input[type=\"radio\"]:checked + label:after {\n  -webkit-transform: scale(1);\n          transform: scale(1); }\n\n.pure-checkbox input[type=\"radio\"] + label:before {\n  border-radius: 50%; }\n\n.pure-checkbox input[type=\"checkbox\"]:checked + label:before {\n  background: #0079FE; }\n\n.pure-checkbox input[type=\"checkbox\"]:checked + label:after {\n  -webkit-transform: rotate(-45deg) scale(1);\n          transform: rotate(-45deg) scale(1); }\n\n.list-message {\n  text-align: center; }\n\n.list-grp {\n  padding: 0 15px !important; }\n\n.list-grp h4 {\n  text-transform: capitalize;\n  margin: 15px 0px 0px 0px;\n  font-size: 14px;\n  font-weight: 700; }\n\n.list-grp > li {\n  padding-left: 15px !important; }\n", ""]);
+exports.push([module.i, ".cuppa-dropdown {\n  position: relative; }\n\n.c-btn {\n  display: inline-block;\n  background: #fff;\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  font-size: 14px;\n  color: #333; }\n\n.c-btn.disabled {\n  background: #ccc; }\n\n.c-btn:focus {\n  outline: none; }\n\n.selected-list .c-list {\n  float: left;\n  padding: 0px;\n  margin: 0px;\n  width: calc(100% - 20px); }\n  .selected-list .c-list .c-token {\n    list-style: none;\n    padding: 2px 8px;\n    background: #0079FE;\n    color: #fff;\n    border-radius: 2px;\n    margin-right: 4px;\n    margin-top: 2px;\n    float: left;\n    position: relative;\n    padding-right: 25px; }\n    .selected-list .c-list .c-token .c-label {\n      display: block;\n      float: left; }\n    .selected-list .c-list .c-token .c-remove {\n      position: absolute;\n      right: 8px;\n      top: 50%;\n      -webkit-transform: translateY(-50%);\n              transform: translateY(-50%);\n      width: 10px; }\n      .selected-list .c-list .c-token .c-remove svg {\n        fill: #fff; }\n\n.selected-list .fa-angle-down, .selected-list .fa-angle-up {\n  font-size: 15pt;\n  position: absolute;\n  right: 10px;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%); }\n\n.selected-list .c-angle-down, .selected-list .c-angle-up {\n  width: 15px;\n  height: 15px;\n  position: absolute;\n  right: 10px;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n  pointer-events: none; }\n  .selected-list .c-angle-down svg, .selected-list .c-angle-up svg {\n    fill: #333; }\n\n.selected-list .countplaceholder {\n  position: absolute;\n  right: 30px;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%); }\n\n.selected-list .c-btn {\n  width: 100%;\n  box-shadow: 0px 1px 5px #959595;\n  padding: 10px;\n  cursor: pointer;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  position: relative; }\n  .selected-list .c-btn .c-icon {\n    position: absolute;\n    right: 5px;\n    top: 50%;\n    -webkit-transform: translateY(-50%);\n            transform: translateY(-50%); }\n\n.dropdown-list {\n  position: absolute;\n  padding-top: 14px;\n  width: 100%;\n  z-index: 9999; }\n  .dropdown-list ul {\n    padding: 0px;\n    list-style: none;\n    overflow: auto;\n    margin: 0px; }\n    .dropdown-list ul li {\n      padding: 10px 10px;\n      cursor: pointer;\n      text-align: left; }\n    .dropdown-list ul li:first-child {\n      padding-top: 10px; }\n    .dropdown-list ul li:last-child {\n      padding-bottom: 10px; }\n    .dropdown-list ul li:hover {\n      background: #f5f5f5; }\n  .dropdown-list ::-webkit-scrollbar {\n    width: 8px; }\n  .dropdown-list ::-webkit-scrollbar-thumb {\n    background: #cccccc;\n    border-radius: 5px; }\n  .dropdown-list ::-webkit-scrollbar-track {\n    background: #f2f2f2; }\n\n.arrow-up, .arrow-down {\n  width: 0;\n  height: 0;\n  border-left: 13px solid transparent;\n  border-right: 13px solid transparent;\n  border-bottom: 15px solid #fff;\n  margin-left: 15px;\n  position: absolute;\n  top: 0; }\n\n.arrow-down {\n  bottom: -14px;\n  top: unset;\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg); }\n\n.arrow-2 {\n  border-bottom: 15px solid #ccc;\n  top: -1px; }\n\n.arrow-down.arrow-2 {\n  top: unset;\n  bottom: -16px; }\n\n.list-area {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  background: #fff;\n  margin: 0px;\n  box-shadow: 0px 1px 5px #959595; }\n\n.select-all {\n  padding: 10px;\n  border-bottom: 1px solid #ccc;\n  text-align: left; }\n\n.list-filter {\n  border-bottom: 1px solid #ccc;\n  position: relative;\n  padding-left: 35px;\n  height: 35px; }\n  .list-filter input {\n    border: 0px;\n    width: 100%;\n    height: 100%;\n    padding: 0px; }\n  .list-filter input:focus {\n    outline: none; }\n  .list-filter .c-search {\n    position: absolute;\n    top: 9px;\n    left: 10px;\n    width: 15px;\n    height: 15px; }\n    .list-filter .c-search svg {\n      fill: #888; }\n\n.pure-checkbox input[type=\"checkbox\"] {\n  border: 0;\n  clip: rect(0 0 0 0);\n  height: 1px;\n  margin: -1px;\n  overflow: hidden;\n  padding: 0;\n  position: absolute;\n  width: 1px; }\n\n.pure-checkbox input[type=\"checkbox\"]:focus + label:before,\n.pure-checkbox input[type=\"checkbox\"]:hover + label:before {\n  border-color: #0079FE;\n  background-color: #f2f2f2; }\n\n.pure-checkbox input[type=\"checkbox\"]:active + label:before {\n  transition-duration: 0s; }\n\n.pure-checkbox input[type=\"checkbox\"] + label {\n  position: relative;\n  padding-left: 2em;\n  vertical-align: middle;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: pointer;\n  margin: 0px;\n  color: #000;\n  font-weight: 300; }\n\n.pure-checkbox input[type=\"checkbox\"] + label:before {\n  box-sizing: content-box;\n  content: '';\n  color: #0079FE;\n  position: absolute;\n  top: 50%;\n  left: 0;\n  width: 14px;\n  height: 14px;\n  margin-top: -9px;\n  border: 2px solid #0079FE;\n  text-align: center;\n  transition: all 0.4s ease; }\n\n.pure-checkbox input[type=\"checkbox\"] + label:after {\n  box-sizing: content-box;\n  content: '';\n  background-color: #0079FE;\n  position: absolute;\n  top: 50%;\n  left: 4px;\n  width: 10px;\n  height: 10px;\n  margin-top: -5px;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n  -webkit-transform-origin: 50%;\n          transform-origin: 50%;\n  transition: -webkit-transform 200ms ease-out;\n  transition: transform 200ms ease-out;\n  transition: transform 200ms ease-out, -webkit-transform 200ms ease-out; }\n\n.pure-checkbox input[type=\"checkbox\"]:disabled + label:before {\n  border-color: #cccccc; }\n\n.pure-checkbox input[type=\"checkbox\"]:disabled:focus + label:before\n.pure-checkbox input[type=\"checkbox\"]:disabled:hover + label:before {\n  background-color: inherit; }\n\n.pure-checkbox input[type=\"checkbox\"]:disabled:checked + label:before {\n  background-color: #cccccc; }\n\n.pure-checkbox input[type=\"checkbox\"] + label:after {\n  background-color: transparent;\n  top: 50%;\n  left: 4px;\n  width: 8px;\n  height: 3px;\n  margin-top: -4px;\n  border-style: solid;\n  border-color: #ffffff;\n  border-width: 0 0 3px 3px;\n  -o-border-image: none;\n     border-image: none;\n  -webkit-transform: rotate(-45deg) scale(0);\n          transform: rotate(-45deg) scale(0); }\n\n.pure-checkbox input[type=\"checkbox\"]:checked + label:after {\n  content: '';\n  -webkit-transform: rotate(-45deg) scale(1);\n          transform: rotate(-45deg) scale(1);\n  transition: -webkit-transform 200ms ease-out;\n  transition: transform 200ms ease-out;\n  transition: transform 200ms ease-out, -webkit-transform 200ms ease-out; }\n\n.pure-checkbox input[type=\"radio\"]:checked + label:before {\n  background-color: white; }\n\n.pure-checkbox input[type=\"radio\"]:checked + label:after {\n  -webkit-transform: scale(1);\n          transform: scale(1); }\n\n.pure-checkbox input[type=\"radio\"] + label:before {\n  border-radius: 50%; }\n\n.pure-checkbox input[type=\"checkbox\"]:checked + label:before {\n  background: #0079FE; }\n\n.pure-checkbox input[type=\"checkbox\"]:checked + label:after {\n  -webkit-transform: rotate(-45deg) scale(1);\n          transform: rotate(-45deg) scale(1); }\n\n.list-message {\n  text-align: center;\n  margin: 0px;\n  padding: 15px 0px;\n  font-size: initial; }\n\n.list-grp {\n  padding: 0 15px !important; }\n\n.list-grp h4 {\n  text-transform: capitalize;\n  margin: 15px 0px 0px 0px;\n  font-size: 14px;\n  font-weight: 700; }\n\n.list-grp > li {\n  padding-left: 15px !important; }\n", ""]);
 
 // exports
 
@@ -387,6 +415,7 @@ var AngularMultiSelect = /** @class */ (function () {
             selectAllText: 'Select All',
             unSelectAllText: 'UnSelect All',
             enableSearchFilter: false,
+            searchBy: [],
             maxHeight: 300,
             badgeShowLimit: 999999999999,
             classes: '',
@@ -568,7 +597,7 @@ var AngularMultiSelect = /** @class */ (function () {
         }
         this.isActive = !this.isActive;
         if (this.isActive) {
-            if (this.settings.searchAutofocus && this.settings.enableSearchFilter) {
+            if (this.settings.searchAutofocus && this.settings.enableSearchFilter && !this.searchTempl) {
                 setTimeout(function () {
                     _this.searchInput.nativeElement.focus();
                 }, 0);
@@ -720,12 +749,16 @@ var AngularMultiSelect = /** @class */ (function () {
         __metadata("design:type", typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_7__menu_item__["a" /* Badge */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__menu_item__["a" /* Badge */]) === "function" && _j || Object)
     ], AngularMultiSelect.prototype, "badgeTempl", void 0);
     __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ContentChild"])(__WEBPACK_IMPORTED_MODULE_7__menu_item__["c" /* Search */]),
+        __metadata("design:type", typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_7__menu_item__["c" /* Search */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__menu_item__["c" /* Search */]) === "function" && _k || Object)
+    ], AngularMultiSelect.prototype, "searchTempl", void 0);
+    __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('searchInput'),
-        __metadata("design:type", typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _k || Object)
+        __metadata("design:type", typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _l || Object)
     ], AngularMultiSelect.prototype, "searchInput", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('selectedList'),
-        __metadata("design:type", typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _l || Object)
+        __metadata("design:type", typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _m || Object)
     ], AngularMultiSelect.prototype, "selectedListElem", void 0);
     AngularMultiSelect = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -735,10 +768,10 @@ var AngularMultiSelect = /** @class */ (function () {
             styles: [__webpack_require__("../../../../../src/app/angular2-multiselect-dropdown/multiselect.component.scss")],
             providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR, DROPDOWN_CONTROL_VALIDATION]
         }),
-        __metadata("design:paramtypes", [typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"]) === "function" && _o || Object])
+        __metadata("design:paramtypes", [typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _o || Object, typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"]) === "function" && _p || Object])
     ], AngularMultiSelect);
     return AngularMultiSelect;
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
 }());
 
 var AngularMultiSelectModule = /** @class */ (function () {
@@ -747,8 +780,8 @@ var AngularMultiSelectModule = /** @class */ (function () {
     AngularMultiSelectModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [__WEBPACK_IMPORTED_MODULE_2__angular_common__["CommonModule"], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormsModule"]],
-            declarations: [AngularMultiSelect, __WEBPACK_IMPORTED_MODULE_5__clickOutside__["a" /* ClickOutsideDirective */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["b" /* ScrollDirective */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["d" /* styleDirective */], __WEBPACK_IMPORTED_MODULE_6__list_filter__["a" /* ListFilterPipe */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["b" /* Item */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["c" /* TemplateRenderer */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["a" /* Badge */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["c" /* setPosition */]],
-            exports: [AngularMultiSelect, __WEBPACK_IMPORTED_MODULE_5__clickOutside__["a" /* ClickOutsideDirective */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["b" /* ScrollDirective */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["d" /* styleDirective */], __WEBPACK_IMPORTED_MODULE_6__list_filter__["a" /* ListFilterPipe */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["b" /* Item */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["c" /* TemplateRenderer */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["a" /* Badge */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["c" /* setPosition */]]
+            declarations: [AngularMultiSelect, __WEBPACK_IMPORTED_MODULE_5__clickOutside__["a" /* ClickOutsideDirective */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["b" /* ScrollDirective */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["d" /* styleDirective */], __WEBPACK_IMPORTED_MODULE_6__list_filter__["a" /* ListFilterPipe */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["b" /* Item */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["d" /* TemplateRenderer */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["a" /* Badge */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["c" /* Search */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["c" /* setPosition */]],
+            exports: [AngularMultiSelect, __WEBPACK_IMPORTED_MODULE_5__clickOutside__["a" /* ClickOutsideDirective */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["b" /* ScrollDirective */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["d" /* styleDirective */], __WEBPACK_IMPORTED_MODULE_6__list_filter__["a" /* ListFilterPipe */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["b" /* Item */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["d" /* TemplateRenderer */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["a" /* Badge */], __WEBPACK_IMPORTED_MODULE_7__menu_item__["c" /* Search */], __WEBPACK_IMPORTED_MODULE_5__clickOutside__["c" /* setPosition */]]
         })
     ], AngularMultiSelectModule);
     return AngularMultiSelectModule;
@@ -790,7 +823,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".left-sidebar, .right-sidebar {\r\n    width: 330px;\r\n    max-width: 330px;\r\n    min-width: 330px;\r\n}\r\n.outer-wrapper {\r\n    padding: 30px;\r\n}\r\n.center-content{\r\n    background: #ffffff;\r\n    border: 1px solid rgba(0,0,0,.125);\r\n    border-radius: 3px;\r\n    padding: 15px;\r\n}\r\n.nav-sub{\r\n    width: 100%;\r\n    box-shadow: none;\r\n    margin-bottom: 6px;\r\n    padding: 0px;\r\n}\r\n.nav-wrapper {\r\n    padding: 0px 10px;\r\n}", ""]);
+exports.push([module.i, ".left-sidebar {\r\n    position: fixed;\r\n    top: 70px;\r\n    height: calc(100vh - 75px);\r\n    overflow: auto;\r\n    padding-right: 0px;\r\n}\r\n.left-sidebar, .right-sidebar {\r\n    width: 330px;\r\n    max-width: 315px;\r\n    min-width: 315px;\r\n}\r\n\r\n.outer-wrapper {\r\n    padding: 30px;\r\n}\r\n.center-content{\r\n    background: #ffffff;\r\n    border: 1px solid rgba(0,0,0,.125);\r\n    border-radius: 3px;\r\n    padding: 15px;\r\n    margin-left: 330px;\r\n    margin-top: 55px;\r\n}\r\n.nav-sub{\r\n    width: 100%;\r\n    box-shadow: none;\r\n    margin-bottom: 6px;\r\n    padding: 0px;\r\n}\r\n.nav-wrapper {\r\n    padding: 0px 10px;\r\n}", ""]);
 
 // exports
 
@@ -803,7 +836,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <nav class=\"navbar navbar-expand-lg nav-sub navbar-light d-md-none d-lg-none\">\r\n    <div class=\"nav-wrapper\">\r\n      <a class=\"navbar-brand\" href=\"#\">Examples</a>\r\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\"\r\n        aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n     <span class=\"fa fa-angle-down\"></span>\r\n  </button>\r\n    </div>\r\n\r\n\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n      <div class=\"list-group\">\r\n        <a [routerLink]=\"['basic']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiselect basic example</a>\r\n        <a [routerLink]=\"['singleselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Single selection</a>\r\n        <a [routerLink]=\"['searchfilter']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Search filter</a>\r\n        <a [routerLink]=\"['groupby']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Group By</a>\r\n        <a [routerLink]=\"['templating']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Templating</a>\r\n        <a [routerLink]=\"['usinginform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Template Driven Forms</a>\r\n        <a [routerLink]=\"['usinginreactiveform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Reactive Forms</a>\r\n        <a [routerLink]=\"['lazyloading']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Lazy Loading</a>\r\n        <a [routerLink]=\"['resetdropdown']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Reset dropdown</a>\r\n        <a [routerLink]=\"['disablemode']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Disable dropdown</a>\r\n        <a [routerLink]=\"['limitselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit selection</a>\r\n        <a [routerLink]=\"['limitbadges']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit Badges</a>\r\n        <a [routerLink]=\"['customplaceholder']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Custom placeholder</a>\r\n        <a [routerLink]=\"['styling']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">CSS Styling</a>\r\n        <a [routerLink]=\"['theming']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Theming</a>\r\n\r\n      </div>\r\n\r\n    </div>\r\n  </nav>\r\n  <div class=\"col-md-3 left-sidebar d-none d-md-block d-lg-block\">\r\n    <div class=\"list-group\">\r\n      <a href=\"#\" class=\"list-group-item list-group-item-action disabled\">\r\n    Examples\r\n  </a>\r\n      <a [routerLink]=\"['basic']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiselect basic example</a>\r\n      <a [routerLink]=\"['singleselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Single selection</a>\r\n      <a [routerLink]=\"['searchfilter']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Search filter</a>\r\n      <a [routerLink]=\"['groupby']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Group By</a>\r\n      <a [routerLink]=\"['templating']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Templating</a>\r\n      <a [routerLink]=\"['usinginform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Template Driven Forms</a>\r\n      <a [routerLink]=\"['usinginreactiveform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Reactive Forms</a>\r\n      <a [routerLink]=\"['lazyloading']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Lazy Loading</a>\r\n      <a [routerLink]=\"['multipledropdowns']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiple dropdowns in a page</a>\r\n      <a [routerLink]=\"['dynamicdatasets']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Dynamic Data Sets loading</a>\r\n      <a [routerLink]=\"['resetdropdown']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Reset dropdown</a>\r\n      <a [routerLink]=\"['disablemode']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Disable dropdown</a>\r\n      <a [routerLink]=\"['limitselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit selection</a>\r\n      <a [routerLink]=\"['limitbadges']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit Badges</a>\r\n      <a [routerLink]=\"['customplaceholder']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Custom placeholder</a>\r\n      <a [routerLink]=\"['styling']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">CSS Styling</a>\r\n<!--      <a [routerLink]=\"['theming']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Theming</a>\r\n-->\r\n    </div>\r\n  </div>\r\n  <div class=\"col center-content\">\r\n    <router-outlet></router-outlet>\r\n  </div>\r\n\r\n</div>"
+module.exports = "<div class=\"row\">\r\n  <nav class=\"navbar navbar-expand-lg nav-sub navbar-light d-md-none d-lg-none\">\r\n    <div class=\"nav-wrapper\">\r\n      <a class=\"navbar-brand\" href=\"#\">Examples</a>\r\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\"\r\n        aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n     <span class=\"fa fa-angle-down\"></span>\r\n  </button>\r\n    </div>\r\n\r\n\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n      <div class=\"list-group\">\r\n        <a [routerLink]=\"['basic']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiselect basic example</a>\r\n        <a [routerLink]=\"['singleselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Single selection</a>\r\n        <a [routerLink]=\"['searchfilter']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Search filter</a>\r\n        <a [routerLink]=\"['groupby']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Group By</a>\r\n        <a [routerLink]=\"['templating']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Templating</a>\r\n        <a [routerLink]=\"['usinginform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Template Driven Forms</a>\r\n        <a [routerLink]=\"['usinginreactiveform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Reactive Forms</a>\r\n        <a [routerLink]=\"['lazyloading']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Lazy Loading</a>\r\n        <a [routerLink]=\"['resetdropdown']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Reset dropdown</a>\r\n        <a [routerLink]=\"['disablemode']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Disable dropdown</a>\r\n        <a [routerLink]=\"['limitselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit selection</a>\r\n        <a [routerLink]=\"['limitbadges']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit Badges</a>\r\n        <a [routerLink]=\"['customplaceholder']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Custom placeholder</a>\r\n        <a [routerLink]=\"['styling']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">CSS Styling</a>\r\n        <a [routerLink]=\"['theming']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Theming</a>\r\n\r\n      </div>\r\n\r\n    </div>\r\n  </nav>\r\n  <div class=\"col-md-3 left-sidebar d-none d-md-block d-lg-block\">\r\n    <div class=\"list-group\">\r\n      <a href=\"#\" class=\"list-group-item list-group-item-action disabled\">\r\n    Examples\r\n  </a>\r\n      <a [routerLink]=\"['basic']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiselect basic example</a>\r\n      <a [routerLink]=\"['singleselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Single selection</a>\r\n      <a [routerLink]=\"['searchfilter']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Search filter</a>\r\n      <a [routerLink]=\"['customSearchAPI']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Custom Search / Search API</a>\r\n      <a [routerLink]=\"['groupby']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Group By</a>\r\n      <a [routerLink]=\"['templating']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Templating</a>\r\n      <a [routerLink]=\"['usinginform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Template Driven Forms</a>\r\n      <a [routerLink]=\"['usinginreactiveform']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Using in Reactive Forms</a>\r\n      <a [routerLink]=\"['lazyloading']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Lazy Loading</a>\r\n      <a [routerLink]=\"['remoteData']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Data from remote API</a>\r\n      <a [routerLink]=\"['multipledropdowns']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Multiple dropdowns in a page</a>\r\n      <a [routerLink]=\"['dynamicdatasets']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Dynamic Data Sets loading</a>\r\n      <a [routerLink]=\"['resetdropdown']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Reset dropdown</a>\r\n      <a [routerLink]=\"['disablemode']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Disable dropdown</a>\r\n      <a [routerLink]=\"['limitselection']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit selection</a>\r\n      <a [routerLink]=\"['limitbadges']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Limit Badges</a>\r\n      <a [routerLink]=\"['customplaceholder']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Custom placeholder</a>\r\n      <a [routerLink]=\"['styling']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">CSS Styling</a>\r\n<!--      <a [routerLink]=\"['theming']\" routerLinkActive=\"active\" href=\"#\" class=\"list-group-item list-group-item-action\">Theming</a>\r\n-->\r\n    </div>\r\n  </div>\r\n  <div class=\"col center-content\">\r\n    <router-outlet></router-outlet>\r\n  </div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -1066,36 +1099,42 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__examples_mock_data__ = __webpack_require__("../../../../../src/app/examples/mock-data.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular2_multiselect_dropdown_multiselect_component__ = __webpack_require__("../../../../../src/app/angular2-multiselect-dropdown/multiselect.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_router__ = __webpack_require__("../../../../../src/app/app.router.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__examples_basic__ = __webpack_require__("../../../../../src/app/examples/basic.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__examples_singleselection__ = __webpack_require__("../../../../../src/app/examples/singleselection.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__examples_groupBy__ = __webpack_require__("../../../../../src/app/examples/groupBy.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__examples_searchFilter__ = __webpack_require__("../../../../../src/app/examples/searchFilter.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__examples_templating__ = __webpack_require__("../../../../../src/app/examples/templating.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__examples_resetdropdown__ = __webpack_require__("../../../../../src/app/examples/resetdropdown.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__examples_disablemode__ = __webpack_require__("../../../../../src/app/examples/disablemode.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__examples_limitselection__ = __webpack_require__("../../../../../src/app/examples/limitselection.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__examples_limitbadges__ = __webpack_require__("../../../../../src/app/examples/limitbadges.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__examples_customplaceholder__ = __webpack_require__("../../../../../src/app/examples/customplaceholder.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__examples_styling__ = __webpack_require__("../../../../../src/app/examples/styling.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__examples_gist__ = __webpack_require__("../../../../../src/app/examples/gist.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_primeng_primeng__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__examples_usingWithForms__ = __webpack_require__("../../../../../src/app/examples/usingWithForms.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__examples_usingInReactForms__ = __webpack_require__("../../../../../src/app/examples/usingInReactForms.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__examples_lazyLoading__ = __webpack_require__("../../../../../src/app/examples/lazyLoading.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__examples_multipleDropdowns__ = __webpack_require__("../../../../../src/app/examples/multipleDropdowns.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__examples_dynamicDataSets__ = __webpack_require__("../../../../../src/app/examples/dynamicDataSets.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__examples_theming__ = __webpack_require__("../../../../../src/app/examples/theming.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_common_http__ = __webpack_require__("../../../common/@angular/common/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__examples_mock_data__ = __webpack_require__("../../../../../src/app/examples/mock-data.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular2_multiselect_dropdown_multiselect_component__ = __webpack_require__("../../../../../src/app/angular2-multiselect-dropdown/multiselect.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_router__ = __webpack_require__("../../../../../src/app/app.router.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__examples_basic__ = __webpack_require__("../../../../../src/app/examples/basic.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__examples_singleselection__ = __webpack_require__("../../../../../src/app/examples/singleselection.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__examples_groupBy__ = __webpack_require__("../../../../../src/app/examples/groupBy.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__examples_searchFilter__ = __webpack_require__("../../../../../src/app/examples/searchFilter.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__examples_templating__ = __webpack_require__("../../../../../src/app/examples/templating.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__examples_resetdropdown__ = __webpack_require__("../../../../../src/app/examples/resetdropdown.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__examples_disablemode__ = __webpack_require__("../../../../../src/app/examples/disablemode.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__examples_limitselection__ = __webpack_require__("../../../../../src/app/examples/limitselection.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__examples_limitbadges__ = __webpack_require__("../../../../../src/app/examples/limitbadges.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__examples_customplaceholder__ = __webpack_require__("../../../../../src/app/examples/customplaceholder.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__examples_styling__ = __webpack_require__("../../../../../src/app/examples/styling.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__examples_gist__ = __webpack_require__("../../../../../src/app/examples/gist.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21_primeng_primeng__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__examples_usingWithForms__ = __webpack_require__("../../../../../src/app/examples/usingWithForms.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__examples_usingInReactForms__ = __webpack_require__("../../../../../src/app/examples/usingInReactForms.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__examples_lazyLoading__ = __webpack_require__("../../../../../src/app/examples/lazyLoading.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__examples_multipleDropdowns__ = __webpack_require__("../../../../../src/app/examples/multipleDropdowns.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__examples_dynamicDataSets__ = __webpack_require__("../../../../../src/app/examples/dynamicDataSets.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__examples_theming__ = __webpack_require__("../../../../../src/app/examples/theming.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__examples_remoteData__ = __webpack_require__("../../../../../src/app/examples/remoteData.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__examples_customSearch__ = __webpack_require__("../../../../../src/app/examples/customSearch.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -1129,37 +1168,40 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__examples_gist__["a" /* ng2Gist */],
-                __WEBPACK_IMPORTED_MODULE_8__examples_basic__["a" /* BasicExample */],
-                __WEBPACK_IMPORTED_MODULE_9__examples_singleselection__["a" /* SingleSelectionExample */],
-                __WEBPACK_IMPORTED_MODULE_10__examples_groupBy__["a" /* GroupByExample */],
-                __WEBPACK_IMPORTED_MODULE_11__examples_searchFilter__["a" /* SearchFilterExample */],
-                __WEBPACK_IMPORTED_MODULE_12__examples_templating__["a" /* TemplatingExample */],
-                __WEBPACK_IMPORTED_MODULE_13__examples_resetdropdown__["a" /* ResetDropdownExample */],
-                __WEBPACK_IMPORTED_MODULE_14__examples_disablemode__["a" /* DisableModeExample */],
-                __WEBPACK_IMPORTED_MODULE_15__examples_limitselection__["a" /* LimitSelectionExample */],
-                __WEBPACK_IMPORTED_MODULE_16__examples_limitbadges__["a" /* LimitBadgesExample */],
-                __WEBPACK_IMPORTED_MODULE_17__examples_customplaceholder__["a" /* CustomPlaceholderExample */],
-                __WEBPACK_IMPORTED_MODULE_18__examples_styling__["a" /* StylingExample */],
-                __WEBPACK_IMPORTED_MODULE_21__examples_usingWithForms__["a" /* UsingWithFormExample */],
-                __WEBPACK_IMPORTED_MODULE_22__examples_usingInReactForms__["a" /* UsingWithReactiveFormExample */],
-                __WEBPACK_IMPORTED_MODULE_23__examples_lazyLoading__["a" /* LazyLoadingExample */],
-                __WEBPACK_IMPORTED_MODULE_24__examples_multipleDropdowns__["a" /* MultipleDropdownsExample */],
-                __WEBPACK_IMPORTED_MODULE_25__examples_dynamicDataSets__["a" /* DynamicDataSetsExample */],
-                __WEBPACK_IMPORTED_MODULE_26__examples_theming__["a" /* ThemingExample */]
+                __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__examples_gist__["a" /* ng2Gist */],
+                __WEBPACK_IMPORTED_MODULE_9__examples_basic__["a" /* BasicExample */],
+                __WEBPACK_IMPORTED_MODULE_10__examples_singleselection__["a" /* SingleSelectionExample */],
+                __WEBPACK_IMPORTED_MODULE_11__examples_groupBy__["a" /* GroupByExample */],
+                __WEBPACK_IMPORTED_MODULE_12__examples_searchFilter__["a" /* SearchFilterExample */],
+                __WEBPACK_IMPORTED_MODULE_13__examples_templating__["a" /* TemplatingExample */],
+                __WEBPACK_IMPORTED_MODULE_14__examples_resetdropdown__["a" /* ResetDropdownExample */],
+                __WEBPACK_IMPORTED_MODULE_15__examples_disablemode__["a" /* DisableModeExample */],
+                __WEBPACK_IMPORTED_MODULE_16__examples_limitselection__["a" /* LimitSelectionExample */],
+                __WEBPACK_IMPORTED_MODULE_17__examples_limitbadges__["a" /* LimitBadgesExample */],
+                __WEBPACK_IMPORTED_MODULE_18__examples_customplaceholder__["a" /* CustomPlaceholderExample */],
+                __WEBPACK_IMPORTED_MODULE_19__examples_styling__["a" /* StylingExample */],
+                __WEBPACK_IMPORTED_MODULE_22__examples_usingWithForms__["a" /* UsingWithFormExample */],
+                __WEBPACK_IMPORTED_MODULE_23__examples_usingInReactForms__["a" /* UsingWithReactiveFormExample */],
+                __WEBPACK_IMPORTED_MODULE_24__examples_lazyLoading__["a" /* LazyLoadingExample */],
+                __WEBPACK_IMPORTED_MODULE_25__examples_multipleDropdowns__["a" /* MultipleDropdownsExample */],
+                __WEBPACK_IMPORTED_MODULE_26__examples_dynamicDataSets__["a" /* DynamicDataSetsExample */],
+                __WEBPACK_IMPORTED_MODULE_27__examples_theming__["a" /* ThemingExample */],
+                __WEBPACK_IMPORTED_MODULE_28__examples_remoteData__["a" /* RemoteDataExample */],
+                __WEBPACK_IMPORTED_MODULE_29__examples_customSearch__["a" /* CustomSearchExample */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["ReactiveFormsModule"],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_7__app_router__["a" /* AppRouterModule */],
-                __WEBPACK_IMPORTED_MODULE_6__angular2_multiselect_dropdown_multiselect_component__["a" /* AngularMultiSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_20_primeng_primeng__["TabViewModule"]
+                __WEBPACK_IMPORTED_MODULE_8__app_router__["a" /* AppRouterModule */],
+                __WEBPACK_IMPORTED_MODULE_7__angular2_multiselect_dropdown_multiselect_component__["a" /* AngularMultiSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_21_primeng_primeng__["TabViewModule"],
+                __WEBPACK_IMPORTED_MODULE_4__angular_common_http__["b" /* HttpClientModule */]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_4__examples_mock_data__["a" /* MockService */]],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_5__examples_mock_data__["a" /* MockService */]],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
@@ -1193,12 +1235,16 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__examples_multipleDropdowns__ = __webpack_require__("../../../../../src/app/examples/multipleDropdowns.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__examples_dynamicDataSets__ = __webpack_require__("../../../../../src/app/examples/dynamicDataSets.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__examples_theming__ = __webpack_require__("../../../../../src/app/examples/theming.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__examples_remoteData__ = __webpack_require__("../../../../../src/app/examples/remoteData.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__examples_customSearch__ = __webpack_require__("../../../../../src/app/examples/customSearch.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -1236,7 +1282,9 @@ var appRoutes = [
     { path: 'lazyloading', component: __WEBPACK_IMPORTED_MODULE_15__examples_lazyLoading__["a" /* LazyLoadingExample */] },
     { path: 'multipledropdowns', component: __WEBPACK_IMPORTED_MODULE_16__examples_multipleDropdowns__["a" /* MultipleDropdownsExample */] },
     { path: 'dynamicdatasets', component: __WEBPACK_IMPORTED_MODULE_17__examples_dynamicDataSets__["a" /* DynamicDataSetsExample */] },
-    { path: 'theming', component: __WEBPACK_IMPORTED_MODULE_18__examples_theming__["a" /* ThemingExample */] }
+    { path: 'theming', component: __WEBPACK_IMPORTED_MODULE_18__examples_theming__["a" /* ThemingExample */] },
+    { path: 'remoteData', component: __WEBPACK_IMPORTED_MODULE_19__examples_remoteData__["a" /* RemoteDataExample */] },
+    { path: 'customSearchAPI', component: __WEBPACK_IMPORTED_MODULE_20__examples_customSearch__["a" /* CustomSearchExample */] }
 ];
 var AppRouterModule = /** @class */ (function () {
     function AppRouterModule() {
@@ -1333,6 +1381,89 @@ var BasicExample = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=C:/Users/Lenovo/Documents/Projects/angular2-multiselect-dropdown/src/basic.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/examples/customSearch.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CustomSearchExample; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/@angular/common/http.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CustomSearchExample = /** @class */ (function () {
+    function CustomSearchExample(http) {
+        this.http = http;
+        this.itemList = [];
+        this.selectedItems = [];
+        this.settings = {};
+        this.cssgist = false;
+        this.title = "Custom Search / Search from API";
+        this.tsgist = "CuppaLabs/1bab5ecbbb22727eb0afe49848a454f0";
+        this.htmlgist = "CuppaLabs/7f0d8ea9f9cfe9eec2cc1699affd2c14";
+        this.tstitle = "customSearch.ts";
+        this.htmltitle = "customSearch.html";
+    }
+    CustomSearchExample.prototype.ngOnInit = function () {
+        this.settings = {
+            text: "Select Countries",
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            classes: "myclass custom-class",
+            primaryKey: "alpha3Code",
+            labelKey: "name",
+            noDataLabel: "Search Countries...",
+            enableSearchFilter: true,
+            searchBy: ['name', 'capital']
+        };
+    };
+    CustomSearchExample.prototype.onItemSelect = function (item) {
+        console.log(item);
+        console.log(this.selectedItems);
+    };
+    CustomSearchExample.prototype.OnItemDeSelect = function (item) {
+        console.log(item);
+        console.log(this.selectedItems);
+    };
+    CustomSearchExample.prototype.onSelectAll = function (items) {
+        console.log(items);
+    };
+    CustomSearchExample.prototype.onDeSelectAll = function (items) {
+        console.log(items);
+    };
+    CustomSearchExample.prototype.onSearch = function (evt) {
+        var _this = this;
+        console.log(evt.target.value);
+        this.itemList = [];
+        this.http.get('https://restcountries.eu/rest/v2/name/' + evt.target.value + '?fulltext=true')
+            .subscribe(function (res) {
+            console.log(res);
+            _this.itemList = res;
+        }, function (error) {
+        });
+    };
+    CustomSearchExample = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: __webpack_require__("../../../../../src/app/examples/views/customSearch.html")
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
+    ], CustomSearchExample);
+    return CustomSearchExample;
+    var _a;
+}());
+
+//# sourceMappingURL=C:/Users/Lenovo/Documents/Projects/angular2-multiselect-dropdown/src/customSearch.js.map
 
 /***/ }),
 
@@ -2187,6 +2318,87 @@ var MultipleDropdownsExample = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/examples/remoteData.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RemoteDataExample; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/@angular/common/http.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var RemoteDataExample = /** @class */ (function () {
+    function RemoteDataExample(http) {
+        this.http = http;
+        this.itemList = [];
+        this.selectedItems = [];
+        this.settings = {};
+        this.cssgist = false;
+        this.title = "Data from remote API example";
+        this.tsgist = "CuppaLabs/ee72fbc7b21dad7e4e7664c5b1553235";
+        this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
+        this.tstitle = "basic.ts";
+        this.htmltitle = "basic.html";
+    }
+    RemoteDataExample.prototype.ngOnInit = function () {
+        var _this = this;
+        this.http.get('https://restcountries.eu/rest/v2/all')
+            .subscribe(function (res) {
+            console.log(res);
+            _this.itemList = res;
+        }, function (error) {
+        });
+        this.settings = {
+            text: "Select Countries",
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            classes: "myclass custom-class",
+            primaryKey: "alpha3Code",
+            labelKey: "name",
+            enableSearchFilter: true,
+            searchBy: ['name', 'capital']
+        };
+    };
+    RemoteDataExample.prototype.onItemSelect = function (item) {
+        console.log(item);
+        console.log(this.selectedItems);
+    };
+    RemoteDataExample.prototype.OnItemDeSelect = function (item) {
+        console.log(item);
+        console.log(this.selectedItems);
+    };
+    RemoteDataExample.prototype.onSelectAll = function (items) {
+        console.log(items);
+    };
+    RemoteDataExample.prototype.onDeSelectAll = function (items) {
+        console.log(items);
+    };
+    RemoteDataExample.prototype.onSearch = function (evt) {
+        console.log(evt.target.value);
+    };
+    RemoteDataExample = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: __webpack_require__("../../../../../src/app/examples/views/remoteData.html")
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
+    ], RemoteDataExample);
+    return RemoteDataExample;
+    var _a;
+}());
+
+//# sourceMappingURL=C:/Users/Lenovo/Documents/Projects/angular2-multiselect-dropdown/src/remoteData.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/examples/resetdropdown.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2389,7 +2601,7 @@ var SingleSelectionExample = /** @class */ (function () {
         this.selectedItems = [
             { "id": 1, "itemName": "India", "name": "IN" }
         ];
-        this.settings = { singleSelection: true, text: "Select Country", labelKey: "name" };
+        this.settings = { singleSelection: true, text: "Select Country" };
     };
     SingleSelectionExample.prototype.onItemSelect = function (item) {
         console.log(item);
@@ -2818,6 +3030,13 @@ var UsingWithFormExample = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/examples/views/customSearch.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h2 class=\"example-title\">\r\n    {{title}}</h2>\r\n<div class=\"col-md-6 mr-auto ml-auto dropdown-container\">\r\n    <angular2-multiselect [data]=\"itemList\" [(ngModel)]=\"selectedItems\" [settings]=\"settings\" (onSelect)=\"onItemSelect($event)\"\r\n        (onDeSelect)=\"OnItemDeSelect($event)\" (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\">\r\n        <c-search>\r\n             <ng-template>\r\n                 <input type=\"text\" (keyup)=\"onSearch($event)\" placeholder=\"Search countries\" style=\"border: none;width: 100%; height: 100%;outline: none;\"/>\r\n             </ng-template>\r\n        </c-search>\r\n        <c-item>\r\n            <ng-template let-item=\"item\">\r\n                <label style=\"color: #333;width: 150px;\">{{item.name}}</label>\r\n                <img [src]=\"item.flag\" style=\"width: 30px; border: 1px solid #efefef;margin-right: 0px;\" />\r\n                <label>{{item.capital}}</label>\r\n            </ng-template>\r\n        </c-item>\r\n    </angular2-multiselect>\r\n</div>\r\n<h4 class=\"example-title code-section\">Code</h4>\r\n\r\n<p-tabView>\r\n    <p-tabPanel header=\"{{tstitle}}\">\r\n        <ng2-gist [gistId]=\"tsgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <p-tabPanel header=\"{{htmltitle}}\">\r\n        <ng2-gist [gistId]=\"htmlgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <span *ngIf=\"cssgist\">\r\n        <p-tabPanel header=\"{{csstitle}}\">\r\n        <ng2-gist [gistId]=\"cssgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n</p-tabView>"
+
+/***/ }),
+
 /***/ "../../../../../src/app/examples/views/disableMode.html":
 /***/ (function(module, exports) {
 
@@ -2850,6 +3069,13 @@ module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"row
 /***/ (function(module, exports) {
 
 module.exports = "<h2 class=\"example-title\"> {{title}}</h2>\r\n<div class=\"col-md-8 mr-auto ml-auto dropdown-container\">\r\n    <div class=\"form-group col-md-12\">\r\n        <label for=\"directorySpecialties\">Directory Specialties</label>\r\n        <angular2-multiselect id=\"directorySpecialties\" name=\"directorySpecialties\" [(ngModel)]=\"providerLocation.directorySpecialties\"\r\n            [data]=\"directorySpecialties\" [settings]=\"dropdownSettings\">\r\n        </angular2-multiselect>\r\n    </div>\r\n    <div class=\"form-group col-md-12\">\r\n        <label for=\"useCases\">Use Cases</label>\r\n        <angular2-multiselect id=\"useCases\" name=\"useCases\" [(ngModel)]=\"providerLocation.useCases\" [data]=\"useCases\" [settings]=\"dropdownSettings2\">\r\n        </angular2-multiselect>\r\n    </div>\r\n</div>\r\n<h4 class=\"example-title code-section\">Code</h4>\r\n\r\n<p-tabView>\r\n    <p-tabPanel header=\"{{tstitle}}\">\r\n        <ng2-gist [gistId]=\"tsgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <p-tabPanel header=\"{{htmltitle}}\">\r\n        <ng2-gist [gistId]=\"htmlgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <span *ngIf=\"cssgist\">\r\n        <p-tabPanel header=\"{{csstitle}}\">\r\n        <ng2-gist [gistId]=\"cssgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n    <span *ngIf=\"mockgist\">\r\n        <p-tabPanel header=\"{{mocktitle}}\">\r\n        <ng2-gist [gistId]=\"mockgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n</p-tabView>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/examples/views/remoteData.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h2 class=\"example-title\">\r\n    {{title}}</h2>\r\n<div class=\"col-md-6 mr-auto ml-auto dropdown-container\">\r\n    <angular2-multiselect [data]=\"itemList\" [(ngModel)]=\"selectedItems\" [settings]=\"settings\" (onSelect)=\"onItemSelect($event)\"\r\n        (onDeSelect)=\"OnItemDeSelect($event)\" (onSelectAll)=\"onSelectAll($event)\" (onDeSelectAll)=\"onDeSelectAll($event)\">\r\n        <c-item>\r\n            <ng-template let-item=\"item\">\r\n                <label style=\"color: #333;width: 150px;\">{{item.name}}</label>\r\n                <img [src]=\"item.flag\" style=\"width: 30px; border: 1px solid #efefef;margin-right: 0px;\" />\r\n                <label>{{item.capital}}</label>\r\n            </ng-template>\r\n        </c-item>\r\n    </angular2-multiselect>\r\n</div>\r\n<h4 class=\"example-title code-section\">Code</h4>\r\n\r\n<p-tabView>\r\n    <p-tabPanel header=\"{{tstitle}}\">\r\n        <ng2-gist [gistId]=\"tsgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <p-tabPanel header=\"{{htmltitle}}\">\r\n        <ng2-gist [gistId]=\"htmlgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    <span *ngIf=\"cssgist\">\r\n        <p-tabPanel header=\"{{csstitle}}\">\r\n        <ng2-gist [gistId]=\"cssgist\"></ng2-gist>\r\n    </p-tabPanel>\r\n    </span>\r\n</p-tabView>"
 
 /***/ }),
 

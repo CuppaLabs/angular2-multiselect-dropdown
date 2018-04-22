@@ -1,8 +1,16 @@
+.left-sidebar {
+    position: fixed;
+    top: 70px;
+    height: calc(100vh - 75px);
+    overflow: auto;
+    padding-right: 0px;
+}
 .left-sidebar, .right-sidebar {
     width: 330px;
-    max-width: 330px;
-    min-width: 330px;
+    max-width: 315px;
+    min-width: 315px;
 }
+
 .outer-wrapper {
     padding: 30px;
 }
@@ -11,6 +19,8 @@
     border: 1px solid rgba(0,0,0,.125);
     border-radius: 3px;
     padding: 15px;
+    margin-left: 330px;
+    margin-top: 55px;
 }
 .nav-sub{
     width: 100%;

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MockService } from './examples/mock-data';
 
 import { AppComponent } from './app.component';
@@ -26,6 +27,8 @@ import { LazyLoadingExample } from './examples/lazyLoading';
 import { MultipleDropdownsExample } from './examples/multipleDropdowns';
 import { DynamicDataSetsExample } from './examples/dynamicDataSets';
 import { ThemingExample } from './examples/theming';
+import { RemoteDataExample } from './examples/remoteData';
+import { CustomSearchExample } from './examples/customSearch';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,9 @@ import { ThemingExample } from './examples/theming';
     LazyLoadingExample,
     MultipleDropdownsExample,
     DynamicDataSetsExample,
-    ThemingExample
+    ThemingExample,
+    RemoteDataExample,
+    CustomSearchExample
     ],
   imports: [
     BrowserModule,
@@ -56,7 +61,8 @@ import { ThemingExample } from './examples/theming';
     HttpModule,
     AppRouterModule,
     AngularMultiSelectModule,
-    TabViewModule
+    TabViewModule,
+    HttpClientModule
   ],
   providers: [MockService],
   bootstrap: [AppComponent]

@@ -19,6 +19,8 @@ import { LazyLoadingExample } from './examples/lazyLoading';
 import { MultipleDropdownsExample } from './examples/multipleDropdowns';
 import { DynamicDataSetsExample } from './examples/dynamicDataSets';
 import { ThemingExample } from './examples/theming';
+import { RemoteDataExample } from './examples/remoteData';
+import { CustomSearchExample } from './examples/customSearch';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/basic', pathMatch: 'full' },
@@ -38,7 +40,10 @@ const appRoutes: Routes = [
   { path: 'lazyloading', component: LazyLoadingExample },
   { path: 'multipledropdowns', component: MultipleDropdownsExample },
   { path: 'dynamicdatasets', component: DynamicDataSetsExample },
-  { path: 'theming', component: ThemingExample }
+  { path: 'theming', component: ThemingExample },
+  { path: 'remoteData', component: RemoteDataExample },
+  { path: 'customSearchAPI', component: CustomSearchExample }
+
 
 
 ];
