@@ -1,10 +1,16 @@
-
 <div class="row">
-    <div class="col-md-3 left-sidebar">
+  <nav class="navbar navbar-expand-lg nav-sub navbar-light d-md-none d-lg-none">
+    <div class="nav-wrapper">
+      <a class="navbar-brand" href="#">Examples</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+     <span class="fa fa-angle-down"></span>
+  </button>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action disabled">
-    Examples
-  </a>
         <a [routerLink]="['basic']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Multiselect basic example</a>
         <a [routerLink]="['singleselection']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Single selection</a>
         <a [routerLink]="['searchfilter']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Search filter</a>
@@ -19,10 +25,41 @@
         <a [routerLink]="['limitbadges']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Limit Badges</a>
         <a [routerLink]="['customplaceholder']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Custom placeholder</a>
         <a [routerLink]="['styling']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">CSS Styling</a>
+        <a [routerLink]="['theming']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Theming</a>
 
       </div>
+
     </div>
-    <div class="col center-content">
-      <router-outlet></router-outlet>
+  </nav>
+  <div class="col-md-3 left-sidebar d-none d-md-block d-lg-block">
+    <div class="list-group">
+      <a href="#" class="list-group-item list-group-item-action disabled">
+    Examples
+  </a>
+      <a [routerLink]="['basic']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Multiselect basic example</a>
+      <a [routerLink]="['singleselection']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Single selection</a>
+      <a [routerLink]="['searchfilter']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Search filter</a>
+      <a [routerLink]="['customSearchAPI']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Custom Search / Search API</a>
+      <a [routerLink]="['groupby']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Group By</a>
+      <a [routerLink]="['templating']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Templating</a>
+      <a [routerLink]="['usinginform']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Using in Template Driven Forms</a>
+      <a [routerLink]="['usinginreactiveform']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Using in Reactive Forms</a>
+      <a [routerLink]="['lazyloading']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Lazy Loading</a>
+      <a [routerLink]="['remoteData']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Data from remote API</a>
+      <a [routerLink]="['multipledropdowns']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Multiple dropdowns in a page</a>
+      <a [routerLink]="['dynamicdatasets']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Dynamic Data Sets loading</a>
+      <a [routerLink]="['resetdropdown']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Reset dropdown</a>
+      <a [routerLink]="['disablemode']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Disable dropdown</a>
+      <a [routerLink]="['limitselection']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Limit selection</a>
+      <a [routerLink]="['limitbadges']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Limit Badges</a>
+      <a [routerLink]="['customplaceholder']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Custom placeholder</a>
+      <a [routerLink]="['styling']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">CSS Styling</a>
+<!--      <a [routerLink]="['theming']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Theming</a>
+-->
     </div>
+  </div>
+  <div class="col center-content">
+    <router-outlet></router-outlet>
+  </div>
+
 </div>

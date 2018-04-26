@@ -5,6 +5,7 @@ export interface DropdownSettings{
     selectAllText: String;
     unSelectAllText: String;
     enableSearchFilter: Boolean;
+    searchBy: Array<string>[];
     maxHeight: number;
     badgeShowLimit: Number;
     classes: String;
@@ -16,4 +17,7 @@ export interface DropdownSettings{
     noDataLabel: string;
     searchAutofocus?: boolean;
     lazyLoading?: boolean;
+    labelKey?: String;
+    primaryKey: string;
+    position:string;
 } 

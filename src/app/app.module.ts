@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { MockService } from './examples/mock-data';
 
 import { AppComponent } from './app.component';
 import { AngularMultiSelectModule } from './angular2-multiselect-dropdown/multiselect.component';
@@ -22,6 +24,11 @@ import { TabViewModule } from 'primeng/primeng';
 import { UsingWithFormExample } from './examples/usingWithForms';
 import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
 import { LazyLoadingExample } from './examples/lazyLoading';
+import { MultipleDropdownsExample } from './examples/multipleDropdowns';
+import { DynamicDataSetsExample } from './examples/dynamicDataSets';
+import { ThemingExample } from './examples/theming';
+import { RemoteDataExample } from './examples/remoteData';
+import { CustomSearchExample } from './examples/customSearch';
 
 @NgModule({
   declarations: [
@@ -40,7 +47,12 @@ import { LazyLoadingExample } from './examples/lazyLoading';
     StylingExample,
     UsingWithFormExample,
     UsingWithReactiveFormExample,
-    LazyLoadingExample
+    LazyLoadingExample,
+    MultipleDropdownsExample,
+    DynamicDataSetsExample,
+    ThemingExample,
+    RemoteDataExample,
+    CustomSearchExample
     ],
   imports: [
     BrowserModule,
@@ -49,9 +61,10 @@ import { LazyLoadingExample } from './examples/lazyLoading';
     HttpModule,
     AppRouterModule,
     AngularMultiSelectModule,
-    TabViewModule
+    TabViewModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [MockService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

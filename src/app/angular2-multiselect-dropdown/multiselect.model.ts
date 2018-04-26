@@ -1,7 +1,3 @@
-export class ListItem{
-    id: Number;
-    itemName: String
-}
 export class MyException {
 	status : number;
 	body : any;

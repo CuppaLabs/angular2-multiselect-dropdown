@@ -16,16 +16,16 @@ export class SingleSelectionExample implements OnInit {
    
 
     this.itemList = [
-                          {"id":1,"itemName":"India"},
-                          {"id":2,"itemName":"Singapore"},
-                          {"id":3,"itemName":"Australia"},
-                          {"id":4,"itemName":"Canada"},
-                          {"id":5,"itemName":"South Korea"},    
-                          {"id":6,"itemName":"Brazil"}                      
+                          {"id":1,"itemName":"India","name":"IN"},
+                          {"id":2,"itemName":"Singapore","name":"SN"},
+                          {"id":3,"itemName":"Australia","name":"AU"},
+                          {"id":4,"itemName":"Canada","name":"CA"},
+                          {"id":5,"itemName":"South Korea","name":"SK"},    
+                          {"id":6,"itemName":"Brazil","name":"BR"}                      
                         ];
     
     this.selectedItems = [
-                          {"id":1,"itemName":"India"}];
+                          {"id":1,"itemName":"India","name":"IN"}];
     this.settings = {singleSelection: true, text:"Select Country"};
   }
   onItemSelect(item:any){
