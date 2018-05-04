@@ -225,6 +225,7 @@ The following list of settings are supported by the component. Configure the set
 | position | String | Set the position of the dropdown list to 'top' or 'bottom'| bottom |
 | noDataLabel | String | Label text when no data is available in the list| 'No Data Available' |
 | searchBy | Array | Search the list by certain properties of the list item. Ex: ["itemName, "id","name"]. Deafult is , it will search the list by all the properties of list item | [] |
+| doNotRenderResults | Boolean | Setting true will stop rendering selected values in the input | false |
 
 
 ### Callback Methods
