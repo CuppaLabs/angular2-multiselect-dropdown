@@ -1,12 +1,12 @@
-import { Component, OnInit, NgModule, SimpleChanges, OnChanges, ChangeDetectorRef, AfterViewChecked, ViewEncapsulation, ContentChild, ViewChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, NgModule, SimpleChanges, OnChanges, ChangeDetectorRef, AfterViewChecked, ViewEncapsulation, ContentChild, ViewChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform, HostListener } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
 import { MyException } from './multiselect.model';
 import { DropdownSettings } from './multiselect.interface';
-import { ClickOutsideDirective, ScrollDirective, styleDirective, setPosition } from './clickOutside';
+import { ClickOutsideDirective, ScrollDirective, styleDirective } from './clickOutside';
 import { ListFilterPipe } from './list-filter';
 import { Item, Badge, Search, TemplateRenderer } from './menu-item';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -62,7 +62,15 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
     @ViewChild('searchInput') searchInput: ElementRef;
     @ViewChild('selectedList') selectedListElem: ElementRef;
-
+	@ViewChild('dropdownList') dropdownListElem: ElementRef;
+	
+	@HostListener('document:keyup.escape', ['$event'])
+	onEscapeDown(event: KeyboardEvent) {
+		if (this.settings.escapeToClose) {
+			this.closeDropdown();
+		}
+	}
+	
     public selectedItems: Array<any>;
     public isActive: boolean = false;
     public isSelectAll: boolean = false;
@@ -81,7 +89,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     public maxBuffer: any;
     public lastScrolled: any;
     public lastRepaintY: any;
-    public selectedListHeight: any;
+    public dropdownListYOffset: number = 0;
 
     defaultSettings: DropdownSettings = {
         singleSelection: false,
@@ -102,7 +110,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         lazyLoading: false,
         labelKey: 'itemName',
         primaryKey: 'id',
-        position: 'bottom'
+        position: 'bottom',
+		autoPosition: true,
+		escapeToClose: true
     }
     public parseError: boolean;
     constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef) {
@@ -121,13 +131,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.maxBuffer = this.screenItemsLen * this.itemHeight;
         this.lastScrolled = 0;
         this.renderChunk(0, this.cachedItemsLen / 2);
-        if (this.settings.position == 'top') {
-            setTimeout(() => {
-                this.selectedListHeight = { val: 0 };
-                this.selectedListHeight.val = this.selectedListElem.nativeElement.clientHeight;
-            });
-        }
-
+		setTimeout(() => {
+			this.calculateDropdownDirection();
+		}); 
     }
     ngOnChanges(changes: SimpleChanges) {
         if (changes.data && !changes.data.firstChange) {
@@ -155,10 +161,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
     }
     ngAfterViewChecked() {
-        if (this.selectedListElem.nativeElement.clientHeight && this.settings.position == 'top' && this.selectedListHeight) {
-            this.selectedListHeight.val = this.selectedListElem.nativeElement.clientHeight;
-            this.cdr.detectChanges();
-        }
+		
     }
     onItemClick(item: any, index: number, evt: Event) {
         if (this.settings.disabled) {
@@ -284,6 +287,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                     this.searchInput.nativeElement.focus();
                 }, 0);
             }
+			this.cdr.detectChanges();
+			this.calculateDropdownDirection();
             this.onOpen.emit(true);
         }
         else {
@@ -353,6 +358,37 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.chunkArray.push(this.data[i]);
         }
     }
+	calculateDropdownDirection() {
+		let shouldOpenTowardsTop = this.settings.position == 'top';
+		if (this.settings.autoPosition) {
+			const dropdownHeight = this.dropdownListElem.nativeElement.clientHeight;
+			const viewportHeight = document.documentElement.clientHeight;
+			const selectedListBounds = this.selectedListElem.nativeElement.getBoundingClientRect();
+			
+			const spaceOnTop: boolean = selectedListBounds.top - dropdownHeight > 0;
+			const spaceOnBottom: boolean = selectedListBounds.bottom + dropdownHeight < viewportHeight;
+			console.log('Top: ' + spaceOnTop);
+			console.log('Bottom: ' + spaceOnBottom);
+			
+			// Keep preference if there is not enough space on either the top or bottom
+			if (spaceOnTop || spaceOnBottom) {
+				if (shouldOpenTowardsTop) {
+					shouldOpenTowardsTop = spaceOnTop;
+				} else {
+					shouldOpenTowardsTop = !spaceOnBottom;
+				}
+			}
+		}
+		console.log(shouldOpenTowardsTop);
+		this.openTowardsTop(shouldOpenTowardsTop);
+	}
+	openTowardsTop(value: boolean) {
+		if (value && this.selectedListElem.nativeElement.clientHeight) {
+            this.dropdownListYOffset = 15 + this.selectedListElem.nativeElement.clientHeight;
+        } else {
+			this.dropdownListYOffset = 0;
+		}
+	}
     public onScroll(e: any) {
         this.scrollTop = e.target.scrollTop;
         this.updateView(this.scrollTop);
@@ -397,7 +433,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
 @NgModule({
     imports: [CommonModule, FormsModule],
-    declarations: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search, setPosition],
-    exports: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search, setPosition]
+    declarations: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search],
+    exports: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search]
 })
 export class AngularMultiSelectModule { }

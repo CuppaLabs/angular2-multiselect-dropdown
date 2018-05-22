@@ -62,10 +62,12 @@
             </span>
         </div>
     </div>
-    <div [setPosition]="selectedListHeight?.val" class="dropdown-list" [ngClass]="{'dropdown-list-top': settings.position == 'top'}"
+    <div #dropdownList class="dropdown-list"
+		[ngClass]="{'dropdown-list-top': dropdownListYOffset}"
+		[style.bottom.px]="dropdownListYOffset ? dropdownListYOffset : null"
         [hidden]="!isActive">
-        <div [ngClass]="{'arrow-up': settings.position == 'bottom', 'arrow-down': settings.position == 'top'}" class="arrow-2"></div>
-        <div [ngClass]="{'arrow-up': settings.position == 'bottom', 'arrow-down': settings.position == 'top'}"></div>
+        <div [ngClass]="{'arrow-up': !dropdownListYOffset, 'arrow-down': dropdownListYOffset}" class="arrow-2"></div>
+        <div [ngClass]="{'arrow-up': !dropdownListYOffset, 'arrow-down': dropdownListYOffset}"></div>
         <div class="list-area">
             <div class="pure-checkbox select-all" *ngIf="settings.enableCheckAll && !settings.singleSelection && !settings.limitSelection"
                 (click)="toggleSelectAll()">

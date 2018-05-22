@@ -19,5 +19,7 @@ export interface DropdownSettings{
     lazyLoading?: boolean;
     labelKey?: String;
     primaryKey: string;
-    position:string;
+    position: 'top' | 'bottom';
+	autoPosition: boolean;
+	escapeToClose: boolean;
 } 

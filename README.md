@@ -222,10 +222,11 @@ The following list of settings are supported by the component. Configure the set
 | searchAutofocus | Boolean | Autofocus search input field| true |
 | labelKey | String | The property name which should be rendered as label in the dropdown| itemName |
 | primaryKey | String | The property by which the object is identified. Default is 'id'.| id |
-| position | String | Set the position of the dropdown list to 'top' or 'bottom'| bottom |
+| position | String | Set the preferred position of the dropdown list to 'top' or 'bottom'| bottom |
+| autoPosition | Boolean | Overrides the preferred dropdown position if there is not enough space available within the viewport.| true |
 | noDataLabel | String | Label text when no data is available in the list| 'No Data Available' |
 | searchBy | Array | Search the list by certain properties of the list item. Ex: ["itemName, "id","name"]. Deafult is , it will search the list by all the properties of list item | [] |
-
+| escapeToClose | Boolean | If the dropdown list should close when the escape key is pressed.| true |
 
 ### Callback Methods
 - `onSelect` - Return the selected item on selection.
