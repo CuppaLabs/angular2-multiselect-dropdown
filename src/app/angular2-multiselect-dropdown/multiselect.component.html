@@ -1,13 +1,13 @@
 <div class="cuppa-dropdown" (clickOutside)="closeDropdown()">
     <div class="selected-list" #selectedList>
         <div class="c-btn" (click)="toggleDropdown($event)" [ngClass]="{'disabled': settings.disabled}">
-            <span *ngIf="selectedItems?.length == 0">{{settings.text}}</span>
-            <span *ngIf="settings.singleSelection">
+            <span *ngIf="selectedItems?.length == 0 || settings.doNotRenderResults">{{settings.text}}</span>
+            <span *ngIf="settings.singleSelection && !settings.doNotRenderResults">
                 <span *ngFor="let item of selectedItems;trackBy: trackByFn.bind(this);">
                     {{item[settings.labelKey]}}
                 </span>
             </span>
-            <div class="c-list" *ngIf="selectedItems?.length > 0 && !settings.singleSelection">
+            <div class="c-list" *ngIf="selectedItems?.length > 0 && !settings.singleSelection && !settings.doNotRenderResults">
                 <div class="c-token" *ngFor="let item of selectedItems;trackBy: trackByFn.bind(this);let k = index" [hidden]="k > settings.badgeShowLimit-1">
                     <span *ngIf="!badgeTempl" class="c-label">{{item[settings.labelKey]}}</span>
                     <span *ngIf="badgeTempl" class="c-label">

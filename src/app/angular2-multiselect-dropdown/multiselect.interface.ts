@@ -20,4 +20,5 @@ export interface DropdownSettings{
     labelKey?: String;
     primaryKey: string;
     position:string;
+	doNotRenderResults: boolean;
 } 
