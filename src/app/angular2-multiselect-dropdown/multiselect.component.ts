@@ -367,8 +367,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 			
 			const spaceOnTop: boolean = selectedListBounds.top - dropdownHeight > 0;
 			const spaceOnBottom: boolean = selectedListBounds.bottom + dropdownHeight < viewportHeight;
-			console.log('Top: ' + spaceOnTop);
-			console.log('Bottom: ' + spaceOnBottom);
 			
 			// Keep preference if there is not enough space on either the top or bottom
 			if (spaceOnTop || spaceOnBottom) {
@@ -379,7 +377,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 				}
 			}
 		}
-		console.log(shouldOpenTowardsTop);
 		this.openTowardsTop(shouldOpenTowardsTop);
 	}
 	openTowardsTop(value: boolean) {
