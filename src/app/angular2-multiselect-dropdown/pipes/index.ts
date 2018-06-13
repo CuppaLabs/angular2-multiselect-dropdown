@@ -1,1 +1,1 @@
-export * from './listfilter.pipe';
+export * from './list-filter.pipe';

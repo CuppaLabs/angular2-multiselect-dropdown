@@ -1,4 +1,4 @@
-export * from './clickoutside.directive';
+export * from './click-outside.directive';
 export * from './scroll.directive';
-export * from './setposition.directive';
-export * from './styleprop.directive';
+export * from './set-position.directive';
+export * from './style-prop.directive';

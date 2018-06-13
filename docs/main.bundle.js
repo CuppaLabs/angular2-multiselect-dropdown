@@ -64,8 +64,8 @@ var BadgeComponent = /** @class */ (function () {
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__item_component__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_component__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/components/search.component.ts");
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__search_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__templaterenderer_component__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/components/templaterenderer.component.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_3__templaterenderer_component__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__template_renderer_component__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/components/template-renderer.component.ts");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_3__template_renderer_component__["a"]; });
 
 
 
@@ -148,7 +148,7 @@ var SearchComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/angular2-multiselect-dropdown/components/templaterenderer.component.ts":
+/***/ "./src/app/angular2-multiselect-dropdown/components/template-renderer.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -196,11 +196,11 @@ var TemplateRendererComponent = /** @class */ (function () {
     return TemplateRendererComponent;
 }());
 
-//# sourceMappingURL=C:/DEV/Github/angular2-multiselect-dropdown/angular2-multiselect-dropdown/src/templaterenderer.component.js.map
+//# sourceMappingURL=C:/DEV/Github/angular2-multiselect-dropdown/angular2-multiselect-dropdown/src/template-renderer.component.js.map
 
 /***/ }),
 
-/***/ "./src/app/angular2-multiselect-dropdown/directives/clickoutside.directive.ts":
+/***/ "./src/app/angular2-multiselect-dropdown/directives/click-outside.directive.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -251,7 +251,7 @@ var ClickOutsideDirective = /** @class */ (function () {
     return ClickOutsideDirective;
 }());
 
-//# sourceMappingURL=C:/DEV/Github/angular2-multiselect-dropdown/angular2-multiselect-dropdown/src/clickoutside.directive.js.map
+//# sourceMappingURL=C:/DEV/Github/angular2-multiselect-dropdown/angular2-multiselect-dropdown/src/click-outside.directive.js.map
 
 /***/ }),
 
@@ -259,14 +259,14 @@ var ClickOutsideDirective = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__clickoutside_directive__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/directives/clickoutside.directive.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__clickoutside_directive__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__click_outside_directive__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/directives/click-outside.directive.ts");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__click_outside_directive__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__scroll_directive__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/directives/scroll.directive.ts");
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__scroll_directive__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__setposition_directive__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/directives/setposition.directive.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__setposition_directive__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__styleprop_directive__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/directives/styleprop.directive.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_3__styleprop_directive__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__set_position_directive__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/directives/set-position.directive.ts");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__set_position_directive__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__style_prop_directive__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/directives/style-prop.directive.ts");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_3__style_prop_directive__["a"]; });
 
 
 
@@ -323,7 +323,7 @@ var ScrollDirective = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/angular2-multiselect-dropdown/directives/setposition.directive.ts":
+/***/ "./src/app/angular2-multiselect-dropdown/directives/set-position.directive.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -367,11 +367,11 @@ var SetPositionDirective = /** @class */ (function () {
     return SetPositionDirective;
 }());
 
-//# sourceMappingURL=C:/DEV/Github/angular2-multiselect-dropdown/angular2-multiselect-dropdown/src/setposition.directive.js.map
+//# sourceMappingURL=C:/DEV/Github/angular2-multiselect-dropdown/angular2-multiselect-dropdown/src/set-position.directive.js.map
 
 /***/ }),
 
-/***/ "./src/app/angular2-multiselect-dropdown/directives/styleprop.directive.ts":
+/***/ "./src/app/angular2-multiselect-dropdown/directives/style-prop.directive.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -411,7 +411,7 @@ var StylePropDirective = /** @class */ (function () {
     return StylePropDirective;
 }());
 
-//# sourceMappingURL=C:/DEV/Github/angular2-multiselect-dropdown/angular2-multiselect-dropdown/src/styleprop.directive.js.map
+//# sourceMappingURL=C:/DEV/Github/angular2-multiselect-dropdown/angular2-multiselect-dropdown/src/style-prop.directive.js.map
 
 /***/ }),
 
@@ -1010,14 +1010,14 @@ var AngularMultiSelectModule = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__listfilter_pipe__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/pipes/listfilter.pipe.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__listfilter_pipe__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__list_filter_pipe__ = __webpack_require__("./src/app/angular2-multiselect-dropdown/pipes/list-filter.pipe.ts");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__list_filter_pipe__["a"]; });
 
 //# sourceMappingURL=C:/DEV/Github/angular2-multiselect-dropdown/angular2-multiselect-dropdown/src/index.js.map
 
 /***/ }),
 
-/***/ "./src/app/angular2-multiselect-dropdown/pipes/listfilter.pipe.ts":
+/***/ "./src/app/angular2-multiselect-dropdown/pipes/list-filter.pipe.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1071,7 +1071,7 @@ var ListFilterPipe = /** @class */ (function () {
     return ListFilterPipe;
 }());
 
-//# sourceMappingURL=C:/DEV/Github/angular2-multiselect-dropdown/angular2-multiselect-dropdown/src/listfilter.pipe.js.map
+//# sourceMappingURL=C:/DEV/Github/angular2-multiselect-dropdown/angular2-multiselect-dropdown/src/list-filter.pipe.js.map
 
 /***/ }),
 
