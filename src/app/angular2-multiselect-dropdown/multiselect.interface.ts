@@ -20,4 +20,6 @@ export interface DropdownSettings{
     labelKey?: String;
     primaryKey: string;
     position:string;
+    showCountOnly: Boolean;
+    showCountText: String
 } 

@@ -7,7 +7,7 @@
                     {{item[settings.labelKey]}}
                 </span>
             </span>
-            <div class="c-list" *ngIf="selectedItems?.length > 0 && !settings.singleSelection">
+            <div class="c-list" *ngIf="selectedItems?.length > 0 && !settings.singleSelection && !settings.showCountOnly">
                 <div class="c-token" *ngFor="let item of selectedItems;trackBy: trackByFn.bind(this);let k = index" [hidden]="k > settings.badgeShowLimit-1">
                     <span *ngIf="!badgeTempl" class="c-label">{{item[settings.labelKey]}}</span>
                     <span *ngIf="badgeTempl" class="c-label">
@@ -27,7 +27,10 @@
                     </span>
                 </div>
             </div>
-            <span class="countplaceholder" *ngIf="selectedItems?.length > settings.badgeShowLimit">+{{selectedItems?.length - settings.badgeShowLimit }}</span>
+            <div class="c-list text-only" *ngIf="settings.showCountOnly && selectedItems.length">
+                    {{selectedItems?.length - settings.badgeShowLimit }} {{settings.showCountText}}
+            </div>
+            <span class="countplaceholder" *ngIf="selectedItems?.length > settings.badgeShowLimit &&  !settings.showCountOnly">+{{selectedItems?.length - settings.badgeShowLimit }}</span>
             <!--            <span class="fa" [ngClass]="{'c-angle-down': !isActive,'fa-angle-up':isActive}"></span>
 --><span *ngIf="!isActive" class="c-angle-down">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

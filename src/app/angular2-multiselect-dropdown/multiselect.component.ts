@@ -102,7 +102,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         lazyLoading: false,
         labelKey: 'itemName',
         primaryKey: 'id',
-        position: 'bottom'
+        position: 'bottom',
+        showCountOnly: false,
+        showCountText: 'Items Selected'
     }
     public parseError: boolean;
     constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef) {
