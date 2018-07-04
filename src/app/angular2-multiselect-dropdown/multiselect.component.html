@@ -27,7 +27,7 @@
                     </span>
                 </div>
             </div>
-            <div class="c-list text-only" *ngIf="settings.showCountOnly && selectedItems.length">
+            <div class="c-list text-only" *ngIf="!settings.singleSelection && settings.showCountOnly && selectedItems.length">
                     {{selectedItems?.length - settings.badgeShowLimit }} {{settings.showCountText}}
             </div>
             <span class="countplaceholder" *ngIf="selectedItems?.length > settings.badgeShowLimit &&  !settings.showCountOnly">+{{selectedItems?.length - settings.badgeShowLimit }}</span>
@@ -153,5 +153,6 @@
             </div>
             <h5 class="list-message" *ngIf="data?.length == 0">{{settings.noDataLabel}}</h5>
         </div>
+        <span *ngIf="settings.showAddItem" class="add-multi-menu" (click)="addItemEmitter($event)"><span class="add-plus">+</span>{{ settings.showAddItemText }}</span>
     </div>
 </div>

@@ -21,5 +21,7 @@ export interface DropdownSettings{
     primaryKey: string;
     position:string;
     showCountOnly: Boolean;
-    showCountText: String
+    showCountText: String;
+    showAddItem: Boolean;
+    showAddItemText: String;
 } 
