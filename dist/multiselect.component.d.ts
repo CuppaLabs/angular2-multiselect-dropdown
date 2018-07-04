@@ -15,6 +15,7 @@ export declare class AngularMultiSelect implements OnInit, ControlValueAccessor,
     onDeSelectAll: EventEmitter<Array<any>>;
     onOpen: EventEmitter<any>;
     onClose: EventEmitter<any>;
+    onAddClick: EventEmitter<any>;
     itemTempl: Item;
     badgeTempl: Badge;
     searchTempl: Search;
@@ -63,6 +64,7 @@ export declare class AngularMultiSelect implements OnInit, ControlValueAccessor,
     toggleSelectAll(): void;
     transformData(arr: Array<any>, field: any): Array<any>;
     renderChunk(fromPos: any, howMany: any): void;
+    addItemEmitter($event: any): void;
     onScroll(e: any): void;
     updateView(scrollTop: any): void;
     filterInfiniteList(evt: any): void;
