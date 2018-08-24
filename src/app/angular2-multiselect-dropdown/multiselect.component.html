@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="c-list text-only" *ngIf="!settings.singleSelection && settings.showCountOnly && selectedItems.length">
-                    {{selectedItems?.length - settings.badgeShowLimit }} {{settings.showCountText}}
+                    {{selectedItems?.length - settings.badgeShowLimit }} {{selectedItems?.length > 1 ? settings.showCountsText : settings.showCountText }}
             </div>
             <span class="countplaceholder" *ngIf="selectedItems?.length > settings.badgeShowLimit &&  !settings.showCountOnly">+{{selectedItems?.length - settings.badgeShowLimit }}</span>
             <!--            <span class="fa" [ngClass]="{'c-angle-down': !isActive,'fa-angle-up':isActive}"></span>

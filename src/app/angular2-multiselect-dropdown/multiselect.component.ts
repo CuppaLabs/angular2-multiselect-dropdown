@@ -107,7 +107,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         primaryKey: 'id',
         position: 'bottom',
         showCountOnly: false,
-        showCountText: 'Items Selected',
+        showCountText: 'Item Selected',
+        showCountsText: 'Items Selected',
         showAddItem: false,
         showAddItemText: 'Add Item'
     }
