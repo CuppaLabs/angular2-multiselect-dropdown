@@ -6,7 +6,6 @@ import { DropdownSettings } from './multiselect.interface';
 import { ClickOutsideDirective, ScrollDirective, styleDirective, setPosition } from './clickOutside';
 import { ListFilterPipe } from './list-filter';
 import { Item, Badge, Search, TemplateRenderer } from './menu-item';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
