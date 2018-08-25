@@ -218,7 +218,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             }
             else {
                 if (this.settings.limitSelection) {
-                    this.selectedItems = value.splice(0, this.settings.limitSelection);
+                    this.selectedItems = value.slice(0, this.settings.limitSelection);
                 }
                 else {
                     this.selectedItems = value;
