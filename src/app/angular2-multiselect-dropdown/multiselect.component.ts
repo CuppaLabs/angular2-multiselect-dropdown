@@ -1,12 +1,9 @@
-import { Component, OnInit, NgModule, SimpleChanges, OnChanges, ChangeDetectorRef, AfterViewChecked, ViewEncapsulation, ContentChild, ViewChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { MyException } from './multiselect.model';
-import { DropdownSettings } from './multiselect.interface';
-import { ClickOutsideDirective, ScrollDirective, styleDirective, setPosition } from './clickOutside';
-import { ListFilterPipe } from './list-filter';
-import { Item, Badge, Search, TemplateRenderer } from './menu-item';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Component, OnInit, SimpleChanges, OnChanges, ChangeDetectorRef, AfterViewChecked, ViewEncapsulation, ContentChild, ViewChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
+import { MyException } from './models/myexception.model';
+import { BadgeComponent,ItemComponent ,SearchComponent} from "./components";
+import { MultiSelectConfig } from './multiselect.config';
+import { IMultiSelectConfig } from './interfaces/multiselect.config';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -18,13 +15,12 @@ export const DROPDOWN_CONTROL_VALIDATION: any = {
     useExisting: forwardRef(() => AngularMultiSelect),
     multi: true,
 }
-const noop = () => {
-};
+const noop = () => { };
 
 @Component({
     selector: 'angular2-multiselect',
     templateUrl: './multiselect.component.html',
-    host: { '[class]': 'defaultSettings.classes' },
+    host: { '[class]': 'settings.classes' },
     styleUrls: ['./multiselect.component.scss'],
     providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR, DROPDOWN_CONTROL_VALIDATION]
 })
@@ -35,7 +31,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     data: Array<any>;
 
     @Input()
-    settings: DropdownSettings;
+    settings: IMultiSelectConfig;
 
     @Output('onSelect')
     onSelect: EventEmitter<any> = new EventEmitter<any>();
@@ -55,10 +51,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Output('onClose')
     onClose: EventEmitter<any> = new EventEmitter<any>();
 
-    @ContentChild(Item) itemTempl: Item;
-    @ContentChild(Badge) badgeTempl: Badge;
-    @ContentChild(Search) searchTempl: Search;
-
+    @ContentChild(ItemComponent) itemTempl: ItemComponent;
+    @ContentChild(BadgeComponent) badgeTempl: BadgeComponent;
+    @ContentChild(SearchComponent) searchTempl: SearchComponent;
 
     @ViewChild('searchInput') searchInput: ElementRef;
     @ViewChild('selectedList') selectedListElem: ElementRef;
@@ -83,33 +78,13 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     public lastRepaintY: any;
     public selectedListHeight: any;
 
-    defaultSettings: DropdownSettings = {
-        singleSelection: false,
-        text: 'Select',
-        enableCheckAll: true,
-        selectAllText: 'Select All',
-        unSelectAllText: 'UnSelect All',
-        enableSearchFilter: false,
-        searchBy:[],
-        maxHeight: 300,
-        badgeShowLimit: 999999999999,
-        classes: '',
-        disabled: false,
-        searchPlaceholderText: 'Search',
-        showCheckbox: true,
-        noDataLabel: 'No Data Available',
-        searchAutofocus: true,
-        lazyLoading: false,
-        labelKey: 'itemName',
-        primaryKey: 'id',
-        position: 'bottom'
-    }
     public parseError: boolean;
-    constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef) {
+    constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef, private defaultSettings: MultiSelectConfig) {
 
     }
+
     ngOnInit() {
-        this.settings = Object.assign(this.defaultSettings, this.settings);
+        this.settings = Object.assign({}, this.defaultSettings, this.settings);
         if (this.settings.groupBy) {
             this.groupedData = this.transformData(this.data, this.settings.groupBy);
         }
@@ -139,7 +114,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             }
         }
         if (changes.settings && !changes.settings.firstChange) {
-            this.settings = Object.assign(this.defaultSettings, this.settings);
+            this.settings = Object.assign({}, this.defaultSettings, this.settings);
         }
     }
     ngDoCheck() {
@@ -395,9 +370,4 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
 }
 
-@NgModule({
-    imports: [CommonModule, FormsModule],
-    declarations: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search, setPosition],
-    exports: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search, setPosition]
-})
-export class AngularMultiSelectModule { }
+

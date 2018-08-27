@@ -1,6 +1,6 @@
-export { AngularMultiSelect } from './multiselect.component';
-export { ClickOutsideDirective } from './clickOutside';
-export { ListFilterPipe } from './list-filter';
-export { Item } from './menu-item';
-export { TemplateRenderer } from './menu-item';
-export { AngularMultiSelectModule } from './multiselect.component';
+export { AngularMultiSelectModule } from "./multiselect.module";
+
+export { BadgeComponent, ItemComponent, SearchComponent } from "./components";
+
+export { IMultiSelectConfig } from './interfaces';
+export { MultiSelectConfig } from './multiselect.config';

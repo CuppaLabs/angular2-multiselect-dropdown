@@ -1,34 +1,36 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
-import { MockService } from './examples/mock-data';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpModule } from "@angular/http";
+import { HttpClientModule } from "@angular/common/http";
+import { MockService } from "./examples/mock-data";
 
-import { AppComponent } from './app.component';
-import { AngularMultiSelectModule } from './angular2-multiselect-dropdown/multiselect.component';
-import { AppRouterModule } from './app.router';
-import { BasicExample } from './examples/basic';
-import { SingleSelectionExample } from './examples/singleselection';
-import { GroupByExample } from './examples/groupBy';
-import { SearchFilterExample } from './examples/searchFilter';
-import { TemplatingExample } from './examples/templating';
-import { ResetDropdownExample } from './examples/resetdropdown';
-import { DisableModeExample } from './examples/disablemode';
-import {LimitSelectionExample } from './examples/limitselection';
-import {LimitBadgesExample } from './examples/limitbadges';
-import { CustomPlaceholderExample } from './examples/customplaceholder';
-import { StylingExample } from './examples/styling';
-import { ng2Gist } from './examples/gist';
-import { TabViewModule } from 'primeng/primeng';
-import { UsingWithFormExample } from './examples/usingWithForms';
-import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
-import { LazyLoadingExample } from './examples/lazyLoading';
-import { MultipleDropdownsExample } from './examples/multipleDropdowns';
-import { DynamicDataSetsExample } from './examples/dynamicDataSets';
-import { ThemingExample } from './examples/theming';
-import { RemoteDataExample } from './examples/remoteData';
-import { CustomSearchExample } from './examples/customSearch';
+import { AppComponent } from "./app.component";
+import { AngularMultiSelectModule, MultiSelectConfig, IMultiSelectConfig } from "./angular2-multiselect-dropdown";
+import { AppRouterModule } from "./app.router";
+import { BasicExample } from "./examples/basic";
+import { SingleSelectionExample } from "./examples/singleselection";
+import { GroupByExample } from "./examples/groupBy";
+import { SearchFilterExample } from "./examples/searchFilter";
+import { TemplatingExample } from "./examples/templating";
+import { ResetDropdownExample } from "./examples/resetdropdown";
+import { DisableModeExample } from "./examples/disablemode";
+import { LimitSelectionExample } from "./examples/limitselection";
+import { LimitBadgesExample } from "./examples/limitbadges";
+import { CustomPlaceholderExample } from "./examples/customplaceholder";
+import { StylingExample } from "./examples/styling";
+import { ng2Gist } from "./examples/gist";
+import { TabViewModule } from "primeng/primeng";
+import { UsingWithFormExample } from "./examples/usingWithForms";
+import { UsingWithReactiveFormExample } from "./examples/usingInReactForms";
+import { LazyLoadingExample } from "./examples/lazyLoading";
+import { MultipleDropdownsExample } from "./examples/multipleDropdowns";
+import { DynamicDataSetsExample } from "./examples/dynamicDataSets";
+import { ThemingExample } from "./examples/theming";
+import { RemoteDataExample } from "./examples/remoteData";
+import { CustomSearchExample } from "./examples/customSearch";
+
+const MULTISELECT_CONFIG: IMultiSelectConfig = { searchPlaceholderText: "Howdy, fellas" };
 
 @NgModule({
   declarations: [
@@ -53,7 +55,7 @@ import { CustomSearchExample } from './examples/customSearch';
     ThemingExample,
     RemoteDataExample,
     CustomSearchExample
-    ],
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
@@ -64,7 +66,15 @@ import { CustomSearchExample } from './examples/customSearch';
     TabViewModule,
     HttpClientModule
   ],
-  providers: [MockService],
+  providers: [
+    MockService,
+    
+    // Default config settings for Angular2 Multiselect Dropdown
+    { 
+      provide: MultiSelectConfig, 
+      useValue: Object.assign({}, new MultiSelectConfig(), MULTISELECT_CONFIG) 
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
