@@ -54,6 +54,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Output('onClose')
     onClose: EventEmitter<any> = new EventEmitter<any>();
 
+    @Output('onAddClick')
+    onAddClick: EventEmitter<any> = new EventEmitter<any>();
+
     @ContentChild(Item) itemTempl: Item;
     @ContentChild(Badge) badgeTempl: Badge;
     @ContentChild(Search) searchTempl: Search;
@@ -101,7 +104,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         lazyLoading: false,
         labelKey: 'itemName',
         primaryKey: 'id',
-        position: 'bottom'
+        position: 'bottom',
+        showCountOnly: false,
+        showCountText: 'Item Selected',
+        showCountsText: 'Items Selected',
+        showAddItem: false,
+        showAddItemText: 'Add Item'
     }
     public parseError: boolean;
     constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef) {
@@ -352,6 +360,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.chunkArray.push(this.data[i]);
         }
     }
+    
+    addItemEmitter($event:any) {
+        this.onAddClick.emit($event);
+    }
+
     public onScroll(e: any) {
         this.scrollTop = e.target.scrollTop;
         this.updateView(this.scrollTop);
