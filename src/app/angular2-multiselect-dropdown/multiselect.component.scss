@@ -24,7 +24,7 @@ $label-color: #000;
     background: $btn-disabled;
 }
 .c-btn:focus{
-        outline: none;
+        
     }
 .selected-list{
     .c-list{
@@ -87,8 +87,8 @@ $label-color: #000;
     }
     .c-btn{
         width: 100%;
-        box-shadow: 0px 1px 5px $box-shadow-color;
-        padding: 10px;
+/*        box-shadow: 0px 1px 5px $box-shadow-color;
+*/        padding: 10px;
         cursor: pointer;
         display: flex;
         position: relative;
@@ -189,6 +189,16 @@ $label-color: #000;
         position: absolute;
         top: 9px;
         left: 10px;
+        width: 15px;
+        height: 15px;
+        svg {
+            fill: #888;
+        }
+    }
+    .c-clear {
+        position: absolute;
+        top: 10px;
+        right: 10px;
         width: 15px;
         height: 15px;
         svg {

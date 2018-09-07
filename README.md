@@ -212,6 +212,9 @@ The following list of settings are supported by the component. Configure the set
 | selectAllText | String | Text to display as the label of select all option | Select All |
 | unSelectAllText | String | Text to display as the label of unSelect option | UnSelect All |
 | enableSearchFilter | Boolean | Enable filter option for the list. | false |
+| enableFilterSelectAll | Boolean | A 'select all' checkbox to select all filtered results.  | true |
+| filterSelectAllText | String | Text to display as the label of select all option | Select all filtered results |
+| filterUnSelectAllText | String | Text to display as the label of unSelect option | UnSelect all filtered results |
 | maxHeight | Number | Set maximum height of the dropdown list in px. | 300 |
 | badgeShowLimit | Number | Limit the number of badges/items to show in the input field. If not set will show all selected. | All |
 | classes | String | Custom classes to the dropdown component. Classes are added to the dropdown selector tag. To add multiple classes, the value should be space separated class names.| '' |
@@ -225,6 +228,8 @@ The following list of settings are supported by the component. Configure the set
 | position | String | Set the position of the dropdown list to 'top' or 'bottom'| bottom |
 | noDataLabel | String | Label text when no data is available in the list| 'No Data Available' |
 | searchBy | Array | Search the list by certain properties of the list item. Ex: ["itemName, "id","name"]. Deafult is , it will search the list by all the properties of list item | [] |
+| lazyLoading | Boolean | Enable lazy loading. Used to render large datasets. | false |
+| showCheckbox | Boolean | Show or hide checkboxes in the list | true |
 
 
 ### Callback Methods

@@ -4,6 +4,9 @@ export interface DropdownSettings{
     enableCheckAll : Boolean;
     selectAllText: String;
     unSelectAllText: String;
+    filterSelectAllText: String;
+    filterUnSelectAllText: String;
+    enableFilterSelectAll: Boolean;
     enableSearchFilter: Boolean;
     searchBy: Array<string>[];
     maxHeight: number;

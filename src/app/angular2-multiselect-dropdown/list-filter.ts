@@ -1,16 +1,26 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { DataService } from './multiselect.service';
 
 
 @Pipe({
     name: 'listFilter',
-    pure: false
+    pure: true
 })
 export class ListFilterPipe implements PipeTransform {
+
+    public filteredList: any = [];
+    constructor(private ds: DataService){
+
+    }
+
     transform(items: any[], filter: any, searchBy: any): any[] {
         if (!items || !filter) {
+            this.ds.setData(items);
             return items;
         }
-        return items.filter((item: any) => this.applyFilter(item, filter, searchBy));
+        this.filteredList = items.filter((item: any) => this.applyFilter(item, filter, searchBy));
+        this.ds.setData(this.filteredList);
+        return this.filteredList;
     }
     applyFilter(item: any, filter: any, searchBy: any): boolean {
         let found = false;

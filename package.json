@@ -1,6 +1,6 @@
 {
   "name": "angular2-multiselect-dropdown",
-  "version": "2.9.1",
+  "version": "2.10.0",
   "description": "Angular 2 and angular 4 multiselect dropdown component.",
   "keywords": [
     "angular 2 multiselect dropdown",
@@ -33,7 +33,6 @@
     "postversion": "git push && git push --tags",
     "prebuild": "rimraf dist tmp",
     "prebuild:watch": "rimraf dist tmp",
-    "prepublishOnly": "npm run ci",
     "preversion": "npm run ci",
     "test": "karma start",
     "test:watch": "karma start --auto-watch --no-single-run",

@@ -52,8 +52,8 @@ export class LazyLoadingExample implements OnInit {
   }
   cssgist: boolean = false;
     title: string = "Lazy loading - Handle large data sets";
-    tsgist: string = "CuppaLabs/ee72fbc7b21dad7e4e7664c5b1553235";
-    htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
-    tstitle: string = "basic.ts"
-    htmltitle: string = "basic.html";
+    tsgist: string = "CuppaLabs/aab6c8b30a6901af01249c474f3f0cbd";
+    htmlgist: string = "CuppaLabs/c77fea947ef053aa22973fcd9c7c612a";
+    tstitle: string = "lazyLoading.ts"
+    htmltitle: string = "lazyLoading.html";
 }

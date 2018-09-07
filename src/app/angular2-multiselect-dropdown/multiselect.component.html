@@ -1,6 +1,6 @@
 <div class="cuppa-dropdown" (clickOutside)="closeDropdown()">
     <div class="selected-list" #selectedList>
-        <div class="c-btn" (click)="toggleDropdown($event)" [ngClass]="{'disabled': settings.disabled}">
+        <div class="c-btn form-control" (click)="toggleDropdown($event)" [ngClass]="{'disabled': settings.disabled}" [attr.tabindex]="0">
             <span *ngIf="selectedItems?.length == 0">{{settings.text}}</span>
             <span *ngIf="settings.singleSelection">
                 <span *ngFor="let item of selectedItems;trackBy: trackByFn.bind(this);">
@@ -67,7 +67,7 @@
         <div [ngClass]="{'arrow-up': settings.position == 'bottom', 'arrow-down': settings.position == 'top'}" class="arrow-2"></div>
         <div [ngClass]="{'arrow-up': settings.position == 'bottom', 'arrow-down': settings.position == 'top'}"></div>
         <div class="list-area">
-            <div class="pure-checkbox select-all" *ngIf="settings.enableCheckAll && !settings.singleSelection && !settings.limitSelection"
+            <div class="pure-checkbox select-all" *ngIf="settings.enableCheckAll && !settings.singleSelection && !settings.limitSelection && data?.length > 0"
                 (click)="toggleSelectAll()">
                 <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelectAll" [disabled]="settings.limitSelection == selectedItems?.length"
                 />
@@ -76,7 +76,7 @@
                 <span [hidden]="!isSelectAll">{{settings.unSelectAllText}}</span>
             </label>
             </div>
-            <div class="list-filter" *ngIf="settings.enableSearchFilter">
+            <div class="list-filter" *ngIf="settings.enableSearchFilter && data?.length > 0">
                 <span class="c-search">
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="100%" height="100%" viewBox="0 0 615.52 615.52" style="enable-background:new 0 0 615.52 615.52;"
@@ -97,13 +97,56 @@
 </g>
 
 </svg>
-
                 </span>
+                <span *ngIf="!settings.lazyLoading" [hidden]="filter == undefined || filter?.length == 0" class="c-clear" (click)="clearSearch()">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 51.976 51.976" style="enable-background:new 0 0 51.976 51.976;" xml:space="preserve">
+<g>
+	<path d="M44.373,7.603c-10.137-10.137-26.632-10.138-36.77,0c-10.138,10.138-10.137,26.632,0,36.77s26.632,10.138,36.77,0
+		C54.51,34.235,54.51,17.74,44.373,7.603z M36.241,36.241c-0.781,0.781-2.047,0.781-2.828,0l-7.425-7.425l-7.778,7.778
+		c-0.781,0.781-2.047,0.781-2.828,0c-0.781-0.781-0.781-2.047,0-2.828l7.778-7.778l-7.425-7.425c-0.781-0.781-0.781-2.048,0-2.828
+		c0.781-0.781,2.047-0.781,2.828,0l7.425,7.425l7.071-7.071c0.781-0.781,2.047-0.781,2.828,0c0.781,0.781,0.781,2.047,0,2.828
+		l-7.071,7.071l7.425,7.425C37.022,34.194,37.022,35.46,36.241,36.241z"/>
+</g>
+</svg>
+                </span>
+<span *ngIf="settings.lazyLoading" [hidden]="filter == undefined || filter?.length == 0" class="c-clear" (click)="resetInfiniteSearch()">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 51.976 51.976" style="enable-background:new 0 0 51.976 51.976;" xml:space="preserve">
+<g>
+	<path d="M44.373,7.603c-10.137-10.137-26.632-10.138-36.77,0c-10.138,10.138-10.137,26.632,0,36.77s26.632,10.138,36.77,0
+		C54.51,34.235,54.51,17.74,44.373,7.603z M36.241,36.241c-0.781,0.781-2.047,0.781-2.828,0l-7.425-7.425l-7.778,7.778
+		c-0.781,0.781-2.047,0.781-2.828,0c-0.781-0.781-0.781-2.047,0-2.828l7.778-7.778l-7.425-7.425c-0.781-0.781-0.781-2.048,0-2.828
+		c0.781-0.781,2.047-0.781,2.828,0l7.425,7.425l7.071-7.071c0.781-0.781,2.047-0.781,2.828,0c0.781,0.781,0.781,2.047,0,2.828
+		l-7.071,7.071l7.425,7.425C37.022,34.194,37.022,35.46,36.241,36.241z"/>
+</g>
+</svg>
+                </span>
+
                 <input class="c-input" *ngIf="!settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
                     [(ngModel)]="filter">
                 <input class="c-input" *ngIf="settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
-                    (keyup)="filterInfiniteList($event)">
+                    [(ngModel)]="filter" (keyup)="filterInfiniteList($event)">
                 <c-templateRenderer *ngIf="searchTempl" [data]="searchTempl" [item]="item"></c-templateRenderer>
+            </div>
+            <div class="filter-select-all" *ngIf="!settings.lazyLoading && settings.enableFilterSelectAll">
+                <div class="pure-checkbox select-all" *ngIf="filter?.length > 0 && filterLength > 0" (click)="toggleFilterSelectAll()">
+                    <input type="checkbox" [checked]="isFilterSelectAll" [disabled]="settings.limitSelection == selectedItems?.length" />
+                    <label>
+                <span [hidden]="isFilterSelectAll">{{settings.filterSelectAllText}}</span>
+                <span [hidden]="!isFilterSelectAll">{{settings.filterUnSelectAllText}}</span>
+            </label>
+                </div>
+                <label *ngIf="filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
+            </div>
+            <div class="filter-select-all" *ngIf="settings.lazyLoading && settings.enableFilterSelectAll">
+                <div class="pure-checkbox select-all" *ngIf="filter?.length > 0 && infiniteFilterLength > 0" (click)="toggleInfiniteFilterSelectAll()">
+                    <input type="checkbox" [checked]="isInfiniteFilterSelectAll" [disabled]="settings.limitSelection == selectedItems?.length" />
+                    <label>
+                <span [hidden]="isInfiniteFilterSelectAll">{{settings.filterSelectAllText}}</span>
+                <span [hidden]="!isInfiniteFilterSelectAll">{{settings.filterUnSelectAllText}}</span>
+            </label>
+                </div>
             </div>
             <ul *ngIf="!settings.groupBy" [style.maxHeight]="settings.maxHeight+'px'" class="lazyContainer">
                 <span *ngIf="itemTempl">
@@ -123,7 +166,7 @@
             <div [ngStyle]="{'height':totalHeight+'px'}" style="position: relative;">
 
             
-        <li *ngFor="let item of chunkArray | listFilter:filter : settings.searchBy; let i = index;" (click)="onItemClick(item,i,$event)" style="position: absolute;width: 100%;" class="pure-checkbox" [styleProp]="chunkIndex[i]">
+        <li *ngFor="let item of chunkArray ; let i = index;" (click)="onItemClick(item,i,$event)" style="position: absolute;width: 100%;" class="pure-checkbox" [styleProp]="chunkIndex[i]">
             <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"/>
             <label>{{item[settings.labelKey]}}</label>
         </li>

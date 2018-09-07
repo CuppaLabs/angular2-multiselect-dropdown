@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, SimpleChanges, OnChanges, ChangeDetectorRef, AfterViewChecked, ViewEncapsulation, ContentChild, ViewChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgModule, SimpleChanges, OnChanges, ChangeDetectorRef, AfterViewChecked, ViewEncapsulation, ContentChild, ViewChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MyException } from './multiselect.model';
@@ -6,6 +6,8 @@ import { DropdownSettings } from './multiselect.interface';
 import { ClickOutsideDirective, ScrollDirective, styleDirective, setPosition } from './clickOutside';
 import { ListFilterPipe } from './list-filter';
 import { Item, Badge, Search, TemplateRenderer } from './menu-item';
+import { DataService } from './multiselect.service';
+import { Subscription } from 'rxjs';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -25,10 +27,10 @@ const noop = () => {
     templateUrl: './multiselect.component.html',
     host: { '[class]': 'defaultSettings.classes' },
     styleUrls: ['./multiselect.component.scss'],
-    providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR, DROPDOWN_CONTROL_VALIDATION]
+    providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR, DROPDOWN_CONTROL_VALIDATION],
 })
 
-export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChanges, Validator, AfterViewChecked {
+export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChanges, Validator, AfterViewChecked, OnDestroy {
 
     @Input()
     data: Array<any>;
@@ -65,6 +67,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     public selectedItems: Array<any>;
     public isActive: boolean = false;
     public isSelectAll: boolean = false;
+    public isFilterSelectAll: boolean = false;
+    public isInfiniteFilterSelectAll: boolean = false;
     public groupedData: Array<any>;
     filter: any;
     public chunkArray: any[];
@@ -81,15 +85,19 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     public lastScrolled: any;
     public lastRepaintY: any;
     public selectedListHeight: any;
-
+    public filterLength: any = 0;
+    public infiniteFilterLength: any = 0;
+    subscription: Subscription;
     defaultSettings: DropdownSettings = {
         singleSelection: false,
         text: 'Select',
         enableCheckAll: true,
         selectAllText: 'Select All',
         unSelectAllText: 'UnSelect All',
+        filterSelectAllText: 'Select all filtered results',
+        filterUnSelectAllText: 'UnSelect all filtered results',
         enableSearchFilter: false,
-        searchBy:[],
+        searchBy: [],
         maxHeight: 300,
         badgeShowLimit: 999999999999,
         classes: '',
@@ -101,10 +109,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         lazyLoading: false,
         labelKey: 'itemName',
         primaryKey: 'id',
-        position: 'bottom'
+        position: 'bottom',
+        enableFilterSelectAll: true
     }
     public parseError: boolean;
-    constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef) {
+    public filteredList: any = [];
+    constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef, private ds: DataService) {
 
     }
     ngOnInit() {
@@ -126,6 +136,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 this.selectedListHeight.val = this.selectedListElem.nativeElement.clientHeight;
             });
         }
+        this.subscription = this.ds.getData().subscribe(data => {
+            this.filterLength = data.length;
+
+            this.onFilterChange(data);
+        });
 
     }
     ngOnChanges(changes: SimpleChanges) {
@@ -277,7 +292,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             return false;
         }
         this.isActive = !this.isActive;
-        if (this.isActive) {
+        if (this.isActive && this.searchInput) {
             if (this.settings.searchAutofocus && this.settings.enableSearchFilter && !this.searchTempl) {
                 setTimeout(() => {
                     this.searchInput.nativeElement.focus();
@@ -307,6 +322,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.onClose.emit(false);
     }
     toggleSelectAll() {
+        console.log(this.ds.getData());
+        console.log(this.filter);
         if (!this.isSelectAll) {
             this.selectedItems = [];
             this.selectedItems = this.data.slice();
@@ -324,6 +341,68 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
             this.onDeSelectAll.emit(this.selectedItems);
         }
+    }
+    toggleFilterSelectAll() {
+        if (!this.isFilterSelectAll) {
+            this.ds.getFilteredData().forEach((item: any) => {
+                if (!this.isSelected(item)) {
+                    this.addSelected(item);
+                }
+
+            });
+            this.isFilterSelectAll = true;
+        }
+        else {
+            this.ds.getFilteredData().forEach((item: any) => {
+                if (this.isSelected(item)) {
+                    this.removeSelected(item);
+                }
+
+            });
+            this.isFilterSelectAll = false;
+        }
+    }
+    toggleInfiniteFilterSelectAll() {
+        if (!this.isInfiniteFilterSelectAll) {
+            this.data.forEach((item: any) => {
+                if (!this.isSelected(item)) {
+                    this.addSelected(item);
+                }
+
+            });
+            this.isInfiniteFilterSelectAll = true;
+        }
+        else {
+            this.data.forEach((item: any) => {
+                if (this.isSelected(item)) {
+                    this.removeSelected(item);
+                }
+
+            });
+            this.isInfiniteFilterSelectAll = false;
+        }
+    }
+    clearSearch() {
+        this.filter = "";
+        this.isFilterSelectAll = false;
+    }
+    onFilterChange(data: any) {
+        if (this.filter && this.filter == "" || data.length == 0) {
+            this.isFilterSelectAll = false;
+        }
+        let cnt = 0;
+        data.forEach((item: any) => {
+            if (this.isSelected(item)) {
+                cnt++;
+            }
+        });
+        if (cnt > 0 && this.filterLength == cnt) {
+            this.isFilterSelectAll = true;
+        }
+        else if (cnt > 0 && this.filterLength != cnt) {
+            this.isFilterSelectAll = false;
+        }
+        this.cdr.detectChanges();
     }
     transformData(arr: Array<any>, field: any): Array<any> {
         const groupedObj: any = arr.reduce((prev: any, cur: any) => {
@@ -382,6 +461,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.totalRows = filteredElems.length;
             this.data = [];
             this.data = filteredElems;
+            this.infiniteFilterLength = this.data.length;
             this.updateView(this.scrollTop);
         }
         else if (evt.target.value.toString() == '' && this.cachedItems.length > 0) {
@@ -389,14 +469,29 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.data = this.cachedItems;
             this.totalHeight = this.itemHeight * this.data.length;
             this.totalRows = this.data.length;
+            this.infiniteFilterLength = 0;
             this.updateView(this.scrollTop);
         }
+    }
+    resetInfiniteSearch() {
+        this.filter = "";
+        this.isInfiniteFilterSelectAll = false;
+        this.data = [];
+        this.data = this.cachedItems;
+        this.totalHeight = this.itemHeight * this.data.length;
+        this.totalRows = this.data.length;
+        this.infiniteFilterLength = 0;
+        this.updateView(this.scrollTop);
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 }
 
 @NgModule({
     imports: [CommonModule, FormsModule],
     declarations: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search, setPosition],
-    exports: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search, setPosition]
+    exports: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search, setPosition],
+    providers: [DataService]
 })
 export class AngularMultiSelectModule { }
