@@ -21,6 +21,7 @@ import { DynamicDataSetsExample } from './examples/dynamicDataSets';
 import { ThemingExample } from './examples/theming';
 import { RemoteDataExample } from './examples/remoteData';
 import { CustomSearchExample } from './examples/customSearch';
+import { SearchFilterByOnePropertyExample } from './examples/searchByOneProperty';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/basic', pathMatch: 'full' },
@@ -42,10 +43,8 @@ const appRoutes: Routes = [
   { path: 'dynamicdatasets', component: DynamicDataSetsExample },
   { path: 'theming', component: ThemingExample },
   { path: 'remoteData', component: RemoteDataExample },
-  { path: 'customSearchAPI', component: CustomSearchExample }
-
-
-
+  { path: 'customSearchAPI', component: CustomSearchExample },
+  { path: 'searchFilterByOneProperty',  component: SearchFilterByOnePropertyExample }
 ];
 
 

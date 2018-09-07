@@ -29,6 +29,7 @@ import { DynamicDataSetsExample } from './examples/dynamicDataSets';
 import { ThemingExample } from './examples/theming';
 import { RemoteDataExample } from './examples/remoteData';
 import { CustomSearchExample } from './examples/customSearch';
+import { SearchFilterByOnePropertyExample } from './examples/searchByOneProperty';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { CustomSearchExample } from './examples/customSearch';
     DynamicDataSetsExample,
     ThemingExample,
     RemoteDataExample,
-    CustomSearchExample
+    CustomSearchExample,
+    SearchFilterByOnePropertyExample
     ],
   imports: [
     BrowserModule,
