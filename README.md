@@ -232,7 +232,7 @@ The following list of settings are supported by the component. Configure the set
 | showCheckbox | Boolean | Show or hide checkboxes in the list | true |
 
 
-### Callback Methods
+### Events
 - `onSelect` - Return the selected item on selection.
     Example : (onSelect)="onItemSelect($event)"
 - `onDeSelect` - Return the un-selected item on un-selecting.
