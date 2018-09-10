@@ -2502,10 +2502,10 @@ var RemoteDataExample = /** @class */ (function () {
         this.settings = {};
         this.cssgist = false;
         this.title = "Data from remote API example";
-        this.tsgist = "CuppaLabs/ee72fbc7b21dad7e4e7664c5b1553235";
+        this.tsgist = "CuppaLabs/ffb168ae28c36a9130ad5ce74b720c5d";
         this.htmlgist = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
-        this.tstitle = "basic.ts";
-        this.htmltitle = "basic.html";
+        this.tstitle = "remoteData.ts";
+        this.htmltitle = "remoteData.html";
     }
     RemoteDataExample.prototype.ngOnInit = function () {
         var _this = this;
