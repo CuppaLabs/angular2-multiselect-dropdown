@@ -1,31 +1,20 @@
 
-$base-color: #0079FE;
-$btn-background: #fff;
-$btn-border: #ccc;
-$btn-text-color: #333;
-$btn-disabled:#ccc;
-$token-color: #fff;
-$box-shadow-color: #959595;
-$list-hover-background: #f5f5f5;
-$label-color: #000;
-
 .cuppa-dropdown{
     position: relative;
 }
 .c-btn{
     display: inline-block;
-    background: $btn-background;
-    border: 1px solid $btn-border;
+    border-width: 1px;
+    line-height: 1.25;
+    /*background: $btn-background;*/
+    /*border: 1px solid $btn-border;*/
     border-radius: 3px;
     font-size: 14px;
-    color: $btn-text-color;
+    /*color: $btn-text-color;*/
 }
 .c-btn.disabled{
-    background: $btn-disabled;
+    background: #ccc;
 }
-.c-btn:focus{
-        
-    }
 .selected-list{
     .c-list{
         float: left;
@@ -35,8 +24,8 @@ $label-color: #000;
         .c-token{
             list-style: none;  
             padding: 2px 8px;
-            background: $base-color; 
-            color: $token-color;
+            /*background: $base-color; */
+            /*color: $token-color;*/
             border-radius: 2px;
             margin-right: 4px;
             margin-top: 2px;
@@ -122,7 +111,7 @@ $label-color: #000;
             padding-bottom: 10px;
         }
         li:hover{
-            background: $list-hover-background;
+            /*background: $list-hover-background;*/
         }
     }
     ::-webkit-scrollbar{
@@ -164,7 +153,7 @@ $label-color: #000;
     border-radius: 3px;
     background: #fff;
     margin: 0px;
-    box-shadow: 0px 1px 5px $box-shadow-color;
+    /*box-shadow: 0px 1px 5px $box-shadow-color;*/
 }
 .select-all{
     padding: 10px;
@@ -219,7 +208,7 @@ $label-color: #000;
 .pure-checkbox input[type="checkbox"]:focus + label:before,
 .pure-checkbox input[type="checkbox"]:hover + label:before
  {
-  border-color: $base-color;
+  /*border-color: $base-color;*/
   background-color: #f2f2f2;
 }
 .pure-checkbox input[type="checkbox"]:active + label:before {
@@ -232,27 +221,27 @@ $label-color: #000;
   user-select: none;
   cursor: pointer;
   margin: 0px;
-  color: $label-color;
+  /*color: $label-color;*/
   font-weight: 300;
 }
 .pure-checkbox input[type="checkbox"] + label:before{
   box-sizing: content-box;
   content: '';
-  color: $base-color;
+  /*color: $base-color;*/
   position: absolute;
   top: 50%;
   left: 0;
   width: 14px;
   height: 14px;
   margin-top: -9px;
-  border: 2px solid $base-color;
+  /*border: 2px solid $base-color;*/
   text-align: center;
   transition: all 0.4s ease;
 }
 .pure-checkbox input[type="checkbox"] + label:after{
   box-sizing: content-box;
   content: '';
-  background-color: $base-color;
+  /*background-color: $base-color;*/
   position: absolute;
   top: 50%;
   left: 4px;
@@ -301,7 +290,7 @@ $label-color: #000;
   border-radius: 50%;
 }
 .pure-checkbox input[type="checkbox"]:checked + label:before{
-  background: $base-color;
+  /*background: $base-color;*/
 }
 .pure-checkbox input[type="checkbox"]:checked + label:after{
   transform: rotate(-45deg) scale(1);
@@ -323,4 +312,7 @@ $label-color: #000;
 }
 .list-grp > li {
     padding-left: 15px !important;
+}
+.selected-item{
+    /*background: $selected-background;*/
 }

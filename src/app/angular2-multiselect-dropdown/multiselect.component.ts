@@ -28,6 +28,7 @@ const noop = () => {
     host: { '[class]': 'defaultSettings.classes' },
     styleUrls: ['./multiselect.component.scss'],
     providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR, DROPDOWN_CONTROL_VALIDATION],
+    encapsulation: ViewEncapsulation.None,
 })
 
 export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChanges, Validator, AfterViewChecked, OnDestroy {
@@ -75,6 +76,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     public scrollTop: any;
     public chunkIndex: any[] = [];
     public cachedItems: any[] = [];
+    public groupCachedItems: any[] = [];
     public totalRows: any;
     public itemHeight: any = 41.6;
     public screenItemsLen: any;
@@ -121,6 +123,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.settings = Object.assign(this.defaultSettings, this.settings);
         if (this.settings.groupBy) {
             this.groupedData = this.transformData(this.data, this.settings.groupBy);
+            this.groupCachedItems = this.cloneArray(this.groupedData);
         }
         this.totalRows = (this.data && this.data.length);
         this.cachedItems = this.data;
@@ -322,8 +325,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.onClose.emit(false);
     }
     toggleSelectAll() {
-        console.log(this.ds.getData());
-        console.log(this.filter);
         if (!this.isSelectAll) {
             this.selectedItems = [];
             this.selectedItems = this.data.slice();
@@ -344,21 +345,44 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     toggleFilterSelectAll() {
         if (!this.isFilterSelectAll) {
-            this.ds.getFilteredData().forEach((item: any) => {
-                if (!this.isSelected(item)) {
-                    this.addSelected(item);
-                }
+            if (this.settings.groupBy) {
+                this.groupedData.forEach((item: any) => {
+                    item.value.forEach((el: any) => {
+                        if (!this.isSelected(el)) {
+                            this.addSelected(el);
+                        }
+                    });
+                });
+            }
+            else {
+                this.ds.getFilteredData().forEach((item: any) => {
+                    if (!this.isSelected(item)) {
+                        this.addSelected(item);
+                    }
 
-            });
+                });
+            }
+
             this.isFilterSelectAll = true;
         }
         else {
-            this.ds.getFilteredData().forEach((item: any) => {
-                if (this.isSelected(item)) {
-                    this.removeSelected(item);
-                }
+            if (this.settings.groupBy) {
+                this.groupedData.forEach((item: any) => {
+                    item.value.forEach((el: any) => {
+                        if (this.isSelected(el)) {
+                            this.removeSelected(el);
+                        }
+                    });
+                });
+            }
+            else {
+                this.ds.getFilteredData().forEach((item: any) => {
+                    if (this.isSelected(item)) {
+                        this.removeSelected(item);
+                    }
 
-            });
+                });
+            }
             this.isFilterSelectAll = false;
         }
     }
@@ -383,8 +407,16 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
     }
     clearSearch() {
-        this.filter = "";
-        this.isFilterSelectAll = false;
+        if (this.settings.groupBy) {
+            this.filter = "";
+            this.groupedData = [];
+            this.groupedData = this.cloneArray(this.groupCachedItems);
+        }
+        else {
+            this.filter = "";
+            this.isFilterSelectAll = false;
+        }
+
     }
     onFilterChange(data: any) {
         if (this.filter && this.filter == "" || data.length == 0) {
@@ -396,6 +428,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 cnt++;
             }
         });
+
         if (cnt > 0 && this.filterLength == cnt) {
             this.isFilterSelectAll = true;
         }
@@ -403,6 +436,71 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.isFilterSelectAll = false;
         }
         this.cdr.detectChanges();
+    }
+    cloneArray(arr: any) {
+        var i, copy;
+
+        if (Array.isArray(arr)) {
+            return JSON.parse(JSON.stringify(arr));
+        } else if (typeof arr === 'object') {
+            throw 'Cannot clone array containing an object!';
+        } else {
+            return arr;
+        }
+    }
+    filterGroupList(evt: any) {
+        this.groupedData = this.cloneArray(this.groupCachedItems);
+        if (evt.target.value.toString() != '') {
+            this.groupedData.forEach((obj: any) => {
+                var filteredElems: Array<any> = [];
+                obj.value.forEach((el: any) => {
+                    if (this.settings.searchBy.length > 0) {
+                        for (var t = 0; t < this.settings.searchBy.length; t++) {
+                            var key: any = this.settings.searchBy[t];
+                            if (el[key] && el[key] != "") {
+                                if (el[key].toString().toLowerCase().indexOf(evt.target.value.toString().toLowerCase()) >= 0) {
+                                    filteredElems.push(el);
+                                }
+                            }
+                        }
+
+                    }
+                    else {
+                        for (var prop in el) {
+                            if (el[prop].toString().toLowerCase().indexOf(evt.target.value.toString().toLowerCase()) >= 0) {
+                                filteredElems.push(el);
+                                break;
+                            }
+                        }
+                    }
+                });
+                obj.value.splice(0, obj.value.length);
+                filteredElems.forEach(i => {
+                    obj.value.push(i);
+                });
+            });
+            let cnt = 0;
+            this.filterLength = 0;
+            this.groupedData.forEach((item: any) => {
+                item.value.forEach((obj: any) => {
+                    this.filterLength++;
+                    if (this.isSelected(obj)) {
+                        cnt++;
+                    }
+                });
+
+            });
+
+            if (cnt > 0 && this.filterLength == cnt) {
+                this.isFilterSelectAll = true;
+            }
+            else if (cnt > 0 && this.filterLength != cnt) {
+                this.isFilterSelectAll = false;
+            }
+        }
+        else if (evt.target.value.toString() == '' && this.groupCachedItems.length > 0) {
+            this.clearSearch();
+        }
     }
     transformData(arr: Array<any>, field: any): Array<any> {
         const groupedObj: any = arr.reduce((prev: any, cur: any) => {

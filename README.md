@@ -5,6 +5,9 @@
 
 Angular 2 multiselect dropdown component for web applications. Easy to integrate and use.
 
+# Important Notice !! 
+#####  From v3.0.0 onwards, you need to include `default.theme.css` file to get the basic styling of the dropdown. Refer to `themes and theming` section below
+
 
 # [Documentation](http://cuppalabs.github.io/components/multiselectDropdown) | [Demos / Examples](https://cuppalabs.github.io/angular2-multiselect-dropdown).
 
@@ -12,15 +15,16 @@ Angular 2 multiselect dropdown component for web applications. Easy to integrate
 ##### 1. Getting Started
 ##### 2. Installation
 ##### 3. Usage
-##### 4. Templates
-##### 5. Template Driven Forms support
-##### 5. Reactive Forms support
-##### 6. Settings configuration
-##### 7. Callbacks and events
-##### 8. Lazy lodaing - handle large data lists
-##### 9. Group By feature
-##### 10. Search filter for both plain list and grouped list
-##### 11. Custom Search / Search API
+##### 4  Theming 
+##### 5. Templates
+##### 6. Template Driven Forms support
+##### 7. Reactive Forms support
+##### 8. Settings configuration
+##### 9. Callbacks and events
+##### 10. Lazy lodaing - handle large data lists
+##### 11. Group By feature
+##### 12. Search filter for both plain list and grouped list
+##### 13. Custom Search / Search API
 
 
 
@@ -114,6 +118,17 @@ Add the following component tag in you template
     (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
 
 ```
+
+### Themes and Theming
+
+- From v3.0.0 onwards, you need to include `default.theme.css` file to get the basic styling of the dropdown. 
+- The component package has a themes folder in node_modules at `angular2-multiselect-dropdown\themes\default.theme.css`
+- Include the `default.theme.css` in `angular-cli.json` (for versions below angular 6) and `angular.json` (for version 6 or more).
+- [Refer this file](https://github.com/CuppaLabs/angular2-multiselect-dropdown/blob/master/.angular-cli.json) on how to add the css file to your angular project.
+
+You can create your own theme from now on. You can have a look at example scss theming file at [Default theme](https://github.com/CuppaLabs/angular2-multiselect-dropdown/tree/master/src/themes/default.theme.scss) 
+
+
 ### Template - For custom html of menu item
 
 ```html

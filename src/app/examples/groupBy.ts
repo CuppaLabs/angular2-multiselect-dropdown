@@ -36,7 +36,8 @@ export class GroupByExample implements OnInit {
       searchPlaceholderText: 'Search Fields',
       enableSearchFilter: true,
       badgeShowLimit: 5,
-      groupBy: "category"
+      groupBy: "category",
+      searchBy: ["itemName"]
     };
   }
   onItemSelect(item: any) {

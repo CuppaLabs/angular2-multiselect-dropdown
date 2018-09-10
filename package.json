@@ -1,6 +1,6 @@
 {
   "name": "angular2-multiselect-dropdown",
-  "version": "2.10.2",
+  "version": "3.0.0",
   "description": "Angular 2 and angular 4 multiselect dropdown component.",
   "keywords": [
     "angular 2 multiselect dropdown",
@@ -15,12 +15,13 @@
     "ng": "ng",
     "start": "ng serve",
     "e2e": "ng e2e",
-    "build": "npm run build:esm && npm run build:umd && gulp copy",
+    "build": "npm run build:esm && npm run build:umd && gulp copy && npm run build-sass",
     "build:esm": "gulp inline-templates && npm run ngcompile",
     "build:esm:watch": "gulp build:esm:watch",
     "build:umd": "webpack --config webpack-umd.config.ts",
     "build:umd:watch": "npm run build:umd -- --watch",
     "build:watch": "concurrently --raw \"npm run build:umd:watch\" \"npm run build:esm:watch\"",
+    "build-sass":"node-sass --include-path scss src/themes/default.theme.scss dist/themes/default.theme.css",
     "ci": "npm run lint && npm run test && npm run build && npm run docs",
     "clean:all": "npm run clean:tmp && rimraf node_modules",
     "clean:tmp": "rimraf coverage dist tmp docs",
@@ -43,7 +44,7 @@
   "dependencies": {},
   "devDependencies": {
     "@angular/animations": "^4.0.0",
-    "@angular/cli": "^1.3.2",
+    "@angular/cli": "^1.7.1",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/compiler-cli": "^4.0.0",

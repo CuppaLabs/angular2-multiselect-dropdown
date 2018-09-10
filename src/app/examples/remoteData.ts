@@ -49,8 +49,8 @@ export class RemoteDataExample implements OnInit {
     }
     cssgist: boolean = false;
     title: string = "Data from remote API example";
-    tsgist: string = "CuppaLabs/ee72fbc7b21dad7e4e7664c5b1553235";
+    tsgist: string = "CuppaLabs/ffb168ae28c36a9130ad5ce74b720c5d";
     htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
-    tstitle: string = "basic.ts"
-    htmltitle: string = "basic.html";
+    tstitle: string = "remoteData.ts"
+    htmltitle: string = "remoteData.html";
 }

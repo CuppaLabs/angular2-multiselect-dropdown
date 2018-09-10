@@ -19,7 +19,7 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
-        "styles.css","main.css",
+        "styles.css","main.css","themes/default.theme.scss",
         "../node_modules/primeng/resources/themes/omega/theme.css",
         "../node_modules/primeng/resources/primeng.min.css"
       ],
