@@ -1,22 +1,22 @@
 export interface DropdownSettings{
-    singleSelection: Boolean;
+    singleSelection: boolean;
     text: String;
-    enableCheckAll : Boolean;
+    enableCheckAll : boolean;
     selectAllText: String;
     unSelectAllText: String;
     filterSelectAllText: String;
     filterUnSelectAllText: String;
-    enableFilterSelectAll: Boolean;
-    enableSearchFilter: Boolean;
+    enableFilterSelectAll: boolean;
+    enableSearchFilter: boolean;
     searchBy: Array<string>[];
     maxHeight: number;
     badgeShowLimit: Number;
     classes: String;
     limitSelection?: Number;
-    disabled?: Boolean;
+    disabled?: boolean;
     searchPlaceholderText: String;
     groupBy?: String;
-    showCheckbox?: Boolean;
+    showCheckbox?: boolean;
     noDataLabel: string;
     searchAutofocus?: boolean;
     lazyLoading?: boolean;
