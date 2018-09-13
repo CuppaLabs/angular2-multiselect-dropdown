@@ -9,6 +9,7 @@ export class DataService {
   private subject = new Subject<any>();
 
   setData(data: any) {
+
     this.filteredData = data;
     this.subject.next(data);
   }

@@ -1,4 +1,7 @@
-
+virtual-scroll {
+  display: block;
+  width: 100%;
+}
 .cuppa-dropdown{
     position: relative;
 }
@@ -315,4 +318,18 @@
 }
 .selected-item{
     /*background: $selected-background;*/
+}
+.grp-item {
+    padding-left: 30px !important;
+}
+.grp-title {
+    padding-bottom: 0px !important;
+}
+.grp-title label {
+    margin-bottom: 0px !important;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+.grp-title:hover{
+    background: none !important;
 }
