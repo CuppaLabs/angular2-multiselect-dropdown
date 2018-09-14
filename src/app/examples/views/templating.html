@@ -1,0 +1,30 @@
+<h2 class="example-title">{{title}}</h2>
+<div class="col-md-7 mr-auto ml-auto dropdown-container">
+    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
+        (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+        <c-badge>
+            <ng-template let-item="item">
+                <label style="margin: 0px;">{{item.itemName}}</label>
+                <img [src]="item.image" style="width: 16px; margin-right: 5px;" />
+            </ng-template>
+        </c-badge>
+        <c-item>
+            <ng-template let-item="item">
+                <label style="color: #333;min-width: 150px;">{{item.itemName}}</label>
+                <img [src]="item.image" style="width: 30px; border: 1px solid #efefef;margin-right: 20px;" />
+                <label>Capital - {{item.capital}}</label>
+            </ng-template>
+        </c-item>
+    </angular2-multiselect>
+</div>
+
+<h4 class="example-title code-section">Code</h4>
+
+<p-tabView>
+    <p-tabPanel header="{{tstitle}}">
+        <ng2-gist [gistId]="tsgist"></ng2-gist>
+    </p-tabPanel>
+    <p-tabPanel header="{{htmltitle}}">
+        <ng2-gist [gistId]="htmlgist"></ng2-gist>
+    </p-tabPanel>
+</p-tabView>

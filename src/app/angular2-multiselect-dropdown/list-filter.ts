@@ -1,28 +1,58 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { DataService } from './multiselect.service';
 
-import { ListItem } from './multiselect.model';
 
 @Pipe({
     name: 'listFilter',
-    pure: false
+    pure: true
 })
 export class ListFilterPipe implements PipeTransform {
-    transform(items: ListItem[], filter: ListItem): ListItem[] {
+
+    public filteredList: any = [];
+    constructor(private ds: DataService) {
+
+    }
+
+    transform(items: any[], filter: any, searchBy: any): any[] {
         if (!items || !filter) {
+            this.ds.setData(items);
             return items;
         }
-        // filter items array, items which match and return true will be kept, false will be filtered out
-        return items.filter((item: ListItem) => this.applyFilter(item, filter));
+        this.filteredList = items.filter((item: any) => this.applyFilter(item, filter, searchBy));
+        this.ds.setData(this.filteredList);
+        return this.filteredList;
     }
-    
-    /**
-     * Perform the filtering.
-     * 
-     * @param {Book} book The book to compare to the filter.
-     * @param {Book} filter The filter to apply.
-     * @return {boolean} True if book satisfies filters, false if not.
-     */
-    applyFilter(item: ListItem, filter: ListItem): boolean {
-        return !(filter.itemName && item.itemName && item.itemName.toLowerCase().indexOf(filter.itemName.toLowerCase()) === -1);
+    applyFilter(item: any, filter: any, searchBy: any): boolean {
+        let found = false;
+        if (searchBy.length > 0) {
+            if (item.grpTitle) {
+                found = true;
+            }
+            else {
+                for (var t = 0; t < searchBy.length; t++) {
+                    if (filter && item[searchBy[t]] && item[searchBy[t]] != "") {
+                        if (item[searchBy[t]].toString().toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
+                            found = true;
+                        }
+                    }
+                }
+            }
+
+        } else {
+            if (item.grpTitle) {
+                found = true;
+            }
+            else {
+                for (var prop in item) {
+                    if (filter && item[prop]) {
+                        if (item[prop].toString().toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
+                            found = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return found;
     }
 }

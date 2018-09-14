@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 body{
-   background: url('assets/img/sand-background.jpg');
+   background-color: rgb(246, 246, 246) !important;
 }
 .navbar-default{
     border-radius: 0px !important;
     background-color: #fff !important;
     margin: 0px !important;
+}
+.example-title{
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 75px;
 }
 .row{
     margin: 0px !important;
@@ -41,3 +45,48 @@ h4{
         color: #fff !important;
     }
 }
+.code-section {
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
+.ui-tabview-nav {
+    background: #007bff !important;
+}
+.ui-tabview .ui-tabview-nav > li.ui-state-default {
+    background: #007bff !important;
+}
+.ui-state-default a {
+    color: #fff !important;
+}
+.ui-tabview .ui-tabview-nav > li.ui-state-active {
+    background: #fff !important;
+}
+.ui-tabview .ui-tabview-nav > li.ui-state-active > a{
+    color: #333 !important;
+}
+.ui-tabview-panel {
+    padding: 0px !important;
+    margin: 0px -7px;
+}
+.custom-class-example {
+    color: #ccc;
+}
+.custom-class-example .c-token{
+    background: #38d574 !important;
+}
+.custom-class-example .pure-checkbox label::before {
+    border-color: #38d574 !important;
+}
+.custom-class-example .pure-checkbox input[type="checkbox"]:checked + label[_ngcontent-c1]:before {
+    background: #38d574 !important;
+}
+.outer-wrapper {
+    margin-top: 15px;
+}
+.dropdown-container {
+    height: 170px;
+}
+iframe {
+    min-height: 300px;
+}
+

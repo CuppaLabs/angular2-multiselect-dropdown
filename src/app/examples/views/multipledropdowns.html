@@ -1,0 +1,34 @@
+<h2 class="example-title"> {{title}}</h2>
+<div class="col-md-8 mr-auto ml-auto dropdown-container">
+    <div class="form-group col-md-12">
+        <label for="directorySpecialties">Directory Specialties</label>
+        <angular2-multiselect id="directorySpecialties" name="directorySpecialties" [(ngModel)]="providerLocation.directorySpecialties"
+            [data]="directorySpecialties" [settings]="dropdownSettings">
+        </angular2-multiselect>
+    </div>
+    <div class="form-group col-md-12">
+        <label for="useCases">Use Cases</label>
+        <angular2-multiselect id="useCases" name="useCases" [(ngModel)]="providerLocation.useCases" [data]="useCases" [settings]="dropdownSettings2">
+        </angular2-multiselect>
+    </div>
+</div>
+<h4 class="example-title code-section">Code</h4>
+
+<p-tabView>
+    <p-tabPanel header="{{tstitle}}">
+        <ng2-gist [gistId]="tsgist"></ng2-gist>
+    </p-tabPanel>
+    <p-tabPanel header="{{htmltitle}}">
+        <ng2-gist [gistId]="htmlgist"></ng2-gist>
+    </p-tabPanel>
+    <span *ngIf="cssgist">
+        <p-tabPanel header="{{csstitle}}">
+        <ng2-gist [gistId]="cssgist"></ng2-gist>
+    </p-tabPanel>
+    </span>
+    <span *ngIf="mockgist">
+        <p-tabPanel header="{{mocktitle}}">
+        <ng2-gist [gistId]="mockgist"></ng2-gist>
+    </p-tabPanel>
+    </span>
+</p-tabView>

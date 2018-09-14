@@ -1,0 +1,40 @@
+.left-sidebar {
+    position: fixed;
+    top: 70px;
+    height: calc(100vh - 75px);
+    overflow: auto;
+    padding-right: 0px;
+}
+.left-sidebar, .right-sidebar {
+    width: 330px;
+    max-width: 315px;
+    min-width: 315px;
+}
+
+.outer-wrapper {
+    padding: 30px;
+}
+.center-content{
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 3px;
+    padding: 15px;
+    margin-left: 0px;
+    margin-top: 0px;
+}
+@media (min-width: 768px) { 
+    .center-content {
+        margin-left: 330px;
+        margin-top: 55px;
+    }
+}
+.nav-sub{
+    width: 100%;
+    box-shadow: none;
+    margin-bottom: 6px;
+    padding: 0px;
+    margin-top: 50px;
+}
+.nav-wrapper {
+    padding: 0px 10px;
+}

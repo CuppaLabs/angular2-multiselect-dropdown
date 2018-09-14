@@ -1,0 +1,79 @@
+<h2 class="example-title">{{title}}</h2>
+<div class="row">
+<div class="col-md-6 ml-auto mr-auto">
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" style="border: 1px solid #ccc; padding: 10px;">
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="formModel.name" name="name"
+                #name="ngModel">
+            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                <div [hidden]="!name.hasError('required')">Name is required</div>
+                <div [hidden]="!name.hasError('pattern')">Only alphabetsallowed</div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Email Address</label>
+            <span style="color: red;float: right;">* required</span>
+            <input type="text" class="form-control" id="emailaddress" required [(ngModel)]="formModel.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                #email="ngModel">
+            <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                <div [hidden]="!email.hasError('required')">Email is required</div>
+                <div [hidden]="!email.hasError('pattern')">Email format should be <small><b>joe@abc.com</b></small></div>
+            </div>
+        </div>
+                <div class="form-group">
+            <label for="name">Skills </label>
+            <span style="color: red;float: right;">* required</span>
+            <angular2-multiselect [data]="itemList" [(ngModel)]="formModel.skills" 
+                                  [settings]="settings" 
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)" 
+                                  (onSelectAll)="onSelectAll($event)" 
+                                  (onDeSelectAll)="onDeSelectAll($event)" name="skills" #skills="ngModel" required>
+            </angular2-multiselect>
+            <div [hidden]="skills.valid" class="alert alert-danger">
+                <div [hidden]="!skills.hasError('required')">Atleast one Skill is required</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-block" [disabled]="!loginForm.form.valid">Submit</button>
+    </form>
+</div>
+<div class="col-md-6">
+    <table class="table">
+        <tr>
+            <td><label>Name</label></td>
+            <td>{{formModel.name}}</td>
+        </tr>
+        <tr>
+            <td><label>Email</label></td>
+            <td>{{formModel.email}}</td>
+        </tr>
+        <tr>
+            <td><label>Skills</label></td>
+            <td>
+                <h6 *ngFor="let obj of formModel.skills">{{obj.itemName}}</h6>
+            </td>
+        </tr>
+    </table>
+    <span>{{formModel | json}}</span>
+        <p>Form status: {{ loginForm.form.status | json }}</p>
+
+</div>
+</div>
+<h4 class="example-title code-section">Code</h4>
+
+<p-tabView>
+    <p-tabPanel header="{{tstitle}}">
+       <ng2-gist [gistId]="tsgist"></ng2-gist>
+    </p-tabPanel>
+    <p-tabPanel header="{{htmltitle}}">
+        <ng2-gist [gistId]="htmlgist"></ng2-gist>
+    </p-tabPanel>
+    <span *ngIf="cssgist">
+        <p-tabPanel header="{{csstitle}}">
+        <ng2-gist [gistId]="cssgist"></ng2-gist>
+    </p-tabPanel>
+    </span>
+</p-tabView>

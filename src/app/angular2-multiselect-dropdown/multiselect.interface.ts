@@ -1,14 +1,26 @@
 export interface DropdownSettings{
-    singleSelection: Boolean;
-    text: String;
-    enableCheckAll : Boolean;
-    selectAllText: String;
-    unSelectAllText: String;
-    enableSearchFilter: Boolean;
-    maxHeight: Number;
-    badgeShowLimit: Number;
-    classes: String;
-    limitSelection?: Number;
-    disabled?: Boolean;
-    searchPlaceholderText: String;
+    singleSelection: boolean;
+    text: string;
+    enableCheckAll : boolean;
+    selectAllText: string;
+    unSelectAllText: string;
+    filterSelectAllText: string;
+    filterUnSelectAllText: string;
+    enableFilterSelectAll: boolean;
+    enableSearchFilter: boolean;
+    searchBy: Array<string>[];
+    maxHeight: number;
+    badgeShowLimit: number;
+    classes: string;
+    limitSelection?: number;
+    disabled?: boolean;
+    searchPlaceholderText: string;
+    groupBy?: string;
+    showCheckbox?: boolean;
+    noDataLabel: string;
+    searchAutofocus?: boolean;
+    lazyLoading?: boolean;
+    labelKey?: string;
+    primaryKey: string;
+    position:string;
 } 
