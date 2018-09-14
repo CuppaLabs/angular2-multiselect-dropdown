@@ -241,7 +241,7 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	protected revertParentOverscroll(): void {
-		const scrollElement = this.getScrollElement();
+		const scrollElement: any = this.getScrollElement();
 		if (scrollElement && this.oldParentScrollOverflow) {
 			scrollElement.style['overflow-y'] = this.oldParentScrollOverflow.y;
 			scrollElement.style['overflow-x'] = this.oldParentScrollOverflow.x;
@@ -265,7 +265,7 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 		this._parentScroll = value;
 		this.addScrollEventHandlers();
 
-		const scrollElement = this.getScrollElement();
+		const scrollElement:any = this.getScrollElement();
 		if (scrollElement !== this.element.nativeElement) {
 			this.oldParentScrollOverflow = { x: scrollElement.style['overflow-x'], y: scrollElement.style['overflow-y'] };
 			scrollElement.style['overflow-y'] = this.horizontal ? 'visible' : 'auto';
@@ -312,7 +312,7 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	public ngOnChanges(changes: any) {
-		let indexLengthChanged = this.cachedItemsLength !== this.items.length;
+		let indexLengthChanged: any = this.cachedItemsLength !== this.items.length;
 		this.cachedItemsLength = this.items.length;
 
 		const firstRun: boolean = !changes.items || !changes.items.previousValue || changes.items.previousValue.length === 0;
@@ -351,8 +351,8 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 				return;
 			}
 
-			let dimensions = this.calculateDimensions();
-			let desiredStartIndex = Math.min(Math.max(index, 0), dimensions.itemCount - 1);
+			let dimensions: any = this.calculateDimensions();
+			let desiredStartIndex: any = Math.min(Math.max(index, 0), dimensions.itemCount - 1);
 			if (this.previousViewPort.startIndex === desiredStartIndex) {
 				if (animationCompletedCallback) {
 					animationCompletedCallback();
@@ -369,11 +369,11 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	protected scrollToIndex_internal(index: number, alignToBeginning: boolean = true, additionalOffset: number = 0, animationMilliseconds: number = undefined, animationCompletedCallback: () => void = undefined) {
 		animationMilliseconds = animationMilliseconds === undefined ? this.scrollAnimationTime : animationMilliseconds;
 
-		let scrollElement = this.getScrollElement();
-		let offset = this.getElementsOffset();
+		let scrollElement: any = this.getScrollElement();
+		let offset: any = this.getElementsOffset();
 
-		let dimensions = this.calculateDimensions();
-		let scroll = this.calculatePadding(index, dimensions, false) + offset + additionalOffset;
+		let dimensions: any = this.calculateDimensions();
+		let scroll: any = this.calculatePadding(index, dimensions, false) + offset + additionalOffset;
 		if (!alignToBeginning) {
 			scroll -= dimensions.wrapGroupsPerPage * dimensions[this._childScrollDim];
 		}
@@ -398,14 +398,14 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 
 	protected previousScrollBoundingRect: ClientRect;
 	protected checkScrollElementResized(): void {
-		let boundingRect = this.getScrollElement().getBoundingClientRect();
+		let boundingRect: any = this.getScrollElement().getBoundingClientRect();
 
 		let sizeChanged: boolean;
 		if (!this.previousScrollBoundingRect) {
 			sizeChanged = true;
 		} else {
-			let widthChange = Math.abs(boundingRect.width - this.previousScrollBoundingRect.width);
-			let heightChange = Math.abs(boundingRect.height - this.previousScrollBoundingRect.height);
+			let widthChange: any = Math.abs(boundingRect.width - this.previousScrollBoundingRect.width);
+			let heightChange: any = Math.abs(boundingRect.height - this.previousScrollBoundingRect.height);
 			sizeChanged = widthChange > this.resizeBypassRefreshTheshold || heightChange > this.resizeBypassRefreshTheshold;
 		}
 
@@ -417,13 +417,13 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 		}
 	}
 
-	protected _invisiblePaddingProperty;
-	protected _offsetType;
-	protected _scrollType;
-	protected _pageOffsetType;
-	protected _childScrollDim;
-	protected _translateDir;
-	protected _marginDir;
+	protected _invisiblePaddingProperty: any;
+	protected _offsetType: any;
+	protected _scrollType: any;
+	protected _pageOffsetType: any;
+	protected _childScrollDim: any;
+	protected _translateDir: any;
+	protected _marginDir: any;
 	protected updateDirection(): void {
 		if (this.horizontal) {
 			this._invisiblePaddingProperty = 'width';
@@ -448,7 +448,7 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	protected refresh_throttled: () => void;
 
 	protected throttleTrailing(func: Function, wait: number): Function {
-		let timeout = undefined;
+		let timeout: any = undefined;
 		const result = function () {
 			const _this = this;
 			const _arguments = arguments;
@@ -492,12 +492,12 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 				if (itemsArrayModified) {
 					this.resetWrapGroupDimensions();
 				}
-				let viewport = this.calculateViewport();
+				let viewport: any = this.calculateViewport();
 
-				let startChanged = itemsArrayModified || viewport.startIndex !== this.previousViewPort.startIndex;
-				let endChanged = itemsArrayModified || viewport.endIndex !== this.previousViewPort.endIndex;
-				let scrollLengthChanged = viewport.scrollLength !== this.previousViewPort.scrollLength;
-				let paddingChanged = viewport.padding !== this.previousViewPort.padding;
+				let startChanged: any = itemsArrayModified || viewport.startIndex !== this.previousViewPort.startIndex;
+				let endChanged: any = itemsArrayModified || viewport.endIndex !== this.previousViewPort.endIndex;
+				let scrollLengthChanged: any = viewport.scrollLength !== this.previousViewPort.scrollLength;
+				let paddingChanged: any = viewport.padding !== this.previousViewPort.padding;
 
 				this.previousViewPort = viewport;
 
@@ -515,7 +515,7 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 					}
 				}
 
-				let emitIndexChangedEvents = true; // maxReRunTimes === 1 (would need to still run if didn't update if previous iteration had updated)
+				let emitIndexChangedEvents: any = true; // maxReRunTimes === 1 (would need to still run if didn't update if previous iteration had updated)
 
 				if (startChanged || endChanged) {
 					this.zone.run(() => {
@@ -565,12 +565,12 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 		});
 	}
 
-	protected getScrollElement(): HTMLElement {
+	protected getScrollElement(): any {
 		return this.parentScroll instanceof Window ? document.scrollingElement || document.documentElement || document.body : this.parentScroll || this.element.nativeElement;
 	}
 
 	protected addScrollEventHandlers() {
-		let scrollElement = this.getScrollElement();
+		let scrollElement: any = this.getScrollElement();
 
 		this.removeScrollEventHandlers();
 
@@ -605,16 +605,16 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	protected getElementsOffset(): number {
-		let offset = 0;
+		let offset: any = 0;
 
 		if (this.containerElementRef && this.containerElementRef.nativeElement) {
 			offset += this.containerElementRef.nativeElement[this._offsetType];
 		}
 
 		if (this.parentScroll) {
-			let scrollElement = this.getScrollElement();
-			let elementClientRect = this.element.nativeElement.getBoundingClientRect();
-			let scrollClientRect = scrollElement.getBoundingClientRect();
+			let scrollElement: any = this.getScrollElement();
+			let elementClientRect: any = this.element.nativeElement.getBoundingClientRect();
+			let scrollClientRect: any = scrollElement.getBoundingClientRect();
 			if (this.horizontal) {
 				offset += elementClientRect.left - scrollClientRect.left;
 			}
@@ -631,16 +631,16 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	protected countItemsPerWrapGroup() {
-		let propertyName = this.horizontal ? 'offsetLeft' : 'offsetTop';
-		let children = ((this.containerElementRef && this.containerElementRef.nativeElement) || this.contentElementRef.nativeElement).children;
+		let propertyName: any = this.horizontal ? 'offsetLeft' : 'offsetTop';
+		let children: any = ((this.containerElementRef && this.containerElementRef.nativeElement) || this.contentElementRef.nativeElement).children;
 
-		let childrenLength = children ? children.length : 0;
+		let childrenLength: any = children ? children.length : 0;
 		if (childrenLength === 0) {
 			return 1;
 		}
 
-		let firstOffset = children[0][propertyName];
-		let result = 1;
+		let firstOffset: any = children[0][propertyName];
+		let result: any = 1;
 		while (result < childrenLength && firstOffset === children[result][propertyName]) {
 			++result;
 		}
@@ -649,8 +649,9 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	protected getScrollPosition(): number {
-		let windowScrollValue = undefined;
+		let windowScrollValue: number = undefined;
 		if (this.parentScroll instanceof Window) {
+			var window: any;
 			windowScrollValue = window[this._pageOffsetType];
 		}
 
@@ -660,7 +661,7 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	protected minMeasuredChildWidth: number;
 	protected minMeasuredChildHeight: number;
 
-	protected wrapGroupDimensions: WrapGroupDimensions;
+	protected wrapGroupDimensions: any;
 
 	protected resetWrapGroupDimensions(): void {
 		const oldWrapGroupDimensions = this.wrapGroupDimensions;
@@ -676,7 +677,7 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 		}
 
 		const itemsPerWrapGroup: number = this.countItemsPerWrapGroup();
-		for (let wrapGroupIndex = 0; wrapGroupIndex < oldWrapGroupDimensions.maxChildSizePerWrapGroup.length; ++wrapGroupIndex) {
+		for (let wrapGroupIndex: any = 0; wrapGroupIndex < oldWrapGroupDimensions.maxChildSizePerWrapGroup.length; ++wrapGroupIndex) {
 			const oldWrapGroupDimension: WrapGroupDimension = oldWrapGroupDimensions.maxChildSizePerWrapGroup[wrapGroupIndex];
 			if (!oldWrapGroupDimension || !oldWrapGroupDimension.items || !oldWrapGroupDimension.items.length) {
 				continue;
@@ -686,8 +687,8 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 				return;
 			}
 
-			let itemsChanged = false;
-			let arrayStartIndex = itemsPerWrapGroup * wrapGroupIndex;
+			let itemsChanged: any = false;
+			let arrayStartIndex: any = itemsPerWrapGroup * wrapGroupIndex;
 			for (let i = 0; i < itemsPerWrapGroup; ++i) {
 				if (!this.compareItems(oldWrapGroupDimension.items[i], this.items[arrayStartIndex + i])) {
 					itemsChanged = true;
@@ -705,23 +706,23 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	protected calculateDimensions(): IDimensions {
-		let scrollElement = this.getScrollElement();
-		let itemCount = this.items.length;
+		let scrollElement: any = this.getScrollElement();
+		let itemCount: any = this.items.length;
 
 		const maxCalculatedScrollBarSize: number = 25; // Note: Formula to auto-calculate doesn't work for ParentScroll, so we default to this if not set by consuming application
 		this.calculatedScrollbarHeight = Math.max(Math.min(scrollElement.offsetHeight - scrollElement.clientHeight, maxCalculatedScrollBarSize), this.calculatedScrollbarHeight);
 		this.calculatedScrollbarWidth = Math.max(Math.min(scrollElement.offsetWidth - scrollElement.clientWidth, maxCalculatedScrollBarSize), this.calculatedScrollbarWidth);
 
-		let viewWidth = scrollElement.offsetWidth - (this.scrollbarWidth || this.calculatedScrollbarWidth || (this.horizontal ? 0 : maxCalculatedScrollBarSize));
-		let viewHeight = scrollElement.offsetHeight - (this.scrollbarHeight || this.calculatedScrollbarHeight || (this.horizontal ? maxCalculatedScrollBarSize : 0));
+		let viewWidth: any = scrollElement.offsetWidth - (this.scrollbarWidth || this.calculatedScrollbarWidth || (this.horizontal ? 0 : maxCalculatedScrollBarSize));
+		let viewHeight: any = scrollElement.offsetHeight - (this.scrollbarHeight || this.calculatedScrollbarHeight || (this.horizontal ? maxCalculatedScrollBarSize : 0));
 
-		let content = (this.containerElementRef && this.containerElementRef.nativeElement) || this.contentElementRef.nativeElement;
+		let content: any = (this.containerElementRef && this.containerElementRef.nativeElement) || this.contentElementRef.nativeElement;
 
-		let itemsPerWrapGroup = this.countItemsPerWrapGroup();
-		let wrapGroupsPerPage;
+		let itemsPerWrapGroup: any = this.countItemsPerWrapGroup();
+		let wrapGroupsPerPage: any;
 
-		let defaultChildWidth;
-		let defaultChildHeight;
+		let defaultChildWidth: any;
+		let defaultChildHeight: any;
 
 		if (!this.enableUnequalChildrenSizes) {
 			if (content.children.length > 0) {
@@ -734,39 +735,39 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 					}
 				}
 
-				let child = content.children[0];
-				let clientRect = child.getBoundingClientRect();
+				let child: any = content.children[0];
+				let clientRect: any = child.getBoundingClientRect();
 				this.minMeasuredChildWidth = Math.min(this.minMeasuredChildWidth, clientRect.width);
 				this.minMeasuredChildHeight = Math.min(this.minMeasuredChildHeight, clientRect.height);
 			}
 
 			defaultChildWidth = this.childWidth || this.minMeasuredChildWidth || viewWidth;
 			defaultChildHeight = this.childHeight || this.minMeasuredChildHeight || viewHeight;
-			let itemsPerRow = Math.max(Math.ceil(viewWidth / defaultChildWidth), 1);
-			let itemsPerCol = Math.max(Math.ceil(viewHeight / defaultChildHeight), 1);
+			let itemsPerRow: any = Math.max(Math.ceil(viewWidth / defaultChildWidth), 1);
+			let itemsPerCol: any = Math.max(Math.ceil(viewHeight / defaultChildHeight), 1);
 			wrapGroupsPerPage = this.horizontal ? itemsPerRow : itemsPerCol;
 		} else {
-			let scrollOffset = scrollElement[this._scrollType] - (this.previousViewPort ? this.previousViewPort.padding : 0);
+			let scrollOffset: any = scrollElement[this._scrollType] - (this.previousViewPort ? this.previousViewPort.padding : 0);
 			
-			let arrayStartIndex = this.previousViewPort.startIndexWithBuffer || 0;
-			let wrapGroupIndex = Math.ceil(arrayStartIndex / itemsPerWrapGroup);
+			let arrayStartIndex: any = this.previousViewPort.startIndexWithBuffer || 0;
+			let wrapGroupIndex: any = Math.ceil(arrayStartIndex / itemsPerWrapGroup);
 
-			let maxWidthForWrapGroup = 0;
-			let maxHeightForWrapGroup = 0;
-			let sumOfVisibleMaxWidths = 0;
-			let sumOfVisibleMaxHeights = 0;
+			let maxWidthForWrapGroup: any = 0;
+			let maxHeightForWrapGroup: any = 0;
+			let sumOfVisibleMaxWidths: any = 0;
+			let sumOfVisibleMaxHeights: any = 0;
 			wrapGroupsPerPage = 0;
 
 			for (let i = 0; i < content.children.length; ++i) {
 				++arrayStartIndex;
-				let child = content.children[i];
-				let clientRect = child.getBoundingClientRect();
+				let child: any = content.children[i];
+				let clientRect: any = child.getBoundingClientRect();
 
 				maxWidthForWrapGroup = Math.max(maxWidthForWrapGroup, clientRect.width);
 				maxHeightForWrapGroup = Math.max(maxHeightForWrapGroup, clientRect.height);
 
 				if (arrayStartIndex % itemsPerWrapGroup === 0) {
-					let oldValue = this.wrapGroupDimensions.maxChildSizePerWrapGroup[wrapGroupIndex];
+					let oldValue: any = this.wrapGroupDimensions.maxChildSizePerWrapGroup[wrapGroupIndex];
 					if (oldValue) {
 						--this.wrapGroupDimensions.numberOfKnownWrapGroupChildSizes;
 						this.wrapGroupDimensions.sumOfKnownWrapGroupChildWidths -= oldValue.childWidth || 0;
@@ -784,9 +785,9 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 					this.wrapGroupDimensions.sumOfKnownWrapGroupChildHeights += maxHeightForWrapGroup;
 
 					if (this.horizontal) {
-						let maxVisibleWidthForWrapGroup = Math.min(maxWidthForWrapGroup, Math.max(viewWidth - sumOfVisibleMaxWidths, 0));
+						let maxVisibleWidthForWrapGroup: any = Math.min(maxWidthForWrapGroup, Math.max(viewWidth - sumOfVisibleMaxWidths, 0));
 						if (scrollOffset > 0) {
-							let scrollOffsetToRemove = Math.min(scrollOffset, maxVisibleWidthForWrapGroup);
+							let scrollOffsetToRemove: any = Math.min(scrollOffset, maxVisibleWidthForWrapGroup);
 							maxVisibleWidthForWrapGroup -= scrollOffsetToRemove;
 							scrollOffset -= scrollOffsetToRemove;
 						}
@@ -796,9 +797,9 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 							++wrapGroupsPerPage;
 						}
 					} else {
-						let maxVisibleHeightForWrapGroup = Math.min(maxHeightForWrapGroup, Math.max(viewHeight - sumOfVisibleMaxHeights, 0));
+						let maxVisibleHeightForWrapGroup: any = Math.min(maxHeightForWrapGroup, Math.max(viewHeight - sumOfVisibleMaxHeights, 0));
 						if (scrollOffset > 0) {
-							let scrollOffsetToRemove = Math.min(scrollOffset, maxVisibleHeightForWrapGroup);
+							let scrollOffsetToRemove: any = Math.min(scrollOffset, maxVisibleHeightForWrapGroup);
 							maxVisibleHeightForWrapGroup -= scrollOffsetToRemove;
 							scrollOffset -= scrollOffsetToRemove;
 						}
@@ -816,8 +817,8 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 				}
 			}
 
-			let averageChildWidth = this.wrapGroupDimensions.sumOfKnownWrapGroupChildWidths / this.wrapGroupDimensions.numberOfKnownWrapGroupChildSizes;
-			let averageChildHeight = this.wrapGroupDimensions.sumOfKnownWrapGroupChildHeights / this.wrapGroupDimensions.numberOfKnownWrapGroupChildSizes;
+			let averageChildWidth: any = this.wrapGroupDimensions.sumOfKnownWrapGroupChildWidths / this.wrapGroupDimensions.numberOfKnownWrapGroupChildSizes;
+			let averageChildHeight: any = this.wrapGroupDimensions.sumOfKnownWrapGroupChildHeights / this.wrapGroupDimensions.numberOfKnownWrapGroupChildSizes;
 			defaultChildWidth = this.childWidth || averageChildWidth || viewWidth;
 			defaultChildHeight = this.childHeight || averageChildHeight || viewHeight;
 
@@ -832,17 +833,17 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 			}
 		}
 
-		let itemsPerPage = itemsPerWrapGroup * wrapGroupsPerPage;
-		let pageCount_fractional = itemCount / itemsPerPage;
-		let numberOfWrapGroups = Math.ceil(itemCount / itemsPerWrapGroup);
+		let itemsPerPage: any = itemsPerWrapGroup * wrapGroupsPerPage;
+		let pageCount_fractional: any = itemCount / itemsPerPage;
+		let numberOfWrapGroups: any = Math.ceil(itemCount / itemsPerWrapGroup);
 
-		let scrollLength = 0;
+		let scrollLength: any = 0;
 
-		let defaultScrollLengthPerWrapGroup = this.horizontal ? defaultChildWidth : defaultChildHeight;
+		let defaultScrollLengthPerWrapGroup: any = this.horizontal ? defaultChildWidth : defaultChildHeight;
 		if (this.enableUnequalChildrenSizes) {
-			let numUnknownChildSizes = 0;
-			for (let i = 0; i < numberOfWrapGroups; ++i) {
-				let childSize = this.wrapGroupDimensions.maxChildSizePerWrapGroup[i] && this.wrapGroupDimensions.maxChildSizePerWrapGroup[i][this._childScrollDim];
+			let numUnknownChildSizes:any = 0;
+			for (let i:any = 0; i < numberOfWrapGroups; ++i) {
+				let childSize: any = this.wrapGroupDimensions.maxChildSizePerWrapGroup[i] && this.wrapGroupDimensions.maxChildSizePerWrapGroup[i][this._childScrollDim];
 				if (childSize) {
 					scrollLength += childSize;
 				} else {
@@ -870,22 +871,22 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	protected cachedPageSize: number = 0;
 	protected previousScrollNumberElements: number = 0;
 
-	protected calculatePadding(arrayStartIndexWithBuffer: number, dimensions: IDimensions, allowUnequalChildrenSizes_Experimental: boolean): number {
+	protected calculatePadding(arrayStartIndexWithBuffer: number, dimensions: any, allowUnequalChildrenSizes_Experimental: boolean): number {
 		if (dimensions.itemCount === 0) {
 			return 0;
 		}
 
-		let defaultScrollLengthPerWrapGroup = dimensions[this._childScrollDim];
-		let startingWrapGroupIndex = Math.ceil(arrayStartIndexWithBuffer / dimensions.itemsPerWrapGroup) || 0;
+		let defaultScrollLengthPerWrapGroup: number = dimensions[this._childScrollDim];
+		let startingWrapGroupIndex: number = Math.ceil(arrayStartIndexWithBuffer / dimensions.itemsPerWrapGroup) || 0;
 
 		if (!this.enableUnequalChildrenSizes) {
 			return defaultScrollLengthPerWrapGroup * startingWrapGroupIndex;
 		}
 
-		let numUnknownChildSizes = 0;
-		let result = 0;
+		let numUnknownChildSizes: any = 0;
+		let result: any = 0;
 		for (let i = 0; i < startingWrapGroupIndex; ++i) {
-			let childSize = this.wrapGroupDimensions.maxChildSizePerWrapGroup[i] && this.wrapGroupDimensions.maxChildSizePerWrapGroup[i][this._childScrollDim];
+			let childSize: WrapGroupDimension = this.wrapGroupDimensions.maxChildSizePerWrapGroup[i] && this.wrapGroupDimensions.maxChildSizePerWrapGroup[i][this._childScrollDim];
 			if (childSize) {
 				result += childSize;
 			} else {
@@ -897,14 +898,14 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 		return result;
 	}
 
-	protected calculatePageInfo(scrollPosition: number, dimensions: IDimensions): IPageInfoWithBuffer {
-		let scrollPercentage = 0;
+	protected calculatePageInfo(scrollPosition: number, dimensions: any): IPageInfoWithBuffer {
+		let scrollPercentage: any = 0;
 		if (this.enableUnequalChildrenSizes) {
-			const numberOfWrapGroups = Math.ceil(dimensions.itemCount / dimensions.itemsPerWrapGroup);
-			let totalScrolledLength = 0;
-			let defaultScrollLengthPerWrapGroup = dimensions[this._childScrollDim];
+			const numberOfWrapGroups:any = Math.ceil(dimensions.itemCount / dimensions.itemsPerWrapGroup);
+			let totalScrolledLength: any = 0;
+			let defaultScrollLengthPerWrapGroup: any = dimensions[this._childScrollDim];
 			for (let i = 0; i < numberOfWrapGroups; ++i) {
-				let childSize = this.wrapGroupDimensions.maxChildSizePerWrapGroup[i] && this.wrapGroupDimensions.maxChildSizePerWrapGroup[i][this._childScrollDim];
+				let childSize: any = this.wrapGroupDimensions.maxChildSizePerWrapGroup[i] && this.wrapGroupDimensions.maxChildSizePerWrapGroup[i][this._childScrollDim];
 				if (childSize) {
 					totalScrolledLength += childSize;
 				} else {
@@ -920,13 +921,13 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 			scrollPercentage = scrollPosition / dimensions.scrollLength;
 		}
 
-		let startingArrayIndex_fractional = Math.min(Math.max(scrollPercentage * dimensions.pageCount_fractional, 0), dimensions.pageCount_fractional) * dimensions.itemsPerPage;
+		let startingArrayIndex_fractional: any = Math.min(Math.max(scrollPercentage * dimensions.pageCount_fractional, 0), dimensions.pageCount_fractional) * dimensions.itemsPerPage;
 
-		let maxStart = dimensions.itemCount - dimensions.itemsPerPage - 1;
-		let arrayStartIndex = Math.min(Math.floor(startingArrayIndex_fractional), maxStart);
+		let maxStart: any = dimensions.itemCount - dimensions.itemsPerPage - 1;
+		let arrayStartIndex: any = Math.min(Math.floor(startingArrayIndex_fractional), maxStart);
 		arrayStartIndex -= arrayStartIndex % dimensions.itemsPerWrapGroup; // round down to start of wrapGroup
 
-		let arrayEndIndex = Math.ceil(startingArrayIndex_fractional) + dimensions.itemsPerPage - 1;
+		let arrayEndIndex: any = Math.ceil(startingArrayIndex_fractional) + dimensions.itemsPerPage - 1;
 		arrayEndIndex += (dimensions.itemsPerWrapGroup - ((arrayEndIndex + 1) % dimensions.itemsPerWrapGroup)); // round up to end of wrapGroup
 
 		if (isNaN(arrayStartIndex)) {
@@ -939,9 +940,9 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 		arrayStartIndex = Math.min(Math.max(arrayStartIndex, 0), dimensions.itemCount - 1);
 		arrayEndIndex = Math.min(Math.max(arrayEndIndex, 0), dimensions.itemCount - 1);
 
-		let bufferSize = this.bufferAmount * dimensions.itemsPerWrapGroup;
-		let startIndexWithBuffer = Math.min(Math.max(arrayStartIndex - bufferSize, 0), dimensions.itemCount - 1);
-		let endIndexWithBuffer = Math.min(Math.max(arrayEndIndex + bufferSize, 0), dimensions.itemCount - 1);
+		let bufferSize: any = this.bufferAmount * dimensions.itemsPerWrapGroup;
+		let startIndexWithBuffer: any = Math.min(Math.max(arrayStartIndex - bufferSize, 0), dimensions.itemCount - 1);
+		let endIndexWithBuffer: any = Math.min(Math.max(arrayEndIndex + bufferSize, 0), dimensions.itemCount - 1);
 
 		return {
 			startIndex: arrayStartIndex,
@@ -952,10 +953,10 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	protected calculateViewport(): IViewport {
-		let dimensions = this.calculateDimensions();
-		let offset = this.getElementsOffset();
+		let dimensions: IDimensions = this.calculateDimensions();
+		let offset: any = this.getElementsOffset();
 
-		let scrollPosition = this.getScrollPosition();
+		let scrollPosition: any = this.getScrollPosition();
 		if (scrollPosition > dimensions.scrollLength && !(this.parentScroll instanceof Window)) {
 			scrollPosition = dimensions.scrollLength;
 		} else {
@@ -963,9 +964,9 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 		}
 		scrollPosition = Math.max(0, scrollPosition);
 
-		let pageInfo = this.calculatePageInfo(scrollPosition, dimensions);
-		let newPadding = this.calculatePadding(pageInfo.startIndexWithBuffer, dimensions, true);
-		let newScrollLength = dimensions.scrollLength;
+		let pageInfo: any = this.calculatePageInfo(scrollPosition, dimensions);
+		let newPadding: any = this.calculatePadding(pageInfo.startIndexWithBuffer, dimensions, true);
+		let newScrollLength: any = dimensions.scrollLength;
 
 		return {
 			startIndex: pageInfo.startIndex,

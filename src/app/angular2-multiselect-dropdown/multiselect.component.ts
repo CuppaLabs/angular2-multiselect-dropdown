@@ -143,7 +143,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.subscription = this.ds.getData().subscribe(data => {
             if (data) {
                 var len = 0;
-                data.forEach((obj, i) => {
+                data.forEach((obj:any, i:any) => {
                     if (!obj.hasOwnProperty('grpTitle')) {
                         len++;
                     }
@@ -523,11 +523,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }, {});
         const tempArr: any = [];
         Object.keys(groupedObj).map((x: any) => {
-            var obj = {};
+            var obj:any = {};
             obj["grpTitle"] = true;
             obj[this.settings.labelKey] = x;
             tempArr.push(obj);
-            groupedObj[x].forEach(item => {
+            groupedObj[x].forEach((item:any) => {
                 tempArr.push(JSON.parse(JSON.stringify(item)));
             });
             // tempArr.push({ key: x, value: groupedObj[x] });

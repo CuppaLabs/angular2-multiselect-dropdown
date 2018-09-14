@@ -144,26 +144,40 @@
         </div>
         <div *ngIf="settings.groupBy && settings.lazyLoading && itemTempl" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
             <virtual-scroll [items]="groupedData" (vsUpdate)="viewPortItems = $event" [ngStyle]="{'height': settings.maxHeight+'px'}">
-                <ul *ngFor="let obj of viewPortItems; let i = index;" class="list-grp">
-                    <h4 *ngIf="obj.value?.length > 0 ">{{obj.key}}</h4>
-                    <li *ngFor="let item of obj.value; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
-                        <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
-                        />
-                        <label></label>
-                        <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
-                    </li>
-                </ul>
-            </virtual-scroll>
-        </div>
-        <div *ngIf="settings.groupBy && !settings.lazyLoading && itemTempl" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
-            <ul *ngFor="let obj of groupedData; let i = index;" class="list-grp">
-                <h4 *ngIf="obj.value?.length > 0 ">{{obj.key}}</h4>
-                <li *ngFor="let item of obj.value; let i = index;" (click)="onItemClick(item,i,$event)" class="pure-checkbox">
+            <ul class="lazyContainer">
+                <span *ngFor="let item of viewPortItems | listFilter:filter : settings.searchBy; let i = index;">
+                    <li (click)="onItemClick(item,i,$event)" *ngIf="!item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle}" class="pure-checkbox">
                     <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                     />
                     <label></label>
                     <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
                 </li>
+                <li *ngIf="item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle}" class="pure-checkbox">
+                    <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
+                    />
+                    <label></label>
+                    <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
+                </li>
+                </span>
+            </ul>
+            </virtual-scroll>
+        </div>
+        <div *ngIf="settings.groupBy && !settings.lazyLoading && itemTempl" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
+            <ul class="lazyContainer">
+                <span *ngFor="let item of groupedData | listFilter:filter : settings.searchBy; let i = index;">
+                    <li (click)="onItemClick(item,i,$event)" *ngIf="!item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle}" class="pure-checkbox">
+                    <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
+                    />
+                    <label></label>
+                    <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
+                </li>
+                <li *ngIf="item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle}" class="pure-checkbox">
+                    <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
+                    />
+                    <label></label>
+                    <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
+                </li>
+                </span>
             </ul>
         </div>
         <div *ngIf="settings.groupBy && settings.lazyLoading && !itemTempl" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
@@ -173,12 +187,12 @@
                 <li  *ngIf="item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle, 'selected-item': isSelected(item) == true }" class="pure-checkbox">
                     <input *ngIf="settings.showCheckbox && !item.grpTitle" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                     />
-                    <label>{{item.id}} - {{item[settings.labelKey]}}</label>
+                    <label>{{item[settings.labelKey]}}</label>
                 </li>
                 <li (click)="onItemClick(item,i,$event)" *ngIf="!item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle, 'selected-item': isSelected(item) == true }" class="pure-checkbox">
                     <input *ngIf="settings.showCheckbox && !item.grpTitle" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                     />
-                    <label>{{item.id}} - {{item[settings.labelKey]}}</label>
+                    <label>{{item[settings.labelKey]}}</label>
                 </li>
                 </span>
                 </ul>
