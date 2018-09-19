@@ -978,11 +978,3 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 		};
 	}
 }
-
-@NgModule({
-	exports: [VirtualScrollComponent],
-	declarations: [VirtualScrollComponent],
-	imports: [CommonModule]
-
-})
-export class VirtualScrollModule { }
