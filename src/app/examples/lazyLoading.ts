@@ -14,7 +14,7 @@ export class LazyLoadingExample implements OnInit {
     ngOnInit() {
 
         this.itemList = [];
-        for(var t=1;t<=100;t++){
+        for(var t=1;t<=1000;t++){
          var tempObj = {"id":0,"itemName":"","category":""};
          tempObj.id = t;
          tempObj.itemName= this.namesList[Math.floor(Math.random()*this.namesList.length)];
@@ -31,8 +31,7 @@ export class LazyLoadingExample implements OnInit {
             classes: "myclass custom-class",
             enableSearchFilter: true,
             lazyLoading: true,
-            badgeShowLimit: 4,
-            groupBy: "category"
+            badgeShowLimit: 4
 
         };
     }
@@ -49,6 +48,12 @@ export class LazyLoadingExample implements OnInit {
     }
     onDeSelectAll(items: any) {
         console.log(items);
+    }
+    onScroll(e:any){
+        console.log(e);
+    }
+    onScrollToEnd(e:any){
+        console.log(e);
     }
   changeData() {
     this.selectedItems = [];

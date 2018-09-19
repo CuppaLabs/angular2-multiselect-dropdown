@@ -8,7 +8,7 @@ import { ListFilterPipe } from './list-filter';
 import { Item, Badge, Search, TemplateRenderer, CIcon } from './menu-item';
 import { DataService } from './multiselect.service';
 import { Subscription } from 'rxjs';
-import { VirtualScrollComponent } from './virtual-scroll';
+import { VirtualScrollComponent, ChangeEvent } from './virtual-scroll';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -40,6 +40,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Input()
     settings: DropdownSettings;
 
+    @Input()
+    loading: boolean;
+
     @Output('onSelect')
     onSelect: EventEmitter<any> = new EventEmitter<any>();
 
@@ -57,6 +60,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
     @Output('onClose')
     onClose: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output('onScrollToEnd')
+    onScrollToEnd: EventEmitter<any> = new EventEmitter<any>();
 
     @ContentChild(Item) itemTempl: Item;
     @ContentChild(Badge) badgeTempl: Badge;
@@ -113,7 +119,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         labelKey: 'itemName',
         primaryKey: 'id',
         position: 'bottom',
-        enableFilterSelectAll: true
+        enableFilterSelectAll: true,
+        selectGroup: false
     }
     public parseError: boolean;
     public filteredList: any = [];
@@ -126,14 +133,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.groupedData = this.transformData(this.data, this.settings.groupBy);
             this.groupCachedItems = this.cloneArray(this.groupedData);
         }
-        this.totalRows = (this.data && this.data.length);
-        this.cachedItems = this.data;
-        this.screenItemsLen = Math.ceil(this.settings.maxHeight / this.itemHeight);
-        this.cachedItemsLen = this.screenItemsLen * 3;
-        this.totalHeight = this.itemHeight * this.totalRows;
-        this.maxBuffer = this.screenItemsLen * this.itemHeight;
-        this.lastScrolled = 0;
-        this.renderChunk(0, this.cachedItemsLen / 2);
+        this.cachedItems = this.cloneArray(this.data);
         if (this.settings.position == 'top') {
             setTimeout(() => {
                 this.selectedListHeight = { val: 0 };
@@ -143,7 +143,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.subscription = this.ds.getData().subscribe(data => {
             if (data) {
                 var len = 0;
-                data.forEach((obj:any, i:any) => {
+                data.forEach((obj: any, i: any) => {
                     if (!obj.hasOwnProperty('grpTitle')) {
                         len++;
                     }
@@ -163,9 +163,13 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                     this.selectedItems = [];
                 }
             }
+            this.cachedItems = this.cloneArray(this.data);
         }
         if (changes.settings && !changes.settings.firstChange) {
             this.settings = Object.assign(this.defaultSettings, this.settings);
+        }
+        if (changes.loading) {
+            console.log(this.loading);
         }
     }
     ngDoCheck() {
@@ -320,11 +324,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     closeDropdown() {
         if (this.searchInput && this.settings.lazyLoading) {
             this.searchInput.nativeElement.value = "";
-            this.data = [];
-            this.data = this.cachedItems;
-            this.totalHeight = this.itemHeight * this.data.length;
-            this.totalRows = this.data.length;
-            this.updateView(this.scrollTop);
+            //this.data = [];
+            //this.data = this.cachedItems;
         }
         if (this.searchInput) {
             this.searchInput.nativeElement.value = "";
@@ -336,6 +337,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     toggleSelectAll() {
         if (!this.isSelectAll) {
             this.selectedItems = [];
+            if (this.settings.groupBy) {
+                this.groupedData.forEach((obj) => {
+                    obj.selected = true;
+                })
+            }
             this.selectedItems = this.data.slice();
             this.isSelectAll = true;
             this.onChangeCallback(this.selectedItems);
@@ -344,6 +350,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.onSelectAll.emit(this.selectedItems);
         }
         else {
+            if (this.settings.groupBy) {
+                this.groupedData.forEach((obj) => {
+                    obj.selected = false;
+                })
+            }
             this.selectedItems = [];
             this.isSelectAll = false;
             this.onChangeCallback(this.selectedItems);
@@ -458,60 +469,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             return arr;
         }
     }
-    /*    filterGroupList(evt: any) {
-            this.groupedData = this.cloneArray(this.groupCachedItems);
-            if (evt.target.value.toString() != '') {
-                this.groupedData.forEach((obj: any) => {
-                    var filteredElems: Array<any> = [];
-                    obj.value.forEach((el: any) => {
-                        if (this.settings.searchBy.length > 0) {
-                            for (var t = 0; t < this.settings.searchBy.length; t++) {
-                                var key: any = this.settings.searchBy[t];
-                                if (el[key] && el[key] != "") {
-                                    if (el[key].toString().toLowerCase().indexOf(evt.target.value.toString().toLowerCase()) >= 0) {
-                                        filteredElems.push(el);
-                                    }
-                                }
-                            }
-    
-                        }
-                        else {
-                            for (var prop in el) {
-                                if (el[prop].toString().toLowerCase().indexOf(evt.target.value.toString().toLowerCase()) >= 0) {
-                                    filteredElems.push(el);
-                                    break;
-                                }
-                            }
-                        }
-                    });
-                    obj.value.splice(0, obj.value.length);
-                    filteredElems.forEach(i => {
-                        obj.value.push(i);
-                    });
-                });
-                let cnt = 0;
-                this.filterLength = 0;
-                this.groupedData.forEach((item: any) => {
-                    item.value.forEach((obj: any) => {
-                        this.filterLength++;
-                        if (this.isSelected(obj)) {
-                            cnt++;
-                        }
-                    });
-    
-                });
-    
-                if (cnt > 0 && this.filterLength == cnt) {
-                    this.isFilterSelectAll = true;
-                }
-                else if (cnt > 0 && this.filterLength != cnt) {
-                    this.isFilterSelectAll = false;
-                }
-            }
-            else if (evt.target.value.toString() == '' && this.groupCachedItems.length > 0) {
-                this.clearSearch();
-            }
-        }*/
     transformData(arr: Array<any>, field: any): Array<any> {
         const groupedObj: any = arr.reduce((prev: any, cur: any) => {
             if (!prev[cur[field]]) {
@@ -523,41 +480,21 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }, {});
         const tempArr: any = [];
         Object.keys(groupedObj).map((x: any) => {
-            var obj:any = {};
+            var obj: any = {};
             obj["grpTitle"] = true;
             obj[this.settings.labelKey] = x;
-            tempArr.push(obj);
-            groupedObj[x].forEach((item:any) => {
-                tempArr.push(JSON.parse(JSON.stringify(item)));
+            obj[this.settings.groupBy] = x;
+            obj['selected'] = false;
+            obj['list'] = [];
+            groupedObj[x].forEach((item: any) => {
+                obj.list.push(item);
             });
-            // tempArr.push({ key: x, value: groupedObj[x] });
+            tempArr.push(obj);
+            obj.list.forEach((item: any) => {
+                tempArr.push(item);
+            });
         });
         return tempArr;
-    }
-    renderChunk(fromPos: any, howMany: any) {
-        this.chunkArray = [];
-        this.chunkIndex = [];
-        var finalItem = fromPos + howMany;
-        if (finalItem > this.totalRows)
-            finalItem = this.totalRows;
-
-        for (var i = fromPos; i < finalItem; i++) {
-            this.chunkIndex.push((i * this.itemHeight) + 'px');
-            this.chunkArray.push(this.data[i]);
-        }
-    }
-    public onScroll(e: any) {
-        this.scrollTop = e.target.scrollTop;
-        this.updateView(this.scrollTop);
-
-    }
-    public updateView(scrollTop: any) {
-        var scrollPos = scrollTop ? scrollTop : 0;
-        var first = (scrollPos / this.itemHeight) - this.screenItemsLen;
-        var firstTemp = "" + first;
-        first = parseInt(firstTemp) < 0 ? 0 : parseInt(firstTemp);
-        this.renderChunk(first, this.cachedItemsLen);
-        this.lastRepaintY = scrollPos;
     }
     public filterInfiniteList(evt: any) {
         var filteredElems: Array<any> = [];
@@ -577,13 +514,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                     }
                 }
             });
-            //this.cachedItems = this.data;
-            //this.totalHeight = this.itemHeight * filteredElems.length;
-            //this.totalRows = filteredElems.length;
             this.data = [];
             this.data = filteredElems;
             this.infiniteFilterLength = this.data.length;
-            //this.updateView(this.scrollTop);
         }
         if (evt.target.value.toString() != '' && this.settings.groupBy) {
             this.groupedData.filter(function (el: any) {
@@ -599,21 +532,14 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                     }
                 }
             });
-            //this.cachedItems = this.data;
-            //this.totalHeight = this.itemHeight * filteredElems.length;
-            //this.totalRows = filteredElems.length;
             this.groupedData = [];
             this.groupedData = filteredElems;
             this.infiniteFilterLength = this.groupedData.length;
-            //this.updateView(this.scrollTop);
         }
         else if (evt.target.value.toString() == '' && this.cachedItems.length > 0) {
             this.data = [];
             this.data = this.cachedItems;
-            /*this.totalHeight = this.itemHeight * this.data.length;
-            this.totalRows = this.data.length;*/
             this.infiniteFilterLength = 0;
-            // this.updateView(this.scrollTop);
         }
     }
     resetInfiniteSearch() {
@@ -624,8 +550,29 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.groupedData = this.groupCachedItems;
         this.infiniteFilterLength = 0;
     }
+    onScrollEnd(e: ChangeEvent) {
+        this.onScrollToEnd.emit(e);
+    }
     ngOnDestroy() {
         this.subscription.unsubscribe();
+    }
+    selectGroup(item: any) {
+        if (item.selected) {
+            item.selected = false;
+            item.list.forEach((obj: any) => {
+                this.removeSelected(obj);
+            });
+        }
+        else {
+            item.selected = true;
+            item.list.forEach((obj: any) => {
+                if (!this.isSelected(obj)) {
+                    this.addSelected(obj);
+                }
+
+            });
+        }
+
     }
 }
 
