@@ -37,6 +37,7 @@ export class GroupByExample implements OnInit {
       enableSearchFilter: true,
       badgeShowLimit: 5,
       groupBy: "category",
+      selectGroup: true,
       searchBy: ["itemName"]
     };
   }

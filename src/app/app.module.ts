@@ -30,6 +30,7 @@ import { ThemingExample } from './examples/theming';
 import { RemoteDataExample } from './examples/remoteData';
 import { CustomSearchExample } from './examples/customSearch';
 import { SearchFilterByOnePropertyExample } from './examples/searchByOneProperty';
+import {LazyLoadingRemoteDataExample } from './examples/lazyLoadingRemoteData';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { SearchFilterByOnePropertyExample } from './examples/searchByOneProperty
     ThemingExample,
     RemoteDataExample,
     CustomSearchExample,
-    SearchFilterByOnePropertyExample
+    SearchFilterByOnePropertyExample,
+    LazyLoadingRemoteDataExample
     ],
   imports: [
     BrowserModule,

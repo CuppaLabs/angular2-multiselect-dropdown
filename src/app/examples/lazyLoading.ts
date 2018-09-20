@@ -49,6 +49,12 @@ export class LazyLoadingExample implements OnInit {
     onDeSelectAll(items: any) {
         console.log(items);
     }
+    onScroll(e:any){
+        console.log(e);
+    }
+    onScrollToEnd(e:any){
+        console.log(e);
+    }
   changeData() {
     this.selectedItems = [];
   }

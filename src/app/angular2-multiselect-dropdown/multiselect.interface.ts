@@ -23,4 +23,6 @@ export interface DropdownSettings{
     labelKey?: string;
     primaryKey: string;
     position:string;
+    loading?: boolean;
+    selectGroup?: boolean;
 } 
