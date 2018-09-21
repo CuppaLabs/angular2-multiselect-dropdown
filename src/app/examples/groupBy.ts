@@ -25,9 +25,9 @@ export class GroupByExample implements OnInit {
     ];
 
     this.selectedItems = [
-      { "id": 1, "itemName": "India" },
-      { "id": 2, "itemName": "Singapore" },
-      { "id": 4, "itemName": "Canada" }];
+      { "id": 1, "itemName": "India", "category": "asia" },
+      { "id": 3, "itemName": "Germany", "category": "Europe" },
+      { "id": 6, "itemName": "Sweden", "category": "Europe" }]
     this.settings = {
       singleSelection: false,
       text: "Select Fields",
@@ -35,7 +35,6 @@ export class GroupByExample implements OnInit {
       unSelectAllText: 'UnSelect All',
       searchPlaceholderText: 'Search Fields',
       enableSearchFilter: true,
-      badgeShowLimit: 5,
       groupBy: "category",
       selectGroup: true,
       searchBy: ["itemName"]

@@ -237,6 +237,7 @@ The following list of settings are supported by the component. Configure the set
 | disabled | Boolean | Disable the dropdown | false |
 | searchPlaceholderText | String | Custom text for the search placeholder text. Default value would be 'Search' | 'Search' |
 | groupBy | String | Name of the field by which the list should be grouped. | none |
+| selectGroup | Boolean | Select a group at once. GroupBy should be enabled, to use this. | false |
 | searchAutofocus | Boolean | Autofocus search input field| true |
 | labelKey | String | The property name which should be rendered as label in the dropdown| itemName |
 | primaryKey | String | The property by which the object is identified. Default is 'id'.| id |
@@ -260,6 +261,8 @@ The following list of settings are supported by the component. Configure the set
     Example : (onOpen)="onOpen($event)"
 - `onClose` - Callback method, fired when the dropdown is closed
     Example : (onClose)="onClose($event)"
+- `onScrollToEnd` - Callback event fired when the dropdown list is scrolled to the end. Usually used with virtual scrolling, to load data on      scroll.
+    Example : (onScrollToEnd)="fetchMore($event)"
 
 ## Run locally
 - Clone the repository or downlod the .zip,.tar files.

@@ -50,7 +50,6 @@ export class LazyLoadingRemoteDataExample implements OnInit {
         console.log(this.itemList);
     }
     fetchMore(event: any) {
-        //this.loading = true;
         if (event.end === this.itemList.length - 1) {
             this.loading = true;
             this.appService.getChunkData(this.itemList.length, this.bufferSize).then(chunk => {
@@ -64,8 +63,8 @@ export class LazyLoadingRemoteDataExample implements OnInit {
     }
     cssgist: boolean = false;
     title: string = "Lazy loading - Remote Data API";
-    tsgist: string = "CuppaLabs/aab6c8b30a6901af01249c474f3f0cbd";
-    htmlgist: string = "CuppaLabs/c77fea947ef053aa22973fcd9c7c612a";
+    tsgist: string = "CuppaLabs/3833720c12e23f6c8ee5fd870e38ad5b";
+    htmlgist: string = "CuppaLabs/72ebd8cfa40a23a74ccbeda6de98a1e8";
     tstitle: string = "lazyLoadingRemoteData.ts"
-    htmltitle: string = "lazyLoading.html";
+    htmltitle: string = "lazyLoadingRemoteData.html";
 }
