@@ -221,6 +221,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         if (this.data.length == this.selectedItems.length) {
             this.isSelectAll = true;
         }
+        if(this.settings.groupBy){
+            this.updateGroupInfo(item);
+        }
     }
     public validate(c: FormControl): any {
         return null;
@@ -468,6 +471,27 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         } else {
             return arr;
         }
+    }
+    updateGroupInfo(item: any){
+        
+        this.groupedData.forEach((obj: any) => {
+            var cnt = 0;
+            if(obj.grpTitle && item[this.settings.groupBy] == obj[this.settings.groupBy]){
+                if(obj.list){
+                    obj.list.forEach(el => {
+                    if(this.isSelected(el)){
+                        cnt++;
+                    } 
+                    });
+                }
+            }
+            if(obj.list && cnt === obj.list.length){
+                obj.selected = true; 
+            }
+            else {
+                obj.selected = false; 
+            }
+        });
     }
     transformData(arr: Array<any>, field: any): Array<any> {
         const groupedObj: any = arr.reduce((prev: any, cur: any) => {
