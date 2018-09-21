@@ -478,7 +478,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             var cnt = 0;
             if(obj.grpTitle && item[this.settings.groupBy] == obj[this.settings.groupBy]){
                 if(obj.list){
-                    obj.list.forEach(el => {
+                    obj.list.forEach((el:any) => {
                     if(this.isSelected(el)){
                         cnt++;
                     } 
