@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MockService } from './examples/mock-data';
 
 import { AppComponent } from './app.component';
-import { AngularMultiSelectModule } from './angular2-multiselect-dropdown/multiselect.component';
+import { AngularMultiSelectModule } from '../../projects/angular2-multiselect-dropdown-lib/src/lib/multiselect.component';
 import { AppRouterModule } from './app.router';
 import { BasicExample } from './examples/basic';
 import { SingleSelectionExample } from './examples/singleselection';

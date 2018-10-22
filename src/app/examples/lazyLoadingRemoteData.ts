@@ -46,7 +46,7 @@ export class LazyLoadingRemoteDataExample implements OnInit {
     onScroll(e: any) {
         console.log(e);
     }
-    onOpen(){
+    onOpen(e:any){
         console.log(this.itemList);
     }
     fetchMore(event: any) {

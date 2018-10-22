@@ -1,36 +1,29 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noEmit": true,
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "noImplicitAny": false,
-    "experimentalDecorators": true,
+    "module": "es2015",
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "lib": [
-      "es2015",
+      "es2017",
       "dom"
     ],
-    "typeRoots" : [
-      "./node_modules/@types"
-    ],
-    "types": [
-      "jasmine",
-      "karma",
-      "node",
-      "webpack",
-      "webpack-env"
-    ]
-  },
-  "include": [
-    "src/app/angular2-multiselect-dropdown/**/*.ts"
-  ],
-  "exclude": [
-    "src/**/*.spec.ts",
-    "node_modules",
-    "demo",
-    "dist"
-  ]
+    "paths": {
+      "angular2-multiselect-dropdown-lib": [
+        "dist/angular2-multiselect-dropdown-lib"
+      ],
+      "angular2-multiselect-dropdown-lib/*": [
+        "dist/angular2-multiselect-dropdown-lib/*"
+      ]
+    }
+  }
 }
