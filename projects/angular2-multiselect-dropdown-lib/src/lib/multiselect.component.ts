@@ -64,6 +64,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Output('onScrollToEnd')
     onScrollToEnd: EventEmitter<any> = new EventEmitter<any>();
 
+    @Output('onFilterSelectAll')
+    onFilterSelectAll: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
+
+    @Output('onFilterDeSelectAll')
+    onFilterDeSelectAll: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
+
     @ContentChild(Item) itemTempl: Item;
     @ContentChild(Badge) badgeTempl: Badge;
     @ContentChild(Search) searchTempl: Search;
@@ -370,11 +376,13 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     toggleFilterSelectAll() {
         if (!this.isFilterSelectAll) {
+            let added = [];
             if (this.settings.groupBy) {
                 this.groupedData.forEach((item: any) => {
                     item.value.forEach((el: any) => {
                         if (!this.isSelected(el)) {
                             this.addSelected(el);
+                            added.push(el);
                         }
                     });
                 });
@@ -383,19 +391,23 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 this.ds.getFilteredData().forEach((item: any) => {
                     if (!this.isSelected(item)) {
                         this.addSelected(item);
+                        added.push(item);
                     }
 
                 });
             }
 
             this.isFilterSelectAll = true;
+            this.onFilterSelectAll.emit(added);
         }
         else {
+            let removed = [];
             if (this.settings.groupBy) {
                 this.groupedData.forEach((item: any) => {
                     item.value.forEach((el: any) => {
                         if (this.isSelected(el)) {
                             this.removeSelected(el);
+                            removed.push(el);
                         }
                     });
                 });
@@ -404,11 +416,13 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 this.ds.getFilteredData().forEach((item: any) => {
                     if (this.isSelected(item)) {
                         this.removeSelected(item);
+                        removed.push(item);
                     }
 
                 });
             }
             this.isFilterSelectAll = false;
+            this.onFilterDeSelectAll.emit(removed);
         }
     }
     toggleInfiniteFilterSelectAll() {
