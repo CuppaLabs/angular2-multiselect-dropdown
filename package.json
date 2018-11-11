@@ -21,7 +21,6 @@
     "build-sass": "node-sass --include-path scss src/themes/default.theme.scss dist/angular2-multiselect-dropdown/themes/default.theme.css",
     "github-pages": "ng build --aot --base-href /angular2-multiselect-dropdown/"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^6.1.0",
     "@angular/common": "^6.1.0",

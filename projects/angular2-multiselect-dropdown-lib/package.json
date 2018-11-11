@@ -1,7 +1,7 @@
 {
   "name": "angular2-multiselect-dropdown",
-  "version": "4.0.0",
-  "description": "Angular 2 and angular 4 multiselect dropdown component.",
+  "version": "4.1.0",
+  "description": "Angular 2 and angular 4/6 multiselect dropdown component.",
   "keywords": [
     "angular 2 multiselect dropdown",
     "angular 4 multiselect dropdown",
@@ -12,7 +12,6 @@
   "author": "Pradeep Terli",
   "scripts": {
   },
-  "private": true,
   "dependencies": {
   },
   "devDependencies": {
