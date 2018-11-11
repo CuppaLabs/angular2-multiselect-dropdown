@@ -23,6 +23,7 @@ import { RemoteDataExample } from './examples/remoteData';
 import { CustomSearchExample } from './examples/customSearch';
 import { SearchFilterByOnePropertyExample } from './examples/searchByOneProperty';
 import {LazyLoadingRemoteDataExample } from './examples/lazyLoadingRemoteData';
+import {SearchFilterAddItemExample } from './examples/searchFilterAddNewItem';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/basic', pathMatch: 'full' },
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
   { path: 'remoteData', component: RemoteDataExample },
   { path: 'customSearchAPI', component: CustomSearchExample },
   { path: 'searchFilterByOneProperty',  component: SearchFilterByOnePropertyExample },
-  { path: 'lazyloadingRemoteData', component: LazyLoadingRemoteDataExample}
+  { path: 'lazyloadingRemoteData', component: LazyLoadingRemoteDataExample},
+  { path: 'searchfilterAddNewItem', component: SearchFilterAddItemExample}
 ];
 
 

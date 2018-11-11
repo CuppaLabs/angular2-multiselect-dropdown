@@ -70,6 +70,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Output('onFilterDeSelectAll')
     onFilterDeSelectAll: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
 
+    @Output('onAddFilterNewItem')
+    onAddFilterNewItem: EventEmitter<any> = new EventEmitter<any>();
+
     @ContentChild(Item) itemTempl: Item;
     @ContentChild(Badge) badgeTempl: Badge;
     @ContentChild(Search) searchTempl: Search;
@@ -78,6 +81,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @ViewChild('searchInput') searchInput: ElementRef;
     @ViewChild('selectedList') selectedListElem: ElementRef;
 
+    filterPipe: ListFilterPipe;
     public selectedItems: Array<any>;
     public isActive: boolean = false;
     public isSelectAll: boolean = false;
@@ -128,7 +132,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         primaryKey: 'id',
         position: 'bottom',
         enableFilterSelectAll: true,
-        selectGroup: false
+        selectGroup: false,
+        addNewItemOnFilter: false,
+        addNewButtonText: "Add"
     }
     public parseError: boolean;
     public filteredList: any = [];
@@ -319,8 +325,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             return false;
         }
         this.isActive = !this.isActive;
-        if (this.isActive && this.searchInput) {
-            if (this.settings.searchAutofocus && this.settings.enableSearchFilter && !this.searchTempl) {
+        if (this.isActive) {
+            if (this.settings.searchAutofocus && this.searchInput && this.settings.enableSearchFilter && !this.searchTempl) {
                 setTimeout(() => {
                     this.searchInput.nativeElement.focus();
                 }, 0);
@@ -631,6 +637,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             });
         }
 
+    }
+    addFilterNewItem(){
+        this.onAddFilterNewItem.emit(this.filter);
+        this.filterPipe = new ListFilterPipe(this.ds);
+        this.filterPipe.transform(this.data, this.filter, this.settings.searchBy);
     }
 }
 

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './views/view.html'
+  templateUrl: './views/searchFilter.html'
 })
-export class SearchFilterExample implements OnInit {
+export class SearchFilterAddItemExample implements OnInit {
 
   itemList = [];
   selectedItems = [];
   settings = {};
-
+  count = 6;
   constructor() {
 
   }
@@ -35,9 +35,13 @@ export class SearchFilterExample implements OnInit {
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: true,
-      badgeShowLimit: 3,
       addNewItemOnFilter: true
     };
+  }
+  onAddItem(data:string){
+    this.count++;
+    this.itemList.push({"id": this.count,"itemName":data,"name":data});
+    this.selectedItems.push({"id": this.count,"itemName":data,"name":data});
   }
   onItemSelect(item: any) {
     console.log(item);
@@ -54,9 +58,9 @@ export class SearchFilterExample implements OnInit {
     console.log(items);
   }
   cssgist: boolean = false;
-  title: string = "Search filter";
-  tsgist: string = "CuppaLabs/447bd5fce6dfc2832f5f4a8c36726a9b";
-  htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
-  tstitle: string = "searchFilter.ts"
+  title: string = "Search and Add New Item, if not found";
+  tsgist: string = "CuppaLabs/c1e00c870c3e3b9213e69e0a93518cc6";
+  htmlgist: string = "CuppaLabs/0583ba4be8b7c192d14f04375f96c074";
+  tstitle: string = "searchFilterAddNewItem.ts"
   htmltitle: string = "searchFilter.html";
 }

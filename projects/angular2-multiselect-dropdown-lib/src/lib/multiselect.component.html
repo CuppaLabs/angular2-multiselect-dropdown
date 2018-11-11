@@ -83,7 +83,10 @@
                 <span [hidden]="!isFilterSelectAll">{{settings.filterUnSelectAllText}}</span>
             </label>
             </div>
-            <label *ngIf="filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
+            <label class="nodata-label" *ngIf="filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
+            <div class="btn-container" *ngIf="settings.addNewItemOnFilter && filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">
+            <button class="c-btn btn-iceblue" (click)="addFilterNewItem()">{{settings.addNewButtonText}}</button>
+            </div>
         </div>
         <div class="filter-select-all" *ngIf="settings.lazyLoading && settings.enableFilterSelectAll">
             <div class="pure-checkbox select-all" *ngIf="filter?.length > 0 && infiniteFilterLength > 0" (click)="toggleInfiniteFilterSelectAll()">
@@ -113,7 +116,7 @@
                         class="pure-checkbox" [ngClass]="{'selected-item': isSelected(item) == true }">
                         <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                         />
-                        <label>{{item.id}}-{{item[settings.labelKey]}}</label>
+                        <label>{{item.id}} {{item[settings.labelKey]}}</label>
                     </li>
                 </ul>
             </virtual-scroll>

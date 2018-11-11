@@ -111,3 +111,8 @@ $selected-background: #e9f4ff;
 .selected-item{
     background: $selected-background;
 }
+.btn-iceblue {
+    background: $base-color;
+    border: 1px solid $btn-border;
+    color: #fff;
+}

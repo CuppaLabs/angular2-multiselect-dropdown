@@ -1,0 +1,28 @@
+<h2 class="example-title">{{title}}</h2>
+<div class="col-md-8 mr-auto ml-auto dropdown-container">
+    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
+        (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)" 
+        (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+</div>
+      <div class="alert alert-warning" role="alert">
+        <b>How this example works !! </b> 
+        <br>
+        When you try to filter the list items, if no search results are available, you would see an 'Add' button. On clicking the add button, it would emit the text that you enter in the input field to your controlle in the callback method, as show in the below code.
+        You can add this item to the data list. If you wish, that this item be selected, add it to selected items list.
+              </div>
+<h4 class="example-title code-section">Code</h4>
+
+<p-tabView>
+    <p-tabPanel header="{{tstitle}}">
+       <ng2-gist [gistId]="tsgist"></ng2-gist>
+    </p-tabPanel>
+    <p-tabPanel header="{{htmltitle}}">
+        <ng2-gist [gistId]="htmlgist"></ng2-gist>
+    </p-tabPanel>
+    <span *ngIf="cssgist">
+        <p-tabPanel header="{{csstitle}}">
+        <ng2-gist [gistId]="cssgist"></ng2-gist>
+    </p-tabPanel>
+    </span>
+</p-tabView>

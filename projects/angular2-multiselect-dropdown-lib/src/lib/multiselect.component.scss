@@ -9,11 +9,10 @@ virtual-scroll {
     display: inline-block;
     border-width: 1px;
     line-height: 1.25;
-    /*background: $btn-background;*/
-    /*border: 1px solid $btn-border;*/
     border-radius: 3px;
     font-size: 14px;
-    /*color: $btn-text-color;*/
+    padding: 5px 10px;
+    cursor: pointer;
 }
 .c-btn.disabled{
     background: #ccc;
@@ -336,4 +335,16 @@ virtual-scroll {
 .loading-icon {
     width: 20px;
     float: right;
+}
+.nodata-label {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px 0px;
+}
+.btn-container {
+    text-align: center;
+    padding: 0px 5px 10px;
+}
+.btn-iceblue {
+    
 }

@@ -248,7 +248,8 @@ The following list of settings are supported by the component. Configure the set
 | searchBy | Array | Search the list by certain properties of the list item. Ex: ["itemName, "id","name"]. Deafult is , it will search the list by all the properties of list item | [] |
 | lazyLoading | Boolean | Enable lazy loading. Used to render large datasets. | false |
 | showCheckbox | Boolean | Show or hide checkboxes in the list | true |
-
+| addNewItemOnFilter | Boolean | Whe you filter items and if, the item is not found, you can add the text as new item to the list | false |
+| addNewButtonText | String | The text in the button when `addNewItemOnFilter` is enabled | 'Add' |
 
 ### Events
 - `onSelect` - Return the selected item on selection.
@@ -265,6 +266,8 @@ The following list of settings are supported by the component. Configure the set
     Example : (onClose)="onClose($event)"
 - `onScrollToEnd` - Callback event fired when the dropdown list is scrolled to the end. Usually used with virtual scrolling, to load data on      scroll.
     Example : (onScrollToEnd)="fetchMore($event)"
+- `onAddFilterNewItem` - Callback event fired when you click the `Add` button which will appear when `addNewItemOnFilter` setting is enabled.
+    Example : (onAddFilterNewItem)="onAddItem($event)"
 
 ## Run locally
 - Clone the repository or downlod the .zip,.tar files.
