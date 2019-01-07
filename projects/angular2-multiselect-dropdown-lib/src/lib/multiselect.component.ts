@@ -338,11 +338,21 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         evt.preventDefault();
     }
-    closeDropdown() {
+    public openDropdown() {
+        if (this.settings.disabled) {
+            return false;
+        }
+        this.isActive = true;
+            if (this.settings.searchAutofocus && this.searchInput && this.settings.enableSearchFilter && !this.searchTempl) {
+                setTimeout(() => {
+                    this.searchInput.nativeElement.focus();
+                }, 0);
+            }
+            this.onOpen.emit(true);
+    }
+    public closeDropdown() {
         if (this.searchInput && this.settings.lazyLoading) {
             this.searchInput.nativeElement.value = "";
-            //this.data = [];
-            //this.data = this.cachedItems;
         }
         if (this.searchInput) {
             this.searchInput.nativeElement.value = "";

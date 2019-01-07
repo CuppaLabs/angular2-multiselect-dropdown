@@ -1,11 +1,15 @@
 <h2 class="example-title">{{title}}</h2>
-<div class="col-md-10 mr-auto ml-auto dropdown-container">
+<div class="col-md-12 mr-auto ml-auto dropdown-container">
     <div class="row">
-        <div class="col">
-            <button (click)="changeData()" class="btn btn-danger">Reset</button>
+        <div class="col-md-4">
+            <button (click)="changeData()" class="btn btn-danger">Reset</button><br>
+            <br>
+            <button (click)="open()" class="btn btn-success">Open Dropdown</button><br>
+            <br>
+            <button (click)="close()" class="btn btn-primary">Close Dropdown</button>
         </div>
-        <div class="col-md-10">
-    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
+        <div class="col-md-8">
+    <angular2-multiselect #dropdownElem [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
         (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
 
         </div>

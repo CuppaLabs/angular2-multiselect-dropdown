@@ -32,7 +32,7 @@ const appRoutes: Routes = [
   { path: 'searchfilter', component: SearchFilterExample },
   { path: 'groupby', component: GroupByExample },
   { path: 'templating', component: TemplatingExample },
-  { path: 'resetdropdown', component: ResetDropdownExample },
+  { path: 'dropdownMethods', component: ResetDropdownExample },
   { path: 'disablemode', component: DisableModeExample },
   { path: 'limitselection', component: LimitSelectionExample },
   { path: 'limitbadges', component: LimitBadgesExample },

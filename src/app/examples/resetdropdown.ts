@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
+import { AngularMultiSelect } from '../../../projects/angular2-multiselect-dropdown-lib/src/lib/multiselect.component';
 
 @Component({
   templateUrl: './views/resetDropdown.html'
@@ -8,7 +9,7 @@ export class ResetDropdownExample implements OnInit {
   itemList = [];
   selectedItems = [];
   settings = {};
-
+  @ViewChild('dropdownElem') dropdownElem: AngularMultiSelect;
   constructor() {
 
   }
@@ -55,6 +56,12 @@ export class ResetDropdownExample implements OnInit {
   }
   changeData() {
     this.selectedItems = [];
+  }
+  open(){
+    this.dropdownElem.openDropdown();
+  }
+  close(){
+    this.dropdownElem.closeDropdown();
   }
   cssgist: boolean = false;
   title: string = "Reset dropdown";
