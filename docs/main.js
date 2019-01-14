@@ -1019,9 +1019,10 @@ var AngularMultiSelect = /** @class */ (function () {
     };
     AngularMultiSelect.prototype.updateGroupInfo = function (item) {
         var _this = this;
+        var key = this.settings.groupBy;
         this.groupedData.forEach(function (obj) {
             var cnt = 0;
-            if (obj.grpTitle && item[_this.settings.groupBy] == obj[_this.settings.groupBy]) {
+            if (obj.grpTitle && (item[key] == obj[key])) {
                 if (obj.list) {
                     obj.list.forEach(function (el) {
                         if (_this.isSelected(el)) {
@@ -1030,10 +1031,10 @@ var AngularMultiSelect = /** @class */ (function () {
                     });
                 }
             }
-            if (obj.list && cnt === obj.list.length) {
+            if (obj.list && (cnt === obj.list.length) && (item[key] == obj[key])) {
                 obj.selected = true;
             }
-            else {
+            else if (obj.list && (cnt != obj.list.length) && (item[key] == obj[key])) {
                 obj.selected = false;
             }
         });
