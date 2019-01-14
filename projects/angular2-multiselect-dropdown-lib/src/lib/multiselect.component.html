@@ -1,4 +1,4 @@
-<div class="cuppa-dropdown">
+<div class="cuppa-dropdown" (clickOutside)="closeDropdownOnClickOut()">
     <div class="selected-list" #selectedList>
         <div class="c-btn" (click)="toggleDropdown($event)" [ngClass]="{'disabled': settings.disabled}" [attr.tabindex]="0">
 
@@ -15,7 +15,7 @@
             <span *ngIf="badgeTempl" class="c-label">
                             <c-templateRenderer [data]="badgeTempl" [item]="item"></c-templateRenderer>
                         </span>
-            <span class="c-remove" (click)="onItemClick(item,k,$event)">
+            <span class="c-remove" (click)="onItemClick(item,k,$event);$event.stopPropagation()">
                 <c-icon [name]="'remove'"></c-icon>
             </span>
         </div>
@@ -26,7 +26,7 @@
                 <span *ngIf="badgeTempl" class="c-label">
                     <c-templateRenderer [data]="badgeTempl" [item]="item"></c-templateRenderer>
                 </span>
-                <span class="c-remove" (click)="onItemClick(item,k,$event)">
+                <span class="c-remove" (click)="onItemClick(item,k,$event);$event.stopPropagation()">
                     <c-icon [name]="'remove'"></c-icon>
                 </span>
             </div>
