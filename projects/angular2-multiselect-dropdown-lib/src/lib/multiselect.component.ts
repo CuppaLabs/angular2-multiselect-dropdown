@@ -515,10 +515,10 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
     }
     updateGroupInfo(item: any) {
-
+        var key = this.settings.groupBy;
         this.groupedData.forEach((obj: any) => {
             var cnt = 0;
-            if (obj.grpTitle && item[this.settings.groupBy] == obj[this.settings.groupBy]) {
+            if (obj.grpTitle && ( item[key] == obj[key])) {
                 if (obj.list) {
                     obj.list.forEach((el: any) => {
                         if (this.isSelected(el)) {
@@ -527,10 +527,10 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                     });
                 }
             }
-            if (obj.list && cnt === obj.list.length) {
+            if (obj.list && (cnt === obj.list.length) && ( item[key] == obj[key])) {
                 obj.selected = true;
             }
-            else {
+            else if (obj.list && (cnt != obj.list.length) && ( item[key] == obj[key])){
                 obj.selected = false;
             }
         });
