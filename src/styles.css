@@ -12853,3 +12853,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 {
     padding: 0;
     list-style: none;
 }
+.output-text {
+    width: 100%;
+    height: 150px;
+}

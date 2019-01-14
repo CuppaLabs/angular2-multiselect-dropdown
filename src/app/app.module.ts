@@ -32,6 +32,7 @@ import { CustomSearchExample } from './examples/customSearch';
 import { SearchFilterByOnePropertyExample } from './examples/searchByOneProperty';
 import {LazyLoadingRemoteDataExample } from './examples/lazyLoadingRemoteData';
 import {SearchFilterAddItemExample } from './examples/searchFilterAddNewItem';
+import { EventsExample } from './examples/events';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {SearchFilterAddItemExample } from './examples/searchFilterAddNewItem';
     CustomSearchExample,
     SearchFilterByOnePropertyExample,
     LazyLoadingRemoteDataExample,
-    SearchFilterAddItemExample
+    SearchFilterAddItemExample,
+    EventsExample
     ],
   imports: [
     BrowserModule,

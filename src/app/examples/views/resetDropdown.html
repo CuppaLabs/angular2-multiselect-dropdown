@@ -4,9 +4,9 @@
         <div class="col-md-4">
             <button (click)="changeData()" class="btn btn-danger">Reset</button><br>
             <br>
-            <button (click)="open()" class="btn btn-success">Open Dropdown</button><br>
+            <button (click)="open($event)" class="btn btn-success">Open</button><br>
             <br>
-            <button (click)="close()" class="btn btn-primary">Close Dropdown</button>
+            <button (click)="close($event)" class="btn btn-primary">Close</button>
         </div>
         <div class="col-md-8">
     <angular2-multiselect #dropdownElem [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"

@@ -1,0 +1,64 @@
+<h2 class="example-title">{{title}}</h2>
+<div class="col-md-12 mr-auto ml-auto dropdown-container" style="height: auto;">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <angular2-multiselect #dropdownElem [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" 
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="OnItemDeSelect($event)" 
+                (onSelectAll)="onSelectAll($event)" 
+                (onDeSelectAll)="onDeSelectAll($event)"
+                (onOpen)="onOpen($event)"
+                (onClose)="onClose($event)">
+            </angular2-multiselect>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            <h5>On Select</h5>
+            <textarea class="output-text" [(ngModel)]="selectedItemString">Event output goes here...
+            </textarea>
+        </div>
+        <div class="col-md-4">
+            <h5>On Un-select</h5>
+            <textarea class="output-text" [(ngModel)]="unSelectedItemString">Event output goes here...
+            </textarea>
+        </div>
+        <div class="col-md-4">
+            <h5>On Open</h5>
+            <textarea class="output-text" [(ngModel)]="openString">Event output goes here...
+            </textarea>
+        </div>
+        <div class="col-md-4">
+            <h5>On Close</h5>
+            <textarea class="output-text" [(ngModel)]="closeString">Event output goes here...
+            </textarea>
+        </div>
+        <div class="col-md-4">
+            <h5>On Select All</h5>
+            <textarea class="output-text" [(ngModel)]="selectAllString">Event output goes here...
+            </textarea>
+        </div>
+        <div class="col-md-4">
+            <h5>On Un-Select All</h5>
+            <textarea class="output-text" [(ngModel)]="unSelectAllString">Event output goes here...
+            </textarea>
+        </div>
+    </div>
+</div>
+
+<h4 class="example-title code-section">Code</h4>
+
+<p-tabView>
+    <p-tabPanel header="{{tstitle}}">
+        <ng2-gist [gistId]="tsgist"></ng2-gist>
+    </p-tabPanel>
+    <p-tabPanel header="{{htmltitle}}">
+        <ng2-gist [gistId]="htmlgist"></ng2-gist>
+    </p-tabPanel>
+</p-tabView>

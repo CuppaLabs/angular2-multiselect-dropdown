@@ -57,14 +57,15 @@ export class ResetDropdownExample implements OnInit {
   changeData() {
     this.selectedItems = [];
   }
-  open(){
+  open(evt: any){
     this.dropdownElem.openDropdown();
+    evt.stopPropagation();
   }
-  close(){
+  close(evt: any){
     this.dropdownElem.closeDropdown();
   }
   cssgist: boolean = false;
-  title: string = "Reset dropdown";
+  title: string = "Methods - Reset, Open, Close dropdown";
   tsgist: string = "CuppaLabs/96d3ca7681f1a7a38b8c76b2f1552458";
   htmlgist: string = "CuppaLabs/bbd73b9f9864effb69f361c9fc65a6e5";
   tstitle: string = "resetDropdown.ts"
