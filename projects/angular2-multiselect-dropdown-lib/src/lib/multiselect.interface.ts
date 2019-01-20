@@ -26,5 +26,7 @@ export interface DropdownSettings{
     loading?: boolean;
     selectGroup?: boolean;
     addNewItemOnFilter?: boolean;
-    addNewButtonText: string;
+    addNewButtonText?: string;
+    escapeToClose?: boolean;
+    autoPosition?: boolean;
 } 

@@ -250,6 +250,7 @@ The following list of settings are supported by the component. Configure the set
 | showCheckbox | Boolean | Show or hide checkboxes in the list | true |
 | addNewItemOnFilter | Boolean | Whe you filter items and if, the item is not found, you can add the text as new item to the list | false |
 | addNewButtonText | String | The text in the button when `addNewItemOnFilter` is enabled | 'Add' |
+| escapeToClose | boolean | Press excape key to close the dropdown | true |
 
 ### Events
 - `onSelect` - Return the selected item on selection.

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgModule, SimpleChanges, OnChanges, ChangeDetectorRef, AfterViewChecked, ViewEncapsulation, ContentChild, ViewChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy, NgModule, SimpleChanges, OnChanges, ChangeDetectorRef, AfterViewChecked, ViewEncapsulation, ContentChild, ViewChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MyException } from './multiselect.model';
@@ -80,6 +80,14 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
     @ViewChild('searchInput') searchInput: ElementRef;
     @ViewChild('selectedList') selectedListElem: ElementRef;
+    @ViewChild('dropdownList') dropdownListElem: ElementRef;
+
+    @HostListener('document:keyup.escape', ['$event'])
+	onEscapeDown(event: KeyboardEvent) {
+		if (this.settings.escapeToClose) {
+			this.closeDropdown();
+		}
+	}
 
     filterPipe: ListFilterPipe;
     public selectedItems: Array<any>;
@@ -108,6 +116,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     public infiniteFilterLength: any = 0;
     public viewPortItems: any;
     public item: any;
+    public dropdownListYOffset: number = 0;
     subscription: Subscription;
     defaultSettings: DropdownSettings = {
         singleSelection: false,
@@ -131,10 +140,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         labelKey: 'itemName',
         primaryKey: 'id',
         position: 'bottom',
+        autoPosition: true,
         enableFilterSelectAll: true,
         selectGroup: false,
         addNewItemOnFilter: false,
-        addNewButtonText: "Add"
+        addNewButtonText: "Add",
+        escapeToClose: true
     }
     public parseError: boolean;
     public filteredList: any = [];
@@ -167,6 +178,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             }
 
         });
+        setTimeout(() => {
+			this.calculateDropdownDirection();
+		}); 
 
     }
     ngOnChanges(changes: SimpleChanges) {
@@ -336,6 +350,10 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         else {
             this.onClose.emit(false);
         }
+        setTimeout(() => {
+            this.calculateDropdownDirection();
+        }, 0);
+        
         evt.preventDefault();
     }
     public openDropdown() {
@@ -663,6 +681,39 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.filterPipe = new ListFilterPipe(this.ds);
         this.filterPipe.transform(this.data, this.filter, this.settings.searchBy);
     }
+    calculateDropdownDirection() {
+		let shouldOpenTowardsTop = this.settings.position == 'top';
+		if (this.settings.autoPosition) {
+			const dropdownHeight = this.dropdownListElem.nativeElement.clientHeight;
+			const viewportHeight = document.documentElement.clientHeight;
+			const selectedListBounds = this.selectedListElem.nativeElement.getBoundingClientRect();
+			
+			const spaceOnTop: number = selectedListBounds.top;
+			const spaceOnBottom: number = viewportHeight - selectedListBounds.top;
+			if (spaceOnBottom < spaceOnTop && dropdownHeight < spaceOnTop){
+                this.openTowardsTop(true);
+            }
+            else {
+                this.openTowardsTop(false);
+            }
+			// Keep preference if there is not enough space on either the top or bottom
+/* 			if (spaceOnTop || spaceOnBottom) {
+				if (shouldOpenTowardsTop) {
+					shouldOpenTowardsTop = spaceOnTop;
+				} else {
+					shouldOpenTowardsTop = !spaceOnBottom;
+				}
+			} */
+		}
+		
+	}
+	openTowardsTop(value: boolean) {
+		if (value && this.selectedListElem.nativeElement.clientHeight) {
+            this.dropdownListYOffset = 15 + this.selectedListElem.nativeElement.clientHeight;
+        } else {
+			this.dropdownListYOffset = 0;
+		}
+	}
 }
 
 @NgModule({
