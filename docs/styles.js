@@ -662,10 +662,10 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Lenovo\Documents\Projects\angular2-multiselect-dropdown\src\styles.css */"./src/styles.css");
-__webpack_require__(/*! C:\Users\Lenovo\Documents\Projects\angular2-multiselect-dropdown\src\themes\default.theme.scss */"./src/themes/default.theme.scss");
-__webpack_require__(/*! C:\Users\Lenovo\Documents\Projects\angular2-multiselect-dropdown\node_modules\primeng\resources\themes\omega\theme.css */"./node_modules/primeng/resources/themes/omega/theme.css");
-module.exports = __webpack_require__(/*! C:\Users\Lenovo\Documents\Projects\angular2-multiselect-dropdown\node_modules\primeng\resources\primeng.min.css */"./node_modules/primeng/resources/primeng.min.css");
+__webpack_require__(/*! C:\Users\pterli\Documents\GitHub\angular2-multiselect-dropdown\src\styles.css */"./src/styles.css");
+__webpack_require__(/*! C:\Users\pterli\Documents\GitHub\angular2-multiselect-dropdown\src\themes\default.theme.scss */"./src/themes/default.theme.scss");
+__webpack_require__(/*! C:\Users\pterli\Documents\GitHub\angular2-multiselect-dropdown\node_modules\primeng\resources\themes\omega\theme.css */"./node_modules/primeng/resources/themes/omega/theme.css");
+module.exports = __webpack_require__(/*! C:\Users\pterli\Documents\GitHub\angular2-multiselect-dropdown\node_modules\primeng\resources\primeng.min.css */"./node_modules/primeng/resources/primeng.min.css");
 
 
 /***/ })
