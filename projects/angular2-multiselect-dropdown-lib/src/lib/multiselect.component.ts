@@ -190,6 +190,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 if (this.data.length == 0) {
                     this.selectedItems = [];
                 }
+                this.groupCachedItems = this.cloneArray(this.groupedData);
             }
             this.cachedItems = this.cloneArray(this.data);
         }
