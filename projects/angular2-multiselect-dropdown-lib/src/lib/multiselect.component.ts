@@ -422,14 +422,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         if (!this.isFilterSelectAll) {
             let added = [];
             if (this.settings.groupBy) {
-                this.groupedData.forEach((item: any) => {
-                    item.value.forEach((el: any) => {
-                        if (!this.isSelected(el)) {
-                            this.addSelected(el);
-                            added.push(el);
-                        }
-                    });
-                });
+                this.ds.getFilteredData().forEach((el: any) => {
+                      if (!this.isSelected(el) && !el.hasOwnProperty('grpTitle')) {
+                          this.addSelected(el);
+                          added.push(el);
+                      }
+                  });
             }
             else {
                 this.ds.getFilteredData().forEach((item: any) => {
@@ -447,14 +445,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         else {
             let removed = [];
             if (this.settings.groupBy) {
-                this.groupedData.forEach((item: any) => {
-                    item.value.forEach((el: any) => {
-                        if (this.isSelected(el)) {
-                            this.removeSelected(el);
-                            removed.push(el);
-                        }
-                    });
-                });
+                  this.ds.getFilteredData().forEach((el: any) => {
+                      if (this.isSelected(el)) {
+                          this.removeSelected(el);
+                          removed.push(el);
+                      }
+                  });
             }
             else {
                 this.ds.getFilteredData().forEach((item: any) => {
