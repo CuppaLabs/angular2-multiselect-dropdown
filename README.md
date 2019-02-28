@@ -41,7 +41,7 @@ Angular 2 multiselect dropdown component for web applications. Easy to integrate
 ### Usage
 Import `AngularMultiSelectModule` into `NgModule` in `app.module.ts`. Angular's `FormsModule` is also required.
 ```js
-import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
