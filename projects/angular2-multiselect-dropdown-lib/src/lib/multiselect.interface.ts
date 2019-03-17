@@ -8,7 +8,7 @@ export interface DropdownSettings{
     filterUnSelectAllText: string;
     enableFilterSelectAll: boolean;
     enableSearchFilter: boolean;
-    searchBy: Array<string>[];
+    searchBy: string[];
     maxHeight: number;
     badgeShowLimit: number;
     classes: string;
