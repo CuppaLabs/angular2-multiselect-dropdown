@@ -388,6 +388,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         this.filter = "";
         this.isActive = false;
+        this.onClose.emit(false);
     }
     toggleSelectAll() {
         if (!this.isSelectAll) {
