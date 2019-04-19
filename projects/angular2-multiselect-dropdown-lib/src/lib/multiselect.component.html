@@ -118,7 +118,7 @@
                         class="pure-checkbox" [ngClass]="{'selected-item': isSelected(item) == true }">
                         <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                         />
-                        <label>{{item.id}} {{item[settings.labelKey]}}</label>
+                        <label>{{item[settings.labelKey]}}</label>
                     </li>
                 </ul>
             </virtual-scroll>
