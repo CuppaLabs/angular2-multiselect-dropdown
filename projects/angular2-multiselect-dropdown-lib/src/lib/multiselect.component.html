@@ -69,8 +69,10 @@
                 <c-icon [name]="'clear'"></c-icon>
                 </span>
 
-            <input class="c-input" *ngIf="!settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
-                [(ngModel)]="filter">
+            <input class="c-input" *ngIf="settings.groupBy && !settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
+                [(ngModel)]="filter" (keyup)="filterGroupedList($event)">
+                <input class="c-input" *ngIf="!settings.groupBy && !settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
+                [(ngModel)]="filter" >
             <input class="c-input" *ngIf="settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
                 [(ngModel)]="filter" (keyup)="filterInfiniteList($event)">
             <!--            <input class="c-input" *ngIf="!settings.lazyLoading && !searchTempl && settings.groupBy" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
@@ -78,14 +80,23 @@
             <c-templateRenderer *ngIf="searchTempl" [data]="searchTempl" [item]="item"></c-templateRenderer>
         </div>
         <div class="filter-select-all" *ngIf="!settings.lazyLoading && settings.enableFilterSelectAll">
-            <div class="pure-checkbox select-all" *ngIf="filter?.length > 0 && filterLength > 0" (click)="toggleFilterSelectAll()">
+            <div class="pure-checkbox select-all" *ngIf="!settings.groupBy && filter?.length > 0 && filterLength > 0" (click)="toggleFilterSelectAll()">
                 <input type="checkbox" [checked]="isFilterSelectAll" [disabled]="settings.limitSelection == selectedItems?.length" />
                 <label>
                 <span [hidden]="isFilterSelectAll">{{settings.filterSelectAllText}}</span>
                 <span [hidden]="!isFilterSelectAll">{{settings.filterUnSelectAllText}}</span>
             </label>
             </div>
-            <label class="nodata-label" *ngIf="filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
+            <div class="pure-checkbox select-all" *ngIf="settings.groupBy && filter?.length > 0 && groupedData?.length > 0" (click)="toggleFilterSelectAll()">
+                    <input type="checkbox" [checked]="isFilterSelectAll && filter?.length > 0" [disabled]="settings.limitSelection == selectedItems?.length" />
+                    <label>
+                    <span [hidden]="isFilterSelectAll">{{settings.filterSelectAllText}}</span>
+                    <span [hidden]="!isFilterSelectAll">{{settings.filterUnSelectAllText}}</span>
+                </label>
+                </div>
+            <label class="nodata-label" *ngIf="!settings.groupBy && filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
+            <label class="nodata-label" *ngIf="settings.groupBy && groupedData?.length == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
+
             <div class="btn-container" *ngIf="settings.addNewItemOnFilter && filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">
             <button class="c-btn btn-iceblue" (click)="addFilterNewItem()">{{settings.addNewButtonText}}</button>
             </div>
@@ -206,7 +217,23 @@
         </div>
         <div *ngIf="settings.groupBy && !settings.lazyLoading && itemTempl == undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
             <ul class="lazyContainer">
-                <span *ngFor="let item of groupedData | listFilter:filter : settings.searchBy; let i = index;">
+                    <span *ngFor="let item of groupedData ; let i = index;">
+                            <li (click)="selectGroup(item, i, $event)" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle}" class="pure-checkbox">
+                                    <input  *ngIf="settings.showCheckbox" type="checkbox" [checked]="item.selected" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
+                                    />
+                                    <label>{{item[settings.labelKey]}}</label>
+                                    <ul class="lazyContainer">
+                                            <span *ngFor="let val of item.list ; let j = index;">
+                                            <li (click)="onItemClick(val,j,$event); $event.stopPropagation()" [ngClass]="{'grp-title': val.grpTitle,'grp-item': !val.grpTitle}" class="pure-checkbox">
+                                                    <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(val)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(val)"
+                                                    />
+                                                    <label>{{val[settings.labelKey]}}</label>
+                                                </li>
+                                                </span>
+                                    </ul>
+                                </li>
+                    </span>
+                <!-- <span *ngFor="let item of groupedData ; let i = index;">
                     <li (click)="onItemClick(item,i,$event)" *ngIf="!item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle}" class="pure-checkbox">
                     <input *ngIf="settings.showCheckbox && !item.grpTitle" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                     />
@@ -222,7 +249,7 @@
                     />
                     <label>{{item[settings.labelKey]}}</label>
                 </li>
-                </span>
+                </span> -->
             </ul>
         </div>
         <h5 class="list-message" *ngIf="data?.length == 0">{{settings.noDataLabel}}</h5>
