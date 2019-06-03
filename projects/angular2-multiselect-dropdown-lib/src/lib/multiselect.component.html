@@ -70,7 +70,7 @@
                 </span>
 
             <input class="c-input" *ngIf="settings.groupBy && !settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
-                [(ngModel)]="filter" (keyup)="filterGroupedList($event)">
+                [(ngModel)]="filter" (keyup)="filterGroupedList()">
                 <input class="c-input" *ngIf="!settings.groupBy && !settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
                 [(ngModel)]="filter" >
             <input class="c-input" *ngIf="settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
@@ -218,7 +218,7 @@
         <div *ngIf="settings.groupBy && !settings.lazyLoading && itemTempl == undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
             <ul class="lazyContainer">
                     <span *ngFor="let item of groupedData ; let i = index;">
-                            <li (click)="selectGroup(item, i, $event)" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle}" class="pure-checkbox">
+                            <li (click)="selectGroup(item)" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle}" class="pure-checkbox">
                                     <input  *ngIf="settings.showCheckbox" type="checkbox" [checked]="item.selected" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                                     />
                                     <label>{{item[settings.labelKey]}}</label>
