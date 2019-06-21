@@ -73,6 +73,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Output('onAddFilterNewItem')
     onAddFilterNewItem: EventEmitter<any> = new EventEmitter<any>();
 
+    @Output('onGroupSelect')
+    onGroupSelect: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output('onGroupDeSelect')
+    onGroupDeSelect: EventEmitter<any> = new EventEmitter<any>();
+
     @ContentChild(Item) itemTempl: Item;
     @ContentChild(Badge) badgeTempl: Badge;
     @ContentChild(Search) searchTempl: Search;
@@ -154,10 +160,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     ngOnInit() {
         this.settings = Object.assign(this.defaultSettings, this.settings);
-        if (this.settings.groupBy) {
-            this.groupedData = this.transformData(this.data, this.settings.groupBy);
-            this.groupCachedItems = this.cloneArray(this.groupedData);
-        }
+
         this.cachedItems = this.cloneArray(this.data);
         if (this.settings.position == 'top') {
             setTimeout(() => {
@@ -286,6 +289,10 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 }
                 if (this.selectedItems.length === this.data.length && this.data.length > 0) {
                     this.isSelectAll = true;
+                }
+                if (this.settings.groupBy) {
+                    this.groupedData = this.transformData(this.data, this.settings.groupBy);
+                    this.groupCachedItems = this.cloneArray(this.groupedData);
                 }
             }
         } else {
@@ -617,10 +624,20 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             obj[this.settings.groupBy] = x;
             obj['selected'] = false;
             obj['list'] = [];
+            var cnt = 0;
             groupedObj[x].forEach((item: any) => {
                 item['list'] = [];
                 obj.list.push(item);
+                if(this.isSelected(item)){
+                    cnt++;
+                }
             });
+            if(cnt == obj.list.length){
+                obj.selected = true;
+            }
+            else {
+                obj.selected = false;
+            }
             tempArr.push(obj);
             // obj.list.forEach((item: any) => {
             //     tempArr.push(item);
@@ -712,6 +729,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             item.list.forEach((obj: any) => {
                 this.removeSelected(obj);
             });
+            this.updateGroupInfo(item);
+            this.onGroupSelect.emit(item);
         }
         else {
             item.selected = true;
@@ -721,9 +740,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 }
 
             });
+            this.updateGroupInfo(item);
+            this.onGroupDeSelect.emit(item);
         }
-        this.updateGroupInfo(item);
-
+        
+        
     }
     addFilterNewItem() {
         this.onAddFilterNewItem.emit(this.filter);

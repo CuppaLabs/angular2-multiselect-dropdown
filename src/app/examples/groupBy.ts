@@ -27,6 +27,7 @@ export class GroupByExample implements OnInit {
     this.selectedItems = [
       { "id": 1, "itemName": "India", "category": "asia" },
       { "id": 3, "itemName": "Germany", "category": "Europe" },
+      { "id": 5, "itemName": "South Korea", "category": "asia" },
       { "id": 6, "itemName": "Sweden", "category": "Europe" }]
     this.settings = {
       singleSelection: false,
@@ -53,6 +54,12 @@ export class GroupByExample implements OnInit {
   }
   onDeSelectAll(items: any) {
     console.log(items);
+  }
+  onGroupSelect(selectedGroupItem){
+    console.log(selectedGroupItem);
+  }
+  onGroupDeSelect(deselectedGroupItem){
+    console.log(deselectedGroupItem);
   }
   loadDataSet1(){
     this.selectedItems = [];

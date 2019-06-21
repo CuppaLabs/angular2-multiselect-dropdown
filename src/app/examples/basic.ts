@@ -25,7 +25,9 @@ export class BasicExample implements OnInit {
             { "countryId": 1, "itemName": "India" },
             { "countryId": 2, "itemName": "Singapore" },
             { "countryId": 3, "itemName": "Australia" },
-            { "countryId": 4, "itemName": "Canada" }];
+            { "countryId": 4, "itemName": "Canada" },
+            { "countryId": 5, "itemName": "South Korea" },
+            { "countryId": 6, "itemName": "Brazil" }];
 
         this.settings = {
             text: "Select Countries",

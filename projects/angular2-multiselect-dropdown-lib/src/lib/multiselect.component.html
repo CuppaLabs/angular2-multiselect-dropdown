@@ -181,18 +181,22 @@
         </div>
         <div *ngIf="settings.groupBy && !settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
             <ul class="lazyContainer">
-                <span *ngFor="let item of groupedData | listFilter:filter : settings.searchBy; let i = index;">
-                    <li (click)="onItemClick(item,i,$event)" *ngIf="!item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle}" class="pure-checkbox">
-                    <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
+                <span *ngFor="let item of groupedData; let i = index;">
+                    <li (click)="selectGroup(item)" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle}" class="pure-checkbox">
+                    <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="item.selected" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                     />
-                    <label></label>
-                    <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
-                </li>
-                <li *ngIf="item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle}" class="pure-checkbox">
-                    <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
-                    />
-                    <label></label>
-                    <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
+                    <label>{{item[settings.labelKey]}}</label>
+                    <ul class="lazyContainer">
+                        <span *ngFor="let val of item.list ; let j = index;">
+                        <li (click)="onItemClick(val,j,$event); $event.stopPropagation()" [ngClass]="{'grp-title': val.grpTitle,'grp-item': !val.grpTitle}" class="pure-checkbox">
+                                <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(val)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(val)"
+                                />
+                                <label></label>
+                                <c-templateRenderer [data]="itemTempl" [item]="val"></c-templateRenderer>
+                            </li>
+                            </span>
+                </ul>
+                    
                 </li>
                 </span>
             </ul>

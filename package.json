@@ -1,6 +1,6 @@
 {
   "name": "angular2-multiselect-dropdown",
-  "version": "4.2.3",
+  "version": "4.2.4",
   "description": "Angular 2 and angular 4 and angular 6 multiselect dropdown component.",
   "keywords": [
     "angular 2 multiselect dropdown",
@@ -18,7 +18,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "publish": "npm run build angular2-multiselect-dropdown-lib && npm run build-sass && copy \"README.md\" \"dist/angular2-multiselect-dropdown/\" && copy \"LICENSE\" \"dist/angular2-multiselect-dropdown/\" && cd dist/angular2-multiselect-dropdown && npm publish",
+    "publish": "npm run build angular2-multiselect-dropdown-lib && npm run build-sass && copy \"README.md\" \"dist/angular2-multiselect-dropdown/\" && copy \"LICENSE\" \"dist/angular2-multiselect-dropdown/\" && cd dist/angular2-multiselect-dropdown && npm publish && npm run github-pages",
     "build-sass": "node-sass --include-path scss src/themes/default.theme.scss dist/angular2-multiselect-dropdown/themes/default.theme.css",
     "github-pages": "ng build --aot --base-href /angular2-multiselect-dropdown/"
   },

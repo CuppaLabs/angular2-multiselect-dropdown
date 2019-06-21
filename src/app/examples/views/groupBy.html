@@ -1,7 +1,8 @@
 <h2 class="example-title">{{title}}</h2>
-<div class="col-md-6 mr-auto ml-auto dropdown-container">
+<div class="col-md-8 mr-auto ml-auto dropdown-container">
     <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
-        (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+        (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"
+        (onGroupSelect)="onGroupSelect($event)" (onGroupDeSelect)="onGroupDeSelect($event)"></angular2-multiselect>
 </div>
 <button class="btn btn-success" (click)="loadDataSet1()">Load/change dataset 1</button>
 <button class="btn btn-success" (click)="loadDataSet2()">Load/change dataset 2</button>
