@@ -721,7 +721,10 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.onScrollToEnd.emit(e);
     }
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+        if(this.subscription){
+            this.subscription.unsubscribe();
+        }
+        
     }
     selectGroup(item: any) {
         if (item.selected) {
