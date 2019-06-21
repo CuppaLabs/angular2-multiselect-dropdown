@@ -261,6 +261,10 @@ The following list of settings are supported by the component. Configure the set
     Example : (onSelectAll)="onSelectAll($event)"
 - `onDeSelectAll` - Returns an empty array.
     Example : (onDeSelectAll)="onDeSelectAll($event)"
+- `onGroupSelect` - Returns the selected group items as an array.
+    Example: (onGroupSelect)="onGroupSelect($event)"
+- `onGroupDeSelect` - Returns the sun-elected group items as an array.
+    Example: (onGroupDeSelect)="onGroupDeSelect($event)"
 - `onOpen` - Callback method fired after the dropdown opens
     Example : (onOpen)="onOpen($event)"
 - `onClose` - Callback method, fired when the dropdown is closed
