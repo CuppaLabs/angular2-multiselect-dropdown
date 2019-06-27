@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { MockService } from './examples/mock-data';
 
@@ -66,7 +65,6 @@ import { EventsExample } from './examples/events';
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpModule,
     AppRouterModule,
     AngularMultiSelectModule,
     TabViewModule,
