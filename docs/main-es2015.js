@@ -3766,7 +3766,6 @@ class EventsExample {
         this.openString = "Dropdown opened: " + evt;
     }
     onClose(evt) {
-        alert();
         this.closeString = "Dropdown opened: " + evt;
     }
     onSelectAll(items) {

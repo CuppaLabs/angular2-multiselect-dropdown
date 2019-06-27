@@ -3885,7 +3885,6 @@ var EventsExample = /** @class */ (function () {
         this.openString = "Dropdown opened: " + evt;
     };
     EventsExample.prototype.onClose = function (evt) {
-        alert();
         this.closeString = "Dropdown opened: " + evt;
     };
     EventsExample.prototype.onSelectAll = function (items) {
