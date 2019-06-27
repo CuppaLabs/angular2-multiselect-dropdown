@@ -55,6 +55,7 @@ export class EventsExample implements OnInit {
         this.openString = "Dropdown opened: "+evt;
     }
     onClose(evt: any){
+        alert();
         this.closeString = "Dropdown opened: "+evt;
     }
     onSelectAll(items: any) {

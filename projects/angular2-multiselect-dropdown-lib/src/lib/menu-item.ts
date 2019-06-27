@@ -9,7 +9,7 @@ import { CommonModule }       from '@angular/common';
 
 export class Item { 
 
-    @ContentChild(TemplateRef) template: TemplateRef<any>
+    @ContentChild(TemplateRef, {static: true}) template: TemplateRef<any>
     constructor() {   
     }
 
@@ -22,7 +22,7 @@ export class Item {
 
 export class Badge { 
 
-    @ContentChild(TemplateRef) template: TemplateRef<any>
+    @ContentChild(TemplateRef, {static: true}) template: TemplateRef<any>
     constructor() {   
     }
 
@@ -35,7 +35,7 @@ export class Badge {
 
 export class Search { 
 
-    @ContentChild(TemplateRef) template: TemplateRef<any>
+    @ContentChild(TemplateRef, {static: true}) template: TemplateRef<any>
     constructor() {   
     }
 

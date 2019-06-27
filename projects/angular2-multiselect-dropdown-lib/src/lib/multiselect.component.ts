@@ -79,14 +79,14 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Output('onGroupDeSelect')
     onGroupDeSelect: EventEmitter<any> = new EventEmitter<any>();
 
-    @ContentChild(Item) itemTempl: Item;
-    @ContentChild(Badge) badgeTempl: Badge;
-    @ContentChild(Search) searchTempl: Search;
+    @ContentChild(Item, {static: true}) itemTempl: Item;
+    @ContentChild(Badge, {static: true}) badgeTempl: Badge;
+    @ContentChild(Search, {static: true}) searchTempl: Search;
 
 
-    @ViewChild('searchInput') searchInput: ElementRef;
-    @ViewChild('selectedList') selectedListElem: ElementRef;
-    @ViewChild('dropdownList') dropdownListElem: ElementRef;
+    @ViewChild('searchInput', {static: true}) searchInput: ElementRef;
+    @ViewChild('selectedList', {static: true}) selectedListElem: ElementRef;
+    @ViewChild('dropdownList', {static: true}) dropdownListElem: ElementRef;
 
     @HostListener('document:keyup.escape', ['$event'])
     onEscapeDown(event: KeyboardEvent) {
@@ -387,15 +387,17 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.onClose.emit(false);
     }
     public closeDropdownOnClickOut() {
-        if (this.searchInput && this.settings.lazyLoading) {
-            this.searchInput.nativeElement.value = "";
+        if(this.isActive){
+            if (this.searchInput && this.settings.lazyLoading) {
+                this.searchInput.nativeElement.value = "";
+            }
+            if (this.searchInput) {
+                this.searchInput.nativeElement.value = "";
+            }
+            this.filter = "";
+            this.isActive = false;
+            this.onClose.emit(false);
         }
-        if (this.searchInput) {
-            this.searchInput.nativeElement.value = "";
-        }
-        this.filter = "";
-        this.isActive = false;
-        this.onClose.emit(false);
     }
     toggleSelectAll() {
         if (!this.isSelectAll) {

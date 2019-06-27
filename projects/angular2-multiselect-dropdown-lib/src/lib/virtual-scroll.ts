@@ -293,13 +293,13 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
 	@Output()
 	public vsEnd: EventEmitter<ChangeEvent> = new EventEmitter<ChangeEvent>();
 
-	@ViewChild('content', { read: ElementRef })
+	@ViewChild('content', { read: ElementRef, static: true})
 	public contentElementRef: ElementRef;
 
-	@ViewChild('invisiblePadding', { read: ElementRef })
+	@ViewChild('invisiblePadding', { read: ElementRef, static: true })
 	public invisiblePaddingElementRef: ElementRef;
 
-	@ContentChild('container', { read: ElementRef })
+	@ContentChild('container', { read: ElementRef, static: true })
 	public containerElementRef: ElementRef;
 
 	public ngOnInit() {

@@ -9,7 +9,7 @@ export class ResetDropdownExample implements OnInit {
   itemList = [];
   selectedItems = [];
   settings = {};
-  @ViewChild('dropdownElem') dropdownElem: AngularMultiSelect;
+  @ViewChild('dropdownElem', {static: true}) dropdownElem: AngularMultiSelect;
   constructor() {
 
   }

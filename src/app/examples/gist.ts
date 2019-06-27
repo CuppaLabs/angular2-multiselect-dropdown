@@ -9,7 +9,7 @@ import {Component, Input, ViewChild, ElementRef, AfterViewInit} from '@angular/c
 })
 
 export class ng2Gist implements AfterViewInit {
-  @ViewChild('iframe') iframe:ElementRef;
+  @ViewChild('iframe', {static: true}) iframe:ElementRef;
   @Input() gistId;
 
   constructor() { }
