@@ -1,6 +1,6 @@
 .left-sidebar {
     position: fixed;
-    top: 70px;
+    top: 65px;
     height: calc(100vh - 75px);
     overflow: auto;
     padding-right: 0px;
@@ -25,7 +25,6 @@
 @media (min-width: 768px) { 
     .center-content {
         margin-left: 330px;
-        margin-top: 55px;
     }
 }
 .nav-sub{
