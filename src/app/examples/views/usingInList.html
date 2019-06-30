@@ -1,0 +1,44 @@
+<h2 class="example-title" style="margin-bottom: 10px;">{{title}}</h2>
+<div class="col-md-12 pl-0 pr-0 dropdown-container" style="height: auto;">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Customer
+                </th>
+                <th>
+                    Countries
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of customers">
+                <td>
+                    {{item.name}}
+                </td>
+                <td>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="item.countries" [settings]="settings"
+                        (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
+                        (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                    </angular2-multiselect>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    {{customers | json}}
+</div>
+<h4 class="example-title code-section">Code</h4>
+
+<p-tabView>
+    <p-tabPanel header="{{tstitle}}">
+        <ng2-gist [gistId]="tsgist"></ng2-gist>
+    </p-tabPanel>
+    <p-tabPanel header="{{htmltitle}}">
+        <ng2-gist [gistId]="htmlgist"></ng2-gist>
+    </p-tabPanel>
+    <span *ngIf="cssgist">
+        <p-tabPanel header="{{csstitle}}">
+            <ng2-gist [gistId]="cssgist"></ng2-gist>
+        </p-tabPanel>
+    </span>
+</p-tabView>

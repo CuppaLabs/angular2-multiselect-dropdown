@@ -33,6 +33,7 @@ import {LazyLoadingRemoteDataExample } from './examples/lazyLoadingRemoteData';
 import {SearchFilterAddItemExample } from './examples/searchFilterAddNewItem';
 import { EventsExample } from './examples/events';
 import { HighlightModule } from 'ngx-highlightjs';
+import { UsingInListExample } from './examples/usingInList';
 
 import xml from 'highlight.js/lib/languages/xml';
 import scss from 'highlight.js/lib/languages/scss';
@@ -72,7 +73,8 @@ export function hljsLanguages() {
     SearchFilterByOnePropertyExample,
     LazyLoadingRemoteDataExample,
     SearchFilterAddItemExample,
-    EventsExample
+    EventsExample,
+    UsingInListExample
     ],
   imports: [
     BrowserModule,
