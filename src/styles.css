@@ -84,7 +84,7 @@ h4{
     background: #38d574 !important;
 }
 .outer-wrapper {
-    margin-top: 65px;
+    margin-top: 57px;
 }
 .dropdown-container {
     height: 170px;
@@ -12858,4 +12858,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 {
 .output-text {
     width: 100%;
     height: 150px;
+}
+.right-sidebar {
+    max-width: 315px;
 }

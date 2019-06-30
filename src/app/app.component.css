@@ -1,14 +1,12 @@
 .left-sidebar {
     position: fixed;
-    top: 65px;
+    top: 57px;
     height: calc(100vh - 75px);
     overflow: auto;
     padding-right: 0px;
 }
 .left-sidebar, .right-sidebar {
-    width: 330px;
-    max-width: 315px;
-    min-width: 315px;
+    width: 265px;
 }
 
 .outer-wrapper {
@@ -24,7 +22,7 @@
 }
 @media (min-width: 768px) { 
     .center-content {
-        margin-left: 330px;
+        margin-left: 265px;
     }
 }
 .nav-sub{
