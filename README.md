@@ -126,7 +126,7 @@ Add the following component tag in you template
 - From v3.0.0 onwards, you need to include `default.theme.css` file to get the basic styling of the dropdown. 
 - The component package has a themes folder in node_modules at `angular2-multiselect-dropdown\themes\default.theme.css`
 - Include the `default.theme.css` in `angular-cli.json` (for versions below angular 6) and `angular.json` (for version 6 or more).
-- [Refer this file](https://github.com/CuppaLabs/angular2-multiselect-dropdown/blob/master/.angular-cli.json) on how to add the css file to your angular project.
+- [Refer this file](https://github.com/CuppaLabs/angular2-multiselect-dropdown/blob/master/angular.json) on how to add the css file to your angular project.
 
 You can create your own theme from now on. You can have a look at example scss theming file at [Default theme](https://github.com/CuppaLabs/angular2-multiselect-dropdown/tree/master/src/themes/default.theme.scss) 
 
