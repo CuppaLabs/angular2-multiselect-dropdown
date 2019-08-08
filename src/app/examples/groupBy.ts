@@ -25,10 +25,7 @@ export class GroupByExample implements OnInit {
     ];
 
     this.selectedItems = [
-      { "id": 1, "itemName": "India", "category": "asia" },
-      { "id": 3, "itemName": "Germany", "category": "Europe" },
-      { "id": 5, "itemName": "South Korea", "category": "asia" },
-      { "id": 6, "itemName": "Sweden", "category": "Europe" }]
+      { "id": 1, "itemName": "India", "category": "asia" }]
     this.settings = {
       singleSelection: false,
       text: "Select Fields",

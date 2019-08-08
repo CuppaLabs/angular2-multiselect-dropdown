@@ -233,12 +233,13 @@ virtual-scroll {
   position: absolute;
   top: 50%;
   left: 0;
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   margin-top: -9px;
   /*border: 2px solid $base-color;*/
   text-align: center;
   transition: all 0.4s ease;
+  border-radius: 3px;
 }
 .pure-checkbox input[type="checkbox"] + label:after{
   box-sizing: content-box;
@@ -246,10 +247,10 @@ virtual-scroll {
   /*background-color: $base-color;*/
   position: absolute;
   top: 50%;
-  left: 4px;
-  width: 10px;
-  height: 10px;
-  margin-top: -5px;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  margin-top: -9px;
   transform: scale(0);
   transform-origin: 50%;
   transition: transform 200ms ease-out;
@@ -267,13 +268,13 @@ virtual-scroll {
 .pure-checkbox input[type="checkbox"] + label:after{
   background-color: transparent;
   top: 50%;
-  left: 4px;
-  width: 8px;
-  height: 3px;
-  margin-top: -4px;
+  left: 3px;
+  width: 9px;
+  height: 4px;
+  margin-top: -5px;
   border-style: solid;
   border-color: #ffffff;
-  border-width: 0 0 3px 3px;
+  border-width: 0 0 2px 2px;
   border-image: none;
   transform: rotate(-45deg) scale(0);
 }

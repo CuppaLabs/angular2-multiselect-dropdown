@@ -273,6 +273,10 @@ The following list of settings are supported by the component. Configure the set
     Example : (onScrollToEnd)="fetchMore($event)"
 - `onAddFilterNewItem` - Callback event fired when you click the `Add` button which will appear when `addNewItemOnFilter` setting is enabled.
     Example : (onAddFilterNewItem)="onAddItem($event)"
+- `onFilterSelectAll` - Callback event fired when the list is filtered and all filtered items are selected with select all filtered items checkbox.
+    Example : (onFilterSelectAll)="onFilterSelectAll($event)"
+- `onFilterDeSelectAll` - Callback event fired when the list is filtered and all filtered items are de-selected with de-select all filtered items checkbox.
+    Example : (onFilterDeSelectAll)="onFilterDeSelectAll($event)"
 
 ## Run locally
 - Clone the repository or downlod the .zip,.tar files.

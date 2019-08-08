@@ -31,6 +31,7 @@
     "@angular/platform-browser": "^8.0.3",
     "@angular/platform-browser-dynamic": "^8.0.3",
     "@angular/router": "^8.0.3",
+    "@tweenjs/tween.js": "^17.4.0",
     "core-js": "^2.5.4",
     "highlight.js": "^9.15.8",
     "ngx-highlightjs": "^3.0.3",
