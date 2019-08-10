@@ -35,3 +35,7 @@
 .nav-wrapper {
     padding: 0px 10px;
 }
+.list-group-item {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}

@@ -10,9 +10,11 @@ virtual-scroll {
     border-width: 1px;
     line-height: 1.25;
     border-radius: 3px;
-    font-size: 14px;
+    font-size: 0.85rem;
     padding: 5px 10px;
     cursor: pointer;
+    align-items: center;
+    min-height: 38px;
 }
 .c-btn.disabled{
     background: #ccc;
@@ -25,7 +27,7 @@ virtual-scroll {
         width: calc(100% - 20px);
         .c-token{
             list-style: none;  
-            padding: 2px 8px;
+            padding: 4px 8px;
             /*background: $base-color; */
             /*color: $token-color;*/
             border-radius: 2px;
@@ -33,7 +35,7 @@ virtual-scroll {
             margin-top: 2px;
             float: left;
             position: relative;
-            padding-right: 25px;
+            padding-right: 22px;
             .c-label{
                 display: block;
                 float: left;
@@ -43,7 +45,7 @@ virtual-scroll {
                 right: 8px;
                 top: 50%;
                 transform: translateY(-50%);
-                width: 10px;
+                width: 8px;
                 svg {
                     fill: #fff;
                 }
@@ -59,8 +61,8 @@ virtual-scroll {
         transform: translateY(-50%);
     }
     .c-angle-down, .c-angle-up{
-        width: 15px;
-        height:15px;
+        width: 12px;
+        height:12px;
         position: absolute;
         right: 10px;
         top: 50%;
@@ -79,7 +81,7 @@ virtual-scroll {
     .c-btn{
         width: 100%;
 /*        box-shadow: 0px 1px 5px $box-shadow-color;
-*/        padding: 10px;
+*/        padding: 5px 10px;
         cursor: pointer;
         display: flex;
         position: relative;
@@ -348,4 +350,10 @@ virtual-scroll {
 }
 .btn-iceblue {
     
+}
+.clear-all {
+    width: 8px;
+    position: absolute;
+    top: 10px;
+    right: 30px;
 }

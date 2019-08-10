@@ -11,8 +11,10 @@ body{
     margin: 0px !important;
 }
 .example-title{
-    border-bottom: 2px solid #ccc;
-    margin-bottom: 75px;
+    border-bottom: 1px solid #ccc;
+    margin: 10px 0 50px 0;
+    padding-bottom: 10px;
+    font-size: 1.25rem;
 }
 .row{
     margin: 0px !important;
@@ -8954,7 +8956,7 @@ pre {
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-thumb {

@@ -58,6 +58,9 @@ export class GroupByExample implements OnInit {
   onGroupDeSelect(deselectedGroupItem){
     console.log(deselectedGroupItem);
   }
+  onChange(e:any){
+console.log(e)
+  }
   loadDataSet1(){
     this.selectedItems = [];
     this.itemList = [ { "id": 1, "itemName": "Apple", "category": "fruits" },

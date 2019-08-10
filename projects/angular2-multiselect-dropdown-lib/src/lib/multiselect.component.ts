@@ -795,6 +795,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.dropdownListYOffset = 0;
         }
     }
+    clearSelection(e: any){
+this.selectedItems = [];
+    }
 }
 
 @NgModule({
