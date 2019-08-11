@@ -8,7 +8,7 @@ import { ListFilterPipe } from './list-filter';
 import { Item, Badge, Search, TemplateRenderer, CIcon } from './menu-item';
 import { DataService } from './multiselect.service';
 import { Subscription, Subject  } from 'rxjs';
-import { VirtualScrollerModule, VirtualScrollerComponent } from 'ngx-virtual-scroller';
+import { VirtualScrollerModule, VirtualScrollerComponent } from './virtual-scroll/virtual-scroll';
 import { map, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators'; 
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {

@@ -24,18 +24,18 @@ import { isPlatformServer } from '@angular/common';
 import { CommonModule } from '@angular/common';
 
 import * as tween from '@tweenjs/tween.js'
+import { VirtualScrollerDefaultOptions } from './defaultoptions';
+import { IPageInfo } from './ipageinfo';
+import { IViewport } from './iviewport';
 
-export interface VirtualScrollerDefaultOptions {
-	scrollThrottlingTime: number;
-	scrollDebounceTime: number;
-	scrollAnimationTime: number;
-	scrollbarWidth?: number;
-	scrollbarHeight?: number;
-	checkResizeInterval: number
-	resizeBypassRefreshThreshold: number,
-	modifyOverflowStyleOfParentScroll: boolean,
-	stripedTable: boolean
-}
+import { WrapGroupDimensions } from './wrapgroupdimensions';
+import { WrapGroupDimension } from './wrapgroupdimension';
+
+import { IDimensions } from './idimension';
+
+ 
+
+
 
 export function VIRTUAL_SCROLLER_DEFAULT_OPTIONS_FACTORY(): VirtualScrollerDefaultOptions {
 	return {
@@ -49,49 +49,18 @@ export function VIRTUAL_SCROLLER_DEFAULT_OPTIONS_FACTORY(): VirtualScrollerDefau
 	};
 }
 
-export interface WrapGroupDimensions {
-	numberOfKnownWrapGroupChildSizes: number;
-	sumOfKnownWrapGroupChildWidths: number;
-	sumOfKnownWrapGroupChildHeights: number;
-	maxChildSizePerWrapGroup: WrapGroupDimension[];
-}
 
-export interface WrapGroupDimension {
-	childWidth: number;
-	childHeight: number;
-	items: any[];
-}
 
-export interface IDimensions {
-	itemCount: number;
-	itemsPerWrapGroup: number;
-	wrapGroupsPerPage: number;
-	itemsPerPage: number;
-	pageCount_fractional: number;
-	childWidth: number;
-	childHeight: number;
-	scrollLength: number;
-	viewportLength: number;
-	maxScrollPosition: number;
-}
 
-export interface IPageInfo {
-	startIndex: number;
-	endIndex: number;
-	scrollStartPosition: number;
-	scrollEndPosition: number;
-	startIndexWithBuffer: number;
-	endIndexWithBuffer: number;
-	maxScrollPosition: number;
-}
 
-export interface IViewport extends IPageInfo {
-	padding: number;
-	scrollLength: number;
-}
+
+
+
+
+
 
 @Component({
-	selector: 'virtual-scroll,[virtualScroll]',
+	selector: 'virtual-scroller,[virtualScroller]',
 	exportAs: 'virtualScroller',
 	template: `
     <div class="total-padding" #invisiblePadding></div>
@@ -584,7 +553,7 @@ export class VirtualScrollerComponent implements OnInit, OnChanges, OnDestroy {
 		protected changeDetectorRef: ChangeDetectorRef,
 		@Inject(PLATFORM_ID) platformId: Object,
 		@Optional() @Inject('virtual-scroller-default-options')
-		options: any) {
+		options: VirtualScrollerDefaultOptions) {
 			
 		this.isAngularUniversalSSR = isPlatformServer(platformId);
 
