@@ -148,10 +148,9 @@
             </ul>
         </div>
         <div *ngIf="!settings.groupBy && settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
-            <virtual-scroller [items]="data" (vsUpdate)="viewPortItems = $event" (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}">
-
-                <ul class="lazyContainer">
-                    <li *ngFor="let item of viewPortItems | listFilter:filter : settings.searchBy; let i = index;" (click)="onItemClick(item,i,$event)"
+                <ul virtualScroller #scroll2 [enableUnequalChildrenSizes]="randomSize" [items]="virtualdata" (vsStart)="onScrollEnd($event)"
+                (vsEnd)="onScrollEnd($event)" class="lazyContainer" [ngStyle]="{'height': settings.maxHeight+'px'}">
+                    <li *ngFor="let item of scroll2.viewPortItems; let i = index;" (click)="onItemClick(item,i,$event)"
                         class="pure-checkbox" [ngClass]="{'selected-item': isSelected(item) == true }">
                         <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                         />
@@ -159,12 +158,11 @@
                         <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
                     </li>
                 </ul>
-            </virtual-scroller>
         </div>
         <div *ngIf="settings.groupBy && settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
-            <virtual-scroller [items]="groupedData" (vsUpdate)="viewPortItems = $event" (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}">
-            <ul class="lazyContainer">
-                <span *ngFor="let item of viewPortItems | listFilter:filter : settings.searchBy; let i = index;">
+            <ul virtualScroller #scroll3 [enableUnequalChildrenSizes]="randomSize" [items]="virtualdata" (vsStart)="onScrollEnd($event)"
+            (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}" class="lazyContainer">
+                <span *ngFor="let item of scroll3.viewPortItems; let i = index;">
                 <li (click)="onItemClick(item,i,$event)" *ngIf="!item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle && !settings.singleSelection}" class="pure-checkbox">
                     <input *ngIf="settings.showCheckbox && !settings.singleSelection" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                     />
@@ -179,7 +177,6 @@
                 </li>
                 </span>
             </ul>
-            </virtual-scroller>
         </div>
         <div *ngIf="settings.groupBy && !settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
             <ul class="lazyContainer">
@@ -205,8 +202,9 @@
         </div>
         <div *ngIf="settings.groupBy && settings.lazyLoading && itemTempl == undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
             <virtual-scroller [items]="groupedData" (vsUpdate)="viewPortItems = $event" (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}">
-                <ul class="lazyContainer">
-                    <span *ngFor="let item of viewPortItems; let i = index;">
+                <ul virtualScroller #scroll4 [enableUnequalChildrenSizes]="randomSize" [items]="virtualdata" (vsStart)="onScrollEnd($event)"
+                (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}" class="lazyContainer">
+                    <span *ngFor="let item of scroll4.viewPortItems; let i = index;">
                 <li  *ngIf="item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle && !settings.singleSelection, 'selected-item': isSelected(item) == true }" class="pure-checkbox">
                     <input *ngIf="settings.showCheckbox && !item.grpTitle && !settings.singleSelection" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                     />
