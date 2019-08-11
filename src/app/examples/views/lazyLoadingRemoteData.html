@@ -1,7 +1,5 @@
 <h2 class="example-title">{{title}}</h2>
 <div class="row">
-    <div class="col-md-3 mr-auto ml-auto dropdown-container">
-    </div>
 <div class="col-md-8 mr-auto ml-auto dropdown-container">
     <angular2-multiselect [data]="itemList" 
                           [(ngModel)]="selectedItems" 
@@ -16,7 +14,7 @@
 <br>
 <span>Total Records : {{itemList.length}}</span>
 </div>
-<div class="col-md-3 mr-auto ml-auto dropdown-container">
+<div class="col-md-4 mr-auto ml-auto dropdown-container">
             <button (click)="changeData()" class="btn btn-danger">Reset</button>
 </div>
 </div>

@@ -77,7 +77,7 @@
                 <input class="c-input" *ngIf="!settings.groupBy && !settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
                 [(ngModel)]="filter" >
             <input class="c-input" *ngIf="settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
-                [(ngModel)]="filter" (keyup)="filterInfiniteList($event)">
+                [(ngModel)]="filter" (keyup)="searchTerm$.next($event.target.value)">
             <!--            <input class="c-input" *ngIf="!settings.lazyLoading && !searchTempl && settings.groupBy" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
                 [(ngModel)]="filter" (keyup)="filterGroupList($event)">-->
             <c-templateRenderer *ngIf="searchTempl" [data]="searchTempl" [item]="item"></c-templateRenderer>
@@ -126,16 +126,15 @@
             </ul>
         </div>
         <div *ngIf="!settings.groupBy && settings.lazyLoading && itemTempl == undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
-            <virtual-scroll [items]="data" (vsUpdate)="viewPortItems = $event" (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}">
-                <ul class="lazyContainer">
-                    <li *ngFor="let item of viewPortItems | listFilter:filter : settings.searchBy; let i = index;" (click)="onItemClick(item,i,$event)"
+                <ul virtualScroller #scroll [enableUnequalChildrenSizes]="randomSize" [items]="virtualdata" (vsStart)="onScrollEnd($event)"
+                (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}" class="lazyContainer">
+                    <li *ngFor="let item of scroll.viewPortItems; let i = index;" (click)="onItemClick(item,i,$event)"
                         class="pure-checkbox" [ngClass]="{'selected-item': isSelected(item) == true }">
                         <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="settings.limitSelection == selectedItems?.length && !isSelected(item)"
                         />
                         <label>{{item[settings.labelKey]}}</label>
                     </li>
                 </ul>
-            </virtual-scroll>
         </div>
         <div *ngIf="!settings.groupBy && !settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
             <ul class="lazyContainer">
@@ -149,7 +148,7 @@
             </ul>
         </div>
         <div *ngIf="!settings.groupBy && settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
-            <virtual-scroll [items]="data" (vsUpdate)="viewPortItems = $event" (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}">
+            <virtual-scroller [items]="data" (vsUpdate)="viewPortItems = $event" (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}">
 
                 <ul class="lazyContainer">
                     <li *ngFor="let item of viewPortItems | listFilter:filter : settings.searchBy; let i = index;" (click)="onItemClick(item,i,$event)"
@@ -160,10 +159,10 @@
                         <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
                     </li>
                 </ul>
-            </virtual-scroll>
+            </virtual-scroller>
         </div>
         <div *ngIf="settings.groupBy && settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
-            <virtual-scroll [items]="groupedData" (vsUpdate)="viewPortItems = $event" (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}">
+            <virtual-scroller [items]="groupedData" (vsUpdate)="viewPortItems = $event" (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}">
             <ul class="lazyContainer">
                 <span *ngFor="let item of viewPortItems | listFilter:filter : settings.searchBy; let i = index;">
                 <li (click)="onItemClick(item,i,$event)" *ngIf="!item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle && !settings.singleSelection}" class="pure-checkbox">
@@ -180,7 +179,7 @@
                 </li>
                 </span>
             </ul>
-            </virtual-scroll>
+            </virtual-scroller>
         </div>
         <div *ngIf="settings.groupBy && !settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
             <ul class="lazyContainer">
@@ -205,7 +204,7 @@
             </ul>
         </div>
         <div *ngIf="settings.groupBy && settings.lazyLoading && itemTempl == undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
-            <virtual-scroll [items]="groupedData" (vsUpdate)="viewPortItems = $event" (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}">
+            <virtual-scroller [items]="groupedData" (vsUpdate)="viewPortItems = $event" (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}">
                 <ul class="lazyContainer">
                     <span *ngFor="let item of viewPortItems; let i = index;">
                 <li  *ngIf="item.grpTitle" [ngClass]="{'grp-title': item.grpTitle,'grp-item': !item.grpTitle && !settings.singleSelection, 'selected-item': isSelected(item) == true }" class="pure-checkbox">
@@ -220,7 +219,7 @@
                 </li>
                 </span>
                 </ul>
-            </virtual-scroll>
+            </virtual-scroller>
         </div>
         <div *ngIf="settings.groupBy && !settings.lazyLoading && itemTempl == undefined" [style.maxHeight]="settings.maxHeight+'px'" style="overflow: auto;">
             <ul class="lazyContainer">

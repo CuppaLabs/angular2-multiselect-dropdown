@@ -17,7 +17,7 @@ export class LazyLoadingExample implements OnInit {
         for(var t=1;t<=1000;t++){
          var tempObj = {"id":0,"itemName":"","category":""};
          tempObj.id = t;
-         tempObj.itemName= this.namesList[Math.floor(Math.random()*this.namesList.length)];
+         tempObj.itemName= t+'--'+this.namesList[Math.floor(Math.random()*this.namesList.length)];
          tempObj.category= this.categories[Math.floor(Math.random()*this.categories.length)];
         this.itemList.push(tempObj);
        }
@@ -59,7 +59,7 @@ export class LazyLoadingExample implements OnInit {
     this.selectedItems = [];
   }
   cssgist: boolean = false;
-    title: string = "Lazy loading - Handle large data sets";
+    title: string = "Virtual scrolling - Lazy load large data sets";
     tsgist: string = "CuppaLabs/aab6c8b30a6901af01249c474f3f0cbd";
     htmlgist: string = "CuppaLabs/c77fea947ef053aa22973fcd9c7c612a";
     tstitle: string = "lazyLoading.ts"

@@ -1,12 +1,16 @@
 .left-sidebar {
     position: fixed;
-    top: 57px;
+    top: 65px;
     height: calc(100vh - 75px);
-    overflow: auto;
     padding-right: 0px;
+    overflow: hidden;
 }
 .left-sidebar, .right-sidebar {
-    width: 265px;
+    width: 260px;
+}
+.left-sidebar:hover {
+    overflow: auto;
+
 }
 
 .outer-wrapper {

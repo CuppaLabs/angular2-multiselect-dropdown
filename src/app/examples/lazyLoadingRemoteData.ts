@@ -50,7 +50,7 @@ export class LazyLoadingRemoteDataExample implements OnInit {
         console.log(this.itemList);
     }
     fetchMore(event: any) {
-        if (event.end === this.itemList.length - 1) {
+        if (event.endIndex === this.itemList.length - 1) {
             this.loading = true;
             this.appService.getChunkData(this.itemList.length, this.bufferSize).then(chunk => {
                 this.itemList = this.itemList.concat(chunk);

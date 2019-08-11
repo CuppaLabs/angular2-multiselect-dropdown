@@ -86,7 +86,7 @@ h4{
     background: #38d574 !important;
 }
 .outer-wrapper {
-    margin-top: 57px;
+    margin-top: 65px;
 }
 .dropdown-container {
     height: 170px;
@@ -3295,7 +3295,7 @@ tbody.collapse.show {
     justify-content: space-between;
     padding: .5rem 1rem;
     background-color: #fff;
-    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28)
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 1px 10px rgba(0,0,0,.28)
 }
 
 .navbar>.container,.navbar>.container-fluid {
@@ -3314,7 +3314,7 @@ tbody.collapse.show {
     min-width: 235px;
     padding-top: .3125rem;
     padding-bottom: .3125rem;
-    margin-right: 1rem;
+    margin-right: 0rem;
     font-size: 1.25rem;
     line-height: inherit;
     white-space: nowrap
@@ -8788,7 +8788,6 @@ body {
 
 .top-navbar {
     padding: 0px 15px;
-    min-height: 56px;
     position: fixed;
     top: 0;
     right: 0;
@@ -8796,8 +8795,7 @@ body {
     z-index: 99999;
 }
 .top-navbar .nav-item > .nav-link {
-    border-bottom: 2px solid transparent;
-    padding: 15px 15px;
+    padding: 20px 15px;
 }
 
 .top-navbar .nav-item.active > .nav-link {
@@ -12863,4 +12861,14 @@ li.L1,li.L3,li.L5,li.L7,li.L9 {
 }
 .right-sidebar {
     max-width: 315px;
+}
+.component-title{
+    background: #f3f3f3;
+    color: #333 !important;
+    font-size: 1rem;
+    padding: 15px 15px !important;
+    line-height: 31px;
+}
+.img-nav-item {
+    padding: 0px !important;
 }
