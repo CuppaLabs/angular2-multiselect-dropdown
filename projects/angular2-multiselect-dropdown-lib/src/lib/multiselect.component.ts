@@ -25,7 +25,6 @@ const noop = () => {
 };
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'angular2-multiselect',
     templateUrl: './multiselect.component.html',
     host: { '[class]': 'defaultSettings.classes' },
