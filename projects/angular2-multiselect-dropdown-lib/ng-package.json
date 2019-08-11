@@ -3,5 +3,8 @@
   "dest": "../../dist/angular2-multiselect-dropdown",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "@tweenjs/tween.js"
+  ]
 }
