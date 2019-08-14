@@ -154,7 +154,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         selectGroup: false,
         addNewItemOnFilter: false,
         addNewButtonText: "Add",
-        escapeToClose: true
+        escapeToClose: true,
+        clearAll: true
     }
     randomSize:boolean = true;
     public parseError: boolean;
@@ -818,6 +819,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     clearSelection(e: any) {
         this.selectedItems = [];
+        this.onDeSelectAll.emit(this.selectedItems);
     }
 }
 

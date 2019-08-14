@@ -17,7 +17,7 @@ export class LazyLoadingExample implements OnInit {
         for(var t=1;t<=1000;t++){
          var tempObj = {"id":0,"itemName":"","category":""};
          tempObj.id = t;
-         tempObj.itemName= t+'--'+this.namesList[Math.floor(Math.random()*this.namesList.length)];
+         tempObj.itemName= this.namesList[Math.floor(Math.random()*this.namesList.length)];
          tempObj.category= this.categories[Math.floor(Math.random()*this.categories.length)];
         this.itemList.push(tempObj);
        }

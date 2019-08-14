@@ -32,7 +32,7 @@
             </div>
         </div>
         <span class="countplaceholder" *ngIf="selectedItems?.length > settings.badgeShowLimit">+{{selectedItems?.length - settings.badgeShowLimit }}</span>
-        <span class="c-remove clear-all" *ngIf="selectedItems?.length > 0" (click)="clearSelection($event);$event.stopPropagation()">
+        <span class="c-remove clear-all" *ngIf="settings.clearAll && selectedItems?.length > 0" (click)="clearSelection($event);$event.stopPropagation()">
             <c-icon [name]="'remove'"></c-icon>
         </span>
         <span *ngIf="!isActive" class="c-angle-down">
@@ -59,8 +59,8 @@
                 <span [hidden]="isSelectAll">{{settings.selectAllText}}</span>
                 <span [hidden]="!isSelectAll">{{settings.unSelectAllText}}</span>
             </label>
-            <img class="loading-icon" *ngIf="loading" src="assets/img/loading.gif"/>
         </div>
+        <img class="loading-icon" *ngIf="loading" src="assets/img/loading.gif"/>
         <div class="list-filter" *ngIf="settings.enableSearchFilter">
             <span class="c-search">
                 <c-icon [name]="'search'"></c-icon>

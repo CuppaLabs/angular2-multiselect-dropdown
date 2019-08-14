@@ -29,4 +29,5 @@ export interface DropdownSettings{
     addNewButtonText?: string;
     escapeToClose?: boolean;
     autoPosition?: boolean;
+    clearAll?: boolean;
 } 

@@ -26,7 +26,7 @@ export class SingleSelectionExample implements OnInit {
     
     this.selectedItems = [
                           {"id":1,"itemName":"India","name":"IN"}];
-    this.settings = {singleSelection: true, text:"Select Country"};
+    this.settings = {singleSelection: true, text:"Select Country",clearAll:false};
   }
   onItemSelect(item:any){
     console.log(item);

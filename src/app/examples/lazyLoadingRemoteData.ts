@@ -25,7 +25,8 @@ export class LazyLoadingRemoteDataExample implements OnInit {
             classes: "myclass custom-class",
             enableSearchFilter: true,
             lazyLoading: true,
-            labelKey: 'name'
+            labelKey: 'name',
+            limitSelection: 3
 
         };
     }
