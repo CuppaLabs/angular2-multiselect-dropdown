@@ -275,7 +275,6 @@ virtual-scroll {
   height: 4px;
   margin-top: -5px;
   border-style: solid;
-  border-color: #ffffff;
   border-width: 0 0 2px 2px;
   border-image: none;
   transform: rotate(-45deg) scale(0);
@@ -337,7 +336,10 @@ virtual-scroll {
 }
 .loading-icon {
     width: 20px;
-    float: right;
+    position: absolute;
+    right: 10px;
+    top: 23px;
+    z-index: 1;
 }
 .nodata-label {
     width: 100%;
