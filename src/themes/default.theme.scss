@@ -108,6 +108,37 @@ $selected-background: #e9f4ff;
         background: $base-color;
     }
 }
+.single-select-mode .pure-checkbox {
+    input[type="checkbox"]:focus + label:before, input[type="checkbox"]:hover + label:before{
+        border-color: $base-color;
+        background-color: #f2f2f2;
+    }
+    input[type="checkbox"] + label{
+        color: $label-color;
+    }
+    input[type="checkbox"] + label:before{
+        color: transparent !important;
+        border: 0px solid $base-color;
+    }
+    input[type="checkbox"] + label:after{
+        background-color: transparent !important;
+    }
+    input[type="checkbox"]:disabled + label:before{
+        border-color: #cccccc;
+    }
+    input[type="checkbox"]:disabled:checked + label:before{
+        background-color: #cccccc;
+    }
+    input[type="checkbox"] + label:after{
+        border-color: $base-color;
+    }
+    input[type="radio"]:checked + label:before{
+        background-color: white;
+    }
+    input[type="checkbox"]:checked + label:before{
+        background: none !important;
+    }
+}
 .selected-item{
     background: $selected-background;
 }

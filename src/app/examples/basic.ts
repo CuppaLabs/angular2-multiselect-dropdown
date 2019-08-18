@@ -9,8 +9,11 @@ export class BasicExample implements OnInit {
     selectedItems = [];
     settings = {};
 
-    constructor(title: Title, meta: Meta) { 
-        title.setTitle('Basic example');
+    constructor(public seotitle: Title, public meta: Meta) { 
+        this.seotitle.setTitle('Basic example');
+        this.meta.addTags([
+            {name: 'description', content:'Basic example of angular multiselect drodown.'}
+        ]);
     }
     ngOnInit() {
 
