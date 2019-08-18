@@ -77,7 +77,7 @@ export function hljsLanguages() {
     UsingInListExample
     ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     ReactiveFormsModule,
     FormsModule,
     AppRouterModule,

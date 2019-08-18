@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Title, Meta } from '@angular/platform-browser';
 @Component({
     templateUrl: './views/view.html'
 })
@@ -9,7 +9,9 @@ export class BasicExample implements OnInit {
     selectedItems = [];
     settings = {};
 
-    constructor() { }
+    constructor(title: Title, meta: Meta) { 
+        title.setTitle('Basic example');
+    }
     ngOnInit() {
 
         this.itemList = [
