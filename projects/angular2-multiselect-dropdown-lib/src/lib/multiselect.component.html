@@ -32,7 +32,7 @@
             </div>
         </div>
         <span class="countplaceholder" *ngIf="selectedItems?.length > settings.badgeShowLimit">+{{selectedItems?.length - settings.badgeShowLimit }}</span>
-        <span class="c-remove clear-all" *ngIf="settings.clearAll && selectedItems?.length > 0" (click)="clearSelection($event);$event.stopPropagation()">
+        <span class="c-remove clear-all" *ngIf="settings.clearAll && selectedItems?.length > 0 && !settings.disabled" (click)="clearSelection($event);$event.stopPropagation()">
             <c-icon [name]="'remove'"></c-icon>
         </span>
         <span *ngIf="!isActive" class="c-angle-down">

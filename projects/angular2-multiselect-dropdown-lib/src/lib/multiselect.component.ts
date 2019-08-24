@@ -214,7 +214,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.settings = Object.assign(this.defaultSettings, this.settings);
         }
         if (changes.loading) {
-            console.log(this.loading);
         }
         if(this.settings.lazyLoading && this.virtualScroollInit && changes.data){
             this.virtualdata = changes.data.currentValue;
@@ -468,16 +467,28 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         this.groupedData = this.cloneArray(this.groupCachedItems);
         this.groupedData = this.groupedData.filter(obj => {
-            let arr = obj.list.filter(t => {
-                return t.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
-            });
-            obj.list = arr;
-            return arr.some(cat => {
-                return cat.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
+            let arr = [];
+            if(obj.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1){
+                arr = obj.list;
+            }   
+            else {
+                arr = obj.list.filter(t => {
+                    return t.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
+                });
             }
-            )
+            
+            obj.list = arr;
+            if(obj.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1){
+                return arr;
+            }
+            else {
+                return arr.some(cat => {
+                    return cat.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
+                }
+                )
+            }
+
         });
-        console.log(this.groupedData);
     }
     toggleFilterSelectAll() {
         if (!this.isFilterSelectAll) {
@@ -560,9 +571,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     clearSearch() {
         if (this.settings.groupBy) {
             this.groupedData = [];
-            this.groupCachedItems.forEach((obj) => {
-                obj.selected = false;
-            })
             this.groupedData = this.cloneArray(this.groupCachedItems);
         }
         this.filter = "";
@@ -821,6 +829,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
     }
     clearSelection(e: any) {
+        if (this.settings.groupBy) {
+            this.groupCachedItems.forEach((obj) => {
+                obj.selected = false;
+            })
+        }
         this.clearSearch();
         this.selectedItems = [];
         this.onDeSelectAll.emit(this.selectedItems);
