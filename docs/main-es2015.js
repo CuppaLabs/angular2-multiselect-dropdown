@@ -727,6 +727,7 @@ class AngularMultiSelect {
                 if (this.data.length == 0) {
                     this.selectedItems = [];
                 }
+                this.groupCachedItems = this.cloneArray(this.groupedData);
             }
             this.cachedItems = this.cloneArray(this.data);
         }
@@ -978,21 +979,21 @@ class AngularMultiSelect {
         this.groupedData = this.cloneArray(this.groupCachedItems);
         this.groupedData = this.groupedData.filter(obj => {
             let arr = [];
-            if (obj.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1) {
+            if (obj[this.settings.labelKey].toLowerCase().indexOf(this.filter.toLowerCase()) > -1) {
                 arr = obj.list;
             }
             else {
                 arr = obj.list.filter(t => {
-                    return t.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
+                    return t[this.settings.labelKey].toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
                 });
             }
             obj.list = arr;
-            if (obj.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1) {
+            if (obj[this.settings.labelKey].toLowerCase().indexOf(this.filter.toLowerCase()) > -1) {
                 return arr;
             }
             else {
                 return arr.some(cat => {
-                    return cat.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
+                    return cat[this.settings.labelKey].toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
                 });
             }
         });
@@ -1001,16 +1002,23 @@ class AngularMultiSelect {
         if (!this.isFilterSelectAll) {
             let added = [];
             if (this.settings.groupBy) {
-                this.groupedData.forEach((item) => {
-                    if (item.list) {
-                        item.list.forEach((el) => {
-                            if (!this.isSelected(el)) {
-                                this.addSelected(el);
-                                added.push(el);
-                            }
-                        });
+                /*                 this.groupedData.forEach((item: any) => {
+                                    if (item.list) {
+                                        item.list.forEach((el: any) => {
+                                            if (!this.isSelected(el)) {
+                                                this.addSelected(el);
+                                                added.push(el);
+                                            }
+                                        });
+                                    }
+                                    this.updateGroupInfo(item);
+                
+                                }); */
+                this.ds.getFilteredData().forEach((el) => {
+                    if (!this.isSelected(el) && !el.hasOwnProperty('grpTitle')) {
+                        this.addSelected(el);
+                        added.push(el);
                     }
-                    this.updateGroupInfo(item);
                 });
             }
             else {
@@ -1027,14 +1035,20 @@ class AngularMultiSelect {
         else {
             let removed = [];
             if (this.settings.groupBy) {
-                this.groupedData.forEach((item) => {
-                    if (item.list) {
-                        item.list.forEach((el) => {
-                            if (this.isSelected(el)) {
-                                this.removeSelected(el);
-                                removed.push(el);
-                            }
-                        });
+                /*                 this.groupedData.forEach((item: any) => {
+                                    if (item.list) {
+                                        item.list.forEach((el: any) => {
+                                            if (this.isSelected(el)) {
+                                                this.removeSelected(el);
+                                                removed.push(el);
+                                            }
+                                        });
+                                    }
+                                }); */
+                this.ds.getFilteredData().forEach((el) => {
+                    if (this.isSelected(el)) {
+                        this.removeSelected(el);
+                        removed.push(el);
                     }
                 });
             }
@@ -5329,6 +5343,7 @@ class RemoteDataExample {
             classes: "myclass custom-class",
             primaryKey: "alpha3Code",
             labelKey: "name",
+            groupBy: 'region',
             enableSearchFilter: true,
             searchBy: ['name', 'capital']
         };

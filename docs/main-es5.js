@@ -752,6 +752,7 @@ var AngularMultiSelect = /** @class */ (function () {
                 if (this.data.length == 0) {
                     this.selectedItems = [];
                 }
+                this.groupCachedItems = this.cloneArray(this.groupedData);
             }
             this.cachedItems = this.cloneArray(this.data);
         }
@@ -1008,21 +1009,21 @@ var AngularMultiSelect = /** @class */ (function () {
         this.groupedData = this.cloneArray(this.groupCachedItems);
         this.groupedData = this.groupedData.filter(function (obj) {
             var arr = [];
-            if (obj.itemName.toLowerCase().indexOf(_this.filter.toLowerCase()) > -1) {
+            if (obj[_this.settings.labelKey].toLowerCase().indexOf(_this.filter.toLowerCase()) > -1) {
                 arr = obj.list;
             }
             else {
                 arr = obj.list.filter(function (t) {
-                    return t.itemName.toLowerCase().indexOf(_this.filter.toLowerCase()) > -1;
+                    return t[_this.settings.labelKey].toLowerCase().indexOf(_this.filter.toLowerCase()) > -1;
                 });
             }
             obj.list = arr;
-            if (obj.itemName.toLowerCase().indexOf(_this.filter.toLowerCase()) > -1) {
+            if (obj[_this.settings.labelKey].toLowerCase().indexOf(_this.filter.toLowerCase()) > -1) {
                 return arr;
             }
             else {
                 return arr.some(function (cat) {
-                    return cat.itemName.toLowerCase().indexOf(_this.filter.toLowerCase()) > -1;
+                    return cat[_this.settings.labelKey].toLowerCase().indexOf(_this.filter.toLowerCase()) > -1;
                 });
             }
         });
@@ -1032,16 +1033,23 @@ var AngularMultiSelect = /** @class */ (function () {
         if (!this.isFilterSelectAll) {
             var added_1 = [];
             if (this.settings.groupBy) {
-                this.groupedData.forEach(function (item) {
-                    if (item.list) {
-                        item.list.forEach(function (el) {
-                            if (!_this.isSelected(el)) {
-                                _this.addSelected(el);
-                                added_1.push(el);
-                            }
-                        });
+                /*                 this.groupedData.forEach((item: any) => {
+                                    if (item.list) {
+                                        item.list.forEach((el: any) => {
+                                            if (!this.isSelected(el)) {
+                                                this.addSelected(el);
+                                                added.push(el);
+                                            }
+                                        });
+                                    }
+                                    this.updateGroupInfo(item);
+                
+                                }); */
+                this.ds.getFilteredData().forEach(function (el) {
+                    if (!_this.isSelected(el) && !el.hasOwnProperty('grpTitle')) {
+                        _this.addSelected(el);
+                        added_1.push(el);
                     }
-                    _this.updateGroupInfo(item);
                 });
             }
             else {
@@ -1058,14 +1066,20 @@ var AngularMultiSelect = /** @class */ (function () {
         else {
             var removed_1 = [];
             if (this.settings.groupBy) {
-                this.groupedData.forEach(function (item) {
-                    if (item.list) {
-                        item.list.forEach(function (el) {
-                            if (_this.isSelected(el)) {
-                                _this.removeSelected(el);
-                                removed_1.push(el);
-                            }
-                        });
+                /*                 this.groupedData.forEach((item: any) => {
+                                    if (item.list) {
+                                        item.list.forEach((el: any) => {
+                                            if (this.isSelected(el)) {
+                                                this.removeSelected(el);
+                                                removed.push(el);
+                                            }
+                                        });
+                                    }
+                                }); */
+                this.ds.getFilteredData().forEach(function (el) {
+                    if (_this.isSelected(el)) {
+                        _this.removeSelected(el);
+                        removed_1.push(el);
                     }
                 });
             }
@@ -5479,6 +5493,7 @@ var RemoteDataExample = /** @class */ (function () {
             classes: "myclass custom-class",
             primaryKey: "alpha3Code",
             labelKey: "name",
+            groupBy: 'region',
             enableSearchFilter: true,
             searchBy: ['name', 'capital']
         };

@@ -26,6 +26,7 @@ export class RemoteDataExample implements OnInit {
             classes: "myclass custom-class",
             primaryKey: "alpha3Code",
             labelKey: "name",
+            groupBy:'region',
             enableSearchFilter: true,
             searchBy: ['name','capital']
         };

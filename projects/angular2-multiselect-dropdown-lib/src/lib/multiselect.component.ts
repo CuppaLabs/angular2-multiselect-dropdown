@@ -10,6 +10,7 @@ import { DataService } from './multiselect.service';
 import { Subscription, Subject  } from 'rxjs';
 import { VirtualScrollerModule, VirtualScrollerComponent } from './virtual-scroll/virtual-scroll';
 import { map, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators'; 
+import { ThrowStmt } from '@angular/compiler';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -207,6 +208,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 if (this.data.length == 0) {
                     this.selectedItems = [];
                 }
+                this.groupCachedItems = this.cloneArray(this.groupedData);
             }
             this.cachedItems = this.cloneArray(this.data);
         }
@@ -468,22 +470,22 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.groupedData = this.cloneArray(this.groupCachedItems);
         this.groupedData = this.groupedData.filter(obj => {
             let arr = [];
-            if(obj.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1){
+            if(obj[this.settings.labelKey].toLowerCase().indexOf(this.filter.toLowerCase()) > -1){
                 arr = obj.list;
             }   
             else {
                 arr = obj.list.filter(t => {
-                    return t.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
+                    return t[this.settings.labelKey].toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
                 });
             }
             
             obj.list = arr;
-            if(obj.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1){
+            if(obj[this.settings.labelKey].toLowerCase().indexOf(this.filter.toLowerCase()) > -1){
                 return arr;
             }
             else {
                 return arr.some(cat => {
-                    return cat.itemName.toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
+                    return cat[this.settings.labelKey].toLowerCase().indexOf(this.filter.toLowerCase()) > -1;
                 }
                 )
             }
@@ -494,7 +496,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         if (!this.isFilterSelectAll) {
             let added = [];
             if (this.settings.groupBy) {
-                this.groupedData.forEach((item: any) => {
+/*                 this.groupedData.forEach((item: any) => {
                     if (item.list) {
                         item.list.forEach((el: any) => {
                             if (!this.isSelected(el)) {
@@ -505,6 +507,13 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                     }
                     this.updateGroupInfo(item);
 
+                }); */
+
+                this.ds.getFilteredData().forEach((el: any) => {
+                    if (!this.isSelected(el) && !el.hasOwnProperty('grpTitle')) {
+                        this.addSelected(el);
+                        added.push(el);
+                    }
                 });
 
             }
@@ -524,7 +533,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         else {
             let removed = [];
             if (this.settings.groupBy) {
-                this.groupedData.forEach((item: any) => {
+/*                 this.groupedData.forEach((item: any) => {
                     if (item.list) {
                         item.list.forEach((el: any) => {
                             if (this.isSelected(el)) {
@@ -532,6 +541,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                                 removed.push(el);
                             }
                         });
+                    }
+                }); */
+                this.ds.getFilteredData().forEach((el: any) => {
+                    if (this.isSelected(el)) {
+                        this.removeSelected(el);
+                        removed.push(el);
                     }
                 });
             }
