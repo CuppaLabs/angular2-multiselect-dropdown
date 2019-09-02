@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LogUpdateService } from './log-update.service';
+import { SwUpdate } from '@angular/service-worker';
 import { CheckForUpdateService } from './check-for-update.service';
 @Component({
   selector: 'app-root',
@@ -41,8 +41,18 @@ export class AppComponent implements OnInit {
   templatingExampleSelectedItems = [];
   templatingExampleSettings = {};
 
-  constructor(public swUpdates: LogUpdateService){
-    
+  constructor(public updates: SwUpdate, private checkForUpdateService: CheckForUpdateService){
+    this.updates.available.subscribe((event) => {
+      this.updateToLatest();
+    });
+    this.updates.activated.subscribe(event => {
+      console.log('old version was', event.previous);
+      console.log('new version is', event.current);
+    });
+  }
+  updateToLatest(): void {
+    console.log('Updating to latest version.');
+    this.updates.activateUpdate().then(() => document.location.reload());
   }
   ngOnInit(){
     this.singleSelectionList = [
