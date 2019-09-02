@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1567425130164,
+  "timestamp": 1567440785730,
   "index": "/angular2-multiselect-dropdown/index.html",
   "assetGroups": [
     {
@@ -10,8 +10,8 @@
       "urls": [
         "/angular2-multiselect-dropdown/favicon.ico",
         "/angular2-multiselect-dropdown/index.html",
-        "/angular2-multiselect-dropdown/main-es2015.b3341aa9b81e673b203e.js",
-        "/angular2-multiselect-dropdown/main-es5.2f2a1b85907a2313d019.js",
+        "/angular2-multiselect-dropdown/main-es2015.b92d8f8ef8769b81ea90.js",
+        "/angular2-multiselect-dropdown/main-es5.511345c709c34600133d.js",
         "/angular2-multiselect-dropdown/polyfills-es2015.444f9ad7571234916d9d.js",
         "/angular2-multiselect-dropdown/polyfills-es5.89e5d8af723470f72102.js",
         "/angular2-multiselect-dropdown/runtime-es2015.858f8dd898b75fe86926.js",
@@ -75,11 +75,11 @@
     "/angular2-multiselect-dropdown/color.c7a33805ffda0d32bd2a.png": "ff4c4bcb2207891b292f544edb4da9d2df5d45cf",
     "/angular2-multiselect-dropdown/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/angular2-multiselect-dropdown/hue.0614c27197fc3ce572e1.png": "f81ae627637a684614aa726e206c73ce099a01fd",
-    "/angular2-multiselect-dropdown/index.html": "74c9d91a7954e9e0340554887962a53420a1cb38",
+    "/angular2-multiselect-dropdown/index.html": "37855c337af4f993e37d014a75bff8fd18bb72b6",
     "/angular2-multiselect-dropdown/line.567f57385ea3dde2c9ae.gif": "a2af20bd160ca9cfc2c85527663ff7429267519a",
     "/angular2-multiselect-dropdown/loading.8732a6660b528fadfaeb.gif": "72998a116936156dc7cace0606dab499fe4f3ce8",
-    "/angular2-multiselect-dropdown/main-es2015.b3341aa9b81e673b203e.js": "a187b09f1fa17cacf4053b0b0473359ab98e4930",
-    "/angular2-multiselect-dropdown/main-es5.2f2a1b85907a2313d019.js": "d8e5b50f99311cffe89c7a7c16aa954ad171c636",
+    "/angular2-multiselect-dropdown/main-es2015.b92d8f8ef8769b81ea90.js": "1768090e30bc929091fe95a9244c9b62931e1543",
+    "/angular2-multiselect-dropdown/main-es5.511345c709c34600133d.js": "46d528fd790581551da490b1dfdb90d33218522a",
     "/angular2-multiselect-dropdown/password-meter.d59e6dc2616c53ce8e77.png": "e0e101bd2a1cbda41398b48a4ab1792d89cb7334",
     "/angular2-multiselect-dropdown/polyfills-es2015.444f9ad7571234916d9d.js": "77f974dd2b186031cfc4f4526d96db4efcd39353",
     "/angular2-multiselect-dropdown/polyfills-es5.89e5d8af723470f72102.js": "589b38f3973ebdf4aa99760757da7b3a939dbb54",

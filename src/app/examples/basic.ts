@@ -38,7 +38,8 @@ export class BasicExample implements OnInit {
             selectAllText: 'Select All',
             unSelectAllText: 'UnSelect All',
             classes: "myclass custom-class",
-            primaryKey: "countryId"
+            primaryKey: "countryId",
+            enableSearchFilter: true
         };
     }
     onItemSelect(item: any) {
