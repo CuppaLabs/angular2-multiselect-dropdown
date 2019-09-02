@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { LogUpdateService } from './log-update.service';
+import { CheckForUpdateService } from './check-for-update.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -40,7 +41,7 @@ export class AppComponent implements OnInit {
   templatingExampleSelectedItems = [];
   templatingExampleSettings = {};
 
-  constructor(){
+  constructor(public swUpdates: LogUpdateService){
     
   }
   ngOnInit(){
