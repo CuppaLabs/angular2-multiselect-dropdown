@@ -40,7 +40,8 @@ import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-
+import { LogUpdateService } from './log-update.service';
+import { CheckForUpdateService } from './check-for-update.service';
 export function hljsLanguages() {
   return [
     {name: 'typescript', func: typescript},
@@ -91,7 +92,7 @@ export function hljsLanguages() {
     }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [MockService],
+  providers: [MockService, LogUpdateService, CheckForUpdateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
