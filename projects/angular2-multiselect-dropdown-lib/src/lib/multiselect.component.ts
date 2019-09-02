@@ -81,14 +81,14 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Output('onGroupDeSelect')
     onGroupDeSelect: EventEmitter<any> = new EventEmitter<any>();
 
-    @ContentChild(Item, { static: true }) itemTempl: Item;
-    @ContentChild(Badge, { static: true }) badgeTempl: Badge;
-    @ContentChild(Search, { static: true }) searchTempl: Search;
+    @ContentChild(Item, { static: false }) itemTempl: Item;
+    @ContentChild(Badge, { static: false }) badgeTempl: Badge;
+    @ContentChild(Search, { static: false }) searchTempl: Search;
 
 
-    @ViewChild('searchInput', { static: true }) searchInput: ElementRef;
-    @ViewChild('selectedList', { static: true }) selectedListElem: ElementRef;
-    @ViewChild('dropdownList', { static: true }) dropdownListElem: ElementRef;
+    @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
+    @ViewChild('selectedList', { static: false }) selectedListElem: ElementRef;
+    @ViewChild('dropdownList', { static: false }) dropdownListElem: ElementRef;
 
     @HostListener('document:keyup.escape', ['$event'])
     onEscapeDown(event: KeyboardEvent) {
@@ -565,16 +565,15 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     toggleInfiniteFilterSelectAll() {
         if (!this.isInfiniteFilterSelectAll) {
-            this.data.forEach((item: any) => {
+            this.virtualdata.forEach((item: any) => {
                 if (!this.isSelected(item)) {
                     this.addSelected(item);
                 }
-
             });
             this.isInfiniteFilterSelectAll = true;
         }
         else {
-            this.data.forEach((item: any) => {
+            this.virtualdata.forEach((item: any) => {
                 if (this.isSelected(item)) {
                     this.removeSelected(item);
                 }

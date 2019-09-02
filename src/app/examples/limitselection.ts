@@ -33,9 +33,9 @@ export class LimitSelectionExample implements OnInit {
       text: "Select Countries",
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      enableSearchFilter: false,
+      enableSearchFilter: true,
       classes: "myclass custom-class",
-      limitSelection: 4
+      limitSelection: 2
     };
   }
   onItemSelect(item: any) {
