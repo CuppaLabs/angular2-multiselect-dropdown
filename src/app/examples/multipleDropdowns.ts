@@ -20,7 +20,8 @@ export class MultipleDropdownsExample implements OnInit {
         useCases: [{ "id": "UCTest3", "name": "Use Case Test 3" }, { "id": "UCTest4", "name": "Use Case Test 4" }]
     };
 
-
+    directoriesDropdownStatus: string = 'closed';
+    casesDropdownStatus: string = 'closed';
     constructor(public mockService: MockService) { }
     ngOnInit() {
 
@@ -56,6 +57,18 @@ export class MultipleDropdownsExample implements OnInit {
     }
     onDeSelectAll(items: any) {
         console.log(items);
+    }
+    onDirectoriesOpen(e:any){
+        this.directoriesDropdownStatus = 'open';
+    }
+    onDirectoriesClose(e:any){
+        this.directoriesDropdownStatus = 'close';
+    }
+    onCasesOpen(e:any){
+        this.casesDropdownStatus = 'open';
+    }
+    onCasesClose(e:any){
+        this.casesDropdownStatus = 'close';
     }
     cssgist: boolean = false;
     title: string = "Multiple Dropdowns in a page";
