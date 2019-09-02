@@ -122,20 +122,6 @@
               }
             }
           }
-        },
-        "app-shell": {
-          "builder": "@angular-devkit/build-angular:app-shell",
-          "options": {
-            "browserTarget": "angular2-multiselect-dropdown:build",
-            "serverTarget": "angular2-multiselect-dropdown:server",
-            "route": "shell"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "angular2-multiselect-dropdown:build:production",
-              "serverTarget": "angular2-multiselect-dropdown:server:production"
-            }
-          }
         }
       }
     },
