@@ -1,10 +1,8 @@
-<!doctype html>
-<html>
-
-<head>
+<!DOCTYPE html><html><head>
   <meta charset="utf-8">
   <title>Angular2 Multiselect Dropdown - Cuppa Labs</title>
-  <base href="/angular2-multiselect-dropdown/">
+  <base href="/">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="assets/img/coffee11.png">
 
@@ -14,7 +12,52 @@
 
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#1976d2">
-<link rel="stylesheet" href="styles.aa9ae165fc4266dfb720.css"></head>
+<style ng-transition="serverApp">.left-sidebar[_ngcontent-sc0] {
+    position: fixed;
+    top: 65px;
+    height: calc(100vh - 75px);
+    padding-right: 0px;
+    overflow: hidden;
+}
+.left-sidebar[_ngcontent-sc0], .right-sidebar[_ngcontent-sc0] {
+    width: 260px;
+}
+.left-sidebar[_ngcontent-sc0]:hover {
+    overflow: auto;
+
+}
+.outer-wrapper[_ngcontent-sc0] {
+    padding: 30px;
+}
+.center-content[_ngcontent-sc0]{
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 3px;
+    padding: 15px;
+    margin-left: 0px;
+    margin-top: 0px;
+}
+@media (min-width: 768px) { 
+    .center-content[_ngcontent-sc0] {
+        margin-left: 265px;
+    }
+}
+.nav-sub[_ngcontent-sc0]{
+    width: 100%;
+    box-shadow: none;
+    margin-bottom: 6px;
+    padding: 0px;
+    margin-top: 50px;
+}
+.nav-wrapper[_ngcontent-sc0] {
+    padding: 0px 10px;
+}
+.list-group-item[_ngcontent-sc0] {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxlQUFlO0lBQ2YsU0FBUztJQUNULDBCQUEwQjtJQUMxQixrQkFBa0I7SUFDbEIsZ0JBQWdCO0FBQ3BCO0FBQ0E7SUFDSSxZQUFZO0FBQ2hCO0FBQ0E7SUFDSSxjQUFjOztBQUVsQjtBQUVBO0lBQ0ksYUFBYTtBQUNqQjtBQUNBO0lBQ0ksbUJBQW1CO0lBQ25CLGtDQUFrQztJQUNsQyxrQkFBa0I7SUFDbEIsYUFBYTtJQUNiLGdCQUFnQjtJQUNoQixlQUFlO0FBQ25CO0FBQ0E7SUFDSTtRQUNJLGtCQUFrQjtJQUN0QjtBQUNKO0FBQ0E7SUFDSSxXQUFXO0lBQ1gsZ0JBQWdCO0lBQ2hCLGtCQUFrQjtJQUNsQixZQUFZO0lBQ1osZ0JBQWdCO0FBQ3BCO0FBQ0E7SUFDSSxpQkFBaUI7QUFDckI7QUFDQTtJQUNJLG1CQUFtQjtJQUNuQixzQkFBc0I7QUFDMUIiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5sZWZ0LXNpZGViYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDY1cHg7XG4gICAgaGVpZ2h0OiBjYWxjKDEwMHZoIC0gNzVweCk7XG4gICAgcGFkZGluZy1yaWdodDogMHB4O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG59XG4ubGVmdC1zaWRlYmFyLCAucmlnaHQtc2lkZWJhciB7XG4gICAgd2lkdGg6IDI2MHB4O1xufVxuLmxlZnQtc2lkZWJhcjpob3ZlciB7XG4gICAgb3ZlcmZsb3c6IGF1dG87XG5cbn1cblxuLm91dGVyLXdyYXBwZXIge1xuICAgIHBhZGRpbmc6IDMwcHg7XG59XG4uY2VudGVyLWNvbnRlbnR7XG4gICAgYmFja2dyb3VuZDogI2ZmZmZmZjtcbiAgICBib3JkZXI6IDFweCBzb2xpZCByZ2JhKDAsMCwwLC4xMjUpO1xuICAgIGJvcmRlci1yYWRpdXM6IDNweDtcbiAgICBwYWRkaW5nOiAxNXB4O1xuICAgIG1hcmdpbi1sZWZ0OiAwcHg7XG4gICAgbWFyZ2luLXRvcDogMHB4O1xufVxuQG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KSB7IFxuICAgIC5jZW50ZXItY29udGVudCB7XG4gICAgICAgIG1hcmdpbi1sZWZ0OiAyNjVweDtcbiAgICB9XG59XG4ubmF2LXN1YntcbiAgICB3aWR0aDogMTAwJTtcbiAgICBib3gtc2hhZG93OiBub25lO1xuICAgIG1hcmdpbi1ib3R0b206IDZweDtcbiAgICBwYWRkaW5nOiAwcHg7XG4gICAgbWFyZ2luLXRvcDogNTBweDtcbn1cbi5uYXYtd3JhcHBlciB7XG4gICAgcGFkZGluZzogMHB4IDEwcHg7XG59XG4ubGlzdC1ncm91cC1pdGVtIHtcbiAgICBwYWRkaW5nLXRvcDogMC41cmVtO1xuICAgIHBhZGRpbmctYm90dG9tOiAwLjVyZW07XG59XG4iXX0= */</style><style ng-transition="serverApp">
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC1zaGVsbC9hcHAtc2hlbGwuY29tcG9uZW50LmNzcyJ9 */</style></head>
 
 <body>
   <nav class="navbar navbar-expand-md top-navbar d-print-none navbar-default">
@@ -50,7 +93,7 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-item nav-link img-nav-item" href="https://github.com/CuppaLabs/angular2-multiselect-dropdown">
-              <img src="assets/img/GitHub-Mark-32px.png"/>
+              <img src="assets/img/GitHub-Mark-32px.png">
            </a>
           </li>
           </ul>
@@ -60,7 +103,7 @@
 
   <div class="outer-wrapper">
     <div class="row">
-      <app-root class="col pl-0 pr-0">Loading...</app-root>
+      <app-root class="col pl-0 pr-0" _nghost-sc0="" ng-version="8.0.3"><div _ngcontent-sc0="" class="row"><nav _ngcontent-sc0="" class="navbar navbar-expand-lg nav-sub navbar-light d-md-none d-lg-none"><div _ngcontent-sc0="" class="nav-wrapper"><a _ngcontent-sc0="" class="navbar-brand" href="#">Examples</a><button _ngcontent-sc0="" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button"><span _ngcontent-sc0="" class="fas fa-angle-down"></span></button></div><div _ngcontent-sc0="" class="collapse navbar-collapse" id="navbarSupportedContent"><div _ngcontent-sc0="" class="list-group"><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/basic" routerlinkactive="active" ng-reflect-router-link="basic" ng-reflect-router-link-active="active">Multiselect basic example</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/singleselection" routerlinkactive="active" ng-reflect-router-link="singleselection" ng-reflect-router-link-active="active">Single selection</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/searchfilter" routerlinkactive="active" ng-reflect-router-link="searchfilter" ng-reflect-router-link-active="active">Search filter</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/groupby" routerlinkactive="active" ng-reflect-router-link="groupby" ng-reflect-router-link-active="active">Group By</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/templating" routerlinkactive="active" ng-reflect-router-link="templating" ng-reflect-router-link-active="active">Templating</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/usinginform" routerlinkactive="active" ng-reflect-router-link="usinginform" ng-reflect-router-link-active="active">Using in Template Driven Forms</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/usinginreactiveform" routerlinkactive="active" ng-reflect-router-link="usinginreactiveform" ng-reflect-router-link-active="active">Using in Reactive Forms</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/lazyloading" routerlinkactive="active" ng-reflect-router-link="lazyloading" ng-reflect-router-link-active="active">Lazy Loading</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/lazyloadingRemoteData" routerlinkactive="active" ng-reflect-router-link="lazyloadingRemoteData" ng-reflect-router-link-active="active">Lazy Loading Data from API</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/usingInList" routerlinkactive="active" ng-reflect-router-link="usingInList" ng-reflect-router-link-active="active">Using in List for loop</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/resetdropdown" routerlinkactive="active" ng-reflect-router-link="resetdropdown" ng-reflect-router-link-active="active">Reset dropdown</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/disablemode" routerlinkactive="active" ng-reflect-router-link="disablemode" ng-reflect-router-link-active="active">Disable dropdown</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/limitselection" routerlinkactive="active" ng-reflect-router-link="limitselection" ng-reflect-router-link-active="active">Limit selection</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/limitbadges" routerlinkactive="active" ng-reflect-router-link="limitbadges" ng-reflect-router-link-active="active">Limit Badges</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/customplaceholder" routerlinkactive="active" ng-reflect-router-link="customplaceholder" ng-reflect-router-link-active="active">Custom placeholder</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/styling" routerlinkactive="active" ng-reflect-router-link="styling" ng-reflect-router-link-active="active">CSS Styling</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/theming" routerlinkactive="active" ng-reflect-router-link="theming" ng-reflect-router-link-active="active">Theming</a></div></div></nav><div _ngcontent-sc0="" class="col-md-3 pl-0 pr-0 left-sidebar d-none d-md-block d-lg-block"><div _ngcontent-sc0="" class="list-group"><a _ngcontent-sc0="" class="list-group-item list-group-item-action disabled" href="#"> Examples </a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/basic" routerlinkactive="active" ng-reflect-router-link="basic" ng-reflect-router-link-active="active">Multiselect basic example</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/singleselection" routerlinkactive="active" ng-reflect-router-link="singleselection" ng-reflect-router-link-active="active">Single selection</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/searchfilter" routerlinkactive="active" ng-reflect-router-link="searchfilter" ng-reflect-router-link-active="active">Search filter</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/customSearchAPI" routerlinkactive="active" ng-reflect-router-link="customSearchAPI" ng-reflect-router-link-active="active">Custom Search / Search API</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/searchFilterByOneProperty" routerlinkactive="active" ng-reflect-router-link="searchFilterByOneProperty" ng-reflect-router-link-active="active">Search Filter By one Property/key</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/searchfilterAddNewItem" routerlinkactive="active" ng-reflect-router-link="searchfilterAddNewItem" ng-reflect-router-link-active="active">Search and Add New Item</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/groupby" routerlinkactive="active" ng-reflect-router-link="groupby" ng-reflect-router-link-active="active">Group By</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/templating" routerlinkactive="active" ng-reflect-router-link="templating" ng-reflect-router-link-active="active">Templating</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/usinginform" routerlinkactive="active" ng-reflect-router-link="usinginform" ng-reflect-router-link-active="active">Using in Template Driven Forms</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/usinginreactiveform" routerlinkactive="active" ng-reflect-router-link="usinginreactiveform" ng-reflect-router-link-active="active">Using in Reactive Forms</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/lazyloading" routerlinkactive="active" ng-reflect-router-link="lazyloading" ng-reflect-router-link-active="active">Virtual Scrolling</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/lazyloadingRemoteData" routerlinkactive="active" ng-reflect-router-link="lazyloadingRemoteData" ng-reflect-router-link-active="active">Lazy Loading Data from API</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/remoteData" routerlinkactive="active" ng-reflect-router-link="remoteData" ng-reflect-router-link-active="active">Data from remote API</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/usingInList" routerlinkactive="active" ng-reflect-router-link="usingInList" ng-reflect-router-link-active="active">Using in List for loop</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/multipledropdowns" routerlinkactive="active" ng-reflect-router-link="multipledropdowns" ng-reflect-router-link-active="active">Multiple dropdowns in a page</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/dynamicdatasets" routerlinkactive="active" ng-reflect-router-link="dynamicdatasets" ng-reflect-router-link-active="active">Dynamic Data Sets loading</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/dropdownMethods" routerlinkactive="active" ng-reflect-router-link="dropdownMethods" ng-reflect-router-link-active="active">Methods - Open, close, Reset</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/events" routerlinkactive="active" ng-reflect-router-link="events" ng-reflect-router-link-active="active">Events</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/disablemode" routerlinkactive="active" ng-reflect-router-link="disablemode" ng-reflect-router-link-active="active">Disable dropdown</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/limitselection" routerlinkactive="active" ng-reflect-router-link="limitselection" ng-reflect-router-link-active="active">Limit selection</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/limitbadges" routerlinkactive="active" ng-reflect-router-link="limitbadges" ng-reflect-router-link-active="active">Limit Badges</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/customplaceholder" routerlinkactive="active" ng-reflect-router-link="customplaceholder" ng-reflect-router-link-active="active">Custom placeholder</a><a _ngcontent-sc0="" class="list-group-item list-group-item-action" href="/styling" routerlinkactive="active" ng-reflect-router-link="styling" ng-reflect-router-link-active="active">CSS Styling</a></div></div><div _ngcontent-sc0="" class="col center-content"><router-outlet _ngcontent-sc0=""></router-outlet><app-app-shell _nghost-sc1=""><p _ngcontent-sc1="">app-shell works!</p></app-app-shell></div></div></app-root>
     <div class="col-md-3 right-sidebar">
     <div>
           <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -116,6 +159,6 @@ i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
       })(document, window, 'Chatra');
   </script>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
-<script src="runtime-es2015.858f8dd898b75fe86926.js" type="module"></script><script src="polyfills-es2015.444f9ad7571234916d9d.js" type="module"></script><script src="runtime-es5.741402d1d47331ce975c.js" nomodule></script><script src="polyfills-es5.89e5d8af723470f72102.js" nomodule></script><script src="main-es2015.b3341aa9b81e673b203e.js" type="module"></script><script src="main-es5.2f2a1b85907a2313d019.js" nomodule></script></body>
+<script src="runtime-es2015.js" type="module"></script><script src="polyfills-es2015.js" type="module"></script><script src="runtime-es5.js" nomodule=""></script><script src="polyfills-es5.js" nomodule=""></script><script src="styles-es2015.js" type="module"></script><script src="styles-es5.js" nomodule=""></script><script src="vendor-es2015.js" type="module"></script><script src="main-es2015.js" type="module"></script><script src="vendor-es5.js" nomodule=""></script><script src="main-es5.js" nomodule=""></script>
 
-</html>
+</body></html>

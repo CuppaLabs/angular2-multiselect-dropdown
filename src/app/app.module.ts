@@ -40,6 +40,7 @@ import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { RouterModule } from '@angular/router';
 
 export function hljsLanguages() {
   return [
@@ -89,7 +90,8 @@ export function hljsLanguages() {
     HighlightModule.forRoot({
       languages: hljsLanguages
     }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    RouterModule
   ],
   providers: [MockService],
   bootstrap: [AppComponent]
