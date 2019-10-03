@@ -353,6 +353,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         return found;
     }
     addSelected(item: any) {
+        if (item.disabled) {
+            return;
+        }
         if (this.settings.singleSelection) {
             this.selectedItems = [];
             this.selectedItems.push(item);
@@ -631,6 +634,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
     }
     updateGroupInfo(item: any) {
+        if (item.disabled) {
+            return false;
+        }
         let key = this.settings.groupBy;
         this.groupedData.forEach((obj: any) => {
             let cnt = 0;
