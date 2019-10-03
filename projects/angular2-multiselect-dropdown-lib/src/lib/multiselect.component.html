@@ -197,7 +197,7 @@
                                 <span *ngFor="let val of item.list ; let j = index;">
                                     <li (click)="onItemClick(val,j,$event); $event.stopPropagation()" [ngClass]="{'grp-title': val.grpTitle,'grp-item': !val.grpTitle && !settings.singleSelection}"
                                         class="pure-checkbox">
-                                        <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(val)" [disabled]="(settings.limitSelection == selectedItems?.length && !isSelected(val)) || item.disabled"
+                                        <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(val)" [disabled]="(settings.limitSelection == selectedItems?.length && !isSelected(val)) || val.disabled"
                                         />
                                         <label></label>
                                         <c-templateRenderer [data]="itemTempl" [item]="val"></c-templateRenderer>
@@ -245,7 +245,7 @@
                                 <span *ngFor="let val of item.list ; let j = index;">
                                     <li (click)="onItemClick(val,j,$event); $event.stopPropagation()" [ngClass]="{'selected-item': isSelected(val) == true,'grp-title': val.grpTitle,'grp-item': !val.grpTitle && !settings.singleSelection}"
                                         class="pure-checkbox">
-                                        <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(val)" [disabled]="(settings.limitSelection == selectedItems?.length && !isSelected(val)) || item.disabled"
+                                        <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(val)" [disabled]="(settings.limitSelection == selectedItems?.length && !isSelected(val)) || val.disabled"
                                         />
                                         <label>{{val[settings.labelKey]}}</label>
                                     </li>

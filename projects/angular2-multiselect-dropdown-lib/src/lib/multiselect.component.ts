@@ -271,6 +271,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         if (this.isSelectAll || this.data.length > this.selectedItems.length) {
             this.isSelectAll = false;
         }
+
         if (this.data.length == this.selectedItems.length) {
             this.isSelectAll = true;
         }
@@ -442,10 +443,10 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.selectedItems = [];
             if (this.settings.groupBy) {
                 this.groupedData.forEach((obj) => {
-                    obj.selected = true;
+                    obj.selected = !obj.disabled;
                 })
                 this.groupCachedItems.forEach((obj) => {
-                    obj.selected = true;
+                    obj.selected = !obj.disabled;
                 })
             }
             // this.selectedItems = this.data.slice();
@@ -687,6 +688,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         const tempArr: any = [];
         Object.keys(groupedObj).map((x: any) => {
             let obj: any = {};
+            let disabledChildrens = [];
             obj["grpTitle"] = true;
             obj[this.settings.labelKey] = x;
             obj[this.settings.groupBy] = x;
@@ -695,6 +697,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             let cnt = 0;
             groupedObj[x].forEach((item: any) => {
                 item['list'] = [];
+                if (item.disabled) {
+                    disabledChildrens.push(item);
+                }
                 obj.list.push(item);
                 if (this.isSelected(item)) {
                     cnt++;
@@ -706,6 +711,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             else {
                 obj.selected = false;
             }
+
+            // Check if current group item's all childrens are disabled or not
+            obj['disabled'] = disabledChildrens.length === groupedObj[x].length;
             tempArr.push(obj);
             // obj.list.forEach((item: any) => {
             //     tempArr.push(item);
@@ -796,6 +804,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
     }
     selectGroup(item: any) {
+        if (item.disabled) {
+            return false;
+        }
         if (item.selected) {
             item.selected = false;
             item.list.forEach((obj: any) => {
