@@ -164,6 +164,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     virtualScroollInit: boolean = false;
     @ViewChild(VirtualScrollerComponent, { static: false })
     private virtualScroller: VirtualScrollerComponent;
+    public isDisabledItemPresent = false;
+
     constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef, private ds: DataService) {
         this.searchTerm$.asObservable().pipe(
             debounceTime(1000),
@@ -187,6 +189,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             if (data) {
                 let len = 0;
                 data.forEach((obj: any, i: any) => {
+                    if (obj.disabled) {
+                        this.isDisabledItemPresent = true;
+                    }
                     if (!obj.hasOwnProperty('grpTitle')) {
                         len++;
                     }
@@ -698,6 +703,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             groupedObj[x].forEach((item: any) => {
                 item['list'] = [];
                 if (item.disabled) {
+                    this.isDisabledItemPresent = true;
                     disabledChildrens.push(item);
                 }
                 obj.list.push(item);

@@ -49,7 +49,7 @@
         <div [ngClass]="{'arrow-up': !dropdownListYOffset, 'arrow-down': dropdownListYOffset}" class="arrow-2"></div>
         <div [ngClass]="{'arrow-up': !dropdownListYOffset, 'arrow-down': dropdownListYOffset}"></div>
         <div class="list-area" [ngClass]="{'single-select-mode': settings.singleSelection }">
-            <div class="pure-checkbox select-all" *ngIf="settings.enableCheckAll && !settings.singleSelection && !settings.limitSelection && data?.length > 0"
+            <div class="pure-checkbox select-all" *ngIf="settings.enableCheckAll && !settings.singleSelection && !settings.limitSelection && data?.length > 0 && !isDisabledItemPresent"
                 (click)="toggleSelectAll()">
                 <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelectAll" [disabled]="settings.limitSelection == selectedItems?.length"
                 />
