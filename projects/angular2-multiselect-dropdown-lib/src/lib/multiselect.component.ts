@@ -174,9 +174,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         });
     }
     ngOnInit() {
-        this.data[0].disabled = true;
-        console.log('ngOnInit', this.data);
-
         this.settings = Object.assign(this.defaultSettings, this.settings);
 
         this.cachedItems = this.cloneArray(this.data);
