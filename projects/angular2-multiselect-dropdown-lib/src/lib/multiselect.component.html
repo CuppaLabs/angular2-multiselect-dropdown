@@ -80,7 +80,7 @@
                 [(ngModel)]="filter" (keyup)="filterGroupList($event)">-->
                 <c-templateRenderer *ngIf="searchTempl" [data]="searchTempl" [item]="item"></c-templateRenderer>
             </div>
-            <div class="filter-select-all" *ngIf="!settings.lazyLoading && settings.enableFilterSelectAll">
+            <div class="filter-select-all" *ngIf="!settings.lazyLoading && settings.enableFilterSelectAll && !isDisabledItemPresent">
                 <div class="pure-checkbox select-all" *ngIf="!settings.groupBy && filter?.length > 0 && filterLength > 0" (click)="toggleFilterSelectAll()">
                     <input type="checkbox" [checked]="isFilterSelectAll" [disabled]="settings.limitSelection == selectedItems?.length" />
                     <label>
@@ -103,7 +103,7 @@
                     <button class="c-btn btn-iceblue" (click)="addFilterNewItem()">{{settings.addNewButtonText}}</button>
                 </div>
             </div>
-            <div class="filter-select-all" *ngIf="settings.lazyLoading && settings.enableFilterSelectAll">
+            <div class="filter-select-all" *ngIf="settings.lazyLoading && settings.enableFilterSelectAll && !isDisabledItemPresent">
                 <div class="pure-checkbox select-all" *ngIf="filter?.length > 0 && infiniteFilterLength > 0" (click)="toggleInfiniteFilterSelectAll()">
                     <input type="checkbox" [checked]="isInfiniteFilterSelectAll" [disabled]="settings.limitSelection == selectedItems?.length"
                     />
