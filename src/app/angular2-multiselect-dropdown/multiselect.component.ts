@@ -64,7 +64,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Output('onScrollToEnd')
     onScrollToEnd: EventEmitter<any> = new EventEmitter<any>();
 
-    @ContentChild(Item) itemTempl: Item;
+    @ContentChild(Item) itemTempl: any;
     @ContentChild(Badge) badgeTempl: Badge;
     @ContentChild(Search) searchTempl: Search;
 
