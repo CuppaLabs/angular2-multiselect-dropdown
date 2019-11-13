@@ -24,7 +24,7 @@ virtual-scroll {
         margin: 0px;
         width: calc(100% - 20px);
         .c-token{
-            list-style: none;  
+            list-style: none;
             padding: 2px 8px;
             /*background: $base-color; */
             /*color: $token-color;*/
@@ -128,8 +128,8 @@ virtual-scroll {
     }
 }
 .arrow-up, .arrow-down {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 13px solid transparent;
   border-right: 13px solid transparent;
   border-bottom: 15px solid #fff;
@@ -156,6 +156,19 @@ virtual-scroll {
     background: #fff;
     margin: 0px;
     /*box-shadow: 0px 1px 5px $box-shadow-color;*/
+    .actions{
+      display: flex;
+      button{
+        width: 100%;
+        background-color: #fff;
+        border: 0.5px solid rgb(214, 214, 214);
+        padding: 8px 0px;
+        cursor: pointer;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
 }
 .select-all{
     padding: 10px;
@@ -346,5 +359,5 @@ virtual-scroll {
     padding: 0px 5px 10px;
 }
 .btn-iceblue {
-    
+
 }

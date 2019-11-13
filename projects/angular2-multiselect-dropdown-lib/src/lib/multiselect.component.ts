@@ -180,7 +180,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         });
         setTimeout(() => {
 			this.calculateDropdownDirection();
-		}); 
+		});
 
     }
     ngOnChanges(changes: SimpleChanges) {
@@ -353,7 +353,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         setTimeout(() => {
             this.calculateDropdownDirection();
         }, 0);
-        
+
         evt.preventDefault();
     }
     public openDropdown() {
@@ -688,7 +688,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 			const dropdownHeight = this.dropdownListElem.nativeElement.clientHeight;
 			const viewportHeight = document.documentElement.clientHeight;
 			const selectedListBounds = this.selectedListElem.nativeElement.getBoundingClientRect();
-			
+
 			const spaceOnTop: number = selectedListBounds.top;
 			const spaceOnBottom: number = viewportHeight - selectedListBounds.top;
 			if (spaceOnBottom < spaceOnTop && dropdownHeight < spaceOnTop){
@@ -706,7 +706,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 				}
 			} */
 		}
-		
+
 	}
 	openTowardsTop(value: boolean) {
 		if (value && this.selectedListElem.nativeElement.clientHeight) {
@@ -714,8 +714,20 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         } else {
 			this.dropdownListYOffset = 0;
 		}
-	}
+  }
+
+  //call this when user click ok button
+  public confirmSelection(){
+    this.closeDropdown();
+  }
+
+  //call this when user cancel
+  //deselect selection
+  public cancelSelection(){
+    this.closeDropdown();
+  }
 }
+
 
 @NgModule({
     imports: [CommonModule, FormsModule],

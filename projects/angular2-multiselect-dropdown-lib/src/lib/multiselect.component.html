@@ -37,8 +37,7 @@
             </span>
         <span *ngIf="isActive" class="c-angle-up">
             <c-icon [name]="'angle-up'"></c-icon>
-
-            </span>
+        </span>
     </div>
 </div>
 <div #dropdownList class="dropdown-list"
@@ -226,6 +225,10 @@
             </ul>
         </div>
         <h5 class="list-message" *ngIf="data?.length == 0">{{settings.noDataLabel}}</h5>
+        <div class="actions">
+              <button (click)="confirmSelection()">OK</button>
+              <button (click)="cancelSelection()">Cancel</button>
+        </div>
     </div>
 </div>
 </div>
