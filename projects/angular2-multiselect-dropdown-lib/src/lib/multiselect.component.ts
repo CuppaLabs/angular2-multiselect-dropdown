@@ -45,6 +45,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @Input()
     loading: boolean;
 
+    @Input()
+    isCustomTriggerEnabled: boolean = false;
+
     @Output('onSelect')
     onSelect: EventEmitter<any> = new EventEmitter<any>();
 
@@ -165,6 +168,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @ViewChild(VirtualScrollerComponent, { static: false })
     private virtualScroller: VirtualScrollerComponent;
     public isDisabledItemPresent = false;
+    private enableCustomTrigger: boolean = false;
 
     constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef, private ds: DataService) {
         this.searchTerm$.asObservable().pipe(
@@ -243,6 +247,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.selectedListHeight.val = this.selectedListElem.nativeElement.clientHeight;
             this.cdr.detectChanges();
         }
+        this.checkCustomTriggerOption();
     }
     onItemClick(item: any, index: number, evt: Event) {
         if (item.disabled) {
@@ -882,6 +887,15 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.clearSearch();
         this.selectedItems = [];
         this.onDeSelectAll.emit(this.selectedItems);
+    }
+    checkCustomTriggerOption(){
+        if (this.isCustomTriggerEnabled && this.selectedItems.length > 2) {
+            this.enableCustomTrigger = true;
+        }
+        else{
+            this.enableCustomTrigger = false;
+        }
+        this.cdr.detectChanges();
     }
 }
 
