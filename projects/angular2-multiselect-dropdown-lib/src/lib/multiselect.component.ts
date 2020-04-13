@@ -881,7 +881,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         this.clearSearch();
         this.selectedItems = [];
-		this.isSelectAll = false;
+        this.isSelectAll = false;
         this.onChangeCallback(this.selectedItems);
         this.onTouchedCallback(this.selectedItems);
         this.onDeSelectAll.emit(this.selectedItems);
