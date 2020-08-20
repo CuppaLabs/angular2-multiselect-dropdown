@@ -10,7 +10,7 @@ export class ClickOutsideDirective {
     @Output()
     public clickOutside = new EventEmitter<MouseEvent>();
 
-    @HostListener('document:click', ['$event', '$event.target'])
+    @HostListener('document:pointerdown', ['$event', '$event.target'])
     @HostListener('document:touchstart', ['$event', '$event.target'])
     public onClick(event: MouseEvent, targetElement: HTMLElement): void {
         if (!targetElement) {
@@ -20,6 +20,7 @@ export class ClickOutsideDirective {
         const clickedInside = this._elementRef.nativeElement.contains(targetElement);
         if (!clickedInside) {
             this.clickOutside.emit(event);
+            console.log('clickOutside');
         }
     }
 }
