@@ -20,7 +20,6 @@ export class ClickOutsideDirective {
         const clickedInside = this._elementRef.nativeElement.contains(targetElement);
         if (!clickedInside) {
             this.clickOutside.emit(event);
-            console.log('clickOutside');
         }
     }
 }
@@ -82,3 +81,4 @@ export class setPosition implements OnInit, OnChanges {
         }
     }
 }
+
