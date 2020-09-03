@@ -52,15 +52,15 @@
             <div class="pure-checkbox select-all" *ngIf="settings.enableCheckAll && !settings.singleSelection && !settings.limitSelection && data?.length > 0 && !isDisabledItemPresent"
                 (click)="toggleSelectAll()">
                 <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelectAll" [disabled]="settings.limitSelection == selectedItems?.length"
-                />
-                <label>
+                id="selectAll"/>
+                <label for="selectAll">
                     <span [hidden]="isSelectAll">{{settings.selectAllText}}</span>
                     <span [hidden]="!isSelectAll">{{settings.unSelectAllText}}</span>
                 </label>
             </div>
             <img class="loading-icon" *ngIf="loading" src="assets/img/loading.gif" />
             <div class="list-filter" *ngIf="settings.enableSearchFilter">
-                <span class="c-search">
+                <span class="c-search" id="searchIcon">
                     <c-icon [name]="'search'"></c-icon>
                 </span>
                 <span *ngIf="!settings.lazyLoading" [hidden]="filter == undefined || filter?.length == 0" class="c-clear" (click)="clearSearch()">
@@ -71,18 +71,19 @@
                 </span>
 
                 <input class="c-input" *ngIf="settings.groupBy && !settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
-                    [(ngModel)]="filter" (keyup)="filterGroupedList()">
+                    [(ngModel)]="filter" (keyup)="filterGroupedList()" aria-labelledby="searchIcon">
                 <input class="c-input" *ngIf="!settings.groupBy && !settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
-                    [(ngModel)]="filter">
+                    [(ngModel)]="filter" aria-labelledby="searchIcon">
                 <input class="c-input" *ngIf="settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
-                    [(ngModel)]="filter" (keyup)="searchTerm$.next($event.target.value)">
+                    [(ngModel)]="filter" (keyup)="searchTerm$.next($event.target.value)" aria-labelledby="searchIcon">
                 <!--            <input class="c-input" *ngIf="!settings.lazyLoading && !searchTempl && settings.groupBy" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
                 [(ngModel)]="filter" (keyup)="filterGroupList($event)">-->
                 <c-templateRenderer *ngIf="searchTempl" [data]="searchTempl" [item]="item"></c-templateRenderer>
             </div>
             <div class="filter-select-all" *ngIf="!settings.lazyLoading && settings.enableFilterSelectAll && !isDisabledItemPresent">
                 <div class="pure-checkbox select-all" *ngIf="!settings.groupBy && filter?.length > 0 && filterLength > 0" (click)="toggleFilterSelectAll()">
-                    <input type="checkbox" [checked]="isFilterSelectAll" [disabled]="settings.limitSelection == selectedItems?.length" />
+                    <input type="checkbox" [checked]="isFilterSelectAll" [disabled]="settings.limitSelection == selectedItems?.length" aria-labelledby="optionName"
+                    aria-label="option"/>
                     <label>
                         <span [hidden]="isFilterSelectAll">{{settings.filterSelectAllText}}</span>
                         <span [hidden]="!isFilterSelectAll">{{settings.filterUnSelectAllText}}</span>
@@ -90,7 +91,7 @@
                 </div>
                 <div class="pure-checkbox select-all" *ngIf="settings.groupBy && filter?.length > 0 && groupedData?.length > 0" (click)="toggleFilterSelectAll()">
                     <input type="checkbox" [checked]="isFilterSelectAll && filter?.length > 0" [disabled]="settings.limitSelection == selectedItems?.length"
-                    />
+                    aria-labelledby="option"/>
                     <label>
                         <span [hidden]="isFilterSelectAll">{{settings.filterSelectAllText}}</span>
                         <span [hidden]="!isFilterSelectAll">{{settings.filterUnSelectAllText}}</span>
@@ -106,7 +107,7 @@
             <div class="filter-select-all" *ngIf="settings.lazyLoading && settings.enableFilterSelectAll && !isDisabledItemPresent">
                 <div class="pure-checkbox select-all" *ngIf="filter?.length > 0 && infiniteFilterLength > 0" (click)="toggleInfiniteFilterSelectAll()">
                     <input type="checkbox" [checked]="isInfiniteFilterSelectAll" [disabled]="settings.limitSelection == selectedItems?.length"
-                    />
+                    aria-labelledby="option"/>
                     <label>
                         <span [hidden]="isInfiniteFilterSelectAll">{{settings.filterSelectAllText}}</span>
                         <span [hidden]="!isInfiniteFilterSelectAll">{{settings.filterUnSelectAllText}}</span>
@@ -120,7 +121,7 @@
                     <li *ngFor="let item of data | listFilter:filter : settings.searchBy; let i = index;" (click)="onItemClick(item,i,$event)"
                         class="pure-checkbox" [ngClass]="{'selected-item': isSelected(item) == true }">
                         <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="(settings.limitSelection == selectedItems?.length && !isSelected(item)) || item.disabled"
-                        />
+                        aria-labelledby="option"/>
                         <label>{{item[settings.labelKey]}}</label>
                     </li>
                 </ul>
