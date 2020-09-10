@@ -818,8 +818,10 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             item.list.forEach((obj: any) => {
                 this.removeSelected(obj);
             });
+            
+            this.onGroupDeSelect.emit(item);
             this.updateGroupInfo(item);
-            this.onGroupSelect.emit(item);
+            
         }
         else {
             item.selected = true;
@@ -829,8 +831,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 }
 
             });
+            this.onGroupSelect.emit(item);
             this.updateGroupInfo(item);
-            this.onGroupDeSelect.emit(item);
+            
         }
 
 
