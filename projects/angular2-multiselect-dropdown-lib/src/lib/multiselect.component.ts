@@ -443,7 +443,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.onClose.emit(false);
         }
     }
-    toggleSelectAll() {
+    toggleSelectAll(event) {
         if (!this.isSelectAll) {
             this.selectedItems = [];
             if (this.settings.groupBy) {
@@ -478,6 +478,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
             this.onDeSelectAll.emit(this.selectedItems);
         }
+        event.stopPropagation();
     }
     filterGroupedList() {
         if (this.filter == "" || this.filter == null) {
@@ -884,9 +885,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         this.clearSearch();
         this.selectedItems = [];
-        this.isSelectAll = false;
+/*         this.isSelectAll = false;
         this.onChangeCallback(this.selectedItems);
-        this.onTouchedCallback(this.selectedItems);
+        this.onTouchedCallback(this.selectedItems); */
         this.onDeSelectAll.emit(this.selectedItems);
     }
 }
