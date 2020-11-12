@@ -9,7 +9,7 @@ import { Item, Badge, Search, TemplateRenderer, CIcon } from './menu-item';
 import { DataService } from './multiselect.service';
 import { Subscription, Subject } from 'rxjs';
 import { VirtualScrollerModule, VirtualScrollerComponent } from './virtual-scroll/virtual-scroll';
-import { map, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged, switchMap, tap, delay } from 'rxjs/operators';
 import { ThrowStmt } from '@angular/compiler';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
@@ -185,7 +185,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 this.selectedListHeight.val = this.selectedListElem.nativeElement.clientHeight;
             });
         }
-        this.subscription = this.ds.getData().subscribe(data => {
+        this.subscription = this.ds.getData()
+          .pipe(delay(0))
+          .subscribe(data => {
             if (data) {
                 let len = 0;
                 data.forEach((obj: any, i: any) => {
@@ -627,7 +629,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         else if (cnt > 0 && this.filterLength != cnt) {
             this.isFilterSelectAll = false;
         }
-        this.cdr.detectChanges();
     }
     cloneArray(arr: any) {
         let i, copy;
