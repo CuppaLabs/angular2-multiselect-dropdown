@@ -128,7 +128,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     public item: any;
     public dropdownListYOffset: number = 0;
     subscription: Subscription;
-    private id: any = Math.random().toString(36).substring(2)
+    public id: any = Math.random().toString(36).substring(2)
     defaultSettings: DropdownSettings = {
         singleSelection: false,
         text: 'Select',
