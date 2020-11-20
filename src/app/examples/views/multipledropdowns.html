@@ -4,17 +4,17 @@
         <label for="directorySpecialties">Directory Specialties</label>
         <label class="float-right">        Directory Dropdown status: <b>{{directoriesDropdownStatus}}</b>
         </label>
-        <angular2-multiselect id="directorySpecialties" name="directorySpecialties" [(ngModel)]="providerLocation.directorySpecialties"
+        <angular2-multiselect id="directorySpecialties" name="directorySpecialties" [(ngModel)]="selectedDirectorySpecialties"
             [data]="directorySpecialties" [settings]="dropdownSettings" 
-            (onOpen)="onDirectoriesOpen($event)" (onClose)="onDirectoriesClose($event)">
+            (onOpen)="onDirectoriesOpen($event)" (onClose)="onDirectoriesClose($event)" (onSelectAll)="onSelectAll(items)" (onDeSelectAll)="onDeSelectAll($event)"> 
         </angular2-multiselect>
     </div>
     <div class="form-group col-md-12">
         <label for="useCases">Use Cases</label>
         <label class="float-right">        Cases Dropdown status: <b>{{casesDropdownStatus}}</b>
         </label>
-        <angular2-multiselect id="useCases" name="useCases" [(ngModel)]="providerLocation.useCases" [data]="useCases" 
-        [settings]="dropdownSettings2" (onOpen)="onCasesOpen($event)" (onClose)="onCasesClose($event)">
+        <angular2-multiselect id="useCases" name="useCases" [(ngModel)]="selectedUseCases" [data]="useCases" 
+        [settings]="dropdownSettings2" (onOpen)="onCasesOpen($event)" (onClose)="onCasesClose($event)" (onSelectAll)="onSelectAll2($event)" (onDeSelectAll)="onDeSelectAll2($event)">
         </angular2-multiselect>
     </div>
 </div>
