@@ -52,8 +52,8 @@
             <div class="pure-checkbox select-all" *ngIf="settings.enableCheckAll && !settings.singleSelection && !settings.limitSelection && data?.length > 0 && !isDisabledItemPresent"
                 >
                 <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelectAll" [disabled]="settings.limitSelection == selectedItems?.length"
-                id="selectAll" (change)="toggleSelectAll($event)"/>
-                <label for="selectAll">
+                [id]="id" (change)="toggleSelectAll($event)"/>
+                <label [for]="id">
                     <span [hidden]="isSelectAll">{{settings.selectAllText}}</span>
                     <span [hidden]="!isSelectAll">{{settings.unSelectAllText}}</span>
                 </label>
