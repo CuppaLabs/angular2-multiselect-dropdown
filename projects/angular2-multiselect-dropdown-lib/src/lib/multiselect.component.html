@@ -193,7 +193,7 @@
                             class="pure-checkbox">
                             <input *ngIf="settings.showCheckbox && !settings.singleSelection" type="checkbox" [checked]="item.selected" [disabled]="(settings.limitSelection == selectedItems?.length && !isSelected(item)) || item.disabled"
                             />
-                            <label>{{item[settings.labelKey]}}</label>
+                            <c-templateRenderer [data]="itemTempl" [item]="item"></c-templateRenderer>
                             <ul class="lazyContainer">
                                 <span *ngFor="let val of item.list ; let j = index;">
                                     <li (click)="onItemClick(val,j,$event); $event.stopPropagation()" [ngClass]="{'grp-title': val.grpTitle,'grp-item': !val.grpTitle && !settings.singleSelection}"
