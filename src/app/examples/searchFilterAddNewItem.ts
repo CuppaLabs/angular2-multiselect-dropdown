@@ -35,7 +35,8 @@ export class SearchFilterAddItemExample implements OnInit {
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: true,
-      addNewItemOnFilter: true
+      addNewItemOnFilter: true,
+      enableFilterSelectAll: true
     };
   }
   onAddItem(data:string){

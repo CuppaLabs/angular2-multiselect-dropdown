@@ -878,7 +878,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.dropdownListYOffset = 0;
         }
     }
-    clearSelection(e: any) {
+    clearSelection(e?: any) {
         if (this.settings.groupBy) {
             this.groupCachedItems.forEach((obj) => {
                 obj.selected = false;

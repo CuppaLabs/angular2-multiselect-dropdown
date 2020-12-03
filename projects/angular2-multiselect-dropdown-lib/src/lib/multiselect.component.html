@@ -4,7 +4,7 @@
 
             <span *ngIf="selectedItems?.length == 0">{{settings.text}}</span>
             <span *ngIf="settings.singleSelection && !badgeTempl">
-                <span *ngFor="let item of selectedItems;trackBy: trackByFn.bind(this);">
+                <span *ngFor="let item of selectedItems;trackBy: trackByFn.bind(this);let k = index">
                     {{item[settings.labelKey]}}
                 </span>
             </span>
@@ -81,7 +81,7 @@
                 <c-templateRenderer *ngIf="searchTempl" [data]="searchTempl" [item]="item"></c-templateRenderer>
             </div>
             <div class="filter-select-all" *ngIf="!settings.lazyLoading && settings.enableFilterSelectAll && !isDisabledItemPresent">
-                <div class="pure-checkbox select-all" *ngIf="!settings.groupBy && filter?.length > 0 && filterLength > 0" (click)="toggleFilterSelectAll()">
+                <div class="pure-checkbox select-all" *ngIf="!settings.groupBy && filter?.length > 0 && filterLength > 0  && !settings.singleSelection" (click)="toggleFilterSelectAll()">
                     <input type="checkbox" [checked]="isFilterSelectAll" [disabled]="settings.limitSelection == selectedItems?.length" aria-labelledby="optionName"
                     aria-label="option"/>
                     <label>
@@ -89,7 +89,7 @@
                         <span [hidden]="!isFilterSelectAll">{{settings.filterUnSelectAllText}}</span>
                     </label>
                 </div>
-                <div class="pure-checkbox select-all" *ngIf="settings.groupBy && filter?.length > 0 && groupedData?.length > 0" (click)="toggleFilterSelectAll()">
+                <div class="pure-checkbox select-all" *ngIf="settings.groupBy && filter?.length > 0 && groupedData?.length > 0  && !settings.singleSelection" (click)="toggleFilterSelectAll()">
                     <input type="checkbox" [checked]="isFilterSelectAll && filter?.length > 0" [disabled]="settings.limitSelection == selectedItems?.length"
                     aria-labelledby="option"/>
                     <label>
@@ -97,14 +97,8 @@
                         <span [hidden]="!isFilterSelectAll">{{settings.filterUnSelectAllText}}</span>
                     </label>
                 </div>
-                <label class="nodata-label" *ngIf="!settings.groupBy && filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
-                <label class="nodata-label" *ngIf="settings.groupBy && groupedData?.length == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
-
-                <div class="btn-container" *ngIf="settings.addNewItemOnFilter && filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">
-                    <button class="c-btn btn-iceblue" (click)="addFilterNewItem()">{{settings.addNewButtonText}}</button>
-                </div>
             </div>
-            <div class="filter-select-all" *ngIf="settings.lazyLoading && settings.enableFilterSelectAll && !isDisabledItemPresent">
+            <div class="filter-select-all" *ngIf="settings.lazyLoading && settings.enableFilterSelectAll && !isDisabledItemPresent && !settings.singleSelection">
                 <div class="pure-checkbox select-all" *ngIf="filter?.length > 0 && infiniteFilterLength > 0" (click)="toggleInfiniteFilterSelectAll()">
                     <input type="checkbox" [checked]="isInfiniteFilterSelectAll" [disabled]="settings.limitSelection == selectedItems?.length"
                     aria-labelledby="option"/>
@@ -112,6 +106,14 @@
                         <span [hidden]="isInfiniteFilterSelectAll">{{settings.filterSelectAllText}}</span>
                         <span [hidden]="!isInfiniteFilterSelectAll">{{settings.filterUnSelectAllText}}</span>
                     </label>
+                </div>
+            </div>
+            <div class="filter-select-all">
+                <label class="nodata-label" *ngIf="!settings.groupBy && filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
+                <label class="nodata-label" *ngIf="settings.groupBy && groupedData?.length == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
+
+                <div class="btn-container" *ngIf="settings.addNewItemOnFilter && filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">
+                    <button class="c-btn btn-iceblue" (click)="addFilterNewItem()">{{settings.addNewButtonText}}</button>
                 </div>
             </div>
 
@@ -126,6 +128,7 @@
                     </li>
                 </ul>
             </div>
+            <!-- lazy loading -->
             <div *ngIf="!settings.groupBy && settings.lazyLoading && itemTempl == undefined" [style.maxHeight]="settings.maxHeight+'px'"
                 style="overflow: auto;">
                 <ul virtualScroller #scroll [enableUnequalChildrenSizes]="randomSize" [items]="virtualdata" (vsStart)="onScrollEnd($event)"
@@ -138,6 +141,7 @@
                     </li>
                 </ul>
             </div>
+            <!-- custom template -->
             <div *ngIf="!settings.groupBy && !settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'"
                 style="overflow: auto;">
                 <ul class="lazyContainer">
@@ -150,6 +154,7 @@
                     </li>
                 </ul>
             </div>
+            <!-- lazy loading and custom template -->
             <div *ngIf="!settings.groupBy && settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'"
                 style="overflow: auto;">
                 <ul virtualScroller #scroll2 [enableUnequalChildrenSizes]="randomSize" [items]="virtualdata" (vsStart)="onScrollEnd($event)"
@@ -163,6 +168,7 @@
                     </li>
                 </ul>
             </div>
+            <!-- lazy loading, group By and custom template -->
             <div *ngIf="settings.groupBy && settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'"
                 style="overflow: auto;">
                 <ul virtualScroller #scroll3 [enableUnequalChildrenSizes]="randomSize" [items]="virtualdata" (vsStart)="onScrollEnd($event)"
@@ -185,6 +191,7 @@
                     </span>
                 </ul>
             </div>
+            <!-- group By and custom template -->
             <div *ngIf="settings.groupBy && !settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'"
                 style="overflow: auto;">
                 <ul class="lazyContainer">
@@ -210,6 +217,7 @@
                     </span>
                 </ul>
             </div>
+            <!-- lazy loading, group By -->
             <div *ngIf="settings.groupBy && settings.lazyLoading && itemTempl == undefined" [style.maxHeight]="settings.maxHeight+'px'"
                 style="overflow: auto;">
                 <virtual-scroller [items]="groupedData" (vsUpdate)="viewPortItems = $event" (vsEnd)="onScrollEnd($event)" [ngStyle]="{'height': settings.maxHeight+'px'}">
@@ -233,6 +241,7 @@
                     </ul>
                 </virtual-scroller>
             </div>
+            <!-- group By -->
             <div *ngIf="settings.groupBy && !settings.lazyLoading && itemTempl == undefined" [style.maxHeight]="settings.maxHeight+'px'"
                 style="overflow: auto;">
                 <ul class="lazyContainer">

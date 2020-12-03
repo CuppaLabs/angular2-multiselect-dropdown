@@ -8,6 +8,7 @@ export class SingleSelectionExample implements OnInit {
   itemList = [];
   selectedItems = [];
   settings = {};
+  count = 6;
 
   constructor(){
     
@@ -26,7 +27,9 @@ export class SingleSelectionExample implements OnInit {
     
     this.selectedItems = [
                           {"id":1,"itemName":"India","name":"IN"}];
-    this.settings = {singleSelection: true, text:"Select Country",clearAll:false};
+    this.settings = {
+      enableSearchFilter: true,
+      addNewItemOnFilter: true,singleSelection: true, text:"Select Country"};
   }
   onItemSelect(item:any){
     console.log(item);
@@ -41,6 +44,12 @@ export class SingleSelectionExample implements OnInit {
   }
    onDeSelectAll(items: any){
     console.log(items);
+  }
+  onAddItem(data:string){
+    this.count++;
+    this.itemList.push({"id": this.count,"itemName":data,"name":data});
+    this.selectedItems = [];
+    this.selectedItems.push({"id": this.count,"itemName":data,"name":data});
   }
 cssgist: boolean = false;
     title: string = "Single Selection";
