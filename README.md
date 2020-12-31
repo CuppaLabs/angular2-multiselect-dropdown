@@ -251,6 +251,7 @@ The following list of settings are supported by the component. Configure the set
 | addNewItemOnFilter | Boolean | Whe you filter items and if, the item is not found, you can add the text as new item to the list | false |
 | addNewButtonText | String | The text in the button when `addNewItemOnFilter` is enabled | 'Add' |
 | escapeToClose | boolean | Press excape key to close the dropdown | true |
+| autoPosition | boolean | Enable dropdown to open either on 'top' or 'bottom' Ex: settings = { position: 'bottom', autoPosition: false }; open the dropdown always at bottom |  true |
 
 ### Events
 - `onSelect` - Return the selected item on selection.
