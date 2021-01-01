@@ -19,7 +19,7 @@ import {LimitBadgesExample } from './examples/limitbadges';
 import { CustomPlaceholderExample } from './examples/customplaceholder';
 import { StylingExample } from './examples/styling';
 import { ng2Gist } from './examples/gist';
-import { TabViewModule } from 'primeng/primeng';
+import { TabViewModule } from 'primeng/tabview';
 import { UsingWithFormExample } from './examples/usingWithForms';
 import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
 import { LazyLoadingExample } from './examples/lazyLoading';

@@ -1,6 +1,6 @@
 {
   "name": "angular2-multiselect-dropdown",
-  "version": "4.6.6",
+  "version": "4.6.7",
   "description": "Angular 2 and angular 4 and angular 6 multiselect dropdown component.",
   "keywords": [
     "angular 2 multiselect dropdown",
@@ -51,8 +51,8 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.800.0",
-    "@angular-devkit/build-ng-packagr": "~0.800.0",
+    "@angular-devkit/build-angular": "~0.801.3",
+    "@angular-devkit/build-ng-packagr": "~0.801.3",
     "@angular/cli": "~8.0.4",
     "@angular/compiler-cli": "^8.0.3",
     "@angular/language-service": "^8.0.3",

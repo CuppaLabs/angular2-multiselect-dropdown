@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './views/view.html' 
+  templateUrl: './views/singleSelection.html' 
 })
 export class SingleSelectionExample implements OnInit {
 
