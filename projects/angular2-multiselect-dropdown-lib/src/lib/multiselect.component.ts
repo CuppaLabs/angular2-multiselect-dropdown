@@ -303,6 +303,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         if (this.settings.groupBy) {
             this.updateGroupInfo(item);
         }
+        
 
     }
     public validate(c: FormControl): any {
@@ -496,6 +497,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
             this.onDeSelectAll.emit(this.selectedItems);
         }
+        setTimeout(() => {
+            this.calculateDropdownDirection();
+        });
         event.stopPropagation();
     }
     filterGroupedList() {
