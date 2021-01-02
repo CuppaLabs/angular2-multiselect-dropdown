@@ -100,10 +100,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
     @HostListener('window:scroll', ['$event'])
     onScroll(event: any) {
-        if (this.settings.tagToBody) {
+        if (this.isActive) {
             this.closeDropdown();
             const elem = this.cuppaDropdown.nativeElement;
-            this.dropDownTop = elem.getBoundingClientRect().y + elem.clientHeight + 1;
+            if(this.settings.autoPosition){
+                this.dropDownTop = elem.getBoundingClientRect().y + elem.clientHeight + 1;
+            }
             this.dropDownLeft = elem.getBoundingClientRect().x;
         }
     }
@@ -173,7 +175,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         addNewButtonText: "Add",
         escapeToClose: true,
         clearAll: true,
-        tagToBody: false
+        tagToBody: true
     }
     randomSize: boolean = true;
     public parseError: boolean;
@@ -220,9 +222,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         });
         setTimeout(() => {
             this.calculateDropdownDirection();
-            if (this.settings.tagToBody) {
-                this.setDropdownWidth()
-            }
         });
         this.virtualScroollInit = false;
     }
@@ -263,11 +262,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.selectedListHeight.val = this.selectedListElem.nativeElement.clientHeight;
             this.cdr.detectChanges();
         }
-        if(this.settings.tagToBody && this.isActive){
-            setTimeout(() => {
-                this.setDropdownWidth();
-            }, 0);
-        }
+        this.calculateDropdownDirection();
     }
     onItemClick(item: any, index: number, evt: Event) {
         if (item.disabled) {
@@ -423,9 +418,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         else {
             this.onClose.emit(false);
         }
-        setTimeout(() => {
-            this.calculateDropdownDirection();
-        }, 0);
         if (this.settings.lazyLoading) {
             this.virtualdata = this.data;
             this.virtualScroollInit = true;
@@ -872,6 +864,16 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     calculateDropdownDirection() {
         let shouldOpenTowardsTop = this.settings.position == 'top';
+        const elem = this.cuppaDropdown.nativeElement;
+        const dropdownWidth = elem.clientWidth;
+        this.dropDownWidth = dropdownWidth;
+        this.dropDownLeft = elem.getBoundingClientRect().x;
+        if(this.settings.position == 'top' && !this.settings.autoPosition){
+            this.openTowardsTop(true);
+        }
+        else if(this.settings.position == 'bottom' && !this.settings.autoPosition){
+            this.openTowardsTop(false);
+        }
         if (this.settings.autoPosition) {
             const dropdownHeight = this.dropdownListElem.nativeElement.clientHeight;
             const viewportHeight = document.documentElement.clientHeight;
@@ -896,18 +898,18 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
 
     }
-    setDropdownWidth() {
-        const elem = this.cuppaDropdown.nativeElement;
-        const dropdownWidth = elem.clientWidth;
-        this.dropDownWidth = dropdownWidth;
-        this.dropDownTop = elem.getBoundingClientRect().y + elem.clientHeight + 1;
-        this.dropDownLeft = elem.getBoundingClientRect().x;
-    }
     openTowardsTop(value: boolean) {
+        const elem = this.cuppaDropdown.nativeElement;
         if (value && this.selectedListElem.nativeElement.clientHeight) {
-            this.dropdownListYOffset = 15 + this.selectedListElem.nativeElement.clientHeight;
+            this.dropdownListYOffset = 15 - this.selectedListElem.nativeElement.clientHeight;
+            this.dropDownTop = elem.getBoundingClientRect().y - this.dropdownListElem.nativeElement.clientHeight - elem.clientHeight/2;
+            this.settings.position = 'top'
+
         } else {
+            this.dropDownTop = elem.getBoundingClientRect().y + elem.clientHeight + 1;
             this.dropdownListYOffset = 0;
+            this.settings.position = 'bottom'
+
         }
     }
     clearSelection(e?: any) {
