@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1609610924548,
+  "timestamp": 1609612579637,
   "index": "/angular2-multiselect-dropdown/index.html",
   "assetGroups": [
     {
@@ -10,8 +10,8 @@
       "urls": [
         "/angular2-multiselect-dropdown/favicon.ico",
         "/angular2-multiselect-dropdown/index.html",
-        "/angular2-multiselect-dropdown/main-es2015.2e41eedf38712013b4fe.js",
-        "/angular2-multiselect-dropdown/main-es5.d578f5a885cf56ca1ca8.js",
+        "/angular2-multiselect-dropdown/main-es2015.f97838c4a10b80a0f316.js",
+        "/angular2-multiselect-dropdown/main-es5.77b2799eb8056dc2bc05.js",
         "/angular2-multiselect-dropdown/polyfills-es2015.cfc005ecbba3ebc3f28c.js",
         "/angular2-multiselect-dropdown/polyfills-es5.34d76c271bf3989aa808.js",
         "/angular2-multiselect-dropdown/runtime-es2015.3f3fc55b246d2a4b8254.js",
@@ -62,9 +62,9 @@
     "/angular2-multiselect-dropdown/assets/img/multiselect-dropdown.png": "f295c2d862b94ec357f6e7e3a5c6bda4d9dc09c0",
     "/angular2-multiselect-dropdown/assets/img/sand-background.jpg": "b39380174d1813771960780eb6b9ffba608c1419",
     "/angular2-multiselect-dropdown/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/angular2-multiselect-dropdown/index.html": "8896a0f8b94f8948bf046289110589123fc9361a",
-    "/angular2-multiselect-dropdown/main-es2015.2e41eedf38712013b4fe.js": "67c1b6fee0e1bfdfc9ef7817e1b13e4a52e14192",
-    "/angular2-multiselect-dropdown/main-es5.d578f5a885cf56ca1ca8.js": "3ef0c7340b4571a2ba79a2992e0b5254f9535ac1",
+    "/angular2-multiselect-dropdown/index.html": "0fb4da62d1b1a51d3281a7a27d21644266283652",
+    "/angular2-multiselect-dropdown/main-es2015.f97838c4a10b80a0f316.js": "cb1716acb2e17154af58f5e288fcfad0ae32ffff",
+    "/angular2-multiselect-dropdown/main-es5.77b2799eb8056dc2bc05.js": "d827f2e0f09f2fdde6d1e86439aa2ea65de6416c",
     "/angular2-multiselect-dropdown/polyfills-es2015.cfc005ecbba3ebc3f28c.js": "e4be224553c5002677d7b21a2514f68bd4d9459d",
     "/angular2-multiselect-dropdown/polyfills-es5.34d76c271bf3989aa808.js": "5a7cdd5be2eeb7d366162ff06da2c7e40d04d2cf",
     "/angular2-multiselect-dropdown/runtime-es2015.3f3fc55b246d2a4b8254.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
