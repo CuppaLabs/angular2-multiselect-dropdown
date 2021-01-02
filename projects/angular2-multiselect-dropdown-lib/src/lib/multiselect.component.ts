@@ -906,7 +906,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         const elem = this.cuppaDropdown.nativeElement;
         if (value && this.selectedListElem.nativeElement.clientHeight) {
             this.dropdownListYOffset = 15 - this.selectedListElem.nativeElement.clientHeight;
-            this.dropDownTop = elem.getBoundingClientRect().y - this.dropdownListElem.nativeElement.clientHeight - elem.clientHeight/2;
+            this.dropDownTop = elem.getBoundingClientRect().y - this.dropdownListElem.nativeElement.clientHeight - 15;
             this.settings.position = 'top'
 
         } else {
