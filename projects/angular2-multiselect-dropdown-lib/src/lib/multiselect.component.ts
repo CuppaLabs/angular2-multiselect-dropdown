@@ -89,6 +89,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
     @ViewChild('selectedList', { static: false }) selectedListElem: ElementRef;
     @ViewChild('dropdownList', { static: false }) dropdownListElem: ElementRef;
+    @ViewChild('cuppaDropdown', { static: false }) cuppaDropdown: ElementRef;
 
     @HostListener('document:keyup.escape', ['$event'])
     onEscapeDown(event: KeyboardEvent) {
@@ -96,6 +97,17 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.closeDropdown();
         }
     }
+
+    @HostListener('window:scroll', ['$event'])
+    onScroll(event: any) {
+        if (this.settings.tagToBody) {
+            this.closeDropdown();
+            const elem = this.cuppaDropdown.nativeElement;
+            this.dropDownTop = elem.getBoundingClientRect().y + elem.clientHeight + 1;
+            this.dropDownLeft = elem.getBoundingClientRect().x;
+        }
+    }
+
     virtualdata: any = [];
     searchTerm$ = new Subject<string>();
 
@@ -128,6 +140,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     public item: any;
     public dropdownListYOffset: number = 0;
     subscription: Subscription;
+    public dropDownWidth: number = 0;
+    public dropDownTop: number = 0;
+    public dropDownLeft: number = 0;
     public id: any = Math.random().toString(36).substring(2)
     defaultSettings: DropdownSettings = {
         singleSelection: false,
@@ -157,7 +172,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         addNewItemOnFilter: false,
         addNewButtonText: "Add",
         escapeToClose: true,
-        clearAll: true
+        clearAll: true,
+        tagToBody: false
     }
     randomSize: boolean = true;
     public parseError: boolean;
@@ -204,6 +220,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         });
         setTimeout(() => {
             this.calculateDropdownDirection();
+            if (this.settings.tagToBody) {
+                this.setDropdownWidth()
+            }
         });
         this.virtualScroollInit = false;
     }
@@ -243,6 +262,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         if (this.selectedListElem.nativeElement.clientHeight && this.settings.position == 'top' && this.selectedListHeight) {
             this.selectedListHeight.val = this.selectedListElem.nativeElement.clientHeight;
             this.cdr.detectChanges();
+        }
+        if(this.settings.tagToBody && this.isActive){
+            setTimeout(() => {
+                this.setDropdownWidth();
+            }, 0);
         }
     }
     onItemClick(item: any, index: number, evt: Event) {
@@ -284,6 +308,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         if (this.settings.groupBy) {
             this.updateGroupInfo(item);
         }
+
     }
     public validate(c: FormControl): any {
         return null;
@@ -820,10 +845,10 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             item.list.forEach((obj: any) => {
                 this.removeSelected(obj);
             });
-            
+
             this.onGroupDeSelect.emit(item);
             this.updateGroupInfo(item);
-            
+
         }
         else {
             item.selected = true;
@@ -835,7 +860,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             });
             this.onGroupSelect.emit(item);
             this.updateGroupInfo(item);
-            
+
         }
 
 
@@ -871,6 +896,13 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
 
     }
+    setDropdownWidth() {
+        const elem = this.cuppaDropdown.nativeElement;
+        const dropdownWidth = elem.clientWidth;
+        this.dropDownWidth = dropdownWidth;
+        this.dropDownTop = elem.getBoundingClientRect().y + elem.clientHeight + 1;
+        this.dropDownLeft = elem.getBoundingClientRect().x;
+    }
     openTowardsTop(value: boolean) {
         if (value && this.selectedListElem.nativeElement.clientHeight) {
             this.dropdownListYOffset = 15 + this.selectedListElem.nativeElement.clientHeight;
@@ -885,7 +917,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             })
         }
         this.clearSearch();
-        this.selectedItems = [];         
+        this.selectedItems = [];
         this.isSelectAll = false;
         this.onChangeCallback(this.selectedItems);
         this.onTouchedCallback(this.selectedItems);

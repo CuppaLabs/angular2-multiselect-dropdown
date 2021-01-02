@@ -109,7 +109,9 @@ virtual-scroll {
     }
   }
 }
-
+.dropdown-list.tagToBody {
+  position: fixed;
+}
 .dropdown-list {
   position: absolute;
   padding-top: 14px;

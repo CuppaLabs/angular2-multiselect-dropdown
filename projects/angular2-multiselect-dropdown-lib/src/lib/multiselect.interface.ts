@@ -30,4 +30,5 @@ export interface DropdownSettings{
     escapeToClose?: boolean;
     autoPosition?: boolean;
     clearAll?: boolean;
+    tagToBody?: boolean;
 } 

@@ -1,4 +1,4 @@
-<div class="cuppa-dropdown" (clickOutside)="closeDropdownOnClickOut()">
+<div class="cuppa-dropdown" (clickOutside)="closeDropdownOnClickOut()" #cuppaDropdown>
     <div class="selected-list" #selectedList>
         <div class="c-btn" (click)="toggleDropdown($event)" [ngClass]="{'disabled': settings.disabled}" [attr.tabindex]="0">
 
@@ -44,7 +44,11 @@
             </span>
         </div>
     </div>
-    <div #dropdownList class="dropdown-list animated fadeIn" [ngClass]="{'dropdown-list-top': dropdownListYOffset}" [style.bottom.px]="dropdownListYOffset ? dropdownListYOffset : null"
+    <div #dropdownList class="dropdown-list animated fadeIn" [ngClass]="{'dropdown-list-top': dropdownListYOffset, 'tagToBody': settings.tagToBody}" 
+    [style.width.px]="settings.tagToBody ? dropDownWidth : null" 
+    [style.top.px]="settings.tagToBody ? dropDownTop : null" 
+    [style.left.px]="settings.tagToBody ? dropDownLeft : null" 
+    [style.bottom.px]="dropdownListYOffset ? dropdownListYOffset : null"
         [hidden]="!isActive">
         <div [ngClass]="{'arrow-up': !dropdownListYOffset, 'arrow-down': dropdownListYOffset}" class="arrow-2"></div>
         <div [ngClass]="{'arrow-up': !dropdownListYOffset, 'arrow-down': dropdownListYOffset}"></div>
