@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './views/singleSelection.html' 
+  templateUrl: './views/singleSelection.html'
 })
 export class SingleSelectionExample implements OnInit {
 
@@ -10,51 +10,53 @@ export class SingleSelectionExample implements OnInit {
   settings = {};
   count = 6;
 
-  constructor(){
-    
+  constructor() {
+
   }
-  ngOnInit(){
-   
+  ngOnInit() {
+
 
     this.itemList = [
-                          {"id":1,"itemName":"India","name":"IN"},
-                          {"id":2,"itemName":"Singapore","name":"SN"},
-                          {"id":3,"itemName":"Australia","name":"AU"},
-                          {"id":4,"itemName":"Canada","name":"CA"},
-                          {"id":5,"itemName":"South Korea","name":"SK"},    
-                          {"id":6,"itemName":"Brazil","name":"BR"}                      
-                        ];
-    
+      { "id": 1, "itemName": "India", "name": "IN" },
+      { "id": 2, "itemName": "Singapore", "name": "SN" },
+      { "id": 3, "itemName": "Australia", "name": "AU" },
+      { "id": 4, "itemName": "Canada", "name": "CA" },
+      { "id": 5, "itemName": "South Korea", "name": "SK" },
+      { "id": 6, "itemName": "Brazil", "name": "BR" }
+    ];
+
     this.selectedItems = [
-                          {"id":1,"itemName":"India","name":"IN"}];
+      { "id": 1, "itemName": "India", "name": "IN" }];
     this.settings = {
       enableSearchFilter: true,
-      addNewItemOnFilter: true,singleSelection: true, text:"Select Country"};
+      addNewItemOnFilter: true, singleSelection: true, text: "Select Country",
+      tagToBody: true
+    };
   }
-  onItemSelect(item:any){
+  onItemSelect(item: any) {
     console.log(item);
     console.log(this.selectedItems);
   }
-  OnItemDeSelect(item:any){
+  OnItemDeSelect(item: any) {
     console.log(item);
     console.log(this.selectedItems);
   }
-  onSelectAll(items: any){
+  onSelectAll(items: any) {
     console.log(items);
   }
-   onDeSelectAll(items: any){
+  onDeSelectAll(items: any) {
     console.log(items);
   }
-  onAddItem(data:string){
+  onAddItem(data: string) {
     this.count++;
-    this.itemList.push({"id": this.count,"itemName":data,"name":data});
+    this.itemList.push({ "id": this.count, "itemName": data, "name": data });
     this.selectedItems = [];
-    this.selectedItems.push({"id": this.count,"itemName":data,"name":data});
+    this.selectedItems.push({ "id": this.count, "itemName": data, "name": data });
   }
-cssgist: boolean = false;
-    title: string = "Single Selection";
-    tsgist: string = "CuppaLabs/6ef578ce507dfd548eec39e008b4de14";
-    htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
-    tstitle: string = "singleSelection.ts"
-    htmltitle: string = "singleSelection.html";
+  cssgist: boolean = false;
+  title: string = "Single Selection";
+  tsgist: string = "CuppaLabs/6ef578ce507dfd548eec39e008b4de14";
+  htmlgist: string = "CuppaLabs/eb78d42ab7971fda6493586e329bfdb8";
+  tstitle: string = "singleSelection.ts"
+  htmltitle: string = "singleSelection.html";
 }

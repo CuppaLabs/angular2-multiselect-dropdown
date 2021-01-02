@@ -37,7 +37,8 @@ export class SearchFilterByOnePropertyExample implements OnInit {
       enableSearchFilter: true,
       badgeShowLimit: 3,
       searchBy: ['itemName'],
-      searchPlaceholderText: 'Search by name' 
+      searchPlaceholderText: 'Search by name',
+      tagToBody: true 
     };
   }
   onItemSelect(item: any) {

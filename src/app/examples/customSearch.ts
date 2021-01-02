@@ -22,7 +22,8 @@ export class CustomSearchExample implements OnInit {
             labelKey: "name",
             noDataLabel: "Search Countries...",
             enableSearchFilter: true,
-            searchBy: ['name', 'capital']
+            searchBy: ['name', 'capital'],
+            tagToBody: true,
         };
     }
     onItemSelect(item: any) {

@@ -35,7 +35,8 @@ export class DisableModeExample implements OnInit {
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: false,
       classes: "myclass custom-class",
-      disabled: true
+      disabled: true,
+      tagToBody: true
     };
   }
   onItemSelect(item: any) {

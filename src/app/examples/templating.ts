@@ -36,7 +36,8 @@ export class TemplatingExample implements OnInit {
                               enableSearchFilter: true,
                               classes:"myclass custom-class",
                               showCheckbox: true,
-                              groupBy: "category"
+                              groupBy: "category",
+                              tagToBody: true,
                             };
 
   }

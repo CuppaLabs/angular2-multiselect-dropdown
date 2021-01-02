@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MockService } from './examples/mock-data';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { AppComponent } from './app.component';
 import { AngularMultiSelectModule } from '../../projects/angular2-multiselect-dropdown-lib/src/lib/multiselect.component';
@@ -19,7 +20,6 @@ import {LimitBadgesExample } from './examples/limitbadges';
 import { CustomPlaceholderExample } from './examples/customplaceholder';
 import { StylingExample } from './examples/styling';
 import { ng2Gist } from './examples/gist';
-import { TabViewModule } from 'primeng/tabview';
 import { UsingWithFormExample } from './examples/usingWithForms';
 import { UsingWithReactiveFormExample } from './examples/usingInReactForms';
 import { LazyLoadingExample } from './examples/lazyLoading';
@@ -34,13 +34,17 @@ import {SearchFilterAddItemExample } from './examples/searchFilterAddNewItem';
 import { EventsExample } from './examples/events';
 import { HighlightModule } from 'ngx-highlightjs';
 import { UsingInListExample } from './examples/usingInList';
-
+import {SourceTab} from './components/sourcetab/sourcetab.component'
 import xml from 'highlight.js/lib/languages/xml';
 import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CheckForUpdateService } from './check-for-update.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 export function hljsLanguages() {
   return [
     {name: 'typescript', func: typescript},
@@ -76,7 +80,8 @@ export function hljsLanguages() {
     LazyLoadingRemoteDataExample,
     SearchFilterAddItemExample,
     EventsExample,
-    UsingInListExample
+    UsingInListExample,
+    SourceTab
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -84,12 +89,15 @@ export function hljsLanguages() {
     FormsModule,
     AppRouterModule,
     AngularMultiSelectModule,
-    TabViewModule,
     HttpClientModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
     HighlightModule.forRoot({
       languages: hljsLanguages
     }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    BrowserAnimationsModule
   ],
   providers: [MockService, CheckForUpdateService],
   bootstrap: [AppComponent]

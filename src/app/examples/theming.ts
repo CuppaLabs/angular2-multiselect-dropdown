@@ -32,7 +32,8 @@ export class ThemingExample implements OnInit {
             selectAllText: 'Select All',
             unSelectAllText: 'UnSelect All',
             classes: "myclass custom-class",
-            primaryKey: "countryId"
+            primaryKey: "countryId",
+            tagToBody: true
         };
     }
     onItemSelect(item: any) {

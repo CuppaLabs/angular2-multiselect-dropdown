@@ -35,7 +35,8 @@ export class LimitSelectionExample implements OnInit {
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: true,
       classes: "myclass custom-class",
-      limitSelection: 2
+      limitSelection: 2,
+      tagToBody: true
     };
   }
   onItemSelect(item: any) {

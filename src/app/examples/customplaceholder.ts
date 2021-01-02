@@ -35,7 +35,8 @@ export class CustomPlaceholderExample implements OnInit {
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: true,
       classes: "myclass custom-class",
-      searchPlaceholderText: "Custom Placeholder text"
+      searchPlaceholderText: "Custom Placeholder text",
+      tagToBody: true,
     };
   }
   onItemSelect(item: any) {

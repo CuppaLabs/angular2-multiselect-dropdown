@@ -33,7 +33,8 @@ export class StylingExample implements OnInit {
       text: "Select Countries",
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      classes: "myclass custom-class-example"
+      classes: "myclass custom-class-example",
+      tagToBody: true
     };
   }
   onItemSelect(item: any) {

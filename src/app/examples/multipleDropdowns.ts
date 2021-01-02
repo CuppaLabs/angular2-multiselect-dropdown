@@ -30,11 +30,13 @@ export class MultipleDropdownsExample implements OnInit {
         this.dropdownSettings = {
             text: "Select",
             enableSearchFilter: true,
-            labelKey: "name"
+            labelKey: "name",
+            tagToBody: true
         };
         this.dropdownSettings2 = {
             text: "Select",
             enableSearchFilter: true,
+            tagToBody: true
         };
 
 

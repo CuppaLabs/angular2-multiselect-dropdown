@@ -31,7 +31,8 @@ export class LazyLoadingExample implements OnInit {
             classes: "myclass custom-class",
             enableSearchFilter: true,
             lazyLoading: true,
-            badgeShowLimit: 4
+            badgeShowLimit: 4,
+            tagToBody: true
 
         };
     }

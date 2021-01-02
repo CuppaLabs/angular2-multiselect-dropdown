@@ -34,7 +34,8 @@ export class ResetDropdownExample implements OnInit {
       text: "Select Countries",
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      classes: "myclass custom-class"
+      classes: "myclass custom-class",
+      tagToBody: true
     };
   }
   onItemSelect(item: any) {

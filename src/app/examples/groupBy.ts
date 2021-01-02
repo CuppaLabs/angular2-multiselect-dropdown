@@ -37,7 +37,8 @@ export class GroupByExample implements OnInit {
       enableSearchFilter: true,
       groupBy: "category",
       selectGroup: true,
-      searchBy: ["itemName"]
+      searchBy: ["itemName"],
+      tagToBody: true
     };
   }
   onItemSelect(item: any) {

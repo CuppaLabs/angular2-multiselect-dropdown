@@ -49,7 +49,8 @@ export class UsingInListExample implements OnInit {
             unSelectAllText: 'UnSelect All',
             enableSearchFilter: true,
             classes: "myclass custom-class",
-            showCheckbox: true
+            showCheckbox: true,
+            tagToBody: true
         };
 
     }

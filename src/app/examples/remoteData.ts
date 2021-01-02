@@ -28,7 +28,8 @@ export class RemoteDataExample implements OnInit {
             labelKey: "name",
             groupBy:'region',
             enableSearchFilter: true,
-            searchBy: ['name','capital']
+            searchBy: ['name','capital'],
+            tagToBody: true
         };
     }
     onItemSelect(item: any) {
