@@ -6,20 +6,20 @@
     <ng-template matTabContent>
       <ng2-gist [gistId]="tsgist"></ng2-gist>
     </ng-template>
-    
+
   </mat-tab>
   <mat-tab label="htmltitle">
     <ng-template mat-tab-label> {{ htmltitle }} </ng-template>
     <ng-template matTabContent>
       <ng2-gist [gistId]="htmlgist"></ng2-gist>
     </ng-template>
-    
+
   </mat-tab>
-  <mat-tab label="csstitle">
+  <mat-tab label="csstitle" *ngIf="csstitle">
     <ng-template mat-tab-label> {{ csstitle }} </ng-template>
     <ng-template matTabContent>
       <ng2-gist [gistId]="cssgist"></ng2-gist>
     </ng-template>
-    
+
   </mat-tab>
 </mat-tab-group>
