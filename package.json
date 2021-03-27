@@ -1,13 +1,14 @@
 {
   "name": "angular2-multiselect-dropdown",
-  "version": "4.6.9",
+  "version": "4.6.10",
   "description": "Angular 2 and angular 4 and angular 6 multiselect dropdown component.",
   "keywords": [
     "angular 2 multiselect dropdown",
     "angular 4 multiselect dropdown",
     "angular multiselect",
     "angular dropdown",
-    "angular 6 dropdown multiselect"
+    "angular 6 dropdown multiselect",
+    "angular 8 dropdown multiselect"
   ],
   "license": "MIT",
   "author": "Pradeep Terli",
