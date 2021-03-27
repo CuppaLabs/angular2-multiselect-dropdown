@@ -44,6 +44,8 @@ import { CheckForUpdateService } from './check-for-update.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogContentExampleDialog, UsingWithinDialog } from './examples/usingWithinDialog';
 
 export function hljsLanguages() {
   return [
@@ -81,7 +83,9 @@ export function hljsLanguages() {
     SearchFilterAddItemExample,
     EventsExample,
     UsingInListExample,
-    SourceTab
+    SourceTab,
+    DialogContentExampleDialog,
+    UsingWithinDialog
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -89,6 +93,7 @@ export function hljsLanguages() {
     FormsModule,
     AppRouterModule,
     AngularMultiSelectModule,
+    MatDialogModule,
     HttpClientModule,
     MatTabsModule,
     MatButtonModule,
@@ -100,6 +105,7 @@ export function hljsLanguages() {
     BrowserAnimationsModule
   ],
   providers: [MockService, CheckForUpdateService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogContentExampleDialog],
 })
 export class AppModule { }

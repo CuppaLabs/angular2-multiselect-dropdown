@@ -22,10 +22,11 @@ import { ThemingExample } from './examples/theming';
 import { RemoteDataExample } from './examples/remoteData';
 import { CustomSearchExample } from './examples/customSearch';
 import { SearchFilterByOnePropertyExample } from './examples/searchByOneProperty';
-import {LazyLoadingRemoteDataExample } from './examples/lazyLoadingRemoteData';
-import {SearchFilterAddItemExample } from './examples/searchFilterAddNewItem';
+import { LazyLoadingRemoteDataExample } from './examples/lazyLoadingRemoteData';
+import { SearchFilterAddItemExample } from './examples/searchFilterAddNewItem';
 import { EventsExample } from './examples/events';
 import { UsingInListExample } from './examples/usingInList';
+import { UsingWithinDialog } from './examples/usingWithinDialog';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/basic', pathMatch: 'full' },
@@ -48,11 +49,12 @@ const appRoutes: Routes = [
   { path: 'theming', component: ThemingExample },
   { path: 'remoteData', component: RemoteDataExample },
   { path: 'customSearchAPI', component: CustomSearchExample },
-  { path: 'searchFilterByOneProperty',  component: SearchFilterByOnePropertyExample },
-  { path: 'lazyloadingRemoteData', component: LazyLoadingRemoteDataExample},
-  { path: 'searchfilterAddNewItem', component: SearchFilterAddItemExample},
-  { path: 'events', component: EventsExample},
-  { path: 'usingInList', component: UsingInListExample}
+  { path: 'searchFilterByOneProperty', component: SearchFilterByOnePropertyExample },
+  { path: 'lazyloadingRemoteData', component: LazyLoadingRemoteDataExample },
+  { path: 'searchfilterAddNewItem', component: SearchFilterAddItemExample },
+  { path: 'events', component: EventsExample },
+  { path: 'usingInList', component: UsingInListExample },
+  { path: 'usingInDialog', component: UsingWithinDialog }
 
 ];
 
