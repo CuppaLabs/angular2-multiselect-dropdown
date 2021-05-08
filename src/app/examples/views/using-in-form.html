@@ -1,79 +1,62 @@
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm" style="border: 1px solid #ccc; padding: 10px;">
 
-<h4>{{ title }}</h4>
-<mat-tab-group mat-align-tabs="start" animationDuration="0ms">
-    <mat-tab>
-      <ng-template mat-tab-label>
-        Demo
-      </ng-template>
-      <ng-template matTabContent>
-        <div class="col-md-8 mr-auto ml-auto dropdown-container">
-            <form (ngSubmit)="onSubmit()" #loginForm="ngForm" style="border: 1px solid #ccc; padding: 10px;">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="formModel.name" name="name"
+            #name="ngModel">
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+            <div [hidden]="!name.hasError('required')">Name is required</div>
+            <div [hidden]="!name.hasError('pattern')">Only alphabetsallowed</div>
 
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="formModel.name" name="name"
-                        #name="ngModel">
-                    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-                        <div [hidden]="!name.hasError('required')">Name is required</div>
-                        <div [hidden]="!name.hasError('pattern')">Only alphabetsallowed</div>
-        
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="name">Email Address</label>
-                    <span style="color: red;float: right;">* required</span>
-                    <input type="text" class="form-control" id="emailaddress" required [(ngModel)]="formModel.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                        #email="ngModel">
-                    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-                        <div [hidden]="!email.hasError('required')">Email is required</div>
-                        <div [hidden]="!email.hasError('pattern')">Email format should be <small><b>joe@abc.com</b></small></div>
-                    </div>
-                </div>
-                        <div class="form-group">
-                    <label for="name">Skills </label>
-                    <span style="color: red;float: right;">* required</span>
-                    <angular2-multiselect [data]="itemList" [(ngModel)]="formModel.skills" 
-                                          [settings]="settings" 
-                                          (onSelect)="onItemSelect($event)"
-                                          (onDeSelect)="OnItemDeSelect($event)" 
-                                          (onSelectAll)="onSelectAll($event)" 
-                                          (onDeSelectAll)="onDeSelectAll($event)" name="skills" #skills="ngModel" required>
-                    </angular2-multiselect>
-                    <div [hidden]="skills.valid" class="alert alert-danger">
-                        <div [hidden]="!skills.hasError('required')">Atleast one Skill is required</div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-success btn-block" [disabled]="!loginForm.form.valid">Submit</button>
-            </form>
-            <table class="table">
-                <tr>
-                    <td><label>Name</label></td>
-                    <td>{{formModel.name}}</td>
-                </tr>
-                <tr>
-                    <td><label>Email</label></td>
-                    <td>{{formModel.email}}</td>
-                </tr>
-                <tr>
-                    <td><label>Skills</label></td>
-                    <td>
-                        <h6 *ngFor="let obj of formModel.skills">{{obj.itemName}}</h6>
-                    </td>
-                </tr>
-            </table>
-            <span>{{formModel | json}}</span>
-                <p>Form status: {{ loginForm.form.status | json }}</p>
-        
         </div>
-      </ng-template>
-      
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label> Source </ng-template>
-      <ng-template matTabContent>
-        <cuppa-source [tstitle]="tstitle" [htmltitle]="htmltitle" [csstitle]="csstitle" 
-[tsgist]="tsgist" [htmlgist]="htmlgist" [cssgist]="cssgist" ></cuppa-source>
-      </ng-template>
-      
-    </mat-tab>
-  </mat-tab-group>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="name">Email Address</label>
+        <span style="color: red;float: right;">* required</span>
+        <input type="text" class="form-control" id="emailaddress" required [(ngModel)]="formModel.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+            #email="ngModel">
+        <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+            <div [hidden]="!email.hasError('required')">Email is required</div>
+            <div [hidden]="!email.hasError('pattern')">Email format should be <small><b>joe@abc.com</b></small></div>
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="name">Skills </label>
+        <span style="color: red;float: right;">* required</span>
+        <angular2-multiselect [data]="itemList" [(ngModel)]="formModel.skills" 
+                              [settings]="settings" 
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)" 
+                              (onSelectAll)="onSelectAll($event)" 
+                              (onDeSelectAll)="onDeSelectAll($event)" name="skills" #skills="ngModel" required>
+        </angular2-multiselect>
+        <div [hidden]="skills.valid" class="alert alert-danger">
+            <div [hidden]="!skills.hasError('required')">Atleast one Skill is required</div>
+        </div>
+    </div>
+    <br>
+    <div class="d-grid col-12 mx-auto">
+        <button type="submit" class="btn btn-success btn-block" [disabled]="!loginForm.form.valid">Submit</button>
+    </div>
+    
+</form>
+<table class="table">
+    <tr>
+        <td><label>Name</label></td>
+        <td>{{formModel.name}}</td>
+    </tr>
+    <tr>
+        <td><label>Email</label></td>
+        <td>{{formModel.email}}</td>
+    </tr>
+    <tr>
+        <td><label>Skills</label></td>
+        <td>
+            <h6 *ngFor="let obj of formModel.skills">{{obj.itemName}}</h6>
+        </td>
+    </tr>
+</table>
+<span>{{formModel | json}}</span>
+    <p>Form status: {{ loginForm.form.status | json }}</p>

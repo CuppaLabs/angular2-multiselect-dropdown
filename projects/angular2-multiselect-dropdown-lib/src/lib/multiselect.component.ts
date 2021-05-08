@@ -113,7 +113,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     virtualdata: any = [];
     searchTerm$ = new Subject<string>();
 
-    filterPipe: ListFilterPipe;
     public selectedItems: Array<any>;
     public isActive: boolean = false;
     public isSelectAll: boolean = false;
@@ -185,7 +184,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     private virtualScroller: VirtualScrollerComponent;
     public isDisabledItemPresent = false;
 
-    constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef, private ds: DataService) {
+    constructor(public _elementRef: ElementRef, private cdr: ChangeDetectorRef, private filterPipe: ListFilterPipe) {
         this.searchTerm$.asObservable().pipe(
             debounceTime(1000),
             distinctUntilChanged(),
@@ -204,26 +203,13 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 this.selectedListHeight.val = this.selectedListElem.nativeElement.clientHeight;
             });
         }
-        this.subscription = this.ds.getData().subscribe(data => {
-            if (data) {
-                let len = 0;
-                data.forEach((obj: any, i: any) => {
-                    if (obj.disabled) {
-                        this.isDisabledItemPresent = true;
-                    }
-                    if (!obj.hasOwnProperty('grpTitle')) {
-                        len++;
-                    }
-                });
-                this.filterLength = len;
-                this.onFilterChange(data);
-            }
-
-        });
         setTimeout(() => {
             this.calculateDropdownDirection();
         });
         this.virtualScroollInit = false;
+    }
+    onKeyUp(evt: any){
+        this.searchTerm$.next((<HTMLInputElement>evt.target).value);
     }
     ngOnChanges(changes: SimpleChanges) {
         if (changes.data && !changes.data.firstChange) {
@@ -266,11 +252,11 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     onItemClick(item: any, index: number, evt: Event) {
         if (item.disabled) {
-            return false;
+            return;
         }
 
         if (this.settings.disabled) {
-            return false;
+            return;
         }
 
         let found = this.isSelected(item);
@@ -405,7 +391,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     toggleDropdown(evt: any) {
         if (this.settings.disabled) {
-            return false;
+            return;
         }
         this.isActive = !this.isActive;
         if (this.isActive) {
@@ -423,7 +409,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     public openDropdown() {
         if (this.settings.disabled) {
-            return false;
+            return;
         }
         this.isActive = true;
         if (this.settings.searchAutofocus && this.searchInput && this.settings.enableSearchFilter && !this.searchTempl) {
@@ -546,7 +532,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
                 });
 
-                this.ds.getFilteredData().forEach((el: any) => {
+                this.filteredList.forEach((el: any) => {
                     if (!this.isSelected(el) && !el.hasOwnProperty('grpTitle')) {
                         this.addSelected(el);
                         added.push(el);
@@ -555,7 +541,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
             }
             else {
-                this.ds.getFilteredData().forEach((item: any) => {
+                this.filteredList.forEach((item: any) => {
                     if (!this.isSelected(item)) {
                         this.addSelected(item);
                         added.push(item);
@@ -581,7 +567,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                     }
                     this.updateGroupInfo(item);
                 });
-                this.ds.getFilteredData().forEach((el: any) => {
+                this.filteredList.forEach((el: any) => {
                     if (this.isSelected(el)) {
                         this.removeSelected(el);
                         removed.push(el);
@@ -589,7 +575,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 });
             }
             else {
-                this.ds.getFilteredData().forEach((item: any) => {
+                this.filteredList.forEach((item: any) => {
                     if (this.isSelected(item)) {
                         this.removeSelected(item);
                         removed.push(item);
@@ -627,11 +613,12 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         this.filter = "";
         this.isFilterSelectAll = false;
-
+        this.data = this.cachedItems;
     }
     onFilterChange(data: any) {
         if (this.filter && this.filter == "" || data.length == 0) {
             this.isFilterSelectAll = false;
+            this.data = this.cachedItems.slice();
         }
         let cnt = 0;
         data.forEach((item: any) => {
@@ -647,7 +634,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         else if (cnt > 0 && this.filterLength != cnt) {
             this.isFilterSelectAll = false;
         }
-        this.cdr.detectChanges();
+        this.data = data;
     }
     cloneArray(arr: any) {
         let i, copy;
@@ -662,7 +649,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     updateGroupInfo(item: any) {
         if (item.disabled) {
-            return false;
+            return;
         }
         let key = this.settings.groupBy;
         this.groupedData.forEach((obj: any) => {
@@ -832,7 +819,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     selectGroup(item: any) {
         if (item.disabled) {
-            return false;
+            return;
         }
         if (item.selected) {
             item.selected = false;
@@ -861,7 +848,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     }
     addFilterNewItem() {
         this.onAddFilterNewItem.emit(this.filter);
-        this.filterPipe = new ListFilterPipe(this.ds);
         this.filterPipe.transform(this.data, this.filter, this.settings.searchBy);
     }
     calculateDropdownDirection() {
@@ -877,7 +863,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.openTowardsTop(false);
         }
         if (this.settings.autoPosition) {
-            const dropdownHeight = this.dropdownListElem.nativeElement.clientHeight;
+            const dropdownHeight = this.defaultSettings.maxHeight;
             const viewportHeight = document.documentElement.clientHeight;
             const selectedListBounds = this.selectedListElem.nativeElement.getBoundingClientRect();
 
@@ -904,7 +890,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         const elem = this.cuppaDropdown.nativeElement;
         if (value && this.selectedListElem.nativeElement.clientHeight) {
             this.dropdownListYOffset = 15 - this.selectedListElem.nativeElement.clientHeight;
-            this.dropDownTop = elem.getBoundingClientRect().y - this.dropdownListElem.nativeElement.clientHeight - 15;
+            this.dropDownTop = elem.getBoundingClientRect().y - this.selectedListElem.nativeElement.clientHeight*2 - 15 - this.defaultSettings.maxHeight;
             this.settings.position = 'top'
 
         } else {
@@ -927,12 +913,28 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.onTouchedCallback(this.selectedItems);
         this.onDeSelectAll.emit(this.selectedItems);
     }
+    filteritems(evt: any) {
+        this.filteredList = this.filterPipe.transform(this.cachedItems, evt.target.value, this.settings.searchBy);
+        if (this.filteredList) {
+            let len = 0;
+            this.filteredList.forEach((obj: any, i: any) => {
+                if (obj.disabled) {
+                    this.isDisabledItemPresent = true;
+                }
+                if (!obj.hasOwnProperty('grpTitle')) {
+                    len++;
+                }
+            });
+            this.filterLength = len;
+        }
+        this.onFilterChange(this.filteredList);
+    }
 }
 
 @NgModule({
     imports: [CommonModule, FormsModule, VirtualScrollerModule],
     declarations: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search, setPosition, CIcon],
     exports: [AngularMultiSelect, ClickOutsideDirective, ScrollDirective, styleDirective, ListFilterPipe, Item, TemplateRenderer, Badge, Search, setPosition, CIcon],
-    providers: [DataService]
+    providers: [DataService, ListFilterPipe]
 })
 export class AngularMultiSelectModule { }

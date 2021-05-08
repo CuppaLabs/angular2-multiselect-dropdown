@@ -1,49 +1,28 @@
-<h4>{{ title }}</h4>
-<mat-tab-group mat-align-tabs="start" animationDuration="0ms">
-  <mat-tab>
-    <ng-template mat-tab-label> Demo </ng-template>
-    <ng-template matTabContent>
-      <div class="col-md-12 mr-auto ml-auto dropdown-container">
-        <table class="table table-bordered">
-          <thead class="thead-dark">
-            <tr>
-              <th>Customer</th>
-              <th>Countries</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of customers">
-              <td>{{item.name}}</td>
-              <td>
-                <angular2-multiselect
-                  [data]="itemList"
-                  [(ngModel)]="item.countries"
-                  [settings]="settings"
-                  (onSelect)="onItemSelect($event)"
-                  (onDeSelect)="OnItemDeSelect($event)"
-                  (onSelectAll)="onSelectAll($event)"
-                  (onDeSelectAll)="onDeSelectAll($event)"
-                >
-                </angular2-multiselect>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        {{customers | json}}
-      </div>
-    </ng-template>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label> Source </ng-template>
-    <ng-template matTabContent>
-      <cuppa-source
-        [tstitle]="tstitle"
-        [htmltitle]="htmltitle"
-        [csstitle]="csstitle"
-        [tsgist]="tsgist"
-        [htmlgist]="htmlgist"
-        [cssgist]="cssgist"
-      ></cuppa-source>
-    </ng-template>
-  </mat-tab>
-</mat-tab-group>
+<div class="col-md-12 mr-auto ml-auto dropdown-container">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>Customer</th>
+        <th>Countries</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of customers">
+        <td>{{item.name}}</td>
+        <td>
+          <angular2-multiselect
+            [data]="itemList"
+            [(ngModel)]="item.countries"
+            [settings]="settings"
+            (onSelect)="onItemSelect($event)"
+            (onDeSelect)="OnItemDeSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+            (onDeSelectAll)="onDeSelectAll($event)"
+          >
+          </angular2-multiselect>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  {{customers | json}}
+</div>

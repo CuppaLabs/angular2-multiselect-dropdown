@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MockService } from './examples/mock-data';
-import {MatTabsModule} from '@angular/material/tabs';
-
 import { AppComponent } from './app.component';
 import { AngularMultiSelectModule } from '../../projects/angular2-multiselect-dropdown-lib/src/lib/multiselect.component';
 import { AppRouterModule } from './app.router';
@@ -34,26 +32,14 @@ import {SearchFilterAddItemExample } from './examples/searchFilterAddNewItem';
 import { EventsExample } from './examples/events';
 import { HighlightModule } from 'ngx-highlightjs';
 import { UsingInListExample } from './examples/usingInList';
-import {SourceTab} from './components/sourcetab/sourcetab.component'
-import xml from 'highlight.js/lib/languages/xml';
-import scss from 'highlight.js/lib/languages/scss';
-import typescript from 'highlight.js/lib/languages/typescript';
+import {SourceTab} from './components/sourcetab/sourcetab.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CheckForUpdateService } from './check-for-update.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatDialogModule} from '@angular/material/dialog';
 import { DialogContentExampleDialog, UsingWithinDialog } from './examples/usingWithinDialog';
-
-export function hljsLanguages() {
-  return [
-    {name: 'typescript', func: typescript},
-    {name: 'scss', func: scss},
-    {name: 'xml', func: xml}
-  ];
-}
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdsenseModule } from 'ng2-adsense';
 
 @NgModule({
   declarations: [
@@ -93,14 +79,10 @@ export function hljsLanguages() {
     FormsModule,
     AppRouterModule,
     AngularMultiSelectModule,
-    MatDialogModule,
     HttpClientModule,
-    MatTabsModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    HighlightModule.forRoot({
-      languages: hljsLanguages
-    }),
+    AdsenseModule.forRoot(),
+    NgbModule,
+    HighlightModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule
   ],

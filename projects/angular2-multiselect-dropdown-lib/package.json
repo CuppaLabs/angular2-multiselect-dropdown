@@ -1,7 +1,10 @@
 {
-  "name": "angular2-multiselect-dropdown",
-  "version": "4.6.10",
-  "description": "Angular 2 and angular 4 and angular 6 multiselect dropdown component.",
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name":"angular2-multiselect-dropdown",
+  "version":"5.0.0",
+  "license": "MIT",
+  "author": "Pradeep Terli",
+  "description": "Angular Multiselct dropdown component library for Angular version 11, 10, 9,8,6,4 ",
   "keywords": [
     "angular 2 multiselect dropdown",
     "angular 4 multiselect dropdown",
@@ -9,14 +12,23 @@
     "angular dropdown",
     "angular 6 dropdown multiselect"
   ],
-  "license": "MIT",
-  "author": "Pradeep Terli",
-  "scripts": {
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/public_api.ts"
+    },
+    "allowedNonPeerDependencies": ["@tweenjs/tween.js"],
+    "assets": [
+      "README.md",
+      "LICENSE",
+      "./themes/*.theme.scss",
+      "./themes/*.theme.css"
+    ],
+    "dest": "../../dist"
+  },
+  "peerDependencies": {
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.4.0"
-  },
-  "devDependencies": {
   },
   "repository": {
     "type": "git",

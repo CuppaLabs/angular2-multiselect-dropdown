@@ -1,81 +1,61 @@
-<h4>{{ title }}</h4>
-<mat-tab-group mat-align-tabs="start" animationDuration="0ms">
-  <mat-tab>
-    <ng-template mat-tab-label> Demo </ng-template>
-    <ng-template matTabContent>
-      <div class="col-md-8 mr-auto ml-auto dropdown-container">
-        <form
-          [formGroup]="userForm"
-          novalidate
-          style="border: 1px solid #ccc; padding: 10px"
-        >
+<form
+  [formGroup]="userForm"
+  novalidate
+  style="border: 1px solid #ccc; padding: 10px"
+>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input class="form-control" formControlName="name" />
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="name">Email Address</label>
+    <span style="color: red; float: right">* required</span>
+    <input class="form-control" formControlName="email" />
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="name">Skills</label>
+    <span style="color: red; float: right">* required</span>
+    <angular2-multiselect
+      [data]="itemList"
+      [(ngModel)]="selectedItems"
+      [settings]="settings"
+      (onSelect)="onItemSelect($event)"
+      (onDeSelect)="OnItemDeSelect($event)"
+      (onSelectAll)="onSelectAll($event)"
+      (onDeSelectAll)="onDeSelectAll($event)"
+      formControlName="skills"
+    >
+    </angular2-multiselect>
+  </div>
+  <br>
+  <div class="d-grid col-12 mx-auto">
+    <button
+    (click)="submitForm()"
+    [disabled]="!userForm.valid"
+    class="btn btn-success btn-block"
+  >
+    Submit
+  </button>
+  </div>
 
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input class="form-control" formControlName="name" />
-          </div>
-          <div class="form-group">
-            <label for="name">Email Address</label>
-            <span style="color: red; float: right">* required</span>
-            <input class="form-control" formControlName="email" />
-          </div>
-          <div class="form-group">
-            <label for="name">Skills</label>
-            <span style="color: red; float: right">* required</span>
-            <angular2-multiselect
-              [data]="itemList"
-              [(ngModel)]="selectedItems"
-              [settings]="settings"
-              (onSelect)="onItemSelect($event)"
-              (onDeSelect)="OnItemDeSelect($event)"
-              (onSelectAll)="onSelectAll($event)"
-              (onDeSelectAll)="onDeSelectAll($event)"
-              formControlName="skills"
-            >
-            </angular2-multiselect>
-          </div>
-          <button
-            (click)="submitForm()"
-            [disabled]="!userForm.valid"
-            class="btn btn-success btn-block"
-          >
-            Submit
-          </button>
-        </form>
-        <table class="table">
-          <tr>
-            <td><label>Name</label></td>
-            <td>{{userForm.value.name}}</td>
-          </tr>
-          <tr>
-            <td><label>Email</label></td>
-            <td>{{userForm.value.email}}</td>
-          </tr>
-          <tr>
-            <td><label>Skills</label></td>
-            <td>
-              <h6 *ngFor="let obj of userForm.value.skills">
-                {{obj.itemName}}
-              </h6>
-            </td>
-          </tr>
-        </table>
-        <span>{{userForm.value | json}}</span>
-        <p>Form status: {{ userForm.status | json }}</p>
-      </div>
-    </ng-template>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label> Source </ng-template>
-    <ng-template matTabContent>
-      <cuppa-source
-        [tstitle]="tstitle"
-        [htmltitle]="htmltitle"
-        [csstitle]="csstitle"
-        [tsgist]="tsgist"
-        [htmlgist]="htmlgist"
-        [cssgist]="cssgist"
-      ></cuppa-source>
-    </ng-template>
-  </mat-tab>
-</mat-tab-group>
+</form>
+<table class="table">
+  <tr>
+    <td><label>Name</label></td>
+    <td>{{userForm.value.name}}</td>
+  </tr>
+  <tr>
+    <td><label>Email</label></td>
+    <td>{{userForm.value.email}}</td>
+  </tr>
+  <tr>
+    <td><label>Skills</label></td>
+    <td>
+      <h6 *ngFor="let obj of userForm.value.skills">{{obj.itemName}}</h6>
+    </td>
+  </tr>
+</table>
+<span>{{userForm.value | json}}</span>
+<p>Form status: {{ userForm.status | json }}</p>

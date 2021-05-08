@@ -42,7 +42,8 @@ export class SearchFilterAddItemExample implements OnInit {
   }
   onAddItem(data:string){
     this.count++;
-    this.itemList.push({"id": this.count,"itemName":data,"name":data});
+    const list = [...this.itemList, ... [{"id": this.count,"itemName":data,"name":data}]]
+    this.itemList = list;
     this.selectedItems.push({"id": this.count,"itemName":data,"name":data});
   }
   onItemSelect(item: any) {

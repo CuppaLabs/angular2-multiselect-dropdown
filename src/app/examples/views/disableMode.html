@@ -1,30 +1,8 @@
-<h4>{{ title }}</h4>
-<mat-tab-group mat-align-tabs="start" animationDuration="0ms">
-    <mat-tab>
-      <ng-template mat-tab-label>
-        Demo
-      </ng-template>
-      <ng-template matTabContent>
-        <div class="col-md-8 mr-auto ml-auto dropdown-container">
-            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
-        (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
-        <div class="example-button-row">
-          <br>
-          <br>
-            <button (click)="disable()" mat-raised-button color="warn">Disable</button>
-            <button (click)="enable()" mat-raised-button color="primary">Enable</button>
-        </div>
-    </div>
-      </ng-template>
-      
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label> Source </ng-template>
-      <ng-template matTabContent>
-        <cuppa-source [tstitle]="tstitle" [htmltitle]="htmltitle" [csstitle]="csstitle" 
-[tsgist]="tsgist" [htmlgist]="htmlgist" [cssgist]="cssgist" ></cuppa-source>
-      </ng-template>
-      
-    </mat-tab>
-  </mat-tab-group>
-
+<angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
+(onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+<div class="example-button-row">
+  <br>
+  <br>
+    <button (click)="disable()" class="btn btn-primary">Disable</button>
+    <button (click)="enable()" class="btn btn-primary">Enable</button>
+</div>

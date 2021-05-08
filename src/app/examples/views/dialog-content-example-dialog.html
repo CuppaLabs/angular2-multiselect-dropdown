@@ -1,7 +1,4 @@
-<h2 mat-dialog-title>Multiselect renders in Dialog</h2>
-
-<mat-dialog-content class="mat-typography">
-    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
+<angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event)"
 (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
 </angular2-multiselect>
   <h3>Develop across all platforms</h3>
@@ -61,8 +58,3 @@
   <p>An app's components typically define many views, arranged hierarchically. Angular provides
   the Router service to help you define navigation paths among views. The router provides
   sophisticated in-browser navigational capabilities.</p>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
-</mat-dialog-actions>

@@ -1,0 +1,131 @@
+@import "node_modules/bootstrap/scss/functions";
+
+@import "node_modules/bootstrap/scss/variables";
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .mat-toolbar {
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+.left-section {
+    max-width: 250px !important;
+    width: 250px !important;
+    position: fixed;
+    display: flex;
+    height: calc(100vh - 64px);
+    overflow: auto;
+    border-right: 1px solid #ccc;
+}
+.center-section {
+    max-width: initial !important;
+    margin-left: 250px;
+    padding-top: 10px;
+}
+.right-section {
+    max-width: 300px !important;
+}
+.mat-grid-list {
+    height: calc(100vh - 64px) !important;
+}
+.left-sidebar {
+    position: fixed;
+    top: 65px;
+    height: calc(100vh - 75px);
+    padding-right: 0px;
+    overflow: hidden;
+}
+.left-sidebar, .right-sidebar {
+    width: 260px;
+}
+.left-sidebar:hover {
+    overflow: auto;
+
+}
+
+.outer-wrapper {
+    padding: 30px;
+}
+.center-content{
+  border-right: $border-width solid $gray-300;
+}
+@media (min-width: 768px) { 
+    .center-content {
+        margin-left: 265px;
+    }
+}
+.nav-sub{
+    width: 100%;
+    box-shadow: none;
+    margin-bottom: 6px;
+    padding: 0px;
+    margin-top: 50px;
+}
+.nav-wrapper {
+    padding: 0px 10px;
+}
+.list-group-item {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    /* rtl:raw:
+    right: 0;
+    */
+    bottom: 0;
+    /* rtl:remove */
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 60px 0 0; /* Height of navbar */
+    overflow: auto;
+    width: 250px;
+    border-right: $border-width solid $gray-300;
+  }
+  
+  @media (max-width: 767.98px) {
+    .sidebar {
+      top: 5rem;
+    }
+  }
+  
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #727272;
+  }
+  
+  .sidebar .nav-link.active {
+    color: #007bff;
+  }
+  
+  .sidebar .nav-link:hover .feather,
+  .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+  
+  .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+  }
+  .center-content {
+    margin-left: 250px !important;
+  }
+.ad-container {
+  flex: 0 0 300px;
+}

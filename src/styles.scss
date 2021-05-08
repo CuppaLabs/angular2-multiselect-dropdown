@@ -1,0 +1,60 @@
+$nav-link-font-size: 0.875rem !default;
+$navbar-nav-link-padding-x: 1rem !default;
+$nav-link-padding-y: 1rem !default;
+$nav-link-color:  #5f6368 !default;
+$nav-tabs-link-active-color: #0d6efd !default;
+$nav-tabs-link-active-border-color:  #0d6efd !default;
+$nav-tabs-border-width: .0625rem;
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+body {
+    min-height: 75rem;
+    padding-top: 60px;
+  }
+  
+.cuppa-navbar {
+    background: $white;
+    box-shadow: 0 0 0px rgb(0 0 0 / 14%), 0 1px 5px rgb(0 0 0 / 28%);
+    padding: 0 !important;
+}
+.cuppa-brand {
+    max-width: 230px;
+    margin: 0;
+    padding: 0px;
+}
+.cuppa-brand img{
+
+}
+.cuppa-brand span:nth-child(2){
+    font-size: 1.4rem;
+    color: $gray-900
+}
+.cuppa-brand span:nth-child(3){
+    color: $gray-800
+}
+.sidebar .nav-link {
+    color: $gray-800;
+    font-weight: 400;
+}
+.sidebar .nav-link.active {
+    background-color: $gray-100;
+}
+.navbar .nav-item {
+    padding: 0px 10px;
+}
+.navbar .nav-item.active {
+    border-bottom: 2px solid $primary;
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+    border-color: transparent;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: $primary;
+    background-color: transparent;
+    border-color: transparent transparent $primary;
+    border-bottom-width: .2rem;
+}
+.example-button-row .btn {
+    margin: 5px;
+}

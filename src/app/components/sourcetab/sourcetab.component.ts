@@ -26,6 +26,7 @@ export class SourceTab implements OnInit {
     @Input()
     cssgist: string
 
+    active = 1;
     constructor(){}
     ngOnInit(){
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
-import {MatDialog} from '@angular/material/dialog';
 
 @Component({
     templateUrl: './views/usingWithinDialog.html'
@@ -11,19 +10,12 @@ export class UsingWithinDialog implements OnInit {
     selectedItems = [];
     settings = {};
 
-    constructor(public seotitle: Title, public meta: Meta, public dialog: MatDialog) { 
+    constructor(public seotitle: Title, public meta: Meta) { 
         this.seotitle.setTitle('Basic example');
         this.meta.addTags([
             {name: 'description', content:'Basic example of angular multiselect drodown.'}
         ]);
     }
-    openDialog() {
-        const dialogRef = this.dialog.open(DialogContentExampleDialog);
-    
-        dialogRef.afterClosed().subscribe(result => {
-          console.log(`Dialog result: ${result}`);
-        });
-      }
     ngOnInit() {
 
         this.itemList = [

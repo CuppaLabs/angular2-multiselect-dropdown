@@ -1,22 +1,24 @@
 {
   "configVersion": 1,
-  "timestamp": 1616838493805,
+  "timestamp": 1620512890678,
   "index": "/angular2-multiselect-dropdown/index.html",
   "assetGroups": [
     {
       "name": "app",
       "installMode": "prefetch",
       "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
       "urls": [
         "/angular2-multiselect-dropdown/favicon.ico",
         "/angular2-multiselect-dropdown/index.html",
-        "/angular2-multiselect-dropdown/main-es2015.ab1767492640daec1a75.js",
-        "/angular2-multiselect-dropdown/main-es5.760493d062cf00cbefe9.js",
-        "/angular2-multiselect-dropdown/polyfills-es2015.cfc005ecbba3ebc3f28c.js",
-        "/angular2-multiselect-dropdown/polyfills-es5.34d76c271bf3989aa808.js",
-        "/angular2-multiselect-dropdown/runtime-es2015.3f3fc55b246d2a4b8254.js",
-        "/angular2-multiselect-dropdown/runtime-es5.96f7c8f8b53ed2a89900.js",
-        "/angular2-multiselect-dropdown/styles.0a11eeabca7e65cf5bb8.css"
+        "/angular2-multiselect-dropdown/main.63ed3c1ced20d12dda96.js",
+        "/angular2-multiselect-dropdown/manifest.webmanifest",
+        "/angular2-multiselect-dropdown/polyfills.3116b8e9dbb90fea460e.js",
+        "/angular2-multiselect-dropdown/runtime.0e49e2b53282f40c8925.js",
+        "/angular2-multiselect-dropdown/scripts.c652307a20a4afc3aa92.js",
+        "/angular2-multiselect-dropdown/styles.0ad5078537e15eda05ff.css"
       ],
       "patterns": []
     },
@@ -24,6 +26,9 @@
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
       "urls": [
         "/angular2-multiselect-dropdown/assets/icons/icon-128x128.png",
         "/angular2-multiselect-dropdown/assets/icons/icon-144x144.png",
@@ -35,8 +40,10 @@
         "/angular2-multiselect-dropdown/assets/icons/icon-96x96.png",
         "/angular2-multiselect-dropdown/assets/img/GitHub-Mark-32px.png",
         "/angular2-multiselect-dropdown/assets/img/GitHub-Mark-64px.png",
+        "/angular2-multiselect-dropdown/assets/img/angular.svg",
         "/angular2-multiselect-dropdown/assets/img/coffee11.png",
         "/angular2-multiselect-dropdown/assets/img/cuppa-logo-coffee11.png",
+        "/angular2-multiselect-dropdown/assets/img/cuppa_logo_128X128.png",
         "/angular2-multiselect-dropdown/assets/img/loading.gif",
         "/angular2-multiselect-dropdown/assets/img/multiselect-dropdown.png",
         "/angular2-multiselect-dropdown/assets/img/sand-background.jpg"
@@ -56,20 +63,21 @@
     "/angular2-multiselect-dropdown/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/angular2-multiselect-dropdown/assets/img/GitHub-Mark-32px.png": "fabe53eb72f9b6d3d47cd95aff31ffc45c2fdbf8",
     "/angular2-multiselect-dropdown/assets/img/GitHub-Mark-64px.png": "b00f47d766170d5814e4a1270a3c534642923207",
+    "/angular2-multiselect-dropdown/assets/img/angular.svg": "0b3394341548880427c38ed78beb990863a4e8cb",
     "/angular2-multiselect-dropdown/assets/img/coffee11.png": "9515b344ab6eb1f3ef6190ee20ef4f43815dcb21",
     "/angular2-multiselect-dropdown/assets/img/cuppa-logo-coffee11.png": "8f0d482978ee243ecbf42efac8a6dc00556439fb",
+    "/angular2-multiselect-dropdown/assets/img/cuppa_logo_128X128.png": "d13323fcef458ff6eee9671c77d61393192c6cf7",
     "/angular2-multiselect-dropdown/assets/img/loading.gif": "c089052df1f20017f7273ef9702620d3e54c0278",
     "/angular2-multiselect-dropdown/assets/img/multiselect-dropdown.png": "f295c2d862b94ec357f6e7e3a5c6bda4d9dc09c0",
     "/angular2-multiselect-dropdown/assets/img/sand-background.jpg": "b39380174d1813771960780eb6b9ffba608c1419",
-    "/angular2-multiselect-dropdown/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/angular2-multiselect-dropdown/index.html": "cd04146a8010860be90a2090ea6c7db3d2f3c29b",
-    "/angular2-multiselect-dropdown/main-es2015.ab1767492640daec1a75.js": "e68ed3f29ee1ed4560f4be1ed67cf90de57e6944",
-    "/angular2-multiselect-dropdown/main-es5.760493d062cf00cbefe9.js": "02beaaf714de00a2e80909865f483aed96874a3d",
-    "/angular2-multiselect-dropdown/polyfills-es2015.cfc005ecbba3ebc3f28c.js": "e4be224553c5002677d7b21a2514f68bd4d9459d",
-    "/angular2-multiselect-dropdown/polyfills-es5.34d76c271bf3989aa808.js": "5a7cdd5be2eeb7d366162ff06da2c7e40d04d2cf",
-    "/angular2-multiselect-dropdown/runtime-es2015.3f3fc55b246d2a4b8254.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
-    "/angular2-multiselect-dropdown/runtime-es5.96f7c8f8b53ed2a89900.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
-    "/angular2-multiselect-dropdown/styles.0a11eeabca7e65cf5bb8.css": "1941def79b2efb20ea1fe64856beca68fb69ac08"
+    "/angular2-multiselect-dropdown/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/angular2-multiselect-dropdown/index.html": "f323b9ebeb078abf2b42c52152f6f852ec073ad7",
+    "/angular2-multiselect-dropdown/main.63ed3c1ced20d12dda96.js": "7dde3eac5cbb93e1acb8999bf573854a689677fe",
+    "/angular2-multiselect-dropdown/manifest.webmanifest": "f5a72e502f70ae65c43b24611ef6bf8c10841d4c",
+    "/angular2-multiselect-dropdown/polyfills.3116b8e9dbb90fea460e.js": "0d003992512d28c544b0a972ce2ae6b28ebbf5f6",
+    "/angular2-multiselect-dropdown/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/angular2-multiselect-dropdown/scripts.c652307a20a4afc3aa92.js": "7536c712daff8466e585cfe148a478e7b7561340",
+    "/angular2-multiselect-dropdown/styles.0ad5078537e15eda05ff.css": "a290b4e9fbb35b902090c857161a69ad678c9b7f"
   },
   "navigationUrls": [
     {
@@ -88,5 +96,6 @@
       "positive": false,
       "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
     }
-  ]
+  ],
+  "navigationRequestStrategy": "performance"
 }

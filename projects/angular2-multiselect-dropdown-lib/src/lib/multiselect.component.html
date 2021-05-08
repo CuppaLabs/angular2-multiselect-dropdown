@@ -76,9 +76,9 @@
                 <input class="c-input" *ngIf="settings.groupBy && !settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
                     [(ngModel)]="filter" (keyup)="filterGroupedList()" aria-labelledby="searchIcon">
                 <input class="c-input" *ngIf="!settings.groupBy && !settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
-                    [(ngModel)]="filter" aria-labelledby="searchIcon">
+                    [(ngModel)]="filter" (keyup)="filteritems($event)" aria-labelledby="searchIcon">
                 <input class="c-input" *ngIf="settings.lazyLoading && !searchTempl" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
-                    [(ngModel)]="filter" (keyup)="searchTerm$.next($event.target.value)" aria-labelledby="searchIcon">
+                    [(ngModel)]="filter" (keyup)="onKeyUp($event)" aria-labelledby="searchIcon">
                 <!--            <input class="c-input" *ngIf="!settings.lazyLoading && !searchTempl && settings.groupBy" #searchInput type="text" [placeholder]="settings.searchPlaceholderText"
                 [(ngModel)]="filter" (keyup)="filterGroupList($event)">-->
                 <c-templateRenderer *ngIf="searchTempl" [data]="searchTempl" [item]="item"></c-templateRenderer>
@@ -111,11 +111,8 @@
                     </label>
                 </div>
             </div>
-            <div class="filter-select-all">
-                <label class="nodata-label" *ngIf="!settings.groupBy && filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
-                <label class="nodata-label" *ngIf="settings.groupBy && groupedData?.length == 0" [hidden]="filter == undefined || filter?.length == 0">{{settings.noDataLabel}}</label>
-
-                <div class="btn-container" *ngIf="settings.addNewItemOnFilter && filterLength == 0" [hidden]="filter == undefined || filter?.length == 0">
+            <div class="filter-select-all" *ngIf="filter?.length">
+                <div class="btn-container" *ngIf="settings.addNewItemOnFilter">
                     <button class="c-btn btn-iceblue" (click)="addFilterNewItem()">{{settings.addNewButtonText}}</button>
                 </div>
             </div>
@@ -123,7 +120,7 @@
             <div *ngIf="!settings.groupBy && !settings.lazyLoading && itemTempl == undefined" [style.maxHeight]="settings.maxHeight+'px'"
                 style="overflow: auto;">
                 <ul class="lazyContainer">
-                    <li *ngFor="let item of data | listFilter:filter : settings.searchBy; let i = index;" (click)="onItemClick(item,i,$event)"
+                    <li *ngFor="let item of data; let i = index;" (click)="onItemClick(item,i,$event)"
                         class="pure-checkbox" [ngClass]="{'selected-item': isSelected(item) == true }">
                         <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="(settings.limitSelection == selectedItems?.length && !isSelected(item)) || item.disabled"
                         aria-labelledby="option"/>
@@ -148,7 +145,7 @@
             <div *ngIf="!settings.groupBy && !settings.lazyLoading && itemTempl != undefined" [style.maxHeight]="settings.maxHeight+'px'"
                 style="overflow: auto;">
                 <ul class="lazyContainer">
-                    <li *ngFor="let item of data | listFilter:filter : settings.searchBy; let i = index;" (click)="onItemClick(item,i,$event)"
+                    <li *ngFor="let item of data; let i = index;" (click)="onItemClick(item,i,$event)"
                         class="pure-checkbox" [ngClass]="{'selected-item': isSelected(item) == true }">
                         <input *ngIf="settings.showCheckbox" type="checkbox" [checked]="isSelected(item)" [disabled]="(settings.limitSelection == selectedItems?.length && !isSelected(item)) || item.disabled"
                         />

@@ -9,7 +9,7 @@ export class CustomSearchExample implements OnInit {
     itemList: any = [];
     selectedItems = [];
     settings = {};
-
+    filter = "";
     constructor(private http: HttpClient) { }
     ngOnInit() {
 
@@ -50,6 +50,10 @@ export class CustomSearchExample implements OnInit {
             }, error => {
 
             });
+    }
+    onClose(){
+        this.itemList = [];
+        this.filter = "";
     }
     cssgist: boolean = false;
     title: string = "Custom Search / Search from API";
