@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1620519591241,
+  "timestamp": 1620521300481,
   "index": "/angular2-multiselect-dropdown/index.html",
   "assetGroups": [
     {
@@ -70,10 +70,10 @@
     "/angular2-multiselect-dropdown/assets/img/cuppa_logo_128X128.png": "d13323fcef458ff6eee9671c77d61393192c6cf7",
     "/angular2-multiselect-dropdown/assets/img/loading.gif": "c089052df1f20017f7273ef9702620d3e54c0278",
     "/angular2-multiselect-dropdown/assets/img/multiselect-dropdown.png": "f295c2d862b94ec357f6e7e3a5c6bda4d9dc09c0",
-    "/angular2-multiselect-dropdown/assets/img/multiselect.jpeg": "a9a9aff3f81cc5ef44854bd6cc54a8d95ee8f682",
+    "/angular2-multiselect-dropdown/assets/img/multiselect.jpeg": "4cb04d2e8d0727ada418fac586c9f6f0f373b067",
     "/angular2-multiselect-dropdown/assets/img/sand-background.jpg": "b39380174d1813771960780eb6b9ffba608c1419",
     "/angular2-multiselect-dropdown/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/angular2-multiselect-dropdown/index.html": "09733ab1069dac0eeeec524e785eaa2ef8347079",
+    "/angular2-multiselect-dropdown/index.html": "112c7b5cb577f1609658df43d99ef76552104b86",
     "/angular2-multiselect-dropdown/main.d664fb6e953a4d74e893.js": "d5df6b00ea91f0cc1c28c5c1f1bf9a6d960cccb5",
     "/angular2-multiselect-dropdown/manifest.webmanifest": "f5a72e502f70ae65c43b24611ef6bf8c10841d4c",
     "/angular2-multiselect-dropdown/polyfills.3116b8e9dbb90fea460e.js": "0d003992512d28c544b0a972ce2ae6b28ebbf5f6",
