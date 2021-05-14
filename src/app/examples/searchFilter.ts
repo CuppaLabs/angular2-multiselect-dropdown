@@ -36,7 +36,6 @@ export class SearchFilterExample implements OnInit {
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: true,
       badgeShowLimit: 3,
-      addNewItemOnFilter: true,
       tagToBody: true
     };
   }

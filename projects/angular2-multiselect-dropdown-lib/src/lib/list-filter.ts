@@ -14,12 +14,10 @@ export class ListFilterPipe implements PipeTransform {
     }
 
     transform(items: any[], filter: any, searchBy: any): any[] {
-        if (!items || !filter) {
-            this.ds.setData(items);
+        if (!items || !filter || filter == "") {
             return items;
         }
         this.filteredList = items.filter((item: any) => this.applyFilter(item, filter, searchBy));
-        this.ds.setData(this.filteredList);
         return this.filteredList;
     }
     applyFilter(item: any, filter: any, searchBy: any): boolean {

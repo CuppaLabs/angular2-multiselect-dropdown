@@ -1,25 +1,21 @@
-<mat-tab-group mat-align-tabs="start" animationDuration="0ms">
-  <mat-tab label="tstitle">
-    <ng-template mat-tab-label>
-      {{ tstitle }}
-    </ng-template>
-    <ng-template matTabContent>
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li [ngbNavItem]="1" >
+    <a ngbNavLink>{{ tstitle }}</a>
+    <ng-template ngbNavContent>
       <ng2-gist [gistId]="tsgist"></ng2-gist>
     </ng-template>
-
-  </mat-tab>
-  <mat-tab label="htmltitle">
-    <ng-template mat-tab-label> {{ htmltitle }} </ng-template>
-    <ng-template matTabContent>
+  </li>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink>{{ htmltitle }}</a>
+    <ng-template ngbNavContent>
       <ng2-gist [gistId]="htmlgist"></ng2-gist>
     </ng-template>
-
-  </mat-tab>
-  <mat-tab label="csstitle" *ngIf="csstitle">
-    <ng-template mat-tab-label> {{ csstitle }} </ng-template>
-    <ng-template matTabContent>
+  </li>
+  <li [ngbNavItem]="3" *ngIf="cssgist">
+    <a ngbNavLink>{{ csstitle }}</a>
+    <ng-template ngbNavContent>
       <ng2-gist [gistId]="cssgist"></ng2-gist>
     </ng-template>
-
-  </mat-tab>
-</mat-tab-group>
+  </li>
+</ul> 
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

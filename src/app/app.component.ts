@@ -1,13 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
+import { Observable } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { CheckForUpdateService } from './check-for-update.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   title = 'app works!';
+  currentComponent: any = {
+    label: '',
+    tstitle: '',
+    htmltitle: '',
+    csstitle: '',
+    tsgist: '',
+    htmlgist: '',
+    cssgist: false
+  };
+  active = 1;
+  links = []
   singleSelectionList = [];
   singleSelectionselectedItems = [];
   singleSelectionSettings = {};
@@ -40,8 +54,10 @@ export class AppComponent implements OnInit {
   templatingExampleList = [];
   templatingExampleSelectedItems = [];
   templatingExampleSettings = {};
+  routeData$: Observable<any>;
 
-  constructor(public updates: SwUpdate, private checkForUpdateService: CheckForUpdateService){
+  constructor(public updates: SwUpdate, private checkForUpdateService: CheckForUpdateService,
+     private router: Router, private activatedRoute: ActivatedRoute){
     this.updates.available.subscribe((event) => {
       this.updateToLatest();
     });
@@ -49,6 +65,22 @@ export class AppComponent implements OnInit {
       console.log('old version was', event.previous);
       console.log('new version is', event.current);
     });
+    console.log(this.router.config)
+    this.links = this.router.config;
+    this.routeData$ = router.events.pipe(
+      filter(routeEvent => routeEvent instanceof NavigationEnd),
+      map(() => activatedRoute),
+      map(activatedRoute => activatedRoute.firstChild),
+      switchMap(firstChild => firstChild.data),
+      map((data: any) => data)
+      );
+      this.routeData$.subscribe(data => {
+        this.active = 1;
+        this.currentComponent = Object.assign({}, data);
+      })
+  }
+  showInfo(link){
+    console.log(link)
   }
   updateToLatest(): void {
     console.log('Updating to latest version.');

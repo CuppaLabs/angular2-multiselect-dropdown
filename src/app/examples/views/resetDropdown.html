@@ -1,45 +1,22 @@
-<h2 class="example-title">{{title}}</h2>
-<div class="col-md-12 mr-auto ml-auto dropdown-container">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="example-button-row">
-        <button (click)="changeData()" mat-raised-button color="primary">
-          Reset</button
-        ><br />
-        <button (click)="open($event)" mat-raised-button color="primary">
-          Open</button
-        ><br />
-        <button (click)="close($event)" mat-raised-button color="primary">
-          Close
-        </button>
-      </div>
-    </div>
-    <div class="col-md-8">
-      <angular2-multiselect
-        #dropdownElem
-        [data]="itemList"
-        [(ngModel)]="selectedItems"
-        [settings]="settings"
-        (onSelect)="onItemSelect($event)"
-        (onDeSelect)="OnItemDeSelect($event)"
-        (onSelectAll)="onSelectAll($event)"
-        (onDeSelectAll)="onDeSelectAll($event)"
-      ></angular2-multiselect>
-    </div>
-  </div>
-  <mat-tab-group mat-align-tabs="start" animationDuration="0ms">
-    <mat-tab>
-      <ng-template mat-tab-label> Source </ng-template>
-      <ng-template matTabContent>
-        <cuppa-source
-          [tstitle]="tstitle"
-          [htmltitle]="htmltitle"
-          [csstitle]="csstitle"
-          [tsgist]="tsgist"
-          [htmlgist]="htmlgist"
-          [cssgist]="cssgist"
-        ></cuppa-source>
-      </ng-template>
-    </mat-tab>
-  </mat-tab-group>
+<angular2-multiselect
+#dropdownElem
+[data]="itemList"
+[(ngModel)]="selectedItems"
+[settings]="settings"
+(onSelect)="onItemSelect($event)"
+(onDeSelect)="OnItemDeSelect($event)"
+(onSelectAll)="onSelectAll($event)"
+(onDeSelectAll)="onDeSelectAll($event)"
+></angular2-multiselect>
+<br>
+<div class="example-button-row">
+  <button (click)="changeData()" class="btn btn-primary">
+    Reset</button
+  >
+  <button (click)="open($event)" class="btn btn-primary">
+    Open</button
+  >
+  <button (click)="close($event)" class="btn btn-primary">
+    Close
+  </button>
 </div>

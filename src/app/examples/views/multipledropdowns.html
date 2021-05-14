@@ -1,59 +1,41 @@
-<h4>{{ title }}</h4>
-<mat-tab-group mat-align-tabs="start" animationDuration="0ms">
-  <mat-tab>
-    <ng-template mat-tab-label> Demo </ng-template>
-    <ng-template matTabContent>
-      <div class="col-md-8 mr-auto ml-auto dropdown-container">
-        <div class="form-group col-md-12">
-          <label for="directorySpecialties">Directory Specialties</label>
-          <label class="float-right">
-            Directory Dropdown status: <b>{{directoriesDropdownStatus}}</b>
-          </label>
-          <angular2-multiselect
-            id="directorySpecialties"
-            name="directorySpecialties"
-            [(ngModel)]="selectedDirectorySpecialties"
-            [data]="directorySpecialties"
-            [settings]="dropdownSettings"
-            (onOpen)="onDirectoriesOpen($event)"
-            (onClose)="onDirectoriesClose($event)"
-            (onSelectAll)="onSelectAll($event)"
-            (onDeSelectAll)="onDeSelectAll($event)"
-          >
-          </angular2-multiselect>
-        </div>
-        <div class="form-group col-md-12">
-          <label for="useCases">Use Cases</label>
-          <label class="float-right">
-            Cases Dropdown status: <b>{{casesDropdownStatus}}</b>
-          </label>
-          <angular2-multiselect
-            id="useCases"
-            name="useCases"
-            [(ngModel)]="selectedUseCases"
-            [data]="useCases"
-            [settings]="dropdownSettings2"
-            (onOpen)="onCasesOpen($event)"
-            (onClose)="onCasesClose($event)"
-            (onSelectAll)="onSelectAll2($event)"
-            (onDeSelectAll)="onDeSelectAll2($event)"
-          >
-          </angular2-multiselect>
-        </div>
-      </div>
-    </ng-template>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label> Source </ng-template>
-    <ng-template matTabContent>
-      <cuppa-source
-        [tstitle]="tstitle"
-        [htmltitle]="htmltitle"
-        [csstitle]="csstitle"
-        [tsgist]="tsgist"
-        [htmlgist]="htmlgist"
-        [cssgist]="cssgist"
-      ></cuppa-source>
-    </ng-template>
-  </mat-tab>
-</mat-tab-group>
+<div class="form-group col-md-12">
+  <label for="directorySpecialties">Directory Specialties</label>
+  <br>
+  <label class="float-right">
+    Directory Dropdown status: <b>{{directoriesDropdownStatus}}</b>
+  </label>
+  <br>
+  <angular2-multiselect
+    id="directorySpecialties"
+    name="directorySpecialties"
+    [(ngModel)]="selectedDirectorySpecialties"
+    [data]="directorySpecialties"
+    [settings]="dropdownSettings"
+    (onOpen)="onDirectoriesOpen($event)"
+    (onClose)="onDirectoriesClose($event)"
+    (onSelectAll)="onSelectAll($event)"
+    (onDeSelectAll)="onDeSelectAll($event)"
+  >
+  </angular2-multiselect>
+</div>
+<br>
+<br>
+<div class="form-group col-md-12">
+  <label for="useCases">Use Cases</label><br>
+  <label class="float-right">
+    Cases Dropdown status: <b>{{casesDropdownStatus}}</b>
+  </label>
+  <br>
+  <angular2-multiselect
+    id="useCases"
+    name="useCases"
+    [(ngModel)]="selectedUseCases"
+    [data]="useCases"
+    [settings]="dropdownSettings2"
+    (onOpen)="onCasesOpen($event)"
+    (onClose)="onCasesClose($event)"
+    (onSelectAll)="onSelectAll2($event)"
+    (onDeSelectAll)="onDeSelectAll2($event)"
+  >
+  </angular2-multiselect>
+</div>

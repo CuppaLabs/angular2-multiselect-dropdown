@@ -1,74 +1,94 @@
-<div class="row">
-  <nav class="navbar navbar-expand-lg nav-sub navbar-light d-md-none d-lg-none">
-    <div class="nav-wrapper">
-      <a class="navbar-brand" href="#">Examples</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-     <span class="fas fa-angle-down"></span>
-  </button>
-    </div>
-
-
+<nav class="navbar navbar-expand-lg fixed-top cuppa-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand cuppa-brand col-lg-2" href="#">
+      <img src="assets/img/cuppa-logo-coffee11.png" height="32" alt="" />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="list-group">
-        <a [routerLink]="['basic']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Multiselect basic example</a>
-        <a [routerLink]="['singleselection']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Single selection</a>
-        <a [routerLink]="['searchfilter']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Search filter</a>
-        <a [routerLink]="['groupby']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Group By</a>
-        <a [routerLink]="['templating']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Templating</a>
-        <a [routerLink]="['usinginform']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Using in Template Driven Forms</a>
-        <a [routerLink]="['usinginreactiveform']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Using in Reactive Forms</a>
-        <a [routerLink]="['lazyloading']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Lazy Loading</a>
-        <a [routerLink]="['lazyloadingRemoteData']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Lazy Loading Data from API</a>
-        <a [routerLink]="['usingInList']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Using in List for loop</a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="#">
+            <img src="assets/img/angular.svg" height="32" alt="" style="margin-top: -3px;height: 25px;" />
+            Multiselect Dropdown
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link active" [routerLink]="['basic']">Examples</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://cuppalabs.github.io/components/multiselectDropdown"
+            target="_blank">Documentation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://cuppalabs.github.io/aboutme" target="_blank">About Me</a>
+        </li>
+      </ul>
 
-        <a [routerLink]="['resetdropdown']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Reset dropdown</a>
-        <a [routerLink]="['disablemode']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Disable dropdown</a>
-        <a [routerLink]="['limitselection']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Limit selection</a>
-        <a [routerLink]="['limitbadges']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Limit Badges</a>
-        <a [routerLink]="['customplaceholder']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Custom placeholder</a>
-        <a [routerLink]="['styling']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">CSS Styling</a>
-        <a [routerLink]="['theming']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Theming</a>
+      <ul class="navbar-nav m2-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="https://www.npmjs.com/package/angular2-multiselect-dropdown"
+            target="_blank">
+            <img src="https://img.shields.io/npm/v/angular2-multiselect-dropdown.svg" />
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="https://github.com/CuppaLabs/angular2-multiselect-dropdown"
+            target="_blank">
+            <img style="height: 15px;" src="assets/img/GitHub-Mark-32px.png" />
+            Source on Github
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
+<div class="container-fluid">
+  <div class="row d-flex">
+    <nav id="sidebarMenu" class="col d-md-block sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <span *ngFor="let link of links">
+            <li class="nav-item">
+              <a class="nav-link" *ngIf="link.path !== ''" [routerLink]="[link.path]" routerLinkActive="active">
+                <span data-feather="home"></span>
+                {{ link.data.label }}
+              </a>
+            </li>
+          </span>
+        </ul>
       </div>
-
-    </div>
-  </nav>
-  <div class="col-md-3 pl-0 pr-0 left-sidebar d-none d-md-block d-lg-block">
-    <div class="list-group">
-      <a href="#" class="list-group-item list-group-item-action disabled">
-    Examples
-  </a>
-      <a [routerLink]="['basic']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Multiselect basic example</a>
-      <a [routerLink]="['singleselection']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Single selection</a>
-      <a [routerLink]="['searchfilter']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Search filter</a>
-      <a [routerLink]="['customSearchAPI']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Custom Search / Search API</a>
-      <a [routerLink]="['searchFilterByOneProperty']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Search Filter By one Property/key</a>
-      <a [routerLink]="['searchfilterAddNewItem']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Search and Add New Item</a>
-      <a [routerLink]="['groupby']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Group By</a>
-      <a [routerLink]="['templating']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Templating</a>
-      <a [routerLink]="['usinginform']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Using in Template Driven Forms</a>
-      <a [routerLink]="['usinginreactiveform']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Using in Reactive Forms</a>
-      <a [routerLink]="['lazyloading']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Virtual Scrolling</a>
-      <a [routerLink]="['lazyloadingRemoteData']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Lazy Loading Data from API</a>
-      <a [routerLink]="['remoteData']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Data from remote API</a>
-      <a [routerLink]="['usingInList']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Using in List for loop</a>
-
-      <a [routerLink]="['multipledropdowns']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Multiple dropdowns in a page</a>
-      <a [routerLink]="['dynamicdatasets']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Dynamic Data Sets loading</a>
-      <a [routerLink]="['dropdownMethods']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Methods - Open, close, Reset</a>
-      <a [routerLink]="['events']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Events</a>
-      <a [routerLink]="['disablemode']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Disable dropdown</a>
-      <a [routerLink]="['limitselection']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Limit selection</a>
-      <a [routerLink]="['limitbadges']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Limit Badges</a>
-      <a [routerLink]="['customplaceholder']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Custom placeholder</a>
-      <a [routerLink]="['styling']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">CSS Styling</a>
-      <!--      <a [routerLink]="['theming']" routerLinkActive="active" href="#" class="list-group-item list-group-item-action">Theming</a>
--->
+    </nav>
+    <main class="col center-content pt-4">
+      <h4 class="mb-4">{{ currentComponent.label }}</h4>
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>Demo</a>
+          <ng-template ngbNavContent>
+            <div class="pt-5">
+              <router-outlet></router-outlet>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink>Source</a>
+          <ng-template ngbNavContent>
+            <cuppa-source [tstitle]="currentComponent.tstitle" [htmltitle]="currentComponent.htmltitle"
+              [csstitle]="currentComponent.csstitle" [tsgist]="currentComponent.tsgist"
+              [htmlgist]="currentComponent.htmlgist" [cssgist]="currentComponent.cssgist"></cuppa-source>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </main>
+    <div class="col ad-container">
+      <ng-adsense [adClient]="'ca-pub-4525567075133342'" [adSlot]="2263435109" [display]="'inline-block'"
+      [width]="300" [height]="250"></ng-adsense>
+      <ng-adsense [adClient]="'ca-pub-4525567075133342'" [adSlot]="6386579727" [display]="'inline-block'" 
+      [width]="300" [height]="250"></ng-adsense>
     </div>
   </div>
-  <div class="col center-content">
-    <router-outlet></router-outlet>
-  </div>
-
 </div>

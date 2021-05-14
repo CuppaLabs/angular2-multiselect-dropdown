@@ -1,63 +1,42 @@
-<h4>{{ title }}</h4>
-<mat-tab-group mat-align-tabs="start" animationDuration="0ms">
-    <mat-tab>
-      <ng-template mat-tab-label>
-        Demo
-      </ng-template>
-      <ng-template matTabContent>
-        <div class="col-md-8 mr-auto ml-auto dropdown-container">
-            <angular2-multiselect #dropdownElem [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" 
-                (onSelect)="onItemSelect($event)"
-                (onDeSelect)="OnItemDeSelect($event)" 
-                (onSelectAll)="onSelectAll($event)" 
-                (onDeSelectAll)="onDeSelectAll($event)"
-                (onOpen)="onOpen($event)"
-                (onClose)="onClose($event)">
-            </angular2-multiselect>
-        </div>
-        <br>
-        <br>
-        <div class="row">
-            <div class="col-md-4">
-                <h5>On Select</h5>
-                <textarea class="output-text" [(ngModel)]="selectedItemString">Event output goes here...
-                </textarea>
-            </div>
-            <div class="col-md-4">
-                <h5>On Un-select</h5>
-                <textarea class="output-text" [(ngModel)]="unSelectedItemString">Event output goes here...
-                </textarea>
-            </div>
-            <div class="col-md-4">
-                <h5>On Open</h5>
-                <textarea class="output-text" [(ngModel)]="openString">Event output goes here...
-                </textarea>
-            </div>
-            <div class="col-md-4">
-                <h5>On Close</h5>
-                <textarea class="output-text" [(ngModel)]="closeString">Event output goes here...
-                </textarea>
-            </div>
-            <div class="col-md-4">
-                <h5>On Select All</h5>
-                <textarea class="output-text" [(ngModel)]="selectAllString">Event output goes here...
-                </textarea>
-            </div>
-            <div class="col-md-4">
-                <h5>On Un-Select All</h5>
-                <textarea class="output-text" [(ngModel)]="unSelectAllString">Event output goes here...
-                </textarea>
-            </div>
-        </div>
-      </ng-template>
-      
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label> Source </ng-template>
-      <ng-template matTabContent>
-        <cuppa-source [tstitle]="tstitle" [htmltitle]="htmltitle" [csstitle]="csstitle" 
-[tsgist]="tsgist" [htmlgist]="htmlgist" [cssgist]="cssgist" ></cuppa-source>
-      </ng-template>
-      
-    </mat-tab>
-  </mat-tab-group>
+  <angular2-multiselect #dropdownElem [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings" 
+      (onSelect)="onItemSelect($event)"
+      (onDeSelect)="OnItemDeSelect($event)" 
+      (onSelectAll)="onSelectAll($event)" 
+      (onDeSelectAll)="onDeSelectAll($event)"
+      (onOpen)="onOpen($event)"
+      (onClose)="onClose($event)">
+  </angular2-multiselect>
+<br>
+<br>
+<div class="row">
+  <div class="col-md-4">
+      <h5>On Select</h5>
+      <textarea class="output-text" [(ngModel)]="selectedItemString">Event output goes here...
+      </textarea>
+  </div>
+  <div class="col-md-4">
+      <h5>On Un-select</h5>
+      <textarea class="output-text" [(ngModel)]="unSelectedItemString">Event output goes here...
+      </textarea>
+  </div>
+  <div class="col-md-4">
+      <h5>On Open</h5>
+      <textarea class="output-text" [(ngModel)]="openString">Event output goes here...
+      </textarea>
+  </div>
+  <div class="col-md-4">
+      <h5>On Close</h5>
+      <textarea class="output-text" [(ngModel)]="closeString">Event output goes here...
+      </textarea>
+  </div>
+  <div class="col-md-4">
+      <h5>On Select All</h5>
+      <textarea class="output-text" [(ngModel)]="selectAllString">Event output goes here...
+      </textarea>
+  </div>
+  <div class="col-md-4">
+      <h5>On Un-Select All</h5>
+      <textarea class="output-text" [(ngModel)]="unSelectAllString">Event output goes here...
+      </textarea>
+  </div>
+</div>

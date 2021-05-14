@@ -218,7 +218,7 @@ virtual-scroll {
 
   .c-search {
     position: absolute;
-    top: 9px;
+    top: 4px;
     left: 10px;
     width: 15px;
     height: 15px;
@@ -230,7 +230,7 @@ virtual-scroll {
 
   .c-clear {
     position: absolute;
-    top: 10px;
+    top: 4px;
     right: 10px;
     width: 15px;
     height: 15px;
@@ -255,7 +255,7 @@ virtual-scroll {
 .pure-checkbox input[type="checkbox"]:focus + label:before,
 .pure-checkbox input[type="checkbox"]:hover + label:before {
   /*border-color: $base-color;*/
-  background-color: #f2f2f2;
+  background-color: none;
 }
 
 .pure-checkbox input[type="checkbox"]:active + label:before {
@@ -420,7 +420,7 @@ virtual-scroll {
 
 .btn-container {
   text-align: center;
-  padding: 0px 5px 10px;
+  padding: 5px 5px 5px;
 }
 
 .btn-iceblue {
