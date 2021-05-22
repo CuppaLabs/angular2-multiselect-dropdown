@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1620521300481,
+  "timestamp": 1621713240020,
   "index": "/angular2-multiselect-dropdown/index.html",
   "assetGroups": [
     {
@@ -13,12 +13,12 @@
       "urls": [
         "/angular2-multiselect-dropdown/favicon.ico",
         "/angular2-multiselect-dropdown/index.html",
-        "/angular2-multiselect-dropdown/main.d664fb6e953a4d74e893.js",
+        "/angular2-multiselect-dropdown/main.6dff6bcc23a4106fc61c.js",
         "/angular2-multiselect-dropdown/manifest.webmanifest",
         "/angular2-multiselect-dropdown/polyfills.3116b8e9dbb90fea460e.js",
         "/angular2-multiselect-dropdown/runtime.0e49e2b53282f40c8925.js",
         "/angular2-multiselect-dropdown/scripts.c652307a20a4afc3aa92.js",
-        "/angular2-multiselect-dropdown/styles.0ad5078537e15eda05ff.css"
+        "/angular2-multiselect-dropdown/styles.af57098af8433a559100.css"
       ],
       "patterns": []
     },
@@ -73,13 +73,13 @@
     "/angular2-multiselect-dropdown/assets/img/multiselect.jpeg": "4cb04d2e8d0727ada418fac586c9f6f0f373b067",
     "/angular2-multiselect-dropdown/assets/img/sand-background.jpg": "b39380174d1813771960780eb6b9ffba608c1419",
     "/angular2-multiselect-dropdown/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/angular2-multiselect-dropdown/index.html": "112c7b5cb577f1609658df43d99ef76552104b86",
-    "/angular2-multiselect-dropdown/main.d664fb6e953a4d74e893.js": "d5df6b00ea91f0cc1c28c5c1f1bf9a6d960cccb5",
+    "/angular2-multiselect-dropdown/index.html": "3412bd01e0779ea529218a6d145d306bb89b272b",
+    "/angular2-multiselect-dropdown/main.6dff6bcc23a4106fc61c.js": "49a3fd8c52e5e18065d76859bca1da4f43d95d7d",
     "/angular2-multiselect-dropdown/manifest.webmanifest": "f5a72e502f70ae65c43b24611ef6bf8c10841d4c",
     "/angular2-multiselect-dropdown/polyfills.3116b8e9dbb90fea460e.js": "0d003992512d28c544b0a972ce2ae6b28ebbf5f6",
     "/angular2-multiselect-dropdown/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "/angular2-multiselect-dropdown/scripts.c652307a20a4afc3aa92.js": "7536c712daff8466e585cfe148a478e7b7561340",
-    "/angular2-multiselect-dropdown/styles.0ad5078537e15eda05ff.css": "a290b4e9fbb35b902090c857161a69ad678c9b7f"
+    "/angular2-multiselect-dropdown/styles.af57098af8433a559100.css": "123ded34fce665065af595288d7af01545b1e931"
   },
   "navigationUrls": [
     {
