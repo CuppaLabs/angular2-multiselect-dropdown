@@ -397,7 +397,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.isActive = !this.isActive;
         if (this.isActive) {
             this.openDropdown()
-            this.calculateDropdownDirection();
         }
         else {
             this.closeDropdown()
@@ -413,6 +412,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             return;
         }
         this.isActive = true;
+        this.calculateDropdownDirection();
         if (this.settings.searchAutofocus && this.searchInput && this.settings.enableSearchFilter && !this.searchTempl) {
             setTimeout(() => {
                 this.searchInput.nativeElement.focus();
@@ -798,7 +798,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.virtualdata = this.cachedItems;
             this.infiniteFilterLength = 0;
         }
-        this.virtualScroller.refresh();
+        if(this.virtualScroller){
+            this.virtualScroller.refresh();
+        }
     }
     resetInfiniteSearch() {
         this.filter = "";
