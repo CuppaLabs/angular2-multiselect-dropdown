@@ -1,14 +1,3 @@
-<angular2-multiselect
-#dropdownElem
-[data]="itemList"
-[(ngModel)]="selectedItems"
-[settings]="settings"
-(onSelect)="onItemSelect($event)"
-(onDeSelect)="OnItemDeSelect($event)"
-(onSelectAll)="onSelectAll($event)"
-(onDeSelectAll)="onDeSelectAll($event)"
-></angular2-multiselect>
-<br>
 <div class="example-button-row">
   <button (click)="changeData()" class="btn btn-primary">
     Reset</button
@@ -20,3 +9,14 @@
     Close
   </button>
 </div>
+<angular2-multiselect
+#dropdownElem
+[data]="itemList"
+[(ngModel)]="selectedItems"
+[settings]="settings"
+(onSelect)="onItemSelect($event)"
+(onDeSelect)="OnItemDeSelect($event)"
+(onSelectAll)="onSelectAll($event)"
+(onDeSelectAll)="onDeSelectAll($event)"
+></angular2-multiselect>
+<br>
