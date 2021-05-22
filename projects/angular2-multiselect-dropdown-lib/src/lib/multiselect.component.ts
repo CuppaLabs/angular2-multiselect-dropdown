@@ -616,6 +616,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         this.filter = "";
         this.isFilterSelectAll = false;
+        this.searchTerm$.next('');
         this.data = this.cachedItems;
     }
     onFilterChange(data: any) {
@@ -805,6 +806,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.virtualdata = [];
         this.virtualdata = this.cachedItems;
         this.groupedData = this.groupCachedItems;
+        this.searchTerm$.next('');
         this.infiniteFilterLength = 0;
     }
     onScrollEnd(e: any) {
