@@ -429,6 +429,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         this.filter = "";
         this.isActive = false;
+        this.searchTerm$.next('');
         this.onClose.emit(false);
     }
     public closeDropdownOnClickOut() {
@@ -442,6 +443,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.filter = "";
             this.isActive = false;
             this.clearSearch();
+            this.searchTerm$.next('');
             this.onClose.emit(false);
         }
     }
