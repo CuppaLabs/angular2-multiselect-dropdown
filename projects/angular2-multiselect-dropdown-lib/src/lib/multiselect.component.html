@@ -44,9 +44,11 @@
             </span>
         </div>
     </div>
-    <div #dropdownList class="dropdown-list tagToBody animated fadeIn" 
+    <div #dropdownList class="dropdown-list animated fadeIn" 
+    [ngClass]="{'tagToBody': settings.tagToBody}"
     [style.width.px]="dropDownWidth" 
-    [style.top.px]="dropDownTop" 
+    [style.top]="dropDownTop" 
+    [style.bottom]="dropDownBottom"
     [style.left.px]="dropDownLeft" 
         [hidden]="!isActive">
         <div [ngClass]="{'arrow-up': settings.position == 'bottom', 'arrow-down': settings.position == 'top'}" class="arrow-2"></div>
