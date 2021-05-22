@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1621713240020,
+  "timestamp": 1621713425879,
   "index": "/angular2-multiselect-dropdown/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/angular2-multiselect-dropdown/favicon.ico",
         "/angular2-multiselect-dropdown/index.html",
-        "/angular2-multiselect-dropdown/main.6dff6bcc23a4106fc61c.js",
+        "/angular2-multiselect-dropdown/main.25546c130791ab847c3f.js",
         "/angular2-multiselect-dropdown/manifest.webmanifest",
         "/angular2-multiselect-dropdown/polyfills.3116b8e9dbb90fea460e.js",
         "/angular2-multiselect-dropdown/runtime.0e49e2b53282f40c8925.js",
@@ -73,8 +73,8 @@
     "/angular2-multiselect-dropdown/assets/img/multiselect.jpeg": "4cb04d2e8d0727ada418fac586c9f6f0f373b067",
     "/angular2-multiselect-dropdown/assets/img/sand-background.jpg": "b39380174d1813771960780eb6b9ffba608c1419",
     "/angular2-multiselect-dropdown/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/angular2-multiselect-dropdown/index.html": "3412bd01e0779ea529218a6d145d306bb89b272b",
-    "/angular2-multiselect-dropdown/main.6dff6bcc23a4106fc61c.js": "49a3fd8c52e5e18065d76859bca1da4f43d95d7d",
+    "/angular2-multiselect-dropdown/index.html": "c5443d689c8aaea3a884fa5582b8faad4e49174a",
+    "/angular2-multiselect-dropdown/main.25546c130791ab847c3f.js": "1cc9fa89a226115440d954637de67bca92041416",
     "/angular2-multiselect-dropdown/manifest.webmanifest": "f5a72e502f70ae65c43b24611ef6bf8c10841d4c",
     "/angular2-multiselect-dropdown/polyfills.3116b8e9dbb90fea460e.js": "0d003992512d28c544b0a972ce2ae6b28ebbf5f6",
     "/angular2-multiselect-dropdown/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
