@@ -10,7 +10,7 @@ export class ClickOutsideDirective {
     @Output()
     public clickOutside = new EventEmitter<MouseEvent>();
 
-    @HostListener('document:click', ['$event', '$event.target'])
+    @HostListener('document:pointerdown', ['$event', '$event.target'])
     @HostListener('document:touchstart', ['$event', '$event.target'])
     public onClick(event: MouseEvent, targetElement: HTMLElement): void {
         if (!targetElement) {
