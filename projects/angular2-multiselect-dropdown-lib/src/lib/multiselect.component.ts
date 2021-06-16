@@ -100,7 +100,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
     @HostListener('window:scroll', ['$event'])
     onScroll(event: any) {
-        if (this.isActive) {
+        if (this.isActive && this.settings.tagToBody) {
             this.closeDropdown();
             /*             const elem = this.cuppaDropdown.nativeElement;
                         if(this.settings.autoPosition){
@@ -142,7 +142,8 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     public dropdownListYOffset: number = 0;
     subscription: Subscription;
     public dropDownWidth: number = 0;
-    public dropDownTop: number = 0;
+    public dropDownTop: any = '';
+    public dropDownBottom: any = 'unset';
     public dropDownLeft: number = 0;
     public id: any = Math.random().toString(36).substring(2)
     defaultSettings: DropdownSettings = {
@@ -396,7 +397,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.isActive = !this.isActive;
         if (this.isActive) {
             this.openDropdown()
-            this.calculateDropdownDirection();
         }
         else {
             this.closeDropdown()
@@ -412,6 +412,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             return;
         }
         this.isActive = true;
+        this.calculateDropdownDirection();
         if (this.settings.searchAutofocus && this.searchInput && this.settings.enableSearchFilter && !this.searchTempl) {
             setTimeout(() => {
                 this.searchInput.nativeElement.focus();
@@ -428,6 +429,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         this.filter = "";
         this.isActive = false;
+        this.searchTerm$.next('');
         this.onClose.emit(false);
     }
     public closeDropdownOnClickOut() {
@@ -441,6 +443,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.filter = "";
             this.isActive = false;
             this.clearSearch();
+            this.searchTerm$.next('');
             this.onClose.emit(false);
         }
     }
@@ -613,6 +616,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         }
         this.filter = "";
         this.isFilterSelectAll = false;
+        this.searchTerm$.next('');
         this.data = this.cachedItems;
     }
     onFilterChange(data: any) {
@@ -794,7 +798,9 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.virtualdata = this.cachedItems;
             this.infiniteFilterLength = 0;
         }
-        this.virtualScroller.refresh();
+        if(this.virtualScroller){
+            this.virtualScroller.refresh();
+        }
     }
     resetInfiniteSearch() {
         this.filter = "";
@@ -802,6 +808,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         this.virtualdata = [];
         this.virtualdata = this.cachedItems;
         this.groupedData = this.groupCachedItems;
+        this.searchTerm$.next('');
         this.infiniteFilterLength = 0;
     }
     onScrollEnd(e: any) {
@@ -855,7 +862,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         const elem = this.cuppaDropdown.nativeElement;
         const dropdownWidth = elem.clientWidth;
         this.dropDownWidth = dropdownWidth;
-        this.dropDownLeft = elem.getBoundingClientRect().x;
+        this.dropDownLeft = this.settings.tagToBody ? elem.getBoundingClientRect().x : 'unset';
         if (this.settings.position == 'top' && !this.settings.autoPosition) {
             this.openTowardsTop(true);
         }
@@ -890,11 +897,23 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
         const elem = this.cuppaDropdown.nativeElement;
         if (value && this.selectedListElem.nativeElement.clientHeight) {
             this.dropdownListYOffset = 15 - this.selectedListElem.nativeElement.clientHeight;
-            this.dropDownTop = elem.getBoundingClientRect().y - this.selectedListElem.nativeElement.clientHeight*2 - 15 - this.defaultSettings.maxHeight;
+            if(this.settings.tagToBody){
+                this.dropDownTop = (elem.getBoundingClientRect().y - this.selectedListElem.nativeElement.clientHeight*2 - 15 - this.defaultSettings.maxHeight)+'px';
+
+            }
+            else {
+                this.dropDownBottom = (this.selectedListElem.nativeElement.clientHeight + 15 )+'px';
+            }
             this.settings.position = 'top'
 
         } else {
-            this.dropDownTop = elem.getBoundingClientRect().y + elem.clientHeight + 1;
+            if(this.settings.tagToBody){
+                this.dropDownTop = (elem.getBoundingClientRect().y + elem.clientHeight + 1)+'px';
+            }
+            else {
+                this.dropDownTop = 'unset';
+                this.dropDownBottom = 'unset';
+            }
             this.dropdownListYOffset = 0;
             this.settings.position = 'bottom'
 
