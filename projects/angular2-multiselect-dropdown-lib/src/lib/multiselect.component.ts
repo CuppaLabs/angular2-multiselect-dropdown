@@ -330,7 +330,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
                 else {
                     this.selectedItems = value;
                 }
-                if (this.selectedItems.length === this.data.length && this.data.length > 0) {
+                if (this.selectedItems!=null && this.selectedItems.length === this.data.length && this.data.length > 0) {
                     this.isSelectAll = true;
                 }
                 if (this.settings.groupBy) {
