@@ -10,7 +10,6 @@ import { DataService } from './multiselect.service';
 import { Subscription, Subject } from 'rxjs';
 import { VirtualScrollerModule, VirtualScrollerComponent } from './virtual-scroll/virtual-scroll';
 import { map, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
-import { ThrowStmt } from '@angular/compiler';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,

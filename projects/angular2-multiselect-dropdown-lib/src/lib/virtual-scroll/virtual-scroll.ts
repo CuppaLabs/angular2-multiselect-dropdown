@@ -33,7 +33,7 @@ import { WrapGroupDimension } from './wrapgroupdimension';
 
 import { IDimensions } from './idimension';
 
- 
+
 
 
 
@@ -79,7 +79,7 @@ export function VIRTUAL_SCROLLER_DEFAULT_OPTIONS_FACTORY(): VirtualScrollerDefau
 	  display: block;
       -webkit-overflow-scrolling: touch;
     }
-	
+
 	:host.horizontal.selfScroll {
       overflow-y: visible;
       overflow-x: auto;
@@ -88,7 +88,7 @@ export function VIRTUAL_SCROLLER_DEFAULT_OPTIONS_FACTORY(): VirtualScrollerDefau
       overflow-y: auto;
       overflow-x: visible;
 	}
-	
+
     .scrollable-content {
       top: 0;
       left: 0;
@@ -102,26 +102,26 @@ export function VIRTUAL_SCROLLER_DEFAULT_OPTIONS_FACTORY(): VirtualScrollerDefau
 	.scrollable-content ::ng-deep > * {
 		box-sizing: border-box;
 	}
-	
+
 	:host.horizontal {
 		white-space: nowrap;
 	}
-	
+
 	:host.horizontal .scrollable-content {
 		display: flex;
 	}
-	
+
 	:host.horizontal .scrollable-content ::ng-deep > * {
 		flex-shrink: 0;
 		flex-grow: 0;
 		white-space: initial;
 	}
-	
+
     .total-padding {
       width: 1px;
       opacity: 0;
     }
-    
+
     :host.horizontal .total-padding {
       height: 100%;
     }
@@ -201,7 +201,7 @@ export class VirtualScrollerComponent implements OnInit, OnChanges, OnDestroy {
 		if (typeof (this._bufferAmount) === 'number' && this._bufferAmount >= 0) {
 			return this._bufferAmount;
 		} else {
-			return this.enableUnequalChildrenSizes ? 5 : 0;	
+			return this.enableUnequalChildrenSizes ? 5 : 0;
 		}
 	}
 	public set bufferAmount(value: number) {
@@ -369,14 +369,14 @@ export class VirtualScrollerComponent implements OnInit, OnChanges, OnDestroy {
 		this.refresh_internal(indexLengthChanged || firstRun);
 	}
 
-	
+
 	public ngDoCheck(): void {
 		if (this.cachedItemsLength !== this.items.length) {
 			this.cachedItemsLength = this.items.length;
 			this.refresh_internal(true);
 			return;
 		}
-		
+
 		if (this.previousViewPort && this.viewPortItems && this.viewPortItems.length > 0) {
 			let itemsArrayChanged = false;
 			for (let i = 0; i < this.viewPortItems.length; ++i) {
@@ -554,7 +554,7 @@ export class VirtualScrollerComponent implements OnInit, OnChanges, OnDestroy {
 		@Inject(PLATFORM_ID) platformId: Object,
 		@Optional() @Inject('virtual-scroller-default-options')
 		options: VirtualScrollerDefaultOptions) {
-			
+
 		this.isAngularUniversalSSR = isPlatformServer(platformId);
 
 		this.scrollThrottlingTime = options.scrollThrottlingTime;
@@ -570,22 +570,22 @@ export class VirtualScrollerComponent implements OnInit, OnChanges, OnDestroy {
 		this.horizontal = false;
 		this.resetWrapGroupDimensions();
 	}
-	
-	protected getElementSize(element: HTMLElement) : ClientRect {
-		let result = element.getBoundingClientRect();
+
+	protected getElementSize(element: HTMLElement) : any {
+		let result = element.getBoundingClientRect() as DOMRect;
 		let styles = getComputedStyle(element);
 		let marginTop = parseInt(styles['margin-top'], 10) || 0;
 		let marginBottom = parseInt(styles['margin-bottom'], 10) || 0;
 		let marginLeft = parseInt(styles['margin-left'], 10) || 0;
 		let marginRight = parseInt(styles['margin-right'], 10) || 0;
-		
+
 		return {
 			top: result.top + marginTop,
 			bottom: result.bottom + marginBottom,
 			left: result.left + marginLeft,
 			right: result.right + marginRight,
 			width: result.width + marginLeft + marginRight,
-			height: result.height + marginTop + marginBottom
+			height: result.height + marginTop + marginBottom,
 		};
 	}
 
@@ -702,7 +702,7 @@ export class VirtualScrollerComponent implements OnInit, OnChanges, OnDestroy {
 		//if items were prepended, scroll forward to keep same items visible
 			let oldViewPort = this.previousViewPort;
 			let oldViewPortItems = this.viewPortItems;
-			
+
 			let oldRefreshCompletedCallback = refreshCompletedCallback;
 			refreshCompletedCallback = () => {
 				let scrollLengthDelta = this.previousViewPort.scrollLength - oldViewPort.scrollLength;
@@ -717,19 +717,19 @@ export class VirtualScrollerComponent implements OnInit, OnChanges, OnDestroy {
 								break;
 							}
 						}
-						
+
 						if (!itemOrderChanged) {
 							this.scrollToPosition(this.previousViewPort.scrollStartPosition + scrollLengthDelta , 0, oldRefreshCompletedCallback);
 							return;
 						}
 					}
 				}
-				
+
 				if (oldRefreshCompletedCallback) {
 					oldRefreshCompletedCallback();
 				}
 			};
-		}			
+		}
 
 		this.zone.runOutsideAngular(() => {
 			requestAnimationFrame(() => {
