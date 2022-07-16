@@ -154,6 +154,5 @@
         }
       }
     }
-  },
-  "defaultProject": "angular2-multiselect-dropdown"
+  }
 }
