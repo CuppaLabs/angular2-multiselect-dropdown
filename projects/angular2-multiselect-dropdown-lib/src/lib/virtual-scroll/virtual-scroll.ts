@@ -585,7 +585,12 @@ export class VirtualScrollerComponent implements OnInit, OnChanges, OnDestroy {
 			left: result.left + marginLeft,
 			right: result.right + marginRight,
 			width: result.width + marginLeft + marginRight,
-			height: result.height + marginTop + marginBottom
+			height: result.height + marginTop + marginBottom,
+			y:result.top +marginTop,
+			x:result.left + marginLeft,
+			toJSON(): any {
+				result.toJSON();
+			}
 		};
 	}
 
