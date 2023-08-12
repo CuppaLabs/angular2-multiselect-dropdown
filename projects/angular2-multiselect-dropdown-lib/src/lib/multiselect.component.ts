@@ -9,8 +9,7 @@ import { Item, Badge, Search, TemplateRenderer, CIcon } from './menu-item';
 import { DataService } from './multiselect.service';
 import { Subscription, Subject } from 'rxjs';
 import { VirtualScrollerModule, VirtualScrollerComponent } from './virtual-scroll/virtual-scroll';
-import { map, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
-import { ThrowStmt } from '@angular/compiler';
+import { map, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 
 export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
