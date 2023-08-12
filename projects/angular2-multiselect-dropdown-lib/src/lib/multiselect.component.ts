@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, ChangeDetectionStrategy, OnDestroy, NgModule, SimpleChanges, OnChanges, ChangeDetectorRef, AfterViewChecked, ViewEncapsulation, ContentChild, ViewChild, forwardRef, Input, Output, EventEmitter, ElementRef, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, UntypedFormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MyException } from './multiselect.model';
 import { DropdownSettings } from './multiselect.interface';
@@ -293,7 +293,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
 
     }
-    public validate(c: FormControl): any {
+    public validate(c: UntypedFormControl): any {
         return null;
     }
     private onTouchedCallback: (_: any) => void = noop;
