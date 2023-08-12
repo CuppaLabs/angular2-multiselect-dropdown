@@ -10,5 +10,5 @@
     "./themes/*.theme.scss",
     "./themes/*.theme.css"
   ],
-  "dest": "../../dist"
+  "dest": "../../dist/angular2-multiselect-dropdown"
 }
