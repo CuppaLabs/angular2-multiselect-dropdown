@@ -11,7 +11,7 @@
       <ng2-gist [gistId]="htmlgist"></ng2-gist>
     </ng-template>
   </li>
-  <li [ngbNavItem]="3">
+  <li [ngbNavItem]="3" *ngIf="cssgist">
     <a ngbNavLink>{{ csstitle }}</a>
     <ng-template ngbNavContent>
       <ng2-gist [gistId]="cssgist"></ng2-gist>
