@@ -1,0 +1,103 @@
+{
+  "configVersion": 1,
+  "timestamp": 1699946179679,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.2cab05909f1bc1af.js",
+        "/manifest.webmanifest",
+        "/polyfills.c741ea16f217cc3c.js",
+        "/runtime.4318aaca78efc023.js",
+        "/scripts.2dd2975b13cf5b4a.js",
+        "/styles.9cff4f107fe408a3.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/img/GitHub-Mark-32px.png",
+        "/assets/img/GitHub-Mark-64px.png",
+        "/assets/img/angular.svg",
+        "/assets/img/coffee11.png",
+        "/assets/img/cuppa-logo-coffee11.png",
+        "/assets/img/cuppa_logo_128X128.png",
+        "/assets/img/loading.gif",
+        "/assets/img/multiselect-dropdown.png",
+        "/assets/img/multiselect.jpeg",
+        "/assets/img/sand-background.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/img/GitHub-Mark-32px.png": "fabe53eb72f9b6d3d47cd95aff31ffc45c2fdbf8",
+    "/assets/img/GitHub-Mark-64px.png": "b00f47d766170d5814e4a1270a3c534642923207",
+    "/assets/img/angular.svg": "0b3394341548880427c38ed78beb990863a4e8cb",
+    "/assets/img/coffee11.png": "9515b344ab6eb1f3ef6190ee20ef4f43815dcb21",
+    "/assets/img/cuppa-logo-coffee11.png": "8f0d482978ee243ecbf42efac8a6dc00556439fb",
+    "/assets/img/cuppa_logo_128X128.png": "d13323fcef458ff6eee9671c77d61393192c6cf7",
+    "/assets/img/loading.gif": "c089052df1f20017f7273ef9702620d3e54c0278",
+    "/assets/img/multiselect-dropdown.png": "f295c2d862b94ec357f6e7e3a5c6bda4d9dc09c0",
+    "/assets/img/multiselect.jpeg": "4cb04d2e8d0727ada418fac586c9f6f0f373b067",
+    "/assets/img/sand-background.jpg": "b39380174d1813771960780eb6b9ffba608c1419",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "e42d48f7b179ab5ed097f5d321ef61a538d89cea",
+    "/main.2cab05909f1bc1af.js": "08b4cc6e969ff64a49b41a59d853e541b5d86b55",
+    "/manifest.webmanifest": "f5a72e502f70ae65c43b24611ef6bf8c10841d4c",
+    "/polyfills.c741ea16f217cc3c.js": "aa58131abb6aae87e9893774d915555cdd9abf06",
+    "/runtime.4318aaca78efc023.js": "dd7c3cdc084799949571d281f38d25fda730005e",
+    "/scripts.2dd2975b13cf5b4a.js": "bb4a17e31854236fb2608002eeda7106c887a0de",
+    "/styles.9cff4f107fe408a3.css": "719a8c9d3806e340e046ea5280fd1d401ab57e8a"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
