@@ -1,4 +1,4 @@
-# Angular 2/4/6/8 Multiselect Dropdown - Updated to work with Angular 13
+# Angular 2/4/6/8 Multiselect Dropdown - Updated to work with Angular 15
 [![npm version](https://img.shields.io/npm/v/angular2-multiselect-dropdown.svg)](https://www.npmjs.com/package/angular2-multiselect-dropdown)
 [![downloads](https://img.shields.io/npm/dt/angular2-multiselect-dropdown.svg)](https://www.npmjs.com/package/angular2-multiselect-dropdown)
 [![license](https://img.shields.io/github/license/cuppalabs/angular2-multiselect-dropdown.svg)](https://www.npmjs.com/package/angular2-multiselect-dropdown)
