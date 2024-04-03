@@ -1,9 +1,9 @@
 {
   "name": "angular2-multiselect-dropdown",
-  "version": "5.0.4",
+  "version": "16.0.0",
   "license": "MIT",
-  "author": "Pradeep Terli",
-  "description": "Angular Multiselct dropdown component library for Angular version 11, 10, 9,8,6,4",
+  "author": "Samotics",
+  "description": "Angular Multiselect dropdown component library for Angular version 16",
   "keywords": [
     "angular 2 multiselect dropdown",
     "angular 4 multiselect dropdown",
@@ -17,9 +17,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/CuppaLabs/angular2-multiselect-dropdown"
-  },
-  "bugs": {
-    "url": "https://github.com/CuppaLabs/angular2-multiselect-dropdown/issues"
+    "url": "https://github.com/semioticlabs/angular2-multiselect-dropdown"
   }
 }
