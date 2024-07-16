@@ -18,7 +18,7 @@
             #email="ngModel">
         <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
             <div [hidden]="!email.hasError('required')">Email is required</div>
-            <div [hidden]="!email.hasError('pattern')">Email format should be <small><b>joe@abc.com</b></small></div>
+            <div [hidden]="!email.hasError('pattern')">Email format should be <small><b>joe&#64;abc.com</b></small></div>
         </div>
     </div>
     <br>
