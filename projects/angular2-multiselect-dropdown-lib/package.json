@@ -12,19 +12,6 @@
     "angular dropdown",
     "angular 6 dropdown multiselect"
   ],
-  "ngPackage": {
-    "lib": {
-      "entryFile": "src/public_api.ts"
-    },
-    "allowedNonPeerDependencies": ["@tweenjs/tween.js"],
-    "assets": [
-      "README.md",
-      "LICENSE",
-      "./themes/*.theme.scss",
-      "./themes/*.theme.css"
-    ],
-    "dest": "../../dist"
-  },
   "peerDependencies": {
   },
   "dependencies": {
