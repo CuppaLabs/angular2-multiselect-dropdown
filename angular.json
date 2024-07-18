@@ -21,7 +21,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "docs"
+              "base": "docs",
+              "browser": ""
             },
             "index": "src/index.html",
             "polyfills": [
