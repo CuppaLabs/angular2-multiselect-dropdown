@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MockService } from './examples/mock-data';
 import { AppComponent } from './app.component';
 import { AngularMultiSelectModule } from '../../projects/angular2-multiselect-dropdown-lib/src/lib/multiselect.component';
@@ -41,8 +41,7 @@ import { DialogContentExampleDialog, UsingWithinDialog } from './examples/usingW
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdsenseModule } from 'ng2-adsense';
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent,
         ng2Gist,
         BasicExample,
@@ -73,20 +72,14 @@ import { AdsenseModule } from 'ng2-adsense';
         DialogContentExampleDialog,
         UsingWithinDialog
     ],
-    imports: [
-        BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    bootstrap: [AppComponent], imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }),
         ReactiveFormsModule,
         FormsModule,
         AppRouterModule,
         AngularMultiSelectModule,
-        HttpClientModule,
         AdsenseModule.forRoot(),
         NgbModule,
         HighlightModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-        BrowserAnimationsModule
-    ],
-    providers: [MockService, CheckForUpdateService],
-    bootstrap: [AppComponent]
-})
+        BrowserAnimationsModule], providers: [MockService, CheckForUpdateService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
