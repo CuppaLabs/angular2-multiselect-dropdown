@@ -46,6 +46,7 @@ Latest version available for each version of Angular
 
 | angular2-multiselect-dropdown | Angular     |
 | ----------------------------- | ----------- |
+| 7.0.0       | 15.X.X |
 | 6.0.0       | 14.X.X |
 
 
