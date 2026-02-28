@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/package.schema.json",
-  "name": "@cuppalabs/angular-multiselect-dropdown",
+  "name": "@cuppaui/angular-multiselect-dropdown",
   "version": "19.0.0",
   "license": "MIT",
   "author": "Pradeep Terli",
@@ -12,7 +12,7 @@
     "multiselect dropdown",
     "ng multiselect",
     "ngx multiselect",
-    "cuppalabs"
+    "cuppaui"
   ],
   "peerDependencies": {
     "@angular/common": ">=19.0.0",

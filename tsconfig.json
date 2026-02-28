@@ -20,14 +20,14 @@
       "dom"
     ],
     "paths": {
-      "@cuppalabs/angular-multiselect-dropdown": [
-        "dist/cuppalabs-angular-multiselect-dropdown"
+      "@cuppaui/angular-multiselect-dropdown": [
+        "dist/cuppaui-angular-multiselect-dropdown"
       ],
       "angular2-multiselect-dropdown": [
-        "dist/cuppalabs-angular-multiselect-dropdown"
+        "dist/cuppaui-angular-multiselect-dropdown"
       ],
       "angular2-multiselect-dropdown-lib": [
-        "dist/cuppalabs-angular-multiselect-dropdown"
+        "dist/cuppaui-angular-multiselect-dropdown"
       ]
     },
     "useDefineForClassFields": false,

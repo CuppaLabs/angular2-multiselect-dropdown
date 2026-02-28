@@ -1,8 +1,8 @@
 # Angular Multiselect Dropdown
 
-[![npm version](https://img.shields.io/npm/v/@cuppalabs/angular-multiselect-dropdown.svg)](https://www.npmjs.com/package/@cuppalabs/angular-multiselect-dropdown)
-[![downloads](https://img.shields.io/npm/dt/@cuppalabs/angular-multiselect-dropdown.svg)](https://www.npmjs.com/package/@cuppalabs/angular-multiselect-dropdown)
-[![license](https://img.shields.io/github/license/cuppalabs/angular2-multiselect-dropdown.svg)](https://www.npmjs.com/package/@cuppalabs/angular-multiselect-dropdown)
+[![npm version](https://img.shields.io/npm/v/@cuppaui/angular-multiselect-dropdown.svg)](https://www.npmjs.com/package/@cuppaui/angular-multiselect-dropdown)
+[![downloads](https://img.shields.io/npm/dt/@cuppaui/angular-multiselect-dropdown.svg)](https://www.npmjs.com/package/@cuppaui/angular-multiselect-dropdown)
+[![license](https://img.shields.io/github/license/cuppalabs/angular2-multiselect-dropdown.svg)](https://www.npmjs.com/package/@cuppaui/angular-multiselect-dropdown)
 
 Angular multiselect dropdown component for web applications. Easy to integrate and use.
 
@@ -10,7 +10,7 @@ Angular multiselect dropdown component for web applications. Easy to integrate a
 
 ## Package Rename Notice
 
-> **Important:** Starting from v19.0.0, this package has been renamed from `angular2-multiselect-dropdown` to `@cuppalabs/angular-multiselect-dropdown`. See [Migration Guide](#migration-guide) below.
+> **Important:** Starting from v19.0.0, this package has been renamed from `angular2-multiselect-dropdown` to `@cuppaui/angular-multiselect-dropdown`. See [Migration Guide](#migration-guide) below.
 
 # Important Notice !! 
 #####  From v3.0.0 onwards, you need to include `default.theme.css` file to get the basic styling of the dropdown. Refer to `themes and theming` section below
@@ -39,10 +39,10 @@ Angular multiselect dropdown component for web applications. Easy to integrate a
 
 ## Getting Started
 ### Installation
-- The Multiselect Dropdown package is published on the [npm](https://www.npmjs.com/package/@cuppalabs/angular-multiselect-dropdown) Registry. 
+- The Multiselect Dropdown package is published on the [npm](https://www.npmjs.com/package/@cuppaui/angular-multiselect-dropdown) Registry. 
 - Install the package :
     ```bash
-    npm install @cuppalabs/angular-multiselect-dropdown
+    npm install @cuppaui/angular-multiselect-dropdown
     ```
 
 - Once installed import `AngularMultiSelectModule` from the installed package into your module as follows:
@@ -51,7 +51,7 @@ Angular multiselect dropdown component for web applications. Easy to integrate a
 
 Latest version available for each version of Angular
 
-| @cuppalabs/angular-multiselect-dropdown | Angular     |
+| @cuppaui/angular-multiselect-dropdown | Angular     |
 | --------------------------------------- | ----------- |
 | 19.0.0                                  | 19.X.X      |
 | *(legacy: angular2-multiselect-dropdown)* | |
@@ -65,7 +65,7 @@ Latest version available for each version of Angular
 ### Usage
 Import `AngularMultiSelectModule` into `NgModule` in `app.module.ts`. Angular's `FormsModule` is also required.
 ```js
-import { AngularMultiSelectModule } from '@cuppalabs/angular-multiselect-dropdown';
+import { AngularMultiSelectModule } from '@cuppaui/angular-multiselect-dropdown';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -306,7 +306,7 @@ The following list of settings are supported by the component. Configure the set
 
 ## Migration Guide
 
-### Upgrading from `angular2-multiselect-dropdown` to `@cuppalabs/angular-multiselect-dropdown`
+### Upgrading from `angular2-multiselect-dropdown` to `@cuppaui/angular-multiselect-dropdown`
 
 Starting from v19.0.0, this package has been renamed to use a scoped package name. Follow these steps to migrate:
 
@@ -317,7 +317,7 @@ npm uninstall angular2-multiselect-dropdown
 
 #### Step 2: Install the new package
 ```bash
-npm install @cuppalabs/angular-multiselect-dropdown
+npm install @cuppaui/angular-multiselect-dropdown
 ```
 
 #### Step 3: Update your imports
@@ -329,7 +329,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 **After:**
 ```typescript
-import { AngularMultiSelectModule } from '@cuppalabs/angular-multiselect-dropdown';
+import { AngularMultiSelectModule } from '@cuppaui/angular-multiselect-dropdown';
 ```
 
 #### Step 4: Update style imports (if using angular.json)
@@ -344,7 +344,7 @@ import { AngularMultiSelectModule } from '@cuppalabs/angular-multiselect-dropdow
 **After:**
 ```json
 "styles": [
-  "node_modules/@cuppalabs/angular-multiselect-dropdown/themes/default.theme.css"
+  "node_modules/@cuppaui/angular-multiselect-dropdown/themes/default.theme.css"
 ]
 ```
 
@@ -357,7 +357,7 @@ import { AngularMultiSelectModule } from '@cuppalabs/angular-multiselect-dropdow
 
 **After:**
 ```scss
-@import '@cuppalabs/angular-multiselect-dropdown/themes/default.theme.scss';
+@import '@cuppaui/angular-multiselect-dropdown/themes/default.theme.scss';
 ```
 
 ### Find and Replace Commands
@@ -366,10 +366,10 @@ You can use these commands to update imports across your project:
 
 ```bash
 # On macOS/Linux
-find ./src -type f \( -name "*.ts" -o -name "*.scss" \) -exec sed -i '' 's/angular2-multiselect-dropdown/@cuppalabs\/angular-multiselect-dropdown/g' {} +
+find ./src -type f \( -name "*.ts" -o -name "*.scss" \) -exec sed -i '' 's/angular2-multiselect-dropdown/@cuppaui\/angular-multiselect-dropdown/g' {} +
 
 # On Linux only
-find ./src -type f \( -name "*.ts" -o -name "*.scss" \) -exec sed -i 's/angular2-multiselect-dropdown/@cuppalabs\/angular-multiselect-dropdown/g' {} +
+find ./src -type f \( -name "*.ts" -o -name "*.scss" \) -exec sed -i 's/angular2-multiselect-dropdown/@cuppaui\/angular-multiselect-dropdown/g' {} +
 ```
 
 ## Run locally

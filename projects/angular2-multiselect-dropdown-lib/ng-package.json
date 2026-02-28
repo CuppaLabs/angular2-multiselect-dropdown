@@ -10,5 +10,5 @@
       "./themes/*.theme.scss",
       "./themes/*.theme.css"
     ],
-    "dest": "../../dist/cuppalabs-angular-multiselect-dropdown"
+    "dest": "../../dist/cuppaui-angular-multiselect-dropdown"
   }
