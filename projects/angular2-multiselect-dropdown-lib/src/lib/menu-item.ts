@@ -4,7 +4,8 @@ import { CommonModule }       from '@angular/common';
 
 @Component({
   selector: 'c-item',
-  template: ``
+  template: ``,
+  standalone: false,
 })
 
 export class Item { 
@@ -17,7 +18,8 @@ export class Item {
 
 @Component({
   selector: 'c-badge',
-  template: ``
+  template: ``,
+  standalone: false,
 })
 
 export class Badge { 
@@ -30,7 +32,8 @@ export class Badge {
 
 @Component({
   selector: 'c-search',
-  template: ``
+  template: ``,
+  standalone: false,
 })
 
 export class Search { 
@@ -42,7 +45,8 @@ export class Search {
 }
 @Component({
   selector: 'c-templateRenderer',
-  template: ``
+  template: ``,
+  standalone: false,
 })
 
 export class TemplateRenderer implements OnInit, OnDestroy { 
@@ -132,7 +136,7 @@ export class TemplateRenderer implements OnInit, OnDestroy {
 </g>
 </svg>`,
   encapsulation: ViewEncapsulation.None,
-
+  standalone: false,
 })
 
 export class CIcon { 

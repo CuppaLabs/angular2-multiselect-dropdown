@@ -5,7 +5,8 @@ import {Component, Input, ViewChild, ElementRef, AfterViewInit} from '@angular/c
   template:`
     <iframe #iframe type="text/javascript" width="100%" frameborder="0"></iframe>
   `,
-  styleUrls: []
+  styleUrls: [],
+  standalone: false,
 })
 
 export class ng2Gist implements AfterViewInit {

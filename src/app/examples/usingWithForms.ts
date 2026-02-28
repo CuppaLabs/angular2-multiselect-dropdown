@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    templateUrl: './views/using-in-form.html'
+    templateUrl: './views/using-in-form.html',
+    standalone: false,
 })
 export class UsingWithFormExample implements OnInit {
     itemList = [];

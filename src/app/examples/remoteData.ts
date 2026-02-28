@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-    templateUrl: './views/remoteData.html'
+    templateUrl: './views/remoteData.html',
+    standalone: false,
 })
 export class RemoteDataExample implements OnInit {
 

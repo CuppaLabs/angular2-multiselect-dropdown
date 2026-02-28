@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MockService } from './mock-data';
 
 @Component({
-    templateUrl: './views/dynamicData.html'
+    templateUrl: './views/dynamicData.html',
+    standalone: false,
 })
 export class DynamicDataSetsExample implements OnInit {
 

@@ -4,7 +4,8 @@ import { DataService } from './multiselect.service';
 
 @Pipe({
     name: 'listFilter',
-    pure: true
+    pure: true,
+    standalone: false,
 })
 export class ListFilterPipe implements PipeTransform {
 

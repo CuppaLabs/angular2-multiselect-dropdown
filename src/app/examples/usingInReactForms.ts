@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
-    templateUrl: './views/using-in-react-form.html'
+    templateUrl: './views/using-in-react-form.html',
+    standalone: false,
 })
 export class UsingWithReactiveFormExample implements OnInit {
     itemList = [];

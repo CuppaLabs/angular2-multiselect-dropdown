@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './views/disableMode.html'
+  templateUrl: './views/disableMode.html',
+  standalone: false,
 })
 export class DisableModeExample implements OnInit {
 

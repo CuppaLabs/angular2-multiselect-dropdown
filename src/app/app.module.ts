@@ -72,7 +72,7 @@ import { AdsenseModule } from 'ng2-adsense';
         DialogContentExampleDialog,
         UsingWithinDialog
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    bootstrap: [AppComponent], imports: [BrowserModule,
         ReactiveFormsModule,
         FormsModule,
         AppRouterModule,

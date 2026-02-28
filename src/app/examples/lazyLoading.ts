@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    templateUrl: './views/lazyLoading.html'
+    templateUrl: './views/lazyLoading.html',
+    standalone: false,
 })
 export class LazyLoadingExample implements OnInit {
 

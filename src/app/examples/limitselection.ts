@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './views/view.html'
+  templateUrl: './views/view.html',
+  standalone: false,
 })
 export class LimitSelectionExample implements OnInit {
 

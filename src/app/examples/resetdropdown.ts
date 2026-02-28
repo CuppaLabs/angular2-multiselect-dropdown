@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
 import { AngularMultiSelect } from '../../../projects/angular2-multiselect-dropdown-lib/src/lib/multiselect.component';
 
 @Component({
-  templateUrl: './views/resetDropdown.html'
+  templateUrl: './views/resetDropdown.html',
+  standalone: false,
 })
 export class ResetDropdownExample implements OnInit {
 

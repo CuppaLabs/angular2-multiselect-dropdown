@@ -1,14 +1,22 @@
 {
   "$schema": "../../node_modules/ng-packagr/package.schema.json",
-  "name":"angular2-multiselect-dropdown",
-  "version":"10.0.0",
+  "name": "@cuppalabs/angular-multiselect-dropdown",
+  "version": "19.0.0",
   "license": "MIT",
   "author": "Pradeep Terli",
-  "description": "Angular Multiselct dropdown component library for Angular version 11, 10, 9,8,6,4 ",
+  "description": "Angular Multiselect Dropdown component library for Angular 19+",
   "keywords": [
-    "angular 15 multiselect dropdown"
+    "angular",
+    "angular multiselect",
+    "angular dropdown",
+    "multiselect dropdown",
+    "ng multiselect",
+    "ngx multiselect",
+    "cuppalabs"
   ],
   "peerDependencies": {
+    "@angular/common": ">=19.0.0",
+    "@angular/core": ">=19.0.0"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.4.0"
@@ -19,5 +27,6 @@
   },
   "bugs": {
     "url": "https://github.com/CuppaLabs/angular2-multiselect-dropdown/issues"
-  }
+  },
+  "homepage": "https://cuppalabs.github.io/angular2-multiselect-dropdown/"
 }

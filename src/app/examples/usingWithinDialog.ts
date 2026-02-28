@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
-    templateUrl: './views/usingWithinDialog.html'
+    templateUrl: './views/usingWithinDialog.html',
+    standalone: false,
 })
 export class UsingWithinDialog implements OnInit {
 
@@ -70,6 +71,7 @@ export class UsingWithinDialog implements OnInit {
 @Component({
     selector: 'dialog-content-example-dialog',
     templateUrl: './views/dialog-content-example-dialog.html',
+    standalone: false,
   })
   export class DialogContentExampleDialog implements OnInit {
     itemList = [];

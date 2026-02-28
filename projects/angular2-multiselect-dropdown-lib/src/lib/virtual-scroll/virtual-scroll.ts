@@ -62,6 +62,7 @@ export function VIRTUAL_SCROLLER_DEFAULT_OPTIONS_FACTORY(): VirtualScrollerDefau
 @Component({
 	selector: 'virtual-scroller,[virtualScroller]',
 	exportAs: 'virtualScroller',
+	standalone: false,
 	template: `
     <div class="total-padding" #invisiblePadding></div>
     <div class="scrollable-content" #content>
@@ -836,7 +837,7 @@ export class VirtualScrollerComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	protected getScrollElement(): HTMLElement {
-		return this.parentScroll instanceof Window ? document.scrollingElement || document.documentElement || document.body : this.parentScroll || this.element.nativeElement;
+		return this.parentScroll instanceof Window ? (document.scrollingElement || document.documentElement || document.body) as HTMLElement : this.parentScroll || this.element.nativeElement;
 	}
 
 	protected addScrollEventHandlers(): void {

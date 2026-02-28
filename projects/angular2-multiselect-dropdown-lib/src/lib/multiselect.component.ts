@@ -31,6 +31,7 @@ const noop = () => {
     styleUrls: ['./multiselect.component.scss'],
     providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR, DROPDOWN_CONTROL_VALIDATION],
     encapsulation: ViewEncapsulation.None,
+    standalone: false,
 })
 
 export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChanges, Validator, AfterViewChecked, OnDestroy {

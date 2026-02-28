@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    templateUrl: './views/theming.html'
+    templateUrl: './views/theming.html',
+    standalone: false,
 })
 export class ThemingExample implements OnInit {
 

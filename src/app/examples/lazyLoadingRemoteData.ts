@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MockService } from './mock-data';
 
 @Component({
-    templateUrl: './views/lazyLoadingRemoteData.html'
+    templateUrl: './views/lazyLoadingRemoteData.html',
+    standalone: false,
 })
 export class LazyLoadingRemoteDataExample implements OnInit {
 

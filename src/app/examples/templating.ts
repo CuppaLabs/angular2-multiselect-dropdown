@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './views/templating.html'
+  templateUrl: './views/templating.html',
+  standalone: false,
 })
 export class TemplatingExample implements OnInit {
 

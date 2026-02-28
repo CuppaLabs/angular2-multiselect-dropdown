@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    templateUrl: './views/events.html'
+    templateUrl: './views/events.html',
+    standalone: false,
 })
 export class EventsExample implements OnInit {
 

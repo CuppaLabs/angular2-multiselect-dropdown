@@ -4,8 +4,8 @@ import {Component, Input, OnInit} from '@angular/core'
 @Component({
     selector: 'cuppa-source',
     templateUrl: './sourcetab.component.html',
-    styleUrls: ['./sourcetab.component.css']
-
+    styleUrls: ['./sourcetab.component.css'],
+    standalone: false,
 })
 export class SourceTab implements OnInit {
     @Input()

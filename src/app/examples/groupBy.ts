@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './views/groupBy.html'
+  templateUrl: './views/groupBy.html',
+  standalone: false,
 })
 export class GroupByExample implements OnInit {
 

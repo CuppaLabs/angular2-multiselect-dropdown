@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Output, EventEmitter, HostListener, Input, OnInit, OnChanges } from '@angular/core';
 
 @Directive({
-    selector: '[clickOutside]'
+    selector: '[clickOutside]',
+    standalone: false,
 })
 export class ClickOutsideDirective {
     constructor(private _elementRef: ElementRef) {
@@ -25,7 +26,8 @@ export class ClickOutsideDirective {
 }
 
 @Directive({
-    selector: '[scroll]'
+    selector: '[scroll]',
+    standalone: false,
 })
 export class ScrollDirective {
     constructor(private _elementRef: ElementRef) {
@@ -40,7 +42,8 @@ export class ScrollDirective {
     }
 }
 @Directive({
-    selector: '[styleProp]'
+    selector: '[styleProp]',
+    standalone: false,
 })
 export class styleDirective {
 
@@ -61,7 +64,8 @@ export class styleDirective {
 
 
 @Directive({
-    selector: '[setPosition]'
+    selector: '[setPosition]',
+    standalone: false,
 })
 export class setPosition implements OnInit, OnChanges {
 

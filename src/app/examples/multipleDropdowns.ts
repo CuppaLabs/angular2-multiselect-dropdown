@@ -3,7 +3,8 @@ import { MockService } from './mock-data';
 import { tap, map } from 'rxjs/operators';
 
 @Component({
-    templateUrl: './views/multipledropdowns.html'
+    templateUrl: './views/multipledropdowns.html',
+    standalone: false,
 })
 export class MultipleDropdownsExample implements OnInit {
 
