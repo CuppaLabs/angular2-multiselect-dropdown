@@ -549,7 +549,7 @@ describe('AngularMultiSelect', () => {
 
   describe('validate', () => {
     it('should return null (no validation errors)', () => {
-      const control = new FormControl();
+      const control = { value: null } as any;
       const result = multiselect.validate(control);
       expect(result).toBeNull();
     });
@@ -758,5 +758,1017 @@ describe('AngularMultiSelect', () => {
 describe('AngularMultiSelectModule', () => {
   it('should import successfully', () => {
     expect(AngularMultiSelectModule).toBeTruthy();
+  });
+});
+
+describe('AngularMultiSelect Extended Coverage', () => {
+  let component: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
+  let multiselect: AngularMultiSelect;
+
+  const mockData = [
+    { id: 1, itemName: 'Item 1' },
+    { id: 2, itemName: 'Item 2' },
+    { id: 3, itemName: 'Item 3' },
+    { id: 4, itemName: 'Item 4' },
+    { id: 5, itemName: 'Item 5' }
+  ];
+
+  const mockGroupData = [
+    { id: 1, itemName: 'Apple', category: 'Fruits' },
+    { id: 2, itemName: 'Banana', category: 'Fruits' },
+    { id: 3, itemName: 'Carrot', category: 'Vegetables' },
+    { id: 4, itemName: 'Potato', category: 'Vegetables' }
+  ];
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, AngularMultiSelectModule],
+      declarations: [TestHostComponent],
+      providers: [DataService, ListFilterPipe]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestHostComponent);
+    component = fixture.componentInstance;
+    component.dropdownList = [...mockData];
+    component.selectedItems = [];
+    component.dropdownSettings = {
+      singleSelection: false,
+      text: 'Select',
+      enableCheckAll: true,
+      enableSearchFilter: true,
+      labelKey: 'itemName',
+      primaryKey: 'id'
+    };
+    fixture.detectChanges();
+    multiselect = component.multiselect;
+  });
+
+  describe('ngDoCheck', () => {
+    it('should set isSelectAll to false when selectedItems is empty', () => {
+      multiselect.selectedItems = [];
+      multiselect.isSelectAll = true;
+      multiselect.ngDoCheck();
+      expect(multiselect.isSelectAll).toBe(false);
+    });
+
+    it('should set isSelectAll to false when data is empty', () => {
+      multiselect.data = [];
+      multiselect.isSelectAll = true;
+      multiselect.ngDoCheck();
+      expect(multiselect.isSelectAll).toBe(false);
+    });
+
+    it('should set isSelectAll to false when selectedItems < data length', () => {
+      multiselect.selectedItems = [mockData[0]];
+      multiselect.isSelectAll = true;
+      multiselect.ngDoCheck();
+      expect(multiselect.isSelectAll).toBe(false);
+    });
+  });
+
+  describe('ngAfterViewInit', () => {
+    it('should handle lazy loading setup', () => {
+      multiselect.settings.lazyLoading = true;
+      expect(() => multiselect.ngAfterViewInit()).not.toThrow();
+    });
+
+    it('should handle non-lazy loading', () => {
+      multiselect.settings.lazyLoading = false;
+      expect(() => multiselect.ngAfterViewInit()).not.toThrow();
+    });
+  });
+
+  describe('ngAfterViewChecked', () => {
+    it('should update selectedListHeight for top position', () => {
+      multiselect.settings.position = 'top';
+      multiselect.selectedListHeight = { val: 0 };
+      multiselect.ngAfterViewChecked();
+      fixture.detectChanges();
+      expect(multiselect.selectedListHeight).toBeTruthy();
+    });
+
+    it('should not update when position is bottom', () => {
+      multiselect.settings.position = 'bottom';
+      expect(() => multiselect.ngAfterViewChecked()).not.toThrow();
+    });
+  });
+
+  describe('onKeyUp', () => {
+    it('should emit search term to subject', fakeAsync(() => {
+      const event = { target: { value: 'test' } };
+      spyOn(multiselect.searchTerm$, 'next');
+      multiselect.onKeyUp(event);
+      expect(multiselect.searchTerm$.next).toHaveBeenCalledWith('test');
+    }));
+  });
+
+  describe('filterGroupedList', () => {
+    beforeEach(() => {
+      component.dropdownSettings = {
+        ...component.dropdownSettings,
+        groupBy: 'category'
+      };
+      component.dropdownList = [...mockGroupData];
+      fixture.detectChanges();
+      multiselect.ngOnInit();
+    });
+
+    it('should clear search when filter is empty', () => {
+      multiselect.filter = '';
+      spyOn(multiselect, 'clearSearch');
+      multiselect.filterGroupedList();
+      expect(multiselect.clearSearch).toHaveBeenCalled();
+    });
+
+    it('should clear search when filter is null', () => {
+      multiselect.filter = null as any;
+      spyOn(multiselect, 'clearSearch');
+      multiselect.filterGroupedList();
+      expect(multiselect.clearSearch).toHaveBeenCalled();
+    });
+
+    it('should filter grouped data by label match', () => {
+      multiselect.groupCachedItems = multiselect.transformData(mockGroupData, 'category');
+      multiselect.filter = 'Fruits';
+      multiselect.filterGroupedList();
+      expect(multiselect.groupedData.length).toBeGreaterThan(0);
+    });
+
+    it('should filter grouped data by item match', () => {
+      multiselect.groupCachedItems = multiselect.transformData(mockGroupData, 'category');
+      multiselect.filter = 'Apple';
+      multiselect.filterGroupedList();
+      expect(multiselect.groupedData.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('toggleInfiniteFilterSelectAll', () => {
+    it('should select all virtual data items', () => {
+      multiselect.virtualdata = [...mockData];
+      multiselect.isInfiniteFilterSelectAll = false;
+      multiselect.toggleInfiniteFilterSelectAll();
+      expect(multiselect.isInfiniteFilterSelectAll).toBe(true);
+      expect(multiselect.selectedItems.length).toBe(5);
+    });
+
+    it('should deselect all virtual data items', () => {
+      multiselect.virtualdata = [...mockData];
+      multiselect.selectedItems = [...mockData];
+      multiselect.isInfiniteFilterSelectAll = true;
+      multiselect.toggleInfiniteFilterSelectAll();
+      expect(multiselect.isInfiniteFilterSelectAll).toBe(false);
+      expect(multiselect.selectedItems.length).toBe(0);
+    });
+  });
+
+  describe('filterInfiniteList', () => {
+    beforeEach(() => {
+      multiselect.cachedItems = [...mockData];
+      multiselect.virtualdata = [...mockData];
+    });
+
+    it('should filter virtual data by search term', () => {
+      multiselect.filterInfiniteList('Item 1');
+      expect(multiselect.virtualdata.length).toBe(1);
+    });
+
+    it('should reset virtual data when search is empty', () => {
+      multiselect.filterInfiniteList('');
+      expect(multiselect.virtualdata).toEqual(multiselect.cachedItems);
+    });
+
+    it('should filter by searchBy property when specified', () => {
+      multiselect.settings.searchBy = ['itemName'];
+      multiselect.filterInfiniteList('Item 2');
+      expect(multiselect.virtualdata.length).toBe(1);
+    });
+
+    it('should handle grouped data filtering', () => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.groupCachedItems = multiselect.transformData(mockGroupData, 'category');
+      multiselect.groupedData = [...multiselect.groupCachedItems];
+      multiselect.filterInfiniteList('Apple');
+      expect(multiselect.groupedData.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('filteritems', () => {
+    it('should filter items and update filteredList', () => {
+      const event = { target: { value: 'Item 1' } };
+      multiselect.cachedItems = [...mockData];
+      multiselect.filteritems(event);
+      expect(multiselect.filteredList).toBeTruthy();
+    });
+
+    it('should track disabled items', () => {
+      const dataWithDisabled = [
+        { id: 1, itemName: 'Item 1', disabled: true },
+        { id: 2, itemName: 'Item 2', disabled: false }
+      ];
+      multiselect.cachedItems = dataWithDisabled;
+      const event = { target: { value: 'Item' } };
+      multiselect.filteritems(event);
+      expect(multiselect.isDisabledItemPresent).toBe(true);
+    });
+  });
+
+  describe('writeValue extended', () => {
+    it('should handle single selection with groupBy', () => {
+      multiselect.settings.singleSelection = true;
+      multiselect.settings.groupBy = 'category';
+      multiselect.data = [...mockGroupData];
+      multiselect.writeValue([mockGroupData[0]]);
+      expect(multiselect.selectedItems.length).toBe(1);
+      expect(multiselect.groupedData).toBeTruthy();
+    });
+
+    it('should throw error for multiple items in single selection', () => {
+      spyOn(console, 'error');
+      multiselect.settings.singleSelection = true;
+      multiselect.writeValue([mockData[0], mockData[1]]);
+      expect(console.error).toHaveBeenCalled();
+      expect(multiselect.selectedItems.length).toBe(1);
+    });
+
+    it('should handle groupBy in multi-selection mode', () => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.data = [...mockGroupData];
+      multiselect.writeValue([mockGroupData[0], mockGroupData[1]]);
+      expect(multiselect.groupedData).toBeTruthy();
+    });
+  });
+
+  describe('toggleDropdown extended', () => {
+    it('should initialize virtual data for lazy loading', () => {
+      multiselect.settings.lazyLoading = true;
+      multiselect.virtualdata = [];
+      const event = new Event('click');
+      spyOn(event, 'preventDefault');
+      multiselect.toggleDropdown(event);
+      expect(multiselect.virtualScroollInit).toBe(true);
+      expect(event.preventDefault).toHaveBeenCalled();
+    });
+  });
+
+  describe('toggleSelectAll with groupBy', () => {
+    beforeEach(() => {
+      component.dropdownSettings = {
+        ...component.dropdownSettings,
+        groupBy: 'category'
+      };
+      component.dropdownList = [...mockGroupData];
+      fixture.detectChanges();
+      multiselect.ngOnInit();
+    });
+
+    it('should select all and update grouped data', () => {
+      const event = { stopPropagation: () => {} };
+      multiselect.toggleSelectAll(event);
+      expect(multiselect.isSelectAll).toBe(true);
+      expect(multiselect.groupedData.every((g: any) => g.selected || g.disabled)).toBe(true);
+    });
+
+    it('should deselect all and update grouped data', () => {
+      const event = { stopPropagation: () => {} };
+      multiselect.toggleSelectAll(event);
+      multiselect.toggleSelectAll(event);
+      expect(multiselect.isSelectAll).toBe(false);
+      expect(multiselect.groupedData.every((g: any) => !g.selected)).toBe(true);
+    });
+  });
+
+  describe('toggleFilterSelectAll with groupBy', () => {
+    beforeEach(() => {
+      component.dropdownSettings = {
+        ...component.dropdownSettings,
+        groupBy: 'category'
+      };
+      component.dropdownList = [...mockGroupData];
+      fixture.detectChanges();
+      multiselect.ngOnInit();
+    });
+
+    it('should select all filtered items in grouped mode', () => {
+      multiselect.filteredList = [mockGroupData[0]];
+      multiselect.toggleFilterSelectAll();
+      expect(multiselect.isFilterSelectAll).toBe(true);
+    });
+
+    it('should deselect all filtered items in grouped mode', () => {
+      multiselect.filteredList = [mockGroupData[0]];
+      multiselect.selectedItems = [mockGroupData[0]];
+      multiselect.isFilterSelectAll = true;
+      multiselect.toggleFilterSelectAll();
+      expect(multiselect.isFilterSelectAll).toBe(false);
+    });
+  });
+
+  describe('onItemClick extended', () => {
+    it('should not select when settings.disabled is true', () => {
+      multiselect.settings.disabled = true;
+      multiselect.onItemClick(mockData[0], 0, new Event('click'));
+      expect(multiselect.selectedItems.length).toBe(0);
+    });
+
+    it('should update group info when groupBy is set', fakeAsync(() => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.data = [...mockGroupData];
+      multiselect.groupedData = multiselect.transformData(mockGroupData, 'category');
+      multiselect.groupCachedItems = [...multiselect.groupedData];
+      
+      multiselect.onItemClick(mockGroupData[0], 0, new Event('click'));
+      tick();
+      expect(multiselect.selectedItems.length).toBe(1);
+    }));
+  });
+
+  describe('onFilterChange extended', () => {
+    it('should set isFilterSelectAll true when all filtered items are selected', () => {
+      multiselect.filter = 'test';
+      multiselect.filterLength = 2;
+      multiselect.selectedItems = [mockData[0], mockData[1]];
+      
+      const filteredData = [mockData[0], mockData[1]];
+      multiselect.onFilterChange(filteredData);
+      
+      expect(multiselect.isFilterSelectAll).toBe(true);
+    });
+
+    it('should set isFilterSelectAll false when not all filtered items are selected', () => {
+      multiselect.filter = 'test';
+      multiselect.filterLength = 3;
+      multiselect.selectedItems = [mockData[0]];
+      
+      const filteredData = [mockData[0], mockData[1], mockData[2]];
+      multiselect.onFilterChange(filteredData);
+      
+      expect(multiselect.isFilterSelectAll).toBe(false);
+    });
+  });
+
+  describe('updateGroupInfo extended', () => {
+    it('should not update for disabled items', () => {
+      const disabledItem = { id: 1, itemName: 'Test', disabled: true, category: 'Test' };
+      multiselect.groupedData = [];
+      multiselect.groupCachedItems = [];
+      multiselect.updateGroupInfo(disabledItem);
+      // Should not throw
+      expect(true).toBe(true);
+    });
+  });
+
+  describe('ngOnChanges extended', () => {
+    it('should clear selectedItems when data becomes empty with groupBy', () => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.selectedItems = [mockGroupData[0]];
+      multiselect.data = [];
+      
+      multiselect.ngOnChanges({
+        data: {
+          currentValue: [],
+          previousValue: mockGroupData,
+          firstChange: false,
+          isFirstChange: () => false
+        }
+      });
+      
+      expect(multiselect.selectedItems).toEqual([]);
+    });
+
+    it('should update settings on settings change', () => {
+      const newSettings = { text: 'New Text' };
+      multiselect.settings = { ...multiselect.settings, ...newSettings };
+      
+      multiselect.ngOnChanges({
+        settings: {
+          currentValue: newSettings,
+          previousValue: {},
+          firstChange: false,
+          isFirstChange: () => false
+        }
+      });
+      
+      expect(multiselect.settings.text).toBe('New Text');
+    });
+
+    it('should handle loading changes', () => {
+      multiselect.ngOnChanges({
+        loading: {
+          currentValue: true,
+          previousValue: false,
+          firstChange: false,
+          isFirstChange: () => false
+        }
+      });
+      // Should not throw
+      expect(true).toBe(true);
+    });
+
+    it('should update virtualdata for lazy loading', () => {
+      multiselect.settings.lazyLoading = true;
+      multiselect.virtualScroollInit = true;
+      const newData = [{ id: 10, itemName: 'New' }];
+      multiselect.data = newData;
+      
+      multiselect.ngOnChanges({
+        data: {
+          currentValue: newData,
+          previousValue: mockData,
+          firstChange: false,
+          isFirstChange: () => false
+        }
+      });
+      
+      expect(multiselect.virtualdata).toEqual(newData);
+    });
+  });
+
+  describe('calculateDropdownDirection', () => {
+    it('should handle top position without autoPosition', () => {
+      multiselect.settings.position = 'top';
+      multiselect.settings.autoPosition = false;
+      spyOn(multiselect, 'openTowardsTop');
+      multiselect.calculateDropdownDirection();
+      expect(multiselect.openTowardsTop).toHaveBeenCalledWith(true);
+    });
+
+    it('should handle bottom position without autoPosition', () => {
+      multiselect.settings.position = 'bottom';
+      multiselect.settings.autoPosition = false;
+      spyOn(multiselect, 'openTowardsTop');
+      multiselect.calculateDropdownDirection();
+      expect(multiselect.openTowardsTop).toHaveBeenCalledWith(false);
+    });
+
+    it('should handle autoPosition', () => {
+      multiselect.settings.autoPosition = true;
+      multiselect.defaultSettings.maxHeight = 300;
+      spyOn(multiselect, 'openTowardsTop');
+      multiselect.calculateDropdownDirection();
+      expect(multiselect.openTowardsTop).toHaveBeenCalled();
+    });
+  });
+
+  describe('openTowardsTop extended', () => {
+    it('should set dropDownTop for tagToBody when opening upwards', () => {
+      multiselect.settings.tagToBody = true;
+      multiselect.openTowardsTop(true);
+      expect(multiselect.settings.position).toBe('top');
+      expect(multiselect.dropDownTop).toBeTruthy();
+    });
+
+    it('should set dropDownBottom when not tagToBody', () => {
+      multiselect.settings.tagToBody = false;
+      multiselect.openTowardsTop(true);
+      expect(multiselect.settings.position).toBe('top');
+      expect(multiselect.dropDownBottom).toBeTruthy();
+    });
+
+    it('should set dropDownTop for tagToBody when opening downwards', () => {
+      multiselect.settings.tagToBody = true;
+      multiselect.openTowardsTop(false);
+      expect(multiselect.settings.position).toBe('bottom');
+    });
+
+    it('should reset values when not tagToBody opening downwards', () => {
+      multiselect.settings.tagToBody = false;
+      multiselect.openTowardsTop(false);
+      expect(multiselect.settings.position).toBe('bottom');
+      expect(multiselect.dropDownTop).toBe('unset');
+      expect(multiselect.dropDownBottom).toBe('unset');
+    });
+  });
+
+  describe('onScroll', () => {
+    it('should close dropdown when active and tagToBody', () => {
+      multiselect.isActive = true;
+      multiselect.settings.tagToBody = true;
+      multiselect.onScroll(new Event('scroll'));
+      expect(multiselect.isActive).toBe(false);
+    });
+
+    it('should not close dropdown when not active', () => {
+      multiselect.isActive = false;
+      multiselect.settings.tagToBody = true;
+      multiselect.onScroll(new Event('scroll'));
+      expect(multiselect.isActive).toBe(false);
+    });
+
+    it('should not close dropdown when tagToBody is false', () => {
+      multiselect.isActive = true;
+      multiselect.settings.tagToBody = false;
+      multiselect.onScroll(new Event('scroll'));
+      expect(multiselect.isActive).toBe(true);
+    });
+  });
+
+  describe('clearSelection extended', () => {
+    it('should reset groupCachedItems when groupBy is set', () => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.groupCachedItems = [{ selected: true }];
+      multiselect.clearSelection();
+      expect(multiselect.groupCachedItems[0].selected).toBe(false);
+    });
+  });
+
+  describe('openDropdown extended', () => {
+    it('should not open when disabled', () => {
+      multiselect.settings.disabled = true;
+      multiselect.openDropdown();
+      expect(multiselect.isActive).toBe(false);
+    });
+
+    it('should not autofocus when searchAutofocus is false', () => {
+      multiselect.settings.searchAutofocus = false;
+      multiselect.settings.enableSearchFilter = true;
+      multiselect.openDropdown();
+      expect(multiselect.isActive).toBe(true);
+    });
+  });
+
+  describe('closeDropdown extended', () => {
+    it('should clear searchInput for lazy loading', fakeAsync(() => {
+      multiselect.settings.lazyLoading = true;
+      multiselect.openDropdown();
+      tick();
+      multiselect.closeDropdown();
+      expect(multiselect.filter).toBe('');
+    }));
+  });
+
+  describe('clearSearch with groupBy', () => {
+    it('should reset groupedData from cache', () => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.groupCachedItems = [{ id: 1 }];
+      multiselect.groupedData = [];
+      multiselect.clearSearch();
+      expect(multiselect.groupedData).toEqual(multiselect.groupCachedItems);
+    });
+  });
+
+  describe('transformData extended', () => {
+    it('should set group selected when all items are selected', () => {
+      multiselect.selectedItems = [mockGroupData[0], mockGroupData[1]];
+      multiselect.settings.labelKey = 'itemName';
+      multiselect.settings.groupBy = 'category';
+      
+      const result = multiselect.transformData(mockGroupData, 'category');
+      const fruitsGroup = result.find((g: any) => g.category === 'Fruits');
+      expect(fruitsGroup.selected).toBe(true);
+    });
+
+    it('should handle disabled childrens', () => {
+      const dataWithDisabled = [
+        { id: 1, itemName: 'Item 1', category: 'Group1', disabled: false },
+        { id: 2, itemName: 'Item 2', category: 'Group1', disabled: true }
+      ];
+      
+      const result = multiselect.transformData(dataWithDisabled, 'category');
+      expect(result[0].disabled).toBe(false);
+    });
+  });
+
+  describe('isSelected with null selectedItems', () => {
+    it('should handle null selectedItems', () => {
+      multiselect.selectedItems = null as any;
+      const result = multiselect.isSelected(mockData[0]);
+      expect(result).toBe(false);
+    });
+  });
+
+  describe('removeSelected with null selectedItems', () => {
+    it('should handle null selectedItems', () => {
+      multiselect.selectedItems = null as any;
+      expect(() => multiselect.removeSelected(mockData[0])).not.toThrow();
+    });
+  });
+});
+
+describe('AngularMultiSelect Additional Coverage', () => {
+  let component: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
+  let multiselect: AngularMultiSelect;
+
+  const mockData = [
+    { id: 1, itemName: 'Item 1' },
+    { id: 2, itemName: 'Item 2' },
+    { id: 3, itemName: 'Item 3' },
+    { id: 4, itemName: 'Item 4' },
+    { id: 5, itemName: 'Item 5' }
+  ];
+
+  const mockGroupData = [
+    { id: 1, itemName: 'Apple', category: 'Fruits' },
+    { id: 2, itemName: 'Banana', category: 'Fruits' },
+    { id: 3, itemName: 'Carrot', category: 'Vegetables' },
+    { id: 4, itemName: 'Potato', category: 'Vegetables' }
+  ];
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, AngularMultiSelectModule],
+      declarations: [TestHostComponent],
+      providers: [DataService, ListFilterPipe]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestHostComponent);
+    component = fixture.componentInstance;
+    component.dropdownList = [...mockData];
+    component.selectedItems = [];
+    component.dropdownSettings = {
+      singleSelection: false,
+      text: 'Select',
+      enableCheckAll: true,
+      enableSearchFilter: true,
+      labelKey: 'itemName',
+      primaryKey: 'id'
+    };
+    fixture.detectChanges();
+    multiselect = component.multiselect;
+  });
+
+  describe('ngOnInit with position top', () => {
+    it('should set selectedListHeight for top position', fakeAsync(() => {
+      multiselect.settings.position = 'top';
+      multiselect.ngOnInit();
+      tick(100);
+      expect(multiselect.selectedListHeight).toBeTruthy();
+    }));
+  });
+
+  describe('onItemClick isSelectAll scenarios', () => {
+    it('should set isSelectAll false when isSelectAll true and selected < data', fakeAsync(() => {
+      multiselect.isSelectAll = true;
+      multiselect.onItemClick(mockData[0], 0, new Event('click'));
+      tick();
+      expect(multiselect.isSelectAll).toBe(false);
+    }));
+
+    it('should set isSelectAll true when all items selected', fakeAsync(() => {
+      multiselect.selectedItems = [mockData[0], mockData[1], mockData[2], mockData[3]];
+      multiselect.onItemClick(mockData[4], 4, new Event('click'));
+      tick();
+      expect(multiselect.isSelectAll).toBe(true);
+    }));
+  });
+
+  describe('addSelected in single selection', () => {
+    it('should close dropdown after adding item', () => {
+      multiselect.settings.singleSelection = true;
+      multiselect.openDropdown();
+      multiselect.addSelected(mockData[0]);
+      expect(multiselect.isActive).toBe(false);
+      expect(multiselect.selectedItems.length).toBe(1);
+    });
+
+    it('should replace previous selection in single mode', () => {
+      multiselect.settings.singleSelection = true;
+      multiselect.addSelected(mockData[0]);
+      multiselect.addSelected(mockData[1]);
+      expect(multiselect.selectedItems.length).toBe(1);
+      expect(multiselect.selectedItems[0]).toEqual(mockData[1]);
+    });
+  });
+
+  describe('filterInfiniteList with searchBy', () => {
+    it('should filter using multiple searchBy properties', () => {
+      const dataWithMultipleProps = [
+        { id: 1, itemName: 'Apple', description: 'red fruit' },
+        { id: 2, itemName: 'Banana', description: 'yellow fruit' }
+      ];
+      multiselect.cachedItems = dataWithMultipleProps;
+      multiselect.virtualdata = [...dataWithMultipleProps];
+      multiselect.settings.searchBy = ['itemName', 'description'];
+      
+      multiselect.filterInfiniteList('red');
+      expect(multiselect.virtualdata.length).toBe(1);
+    });
+  });
+
+  describe('filterInfiniteList with groupBy', () => {
+    it('should filter grouped data with grpTitle items', () => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.groupCachedItems = [
+        { grpTitle: true, itemName: 'Fruits', category: 'Fruits', list: [mockGroupData[0], mockGroupData[1]] },
+        { grpTitle: true, itemName: 'Vegetables', category: 'Vegetables', list: [mockGroupData[2], mockGroupData[3]] }
+      ];
+      multiselect.groupedData = [...multiselect.groupCachedItems];
+      
+      multiselect.filterInfiniteList('Apple');
+      expect(multiselect.groupedData.length).toBeGreaterThan(0);
+    });
+
+    it('should handle empty search with groupBy', () => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.cachedItems = [...mockGroupData];
+      multiselect.filterInfiniteList('');
+      expect(multiselect.virtualdata).toEqual(multiselect.cachedItems);
+    });
+  });
+
+  describe('toggleFilterSelectAll with filteredList containing grpTitle', () => {
+    it('should skip items with grpTitle when selecting', () => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.filteredList = [
+        { grpTitle: true, itemName: 'Fruits' },
+        mockGroupData[0]
+      ];
+      multiselect.groupedData = [];
+      
+      multiselect.toggleFilterSelectAll();
+      expect(multiselect.selectedItems.length).toBe(1);
+    });
+  });
+
+  describe('selectGroup event emissions', () => {
+    it('should emit onGroupSelect when selecting group', fakeAsync(() => {
+      const groupItem = {
+        grpTitle: true,
+        itemName: 'Fruits',
+        category: 'Fruits',
+        selected: false,
+        list: [mockGroupData[0], mockGroupData[1]]
+      };
+      multiselect.groupedData = [groupItem];
+      multiselect.groupCachedItems = [groupItem];
+      multiselect.settings.groupBy = 'category';
+      
+      multiselect.selectGroup(groupItem);
+      tick();
+      fixture.detectChanges();
+      
+      expect(component.groupSelectEvent).toBeTruthy();
+    }));
+
+    it('should emit onGroupDeSelect when deselecting group', fakeAsync(() => {
+      const groupItem = {
+        grpTitle: true,
+        itemName: 'Fruits',
+        category: 'Fruits',
+        selected: true,
+        list: [mockGroupData[0], mockGroupData[1]]
+      };
+      multiselect.groupedData = [groupItem];
+      multiselect.groupCachedItems = [groupItem];
+      multiselect.settings.groupBy = 'category';
+      multiselect.selectedItems = [mockGroupData[0], mockGroupData[1]];
+      
+      multiselect.selectGroup(groupItem);
+      tick();
+      fixture.detectChanges();
+      
+      expect(component.groupDeSelectEvent).toBeTruthy();
+    }));
+  });
+
+  describe('updateGroupInfo detailed', () => {
+    it('should set group selected when all items selected', () => {
+      const groupItem = {
+        grpTitle: true,
+        itemName: 'Fruits',
+        category: 'Fruits',
+        selected: false,
+        list: [mockGroupData[0], mockGroupData[1]]
+      };
+      multiselect.groupedData = [groupItem];
+      multiselect.groupCachedItems = [{ ...groupItem }];
+      multiselect.settings.groupBy = 'category';
+      multiselect.selectedItems = [mockGroupData[0], mockGroupData[1]];
+      
+      multiselect.updateGroupInfo(mockGroupData[0]);
+      
+      expect(groupItem.selected).toBe(true);
+    });
+
+    it('should set group unselected when not all items selected', () => {
+      const groupItem = {
+        grpTitle: true,
+        itemName: 'Fruits',
+        category: 'Fruits',
+        selected: true,
+        list: [mockGroupData[0], mockGroupData[1]]
+      };
+      multiselect.groupedData = [groupItem];
+      multiselect.groupCachedItems = [{ ...groupItem }];
+      multiselect.settings.groupBy = 'category';
+      multiselect.selectedItems = [mockGroupData[0]];
+      
+      multiselect.updateGroupInfo(mockGroupData[0]);
+      
+      expect(groupItem.selected).toBe(false);
+    });
+  });
+
+  describe('cloneArray edge cases', () => {
+    it('should throw for non-array objects', () => {
+      expect(() => multiselect.cloneArray({} as any)).toThrow();
+    });
+
+    it('should throw for null', () => {
+      // null is typeof 'object' in JavaScript
+      expect(() => multiselect.cloneArray(null as any)).toThrow();
+    });
+
+    it('should return primitives as-is', () => {
+      expect(multiselect.cloneArray(42 as any)).toBe(42);
+      expect(multiselect.cloneArray('test' as any)).toBe('test');
+      expect(multiselect.cloneArray(undefined as any)).toBe(undefined);
+    });
+  });
+
+  describe('writeValue with all selected items', () => {
+    it('should set isSelectAll when value equals all data', () => {
+      multiselect.writeValue([...mockData]);
+      expect(multiselect.isSelectAll).toBe(true);
+    });
+
+    it('should not set isSelectAll when value is partial', () => {
+      multiselect.writeValue([mockData[0]]);
+      expect(multiselect.isSelectAll).toBe(false);
+    });
+  });
+
+  describe('onFilterChange detailed', () => {
+    it('should handle items with grpTitle property', () => {
+      multiselect.filter = 'test';
+      multiselect.filterLength = 2;
+      
+      const filteredData = [
+        { grpTitle: true, itemName: 'Group' },
+        mockData[0],
+        mockData[1]
+      ];
+      multiselect.selectedItems = [mockData[0], mockData[1]];
+      
+      multiselect.onFilterChange(filteredData);
+      expect(multiselect.isFilterSelectAll).toBe(true);
+    });
+  });
+
+  describe('filteritems with grpTitle', () => {
+    it('should count items excluding grpTitle', () => {
+      multiselect.cachedItems = [
+        { grpTitle: true, itemName: 'Group' },
+        mockData[0]
+      ];
+      const event = { target: { value: '' } };
+      multiselect.filteritems(event);
+      // filterLength should only count non-grpTitle items
+      expect(multiselect.filterLength).toBeLessThanOrEqual(1);
+    });
+  });
+
+  describe('openDropdown with search autofocus', () => {
+    it('should focus search input when searchAutofocus enabled', fakeAsync(() => {
+      multiselect.settings.searchAutofocus = true;
+      multiselect.settings.enableSearchFilter = true;
+      multiselect.searchTempl = null as any;
+      
+      multiselect.openDropdown();
+      tick(100);
+      
+      expect(multiselect.isActive).toBe(true);
+    }));
+
+    it('should not focus when searchTempl exists', fakeAsync(() => {
+      multiselect.settings.searchAutofocus = true;
+      multiselect.settings.enableSearchFilter = true;
+      multiselect.searchTempl = {} as any;
+      
+      multiselect.openDropdown();
+      tick(100);
+      
+      expect(multiselect.isActive).toBe(true);
+    }));
+  });
+
+  describe('closeDropdownOnClickOut', () => {
+    it('should call clearSearch when closing', () => {
+      multiselect.isActive = true;
+      spyOn(multiselect, 'clearSearch');
+      multiselect.closeDropdownOnClickOut();
+      expect(multiselect.clearSearch).toHaveBeenCalled();
+    });
+  });
+
+  describe('transformData with selected items', () => {
+    it('should mark group selected when some items are selected', () => {
+      multiselect.settings.labelKey = 'itemName';
+      multiselect.settings.groupBy = 'category';
+      multiselect.selectedItems = [mockGroupData[0]];
+      
+      const result = multiselect.transformData(mockGroupData, 'category');
+      const fruitsGroup = result.find((g: any) => g.category === 'Fruits');
+      
+      // Not all selected, so should be false
+      expect(fruitsGroup.selected).toBe(false);
+    });
+  });
+
+  describe('resetInfiniteSearch with groupedData', () => {
+    it('should reset groupedData from cache', () => {
+      multiselect.groupCachedItems = [{ id: 1, grpTitle: true }];
+      multiselect.groupedData = [];
+      multiselect.resetInfiniteSearch();
+      expect(multiselect.groupedData).toEqual(multiselect.groupCachedItems);
+    });
+  });
+
+  describe('onScrollEnd edge cases', () => {
+    it('should handle startIndex 0', fakeAsync(() => {
+      const event = { startIndex: 0, endIndex: 2 };
+      multiselect.data = [...mockData];
+      multiselect.onScrollEnd(event);
+      tick();
+      expect(component.scrollEndEvent).toEqual(event);
+    }));
+
+    it('should handle endIndex at last position', fakeAsync(() => {
+      const event = { startIndex: 2, endIndex: 4 };
+      multiselect.data = [...mockData];
+      multiselect.onScrollEnd(event);
+      tick();
+      expect(component.scrollEndEvent).toEqual(event);
+    }));
+  });
+
+  describe('Virtual scroller refresh', () => {
+    it('should call virtualScroller.refresh when available', () => {
+      const mockVirtualScroller = { refresh: jasmine.createSpy('refresh') };
+      (multiselect as any).virtualScroller = mockVirtualScroller;
+      multiselect.cachedItems = [...mockData];
+      multiselect.virtualdata = [...mockData];
+      
+      multiselect.filterInfiniteList('Item');
+      
+      expect(mockVirtualScroller.refresh).toHaveBeenCalled();
+    });
+  });
+
+  describe('ngOnChanges with groupBy data changes', () => {
+    it('should transform data when groupBy is set', () => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.data = [...mockGroupData];
+      
+      multiselect.ngOnChanges({
+        data: {
+          currentValue: mockGroupData,
+          previousValue: [],
+          firstChange: false,
+          isFirstChange: () => false
+        }
+      });
+      
+      expect(multiselect.groupedData).toBeTruthy();
+      expect(multiselect.groupCachedItems).toBeTruthy();
+    });
+  });
+
+  describe('toggleSelectAll stopPropagation', () => {
+    it('should call stopPropagation on event', () => {
+      const event = { stopPropagation: jasmine.createSpy('stopPropagation') };
+      multiselect.toggleSelectAll(event);
+      expect(event.stopPropagation).toHaveBeenCalled();
+    });
+  });
+
+  describe('filterGroupedList item filtering', () => {
+    it('should filter by item properties within groups', () => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.settings.labelKey = 'itemName';
+      multiselect.groupCachedItems = [
+        { 
+          grpTitle: true, 
+          itemName: 'Fruits', 
+          category: 'Fruits', 
+          list: [
+            { id: 1, itemName: 'Apple', category: 'Fruits' },
+            { id: 2, itemName: 'Banana', category: 'Fruits' }
+          ]
+        }
+      ];
+      
+      multiselect.filter = 'Apple';
+      multiselect.filterGroupedList();
+      
+      expect(multiselect.groupedData.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('onItemClick with groupBy update', () => {
+    it('should call updateGroupInfo when groupBy set', fakeAsync(() => {
+      multiselect.settings.groupBy = 'category';
+      multiselect.groupedData = [
+        { grpTitle: true, itemName: 'Fruits', category: 'Fruits', selected: false, list: [mockGroupData[0]] }
+      ];
+      multiselect.groupCachedItems = [...multiselect.groupedData];
+      
+      spyOn(multiselect, 'updateGroupInfo');
+      multiselect.onItemClick(mockGroupData[0], 0, new Event('click'));
+      tick();
+      
+      expect(multiselect.updateGroupInfo).toHaveBeenCalled();
+    }));
   });
 });

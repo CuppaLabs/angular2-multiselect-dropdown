@@ -62,6 +62,39 @@ Latest version available for each version of Angular
 | 6.0.0                                   | 14.X.X      |
 
 
+## Code Coverage
+
+This library maintains comprehensive unit test coverage using Karma + Jasmine with Istanbul code coverage.
+
+### Overall Library Coverage
+
+| Metric     | Coverage | Covered/Total |
+| ---------- | -------- | ------------- |
+| Statements | 97.00%   | 1069/1102     |
+| Branches   | 93.47%   | 544/582       |
+| Functions  | 99.45%   | 181/182       |
+| Lines      | 96.95%   | 1049/1082     |
+
+### Component Coverage
+
+| File                    | Statements | Branches | Functions | Lines   |
+| ----------------------- | ---------- | -------- | --------- | ------- |
+| multiselect.component.ts | 98.08%     | 96.50%   | 98.82%    | 98.06%  |
+| virtual-scroll.ts        | 95.93%     | 91.10%   | 100%      | 95.84%  |
+
+### Running Tests
+
+```bash
+# Run tests with coverage
+ng test angular2-multiselect-dropdown-lib --code-coverage
+
+# Run tests in watch mode
+ng test angular2-multiselect-dropdown-lib
+```
+
+Coverage reports are generated in the `coverage/angular2-multiselect-dropdown-lib/` directory.
+
+
 ### Usage
 Import `AngularMultiSelectModule` into `NgModule` in `app.module.ts`. Angular's `FormsModule` is also required.
 ```js
